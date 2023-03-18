@@ -1,7 +1,6 @@
 package com.example.gesturetranslator;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -10,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.Size;
 import android.view.LayoutInflater;
+import android.view.Surface;
 import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
@@ -23,9 +23,26 @@ import androidx.core.content.ContextCompat;
 
 import com.example.gesturetranslator.Translators.YUVtoRGB;
 import com.example.gesturetranslator.databinding.ActivityMainBinding;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.common.util.concurrent.ListenableFuture;
 
+import org.tensorflow.lite.support.common.ops.NormalizeOp;
+import org.tensorflow.lite.support.image.ImageProcessor;
+import org.tensorflow.lite.support.image.TensorImage;
+import org.tensorflow.lite.support.label.Category;
+import org.tensorflow.lite.task.core.BaseOptions;
+import org.tensorflow.lite.task.core.vision.ImageProcessingOptions;
+import org.tensorflow.lite.task.gms.vision.TfLiteVision;
+import org.tensorflow.lite.task.gms.vision.classifier.Classifications;
+import org.tensorflow.lite.task.gms.vision.classifier.ImageClassifier;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
+
+import io.reactivex.rxjava3.core.ObservableSource;
+import io.reactivex.rxjava3.core.Observer;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,16 +64,39 @@ public class MainActivity extends AppCompatActivity {
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, PERMISSION_REQUEST_CAMERA);
-        } else {
-            initializeCamera();
-        }
-
+        init();
         initListeners();
     }
 
-    private void initListeners(){
+    private void init() {
+        TfLiteVision.initialize(getApplicationContext()).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                start();
+            }
+        });
+    }
+
+    private void start() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST_CAMERA);
+        } else {
+            initializeCamera();
+        }
+    }
+
+    private void initListeners() {
+        ReadML.setMlReaderListener(new ReadML.MLReaderListener() {
+            @Override
+            public void read(List<Category> categories) {
+                if (categories != null && categories.size() != 0) {
+                    Log.e(TAG, "label: " + categories.get(0).getLabel() + " score: " + categories.get(0).getScore());
+                    binding.wordPredictTV.setText(Constant.LABEL[categories.get(0).getIndex()] + " " + categories.get(0).getScore() + "%");
+                } else {
+                    binding.wordPredictTV.setText("");
+                }
+            }
+        });
         binding.graySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -69,12 +109,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == PERMISSION_REQUEST_CAMERA && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if (requestCode == PERMISSION_REQUEST_CAMERA && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             initializeCamera();
         }
     }
 
-    private void initializeCamera(){
+    private void initializeCamera() {
         cameraProviderFuture = ProcessCameraProvider.getInstance(this);
         cameraProviderFuture.addListener(new Runnable() {
             @Override
@@ -83,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                     ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
 
                     ImageAnalysis imageAnalysis = new ImageAnalysis.Builder()
-                            .setTargetResolution(new Size(1024,768))
+                            .setTargetResolution(new Size(1024, 768))
                             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                             .build();
 
@@ -116,6 +156,8 @@ public class MainActivity extends AppCompatActivity {
 
                             binding.preview.setRotation(image.getImageInfo().getRotationDegrees());
                             binding.preview.setImageBitmap(bitmap);
+
+                            ReadML.readMl(getApplicationContext(), bitmap, image.getImageInfo().getRotationDegrees());
 
                             image.close();
                         }
