@@ -93,13 +93,13 @@ public class ReadML {
         private void setupClassifier() {
             ImageClassifier.ImageClassifierOptions.Builder optionsBuilder = ImageClassifier.ImageClassifierOptions.builder()
                     .setScoreThreshold(0.01f)
-                    .setMaxResults(7);
+                    .setMaxResults(29);
 
             BaseOptions.Builder baseOptionsBuilder = BaseOptions.builder().setNumThreads(2);
 
             optionsBuilder.setBaseOptions(baseOptionsBuilder.build());
 
-            String modelName = "model.tflite";
+            String modelName = "VGG16.tflite";
 
             try {
                 imageClassifer = ImageClassifier.createFromFileAndOptions(context, modelName, optionsBuilder.build());

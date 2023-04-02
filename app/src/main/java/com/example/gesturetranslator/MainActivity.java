@@ -3,14 +3,18 @@ package com.example.gesturetranslator;
 import android.Manifest;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.util.Size;
 import android.view.LayoutInflater;
 import android.view.Surface;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,7 +40,10 @@ import org.tensorflow.lite.task.gms.vision.TfLiteVision;
 import org.tensorflow.lite.task.gms.vision.classifier.Classifications;
 import org.tensorflow.lite.task.gms.vision.classifier.ImageClassifier;
 
+import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
@@ -82,7 +89,60 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST_CAMERA);
         } else {
             initializeCamera();
+            //starting();
         }
+    }
+
+
+    Iterator<String> iterator;
+    public void starting(){
+        String[] paths = getFilesFromPath("Russia_test");
+
+        Handler handler = new Handler();
+
+        if (iterator == null) {
+            iterator = Arrays.stream(paths).iterator();
+        }
+
+        if (iterator.hasNext()){
+            Bitmap bitmap1 = loadImageFromAsset("Russia_test/"+iterator.next());
+            binding.preview.setImageBitmap(bitmap1);
+            ReadML.readMl(getApplicationContext(), bitmap1, 0);
+        } else {
+            iterator = null;
+            starting();
+        }
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                starting();
+            }
+        };
+
+        handler.postDelayed( runnable, 5000);
+    }
+
+    public Bitmap loadImageFromAsset(String path) {
+        try {
+            InputStream ims = getAssets().open(path);
+            Bitmap bitmap = BitmapFactory.decodeStream(ims);
+            return bitmap;
+        }
+        catch(Exception ex) {
+            return null;
+        }
+    }
+
+    private String[] getFilesFromPath(String path){
+        AssetManager myAssetManager = getApplicationContext().getAssets();
+        try {
+            String[] Files = myAssetManager.list(path);
+            return Files;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private void initListeners() {
@@ -157,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
                             binding.preview.setRotation(image.getImageInfo().getRotationDegrees());
                             binding.preview.setImageBitmap(bitmap);
 
-                            ReadML.readMl(getApplicationContext(), bitmap, image.getImageInfo().getRotationDegrees());
+                            ReadML.readMl(getApplicationContext(), Bitmap.createScaledBitmap(bitmap, 255, 255, true), image.getImageInfo().getRotationDegrees());
 
                             image.close();
                         }
