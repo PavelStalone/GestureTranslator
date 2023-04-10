@@ -99,7 +99,7 @@ public class ReadML {
 
             optionsBuilder.setBaseOptions(baseOptionsBuilder.build());
 
-            String modelName = "VGG16.tflite";
+            String modelName = "MobileNetV2.tflite";
 
             try {
                 imageClassifer = ImageClassifier.createFromFileAndOptions(context, modelName, optionsBuilder.build());
@@ -136,7 +136,7 @@ public class ReadML {
                                 return (int) ((category.getScore() - t1.getScore()) * 100);
                             }
                         });
-                    } catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     printCategorys(categories);
@@ -162,7 +162,7 @@ public class ReadML {
             }
         }
 
-        private void printCategorys (List<Category> categories){
+        private void printCategorys(List<Category> categories) {
             for (int i = 0; i < categories.size(); i++) {
                 Log.e(TAG, "category[" + i + "]: " + categories.get(i).getLabel() + " " + categories.get(i).getScore());
             }

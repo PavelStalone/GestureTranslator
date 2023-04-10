@@ -12,9 +12,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.util.Size;
 import android.view.LayoutInflater;
-import android.view.Surface;
 import android.widget.CompoundButton;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,26 +28,14 @@ import com.example.gesturetranslator.databinding.ActivityMainBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.common.util.concurrent.ListenableFuture;
 
-import org.tensorflow.lite.support.common.ops.NormalizeOp;
-import org.tensorflow.lite.support.image.ImageProcessor;
-import org.tensorflow.lite.support.image.TensorImage;
 import org.tensorflow.lite.support.label.Category;
-import org.tensorflow.lite.task.core.BaseOptions;
-import org.tensorflow.lite.task.core.vision.ImageProcessingOptions;
 import org.tensorflow.lite.task.gms.vision.TfLiteVision;
-import org.tensorflow.lite.task.gms.vision.classifier.Classifications;
-import org.tensorflow.lite.task.gms.vision.classifier.ImageClassifier;
 
 import java.io.InputStream;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.ExecutionException;
-
-import io.reactivex.rxjava3.core.ObservableSource;
-import io.reactivex.rxjava3.core.Observer;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -95,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     Iterator<String> iterator;
-    public void starting(){
+
+    public void starting() {
         String[] paths = getFilesFromPath("Russia_test");
 
         Handler handler = new Handler();
@@ -104,8 +91,8 @@ public class MainActivity extends AppCompatActivity {
             iterator = Arrays.stream(paths).iterator();
         }
 
-        if (iterator.hasNext()){
-            Bitmap bitmap1 = loadImageFromAsset("Russia_test/"+iterator.next());
+        if (iterator.hasNext()) {
+            Bitmap bitmap1 = loadImageFromAsset("Russia_test/" + iterator.next());
             binding.preview.setImageBitmap(bitmap1);
             ReadML.readMl(getApplicationContext(), bitmap1, 0);
         } else {
@@ -120,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        handler.postDelayed( runnable, 5000);
+        handler.postDelayed(runnable, 5000);
     }
 
     public Bitmap loadImageFromAsset(String path) {
@@ -128,13 +115,12 @@ public class MainActivity extends AppCompatActivity {
             InputStream ims = getAssets().open(path);
             Bitmap bitmap = BitmapFactory.decodeStream(ims);
             return bitmap;
-        }
-        catch(Exception ex) {
+        } catch (Exception ex) {
             return null;
         }
     }
 
-    private String[] getFilesFromPath(String path){
+    private String[] getFilesFromPath(String path) {
         AssetManager myAssetManager = getApplicationContext().getAssets();
         try {
             String[] Files = myAssetManager.list(path);
@@ -217,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
                             binding.preview.setRotation(image.getImageInfo().getRotationDegrees());
                             binding.preview.setImageBitmap(bitmap);
 
-                            ReadML.readMl(getApplicationContext(), Bitmap.createScaledBitmap(bitmap, 255, 255, true), image.getImageInfo().getRotationDegrees());
+                            ReadML.readMl(getApplicationContext(), bitmap, image.getImageInfo().getRotationDegrees());
 
                             image.close();
                         }
