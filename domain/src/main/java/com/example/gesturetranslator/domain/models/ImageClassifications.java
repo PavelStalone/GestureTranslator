@@ -1,4 +1,4 @@
-package com.example.domain.models;
+package com.example.gesturetranslator.domain.models;
 
 public class ImageClassifications {
     private final String label;

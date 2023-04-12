@@ -1,4 +1,4 @@
-package com.example.feature.translators;
+package com.example.gesturetranslator.feature.translators;
 
 import android.content.Context;
 import android.graphics.Bitmap;

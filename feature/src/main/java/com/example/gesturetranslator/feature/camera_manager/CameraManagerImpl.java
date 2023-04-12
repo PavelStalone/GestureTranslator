@@ -1,4 +1,4 @@
-package com.example.feature.camera_manager;
+package com.example.gesturetranslator.feature.camera_manager;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,9 +13,9 @@ import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
-import com.example.feature.camera_manager.listeners.CameraListener;
-import com.example.feature.camera_manager.models.ImageFromCamera;
-import com.example.feature.translators.YUVtoRGB;
+import com.example.gesturetranslator.feature.camera_manager.listeners.CameraListener;
+import com.example.gesturetranslator.feature.camera_manager.models.ImageFromCamera;
+import com.example.gesturetranslator.feature.translators.YUVtoRGB;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.util.concurrent.ExecutionException;

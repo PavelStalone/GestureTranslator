@@ -1,6 +1,6 @@
-package com.example.domain.usecases;
+package com.example.gesturetranslator.domain.usecases;
 
-import com.example.domain.models.ImageClassifications;
+import com.example.gesturetranslator.domain.models.ImageClassifications;
 
 import java.util.List;
 

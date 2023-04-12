@@ -1,7 +1,7 @@
 package com.example.gesturetranslator.di;
 
-import com.example.domain.repository.LoadImageRepository;
-import com.example.domain.usecases.LoadImageUseCase;
+import com.example.gesturetranslator.domain.repository.LoadImageRepository;
+import com.example.gesturetranslator.domain.usecases.LoadImageUseCase;
 
 import dagger.Module;
 import dagger.Provides;

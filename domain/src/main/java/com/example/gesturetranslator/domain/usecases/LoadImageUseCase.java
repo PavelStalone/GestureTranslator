@@ -1,7 +1,7 @@
-package com.example.domain.usecases;
+package com.example.gesturetranslator.domain.usecases;
 
-import com.example.domain.repository.LoadImageRepository;
-import com.example.domain.listeners.LoadImagesInterface;
+import com.example.gesturetranslator.domain.repository.LoadImageRepository;
+import com.example.gesturetranslator.domain.listeners.LoadImagesInterface;
 
 public class LoadImageUseCase {
 

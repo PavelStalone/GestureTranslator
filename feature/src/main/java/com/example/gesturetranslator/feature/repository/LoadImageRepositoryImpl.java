@@ -1,11 +1,11 @@
-package com.example.feature.repository;
+package com.example.gesturetranslator.feature.repository;
 
-import com.example.domain.models.Image;
-import com.example.domain.repository.LoadImageRepository;
-import com.example.domain.listeners.LoadImagesInterface;
-import com.example.feature.camera_manager.listeners.CameraListener;
-import com.example.feature.camera_manager.CameraManager;
-import com.example.feature.camera_manager.models.ImageFromCamera;
+import com.example.gesturetranslator.domain.models.Image;
+import com.example.gesturetranslator.domain.repository.LoadImageRepository;
+import com.example.gesturetranslator.domain.listeners.LoadImagesInterface;
+import com.example.gesturetranslator.feature.camera_manager.listeners.CameraListener;
+import com.example.gesturetranslator.feature.camera_manager.CameraManager;
+import com.example.gesturetranslator.feature.camera_manager.models.ImageFromCamera;
 
 public class LoadImageRepositoryImpl implements LoadImageRepository {
     private final CameraManager cameraManager;

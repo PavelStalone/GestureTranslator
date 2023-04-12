@@ -17,9 +17,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.domain.models.Image;
-import com.example.domain.listeners.LoadImagesInterface;
-import com.example.domain.usecases.LoadImageUseCase;
+import com.example.gesturetranslator.domain.models.Image;
+import com.example.gesturetranslator.domain.listeners.LoadImagesInterface;
+import com.example.gesturetranslator.domain.usecases.LoadImageUseCase;
 import com.example.gesturetranslator.databinding.ActivityMainBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -160,8 +160,28 @@ public class MainActivity extends AppCompatActivity implements LoadImagesInterfa
 
     @Override
     public void getImage(Image image) {
-        binding.preview.setRotation(image.getRotaion());
-        binding.preview.setImageBitmap(image.getBitmap());
+        Bitmap bitmap = image.getBitmap();
+        int rotation = image.getRotaion();
+
+        if (grayMode) {
+            int size = bitmap.getWidth() * bitmap.getHeight();
+            int[] pixels = new int[size];
+            bitmap.getPixels(pixels, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
+
+            for (int i = 0; i < size; i++) {
+                int color = pixels[i];
+                int r = color >> 16 & 0xff;
+                int g = color >> 8 & 0xff;
+                int b = color & 0xff;
+                int gray = (r + g + b) / 3;
+                pixels[i] = 0xff000000 | gray << 16 | gray << 8 | gray;
+            }
+
+            bitmap.setPixels(pixels, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
+        }
+
+        binding.preview.setRotation(rotation);
+        binding.preview.setImageBitmap(bitmap);
     }
 
     @Override

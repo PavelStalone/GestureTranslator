@@ -1,4 +1,4 @@
-package com.example.domain.models;
+package com.example.gesturetranslator.domain.models;
 
 import android.graphics.Bitmap;
 
