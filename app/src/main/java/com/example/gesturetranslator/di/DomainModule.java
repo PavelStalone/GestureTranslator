@@ -1,7 +1,9 @@
 package com.example.gesturetranslator.di;
 
 import com.example.gesturetranslator.domain.repository.LoadImageRepository;
+import com.example.gesturetranslator.domain.repository.RecognizeImageRepository;
 import com.example.gesturetranslator.domain.usecases.LoadImageUseCase;
+import com.example.gesturetranslator.domain.usecases.RecognizeImageUseCase;
 
 import dagger.Module;
 import dagger.Provides;
@@ -15,5 +17,10 @@ public class DomainModule {
     @Provides
     LoadImageUseCase provideLoadImageUseCase(LoadImageRepository loadImageRepository){
         return new LoadImageUseCase(loadImageRepository);
+    }
+
+    @Provides
+    RecognizeImageUseCase provideRecognizeImageUseCase(RecognizeImageRepository recognizeImageRepository){
+        return new RecognizeImageUseCase(recognizeImageRepository);
     }
 }

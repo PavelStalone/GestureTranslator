@@ -1,12 +1,21 @@
 package com.example.gesturetranslator.domain.usecases;
 
-import com.example.gesturetranslator.domain.models.ImageClassifications;
-
-import java.util.List;
+import com.example.gesturetranslator.domain.listeners.RecognizeImageListener;
+import com.example.gesturetranslator.domain.models.Image;
+import com.example.gesturetranslator.domain.repository.RecognizeImageRepository;
 
 public class RecognizeImageUseCase {
-    public List<ImageClassifications> execute(){
+    private RecognizeImageRepository recognizeImageRepository;
 
-        return null;
+    public RecognizeImageUseCase(RecognizeImageRepository recognizeImageRepository) {
+        this.recognizeImageRepository = recognizeImageRepository;
+    }
+
+    public void execute(Image image){
+        recognizeImageRepository.recogniseImage(image);
+    }
+
+    public void setOnRecogniseListener(RecognizeImageListener recognizeImageListener){
+        recognizeImageRepository.setRecogniseListener(recognizeImageListener);
     }
 }

@@ -17,10 +17,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.gesturetranslator.domain.listeners.RecognizeImageListener;
 import com.example.gesturetranslator.domain.models.Image;
-import com.example.gesturetranslator.domain.listeners.LoadImagesInterface;
+import com.example.gesturetranslator.domain.listeners.LoadImagesListener;
+import com.example.gesturetranslator.domain.models.ImageClassifications;
 import com.example.gesturetranslator.domain.usecases.LoadImageUseCase;
 import com.example.gesturetranslator.databinding.ActivityMainBinding;
+import com.example.gesturetranslator.domain.usecases.RecognizeImageUseCase;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import org.tensorflow.lite.support.label.Category;
@@ -36,7 +39,7 @@ import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class MainActivity extends AppCompatActivity implements LoadImagesInterface {
+public class MainActivity extends AppCompatActivity implements LoadImagesListener, RecognizeImageListener {
 
     private static final String TAG = "MainActivity";
     private static final int PERMISSION_REQUEST_CAMERA = 23;
@@ -46,6 +49,9 @@ public class MainActivity extends AppCompatActivity implements LoadImagesInterfa
 
     @Inject
     LoadImageUseCase loadImageUseCase;
+
+    @Inject
+    RecognizeImageUseCase recognizeImageUseCase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements LoadImagesInterfa
         } else {
             //starting();
             loadImageUseCase.execute(this);
+            recognizeImageUseCase.setOnRecogniseListener(this);
         }
     }
 
@@ -92,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements LoadImagesInterfa
         if (iterator.hasNext()) {
             Bitmap bitmap1 = loadImageFromAsset("Russia_test/" + iterator.next());
             binding.preview.setImageBitmap(bitmap1);
-            ReadML.readMl(getApplicationContext(), bitmap1, 0);
+            //ReadML.readMl(getApplicationContext(), bitmap1, 0);
         } else {
             iterator = null;
             starting();
@@ -130,17 +137,6 @@ public class MainActivity extends AppCompatActivity implements LoadImagesInterfa
     }
 
     private void initListeners() {
-        ReadML.setMlReaderListener(new ReadML.MLReaderListener() {
-            @Override
-            public void read(List<Category> categories) {
-                if (categories != null && categories.size() != 0) {
-                    Log.e(TAG, "label: " + categories.get(0).getLabel() + " score: " + categories.get(0).getScore());
-                    binding.wordPredictTV.setText(Constant.LABEL[categories.get(0).getIndex()] + " " + categories.get(0).getScore() + "%");
-                } else {
-                    binding.wordPredictTV.setText("");
-                }
-            }
-        });
         binding.graySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -155,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements LoadImagesInterfa
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_REQUEST_CAMERA && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             loadImageUseCase.execute(this);
+            recognizeImageUseCase.setOnRecogniseListener(this);
         }
     }
 
@@ -182,6 +179,13 @@ public class MainActivity extends AppCompatActivity implements LoadImagesInterfa
 
         binding.preview.setRotation(rotation);
         binding.preview.setImageBitmap(bitmap);
+
+        recognizeImageUseCase.execute(image);
+    }
+
+    @Override
+    public void recognise(ImageClassifications imageClassifications) {
+        binding.wordPredictTV.setText(String.format("%s %.2f", imageClassifications.getLabel(), imageClassifications.getPercent()) + "%");
     }
 
     @Override

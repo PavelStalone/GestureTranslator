@@ -2,7 +2,7 @@ package com.example.gesturetranslator.feature.repository;
 
 import com.example.gesturetranslator.domain.models.Image;
 import com.example.gesturetranslator.domain.repository.LoadImageRepository;
-import com.example.gesturetranslator.domain.listeners.LoadImagesInterface;
+import com.example.gesturetranslator.domain.listeners.LoadImagesListener;
 import com.example.gesturetranslator.feature.camera_manager.listeners.CameraListener;
 import com.example.gesturetranslator.feature.camera_manager.CameraManager;
 import com.example.gesturetranslator.feature.camera_manager.models.ImageFromCamera;
@@ -15,9 +15,8 @@ public class LoadImageRepositoryImpl implements LoadImageRepository {
     }
 
     @Override
-    public Image loadImages(LoadImagesInterface loadImagesInterface) {
-        cameraManager.loadImage(mapperToDomainListener(loadImagesInterface));
-        return null;
+    public void loadImages(LoadImagesListener loadImagesListener) {
+        cameraManager.loadImage(mapperToDomainListener(loadImagesListener));
     }
 
 
@@ -30,16 +29,16 @@ public class LoadImageRepositoryImpl implements LoadImageRepository {
         return new Image(imageFromCamera.getImage(), imageFromCamera.getRotaion());
     }
 
-    private CameraListener mapperToDomainListener(LoadImagesInterface loadImagesInterface) {
+    private CameraListener mapperToDomainListener(LoadImagesListener loadImagesListener) {
         return new CameraListener() {
             @Override
             public void getImage(ImageFromCamera imageFromCamera) {
-                loadImagesInterface.getImage(mapToDomain(imageFromCamera));
+                loadImagesListener.getImage(mapToDomain(imageFromCamera));
             }
 
             @Override
             public void error(Exception exception) {
-                loadImagesInterface.error(exception);
+                loadImagesListener.error(exception);
             }
         };
     }

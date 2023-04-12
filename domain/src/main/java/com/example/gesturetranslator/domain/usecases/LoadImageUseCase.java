@@ -1,7 +1,7 @@
 package com.example.gesturetranslator.domain.usecases;
 
 import com.example.gesturetranslator.domain.repository.LoadImageRepository;
-import com.example.gesturetranslator.domain.listeners.LoadImagesInterface;
+import com.example.gesturetranslator.domain.listeners.LoadImagesListener;
 
 public class LoadImageUseCase {
 
@@ -11,7 +11,7 @@ public class LoadImageUseCase {
         this.loadImageRepository = loadImageRepository;
     }
 
-    public void execute(LoadImagesInterface loadImagesInterface) {
-        loadImageRepository.loadImages(loadImagesInterface);
+    public void execute(LoadImagesListener loadImagesListener) {
+        loadImageRepository.loadImages(loadImagesListener);
     }
 }

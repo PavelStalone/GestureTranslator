@@ -1,12 +1,13 @@
-package com.example.gesturetranslator.presentation;
+package com.example.gesturetranslator.core.tensor_flow_lite_manager;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.Surface;
 
-import org.tensorflow.lite.support.image.ImageProcessor;
-import org.tensorflow.lite.support.image.TensorImage;
+import com.example.gesturetranslator.core.tensor_flow_lite_manager.listeners.TFLRecognizeListener;
+import com.example.gesturetranslator.core.tensor_flow_lite_manager.models.TFLImage;
+import com.example.gesturetranslator.core.tensor_flow_lite_manager.models.TFLImageClasification;
+
 import org.tensorflow.lite.support.label.Category;
 import org.tensorflow.lite.task.core.BaseOptions;
 import org.tensorflow.lite.task.core.vision.ImageProcessingOptions;
@@ -23,68 +24,70 @@ import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class ReadML {
-    private static Context context;
-    private static MLReaderListener mlReaderListener;
+public class TFLManagerImpl implements TFLManager {
+    private final Context context;
+
+    private TFLRecognizeListener tflRecognizeListener;
     private static boolean ban = false;
 
-    interface MLReaderListener {
-        void read(List<Category> categories);
+    public static final String[] LABEL = new String[]{"А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Ь", "Ы", "Э", "Ю", "Я"};
+
+    public TFLManagerImpl(Context context) {
+        this.context = context;
     }
 
-    public static void setMlReaderListener(MLReaderListener mlReaderListener) {
-        ReadML.mlReaderListener = mlReaderListener;
-    }
-
-    public static void readMl(Context context, Bitmap image, int rotation) {
+    @Override
+    public void recogniseImage(TFLImage tflImage) {
         if (ban) return;
-        ReadML.context = context;
         ban = true;
-        Observable<List<Category>> observable = Observable.defer(() -> new PredictMLObservable(image, rotation));
+        Observable<TFLImageClasification> observable = Observable.defer(() -> new PredictMLObservable(tflImage));
 
-        Observer<List<Category>> observer = new Observer<List<Category>>() {
+        Observer<TFLImageClasification> observer = new Observer<TFLImageClasification>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
 
             }
 
             @Override
-            public void onNext(@NonNull List<Category> categories) {
-                if (mlReaderListener != null) {
-                    mlReaderListener.read(categories);
+            public void onNext(@NonNull TFLImageClasification tflImageClasification) {
+                if (tflRecognizeListener != null) {
+                    tflRecognizeListener.recognise(tflImageClasification);
                 }
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-
+                if (tflRecognizeListener != null) {
+                    tflRecognizeListener.error((Exception) e);
+                }
             }
 
             @Override
             public void onComplete() {
-                ReadML.ban = false;
+                ban = false;
             }
         };
 
         observable.subscribeOn(Schedulers.io())
                 .subscribe(observer);
-
     }
 
+    @Override
+    public void setTflRecogniseListener(TFLRecognizeListener tflRecognizeListener) {
+        this.tflRecognizeListener = tflRecognizeListener;
+    }
 
-    static class PredictMLObservable implements ObservableSource<List<Category>> {
+    class PredictMLObservable implements ObservableSource<TFLImageClasification> {
         private final static String TAG = "PredictMLObservable";
-        private final Bitmap image;
-        private final int rotation;
+        private final TFLImage tflImage;
 
-        public PredictMLObservable(Bitmap image, int rotation) {
-            this.image = image;
-            this.rotation = rotation;
+        public PredictMLObservable(TFLImage tflImage) {
+            this.tflImage = tflImage;
         }
 
         @Override
-        public void subscribe(@io.reactivex.rxjava3.annotations.NonNull Observer<? super List<Category>> observer) {
-            observer.onNext(classify(image, rotation));
+        public void subscribe(@io.reactivex.rxjava3.annotations.NonNull Observer<? super TFLImageClasification> observer) {
+            observer.onNext(classify(tflImage));
             observer.onComplete();
         }
 
@@ -108,20 +111,16 @@ public class ReadML {
             }
         }
 
-        private List<Category> classify(Bitmap image, int rotation) {
+        private TFLImageClasification classify(TFLImage tflImage) {
             if (imageClassifer == null) {
                 setupClassifier();
             }
 
-            ImageProcessor imageProcessor = new ImageProcessor.Builder().build();
-
-            TensorImage tensorImage = imageProcessor.process(TensorImage.fromBitmap(image));
-
             ImageProcessingOptions imageProcessingOptions = ImageProcessingOptions.builder()
-                    .setOrientation(getOrientationFromRotation(rotation))
+                    .setOrientation(getOrientationFromRotation(tflImage.getRotation()))
                     .build();
 
-            List<Classifications> results = imageClassifer.classify(tensorImage, imageProcessingOptions);
+            List<Classifications> results = imageClassifer.classify(tflImage.getTensorImage(), imageProcessingOptions);
 
             List<Category> categories = null;
 
@@ -142,11 +141,8 @@ public class ReadML {
                     printCategorys(categories);
                 }
                 Log.e(TAG, "results categories: " + results.get(0).getCategories().size());
-//                if (results.get(0).getCategories().size() != 0) {
-//                    Log.e(TAG, "label: " + categories.get(0).getLabel() + " score: " + categories.get(0).getScore());
-//                }
             }
-            return categories;
+            return new TFLImageClasification(LABEL[categories.get(0).getIndex()], categories.get(0).getScore() * 100);
         }
 
         private ImageProcessingOptions.Orientation getOrientationFromRotation(int rotation) {
