@@ -1,7 +1,7 @@
 package com.example.feature.camera_manager;
 
-import com.example.feature.camera_manager.models.ImageFromCamera;
+import com.example.feature.camera_manager.listeners.CameraListener;
 
 public interface CameraManager {
-    ImageFromCamera loadImage();
+    void loadImage(CameraListener cameraListener);
 }

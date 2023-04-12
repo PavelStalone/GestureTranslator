@@ -1,7 +1,7 @@
 package com.example.domain.usecases;
 
-import com.example.domain.models.Image;
 import com.example.domain.repository.LoadImageRepository;
+import com.example.domain.listeners.LoadImagesInterface;
 
 public class LoadImageUseCase {
 
@@ -11,7 +11,7 @@ public class LoadImageUseCase {
         this.loadImageRepository = loadImageRepository;
     }
 
-    public Image execute() {
-        return null;
+    public void execute(LoadImagesInterface loadImagesInterface) {
+        loadImageRepository.loadImages(loadImagesInterface);
     }
 }

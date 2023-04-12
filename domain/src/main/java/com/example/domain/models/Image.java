@@ -10,4 +10,12 @@ public class Image {
         this.bitmap = bitmap;
         this.rotaion = rotaion;
     }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public int getRotaion() {
+        return rotaion;
+    }
 }
