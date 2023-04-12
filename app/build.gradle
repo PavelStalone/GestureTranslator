@@ -40,14 +40,8 @@ android {
 }
 
 dependencies {
-    implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
-    implementation "io.reactivex.rxjava3:rxjava:3.0.13"
-
     implementation "com.google.dagger:hilt-android:2.44"
     annotationProcessor 'com.google.dagger:hilt-compiler:2.44'
-
-    implementation 'org.tensorflow:tensorflow-lite-task-vision-play-services:0.4.2'
-    implementation 'com.google.android.gms:play-services-tflite-gpu:16.1.0'
 
     implementation project(path: ':domain')
     implementation project(path: ':feature')

@@ -17,22 +17,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.gesturetranslator.databinding.ActivityMainBinding;
+import com.example.gesturetranslator.domain.listeners.LoadImagesListener;
 import com.example.gesturetranslator.domain.listeners.RecognizeImageListener;
 import com.example.gesturetranslator.domain.models.Image;
-import com.example.gesturetranslator.domain.listeners.LoadImagesListener;
 import com.example.gesturetranslator.domain.models.ImageClassifications;
 import com.example.gesturetranslator.domain.usecases.LoadImageUseCase;
-import com.example.gesturetranslator.databinding.ActivityMainBinding;
 import com.example.gesturetranslator.domain.usecases.RecognizeImageUseCase;
-import com.google.android.gms.tasks.OnSuccessListener;
-
-import org.tensorflow.lite.support.label.Category;
-import org.tensorflow.lite.task.gms.vision.TfLiteVision;
 
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -61,17 +56,8 @@ public class MainActivity extends AppCompatActivity implements LoadImagesListene
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        init();
+        start();
         initListeners();
-    }
-
-    private void init() {
-        TfLiteVision.initialize(getApplicationContext()).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                start();
-            }
-        });
     }
 
     private void start() {
@@ -82,6 +68,16 @@ public class MainActivity extends AppCompatActivity implements LoadImagesListene
             loadImageUseCase.execute(this);
             recognizeImageUseCase.setOnRecogniseListener(this);
         }
+    }
+
+    private void initListeners() {
+        binding.graySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                grayMode = b;
+                Log.e(TAG, "onCheckedChanged: " + grayMode);
+            }
+        });
     }
 
 
@@ -136,22 +132,11 @@ public class MainActivity extends AppCompatActivity implements LoadImagesListene
         return null;
     }
 
-    private void initListeners() {
-        binding.graySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                grayMode = b;
-                Log.e(TAG, "onCheckedChanged: " + grayMode);
-            }
-        });
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_REQUEST_CAMERA && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            loadImageUseCase.execute(this);
-            recognizeImageUseCase.setOnRecogniseListener(this);
+            start();
         }
     }
 

@@ -7,10 +7,12 @@ import android.view.Surface;
 import com.example.gesturetranslator.core.tensor_flow_lite_manager.listeners.TFLRecognizeListener;
 import com.example.gesturetranslator.core.tensor_flow_lite_manager.models.TFLImage;
 import com.example.gesturetranslator.core.tensor_flow_lite_manager.models.TFLImageClasification;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import org.tensorflow.lite.support.label.Category;
 import org.tensorflow.lite.task.core.BaseOptions;
 import org.tensorflow.lite.task.core.vision.ImageProcessingOptions;
+import org.tensorflow.lite.task.gms.vision.TfLiteVision;
 import org.tensorflow.lite.task.gms.vision.classifier.Classifications;
 import org.tensorflow.lite.task.gms.vision.classifier.ImageClassifier;
 
@@ -34,6 +36,13 @@ public class TFLManagerImpl implements TFLManager {
 
     public TFLManagerImpl(Context context) {
         this.context = context;
+        ban = true;
+        TfLiteVision.initialize(context).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                ban = false;
+            }
+        });
     }
 
     @Override
