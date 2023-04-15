@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
-            android:background="@drawable/flesh_light" />
+            android:background="@drawable/flashlight" />
 
         <ImageView
             android:layout_width="wrap_content"

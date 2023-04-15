@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.gesturetranslator.databinding.ActivityMainBinding;
 import com.example.gesturetranslator.domain.listeners.LoadImagesListener;
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements LoadImagesListene
 
     private boolean grayMode;
 
+    private MainViewModel mainViewModel;
+
     @Inject
     LoadImageUseCase loadImageUseCase;
 
@@ -53,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements LoadImagesListene
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
+
+        mainViewModel = new ViewModelProvider(this, new MainViewModelFactory()).get(MainViewModel.class);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
