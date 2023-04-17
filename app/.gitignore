@@ -1,5 +1,4 @@
 /build
 /compiler.xml
-build.gradle
-./idea/misc.xml
+.idea/
 /src/main/assets

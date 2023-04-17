@@ -8,23 +8,24 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
-import android.widget.CompoundButton;
+import android.view.View;
+import android.view.ViewTreeObserver;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.example.gesturetranslator.databinding.ActivityMainBinding;
+import com.example.gesturetranslator.databinding.MainFrameBinding;
 import com.example.gesturetranslator.domain.listeners.LoadImagesListener;
 import com.example.gesturetranslator.domain.listeners.RecognizeImageListener;
 import com.example.gesturetranslator.domain.models.Image;
 import com.example.gesturetranslator.domain.models.ImageClassifications;
 import com.example.gesturetranslator.domain.usecases.LoadImageUseCase;
 import com.example.gesturetranslator.domain.usecases.RecognizeImageUseCase;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.io.InputStream;
 import java.util.Arrays;
@@ -39,7 +40,8 @@ public class MainActivity extends AppCompatActivity implements LoadImagesListene
 
     private static final String TAG = "MainActivity";
     private static final int PERMISSION_REQUEST_CAMERA = 23;
-    private ActivityMainBinding binding;
+    private MainFrameBinding binding;
+    private BottomSheetBehavior bottomSheetBehavior;
 
     private boolean grayMode;
 
@@ -54,15 +56,32 @@ public class MainActivity extends AppCompatActivity implements LoadImagesListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(LayoutInflater.from(this));
+        binding = MainFrameBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
 
-        mainViewModel = new ViewModelProvider(this, new MainViewModelFactory()).get(MainViewModel.class);
+        //mainViewModel = new ViewModelProvider(this, new MainViewModelFactory()).get(MainViewModel.class);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        start();
+        init();
         initListeners();
+        start();
+    }
+
+    public void init() {
+        bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheetBehaviorLayout.bottomSheetBehavior);
+
+        binding.bottomSheetBehaviorLayout.bottomSheetBehavior.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                binding.bottomSheetBehaviorLayout.bottomSheetBehavior.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+
+                bottomSheetBehavior.setPeekHeight(displayMetrics.heightPixels - binding.imageWithPredict.preview.getBottom() - binding.imageWithPredict.wordPredictTV.getHeight());
+            }
+        });
     }
 
     private void start() {
@@ -75,12 +94,23 @@ public class MainActivity extends AppCompatActivity implements LoadImagesListene
         }
     }
 
+    boolean flag = false;
+
     private void initListeners() {
-        binding.graySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//        binding.graySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                grayMode = b;
+//                Log.e(TAG, "onCheckedChanged: " + grayMode);
+//            }
+//        });
+        binding.controlMenu.realTimeIV.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                grayMode = b;
-                Log.e(TAG, "onCheckedChanged: " + grayMode);
+            public void onClick(View v) {
+                flag = !flag;
+                if (flag) {
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                } else bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             }
         });
     }
@@ -99,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements LoadImagesListene
 
         if (iterator.hasNext()) {
             Bitmap bitmap1 = loadImageFromAsset("Russia_test/" + iterator.next());
-            binding.preview.setImageBitmap(bitmap1);
+            binding.imageWithPredict.preview.setImageBitmap(bitmap1);
             //ReadML.readMl(getApplicationContext(), bitmap1, 0);
         } else {
             iterator = null;
@@ -167,15 +197,15 @@ public class MainActivity extends AppCompatActivity implements LoadImagesListene
             bitmap.setPixels(pixels, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
         }
 
-        binding.preview.setRotation(rotation);
-        binding.preview.setImageBitmap(bitmap);
+        binding.imageWithPredict.preview.setRotation(rotation);
+        binding.imageWithPredict.preview.setImageBitmap(bitmap);
 
-        recognizeImageUseCase.execute(image);
+        //recognizeImageUseCase.execute(image);
     }
 
     @Override
     public void recognise(ImageClassifications imageClassifications) {
-        binding.wordPredictTV.setText(String.format("%s %.2f", imageClassifications.getLabel(), imageClassifications.getPercent()) + "%");
+        binding.imageWithPredict.wordPredictTV.setText(String.format("%s %.2f", imageClassifications.getLabel(), imageClassifications.getPercent()) + "%");
     }
 
     @Override
