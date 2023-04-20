@@ -2,11 +2,11 @@ package com.example.gesturetranslator.core.managers.tensor_flow_lite_manager.mod
 
 import org.tensorflow.lite.support.image.TensorImage;
 
-public class TFLImage {
+public class TfLiteImage {
     private final TensorImage tensorImage;
     private final int rotation;
 
-    public TFLImage(TensorImage tensorImage, int rotation) {
+    public TfLiteImage(TensorImage tensorImage, int rotation) {
         this.tensorImage = tensorImage;
         this.rotation = rotation;
     }
