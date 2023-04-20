@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -200,7 +201,12 @@ public class MainActivity extends AppCompatActivity implements LoadImagesListene
         binding.imageWithPredict.preview.setRotation(rotation);
         binding.imageWithPredict.preview.setImageBitmap(bitmap);
 
-        //recognizeImageUseCase.execute(image);
+//        DisplayMetrics displayMetrics = new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+//
+//        bottomSheetBehavior.setPeekHeight(displayMetrics.heightPixels - binding.imageWithPredict.preview.getBottom() - binding.imageWithPredict.wordPredictTV.getHeight());
+
+        recognizeImageUseCase.execute(image);
     }
 
     @Override
@@ -210,6 +216,7 @@ public class MainActivity extends AppCompatActivity implements LoadImagesListene
 
     @Override
     public void error(Exception exception) {
+        Log.e(TAG, "Error!  [!]");
         exception.printStackTrace();
     }
 }

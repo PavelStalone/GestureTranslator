@@ -1,4 +1,4 @@
-package com.example.gesturetranslator.feature.camera_manager.models;
+package com.example.gesturetranslator.feature.managers.camera_manager.models;
 
 import android.graphics.Bitmap;
 

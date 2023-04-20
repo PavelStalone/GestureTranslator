@@ -1,4 +1,4 @@
-package com.example.gesturetranslator.core.tensor_flow_lite_manager.models;
+package com.example.gesturetranslator.core.managers.tensor_flow_lite_manager.models;
 
 import org.tensorflow.lite.support.image.TensorImage;
 

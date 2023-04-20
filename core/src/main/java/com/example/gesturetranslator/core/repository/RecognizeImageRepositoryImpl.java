@@ -1,9 +1,9 @@
 package com.example.gesturetranslator.core.repository;
 
-import com.example.gesturetranslator.core.tensor_flow_lite_manager.TFLManager;
-import com.example.gesturetranslator.core.tensor_flow_lite_manager.listeners.TFLRecognizeListener;
-import com.example.gesturetranslator.core.tensor_flow_lite_manager.models.TFLImage;
-import com.example.gesturetranslator.core.tensor_flow_lite_manager.models.TFLImageClasification;
+import com.example.gesturetranslator.core.managers.tensor_flow_lite_manager.TFLManager;
+import com.example.gesturetranslator.core.managers.tensor_flow_lite_manager.listeners.TFLRecognizeListener;
+import com.example.gesturetranslator.core.managers.tensor_flow_lite_manager.models.TFLImage;
+import com.example.gesturetranslator.core.managers.tensor_flow_lite_manager.models.TFLImageClasification;
 import com.example.gesturetranslator.domain.listeners.RecognizeImageListener;
 import com.example.gesturetranslator.domain.models.Image;
 import com.example.gesturetranslator.domain.models.ImageClassifications;

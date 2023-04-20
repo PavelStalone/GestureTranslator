@@ -1,12 +1,12 @@
-package com.example.gesturetranslator.core.tensor_flow_lite_manager;
+package com.example.gesturetranslator.core.managers.tensor_flow_lite_manager;
 
 import android.content.Context;
 import android.util.Log;
 import android.view.Surface;
 
-import com.example.gesturetranslator.core.tensor_flow_lite_manager.listeners.TFLRecognizeListener;
-import com.example.gesturetranslator.core.tensor_flow_lite_manager.models.TFLImage;
-import com.example.gesturetranslator.core.tensor_flow_lite_manager.models.TFLImageClasification;
+import com.example.gesturetranslator.core.managers.tensor_flow_lite_manager.listeners.TFLRecognizeListener;
+import com.example.gesturetranslator.core.managers.tensor_flow_lite_manager.models.TFLImage;
+import com.example.gesturetranslator.core.managers.tensor_flow_lite_manager.models.TFLImageClasification;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import org.tensorflow.lite.support.label.Category;
@@ -54,7 +54,6 @@ public class TFLManagerImpl implements TFLManager {
         Observer<TFLImageClasification> observer = new Observer<TFLImageClasification>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
-
             }
 
             @Override
@@ -69,6 +68,7 @@ public class TFLManagerImpl implements TFLManager {
                 if (tflRecognizeListener != null) {
                     tflRecognizeListener.error((Exception) e);
                 }
+                ban = false;
             }
 
             @Override

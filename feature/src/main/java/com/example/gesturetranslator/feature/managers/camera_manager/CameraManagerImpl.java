@@ -1,8 +1,9 @@
-package com.example.gesturetranslator.feature.camera_manager;
+package com.example.gesturetranslator.feature.managers.camera_manager;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.Image;
+import android.util.Log;
 import android.util.Size;
 
 import androidx.annotation.NonNull;
@@ -13,8 +14,8 @@ import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
-import com.example.gesturetranslator.feature.camera_manager.listeners.CameraListener;
-import com.example.gesturetranslator.feature.camera_manager.models.ImageFromCamera;
+import com.example.gesturetranslator.feature.managers.camera_manager.listeners.CameraListener;
+import com.example.gesturetranslator.feature.managers.camera_manager.models.ImageFromCamera;
 import com.example.gesturetranslator.feature.translators.YUVtoRGB;
 import com.google.common.util.concurrent.ListenableFuture;
 
@@ -67,10 +68,7 @@ public class CameraManagerImpl implements CameraManager{
 
                     cameraProvider.bindToLifecycle((LifecycleOwner) context, cameraSelector, imageAnalysis);
 
-                } catch (ExecutionException e) {
-                    if (cameraListener != null) cameraListener.error(e);
-                    throw new RuntimeException(e);
-                } catch (InterruptedException e) {
+                } catch (Exception e) {
                     if (cameraListener != null) cameraListener.error(e);
                     throw new RuntimeException(e);
                 }

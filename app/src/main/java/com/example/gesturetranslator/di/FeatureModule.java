@@ -3,8 +3,8 @@ package com.example.gesturetranslator.di;
 import android.content.Context;
 
 import com.example.gesturetranslator.domain.repository.LoadImageRepository;
-import com.example.gesturetranslator.feature.camera_manager.CameraManager;
-import com.example.gesturetranslator.feature.camera_manager.CameraManagerImpl;
+import com.example.gesturetranslator.feature.managers.camera_manager.CameraManager;
+import com.example.gesturetranslator.feature.managers.camera_manager.CameraManagerImpl;
 import com.example.gesturetranslator.feature.repository.LoadImageRepositoryImpl;
 
 import dagger.Module;
