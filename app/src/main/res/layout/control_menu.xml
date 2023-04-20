@@ -32,11 +32,11 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/realTimeLV"
+    <com.example.gesturetranslator.custom_views.RealTimeButton
+        android:id="@+id/realTimeBTN"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        app:lottie_rawRes="@raw/start_stop"
+        app:lottie_rawRes="@raw/stop_start"
         app:lottie_autoPlay="false"
         app:lottie_loop="false"
         app:lottie_speed="2"

@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.gesturetranslator.R;
+import com.example.gesturetranslator.custom_views.RealTimeButton;
 import com.example.gesturetranslator.databinding.MainFrameBinding;
 import com.example.gesturetranslator.domain.listeners.LoadImagesListener;
 import com.example.gesturetranslator.domain.listeners.RecognizeImageListener;
@@ -96,22 +97,36 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
         }
     }
 
-    boolean flag = false;
-
     private void initListeners() {
-        binding.controlMenu.realTimeLV.setOnClickListener(new View.OnClickListener() {
+        binding.controlMenu.realTimeBTN.setOnChangedStatusListener(new RealTimeButton.OnChangedStatusListener() {
             @Override
-            public void onClick(View v) {
-                flag = !flag;
-                if (flag) {
-                    binding.controlMenu.realTimeLV.setAnimation(R.raw.start_stop);
-                    binding.controlMenu.realTimeLV.playAnimation();
-                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                } else {
-                    binding.controlMenu.realTimeLV.setAnimation(R.raw.stop_start);
-                    binding.controlMenu.realTimeLV.playAnimation();
-                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            public void onStart() {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+
+            @Override
+            public void onStop() {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            }
+        });
+
+        bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                Log.e(TAG, "onStateChanged: " + newState);
+                switch (newState){
+                    case BottomSheetBehavior.STATE_EXPANDED:
+                        if (binding.controlMenu.realTimeBTN.isPlay()) binding.controlMenu.realTimeBTN.onStop();
+                        break;
+                    case BottomSheetBehavior.STATE_COLLAPSED:
+                        if (!binding.controlMenu.realTimeBTN.isPlay()) binding.controlMenu.realTimeBTN.onStart();
+                        break;
                 }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
             }
         });
     }
@@ -132,7 +147,7 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
         binding.imageWithPredict.preview.setRotation(rotation);
         binding.imageWithPredict.preview.setImageBitmap(bitmap);
 
-        recognizeImageUseCase.execute(image);
+        if (binding.controlMenu.realTimeBTN.isPlay()) recognizeImageUseCase.execute(image);
     }
 
     @Override
