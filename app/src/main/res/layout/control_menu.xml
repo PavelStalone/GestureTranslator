@@ -5,17 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background"
     android:gravity="center"
-    android:paddingVertical="25dp">
-
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@drawable/gesture_list" />
+    android:paddingVertical="15dp">
 
     <View
         android:layout_width="0dp"
@@ -27,26 +17,16 @@
         android:layout_height="60dp"
         android:background="@drawable/flashlight" />
 
+
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <com.example.gesturetranslator.custom_views.RealTimeButton
-        android:id="@+id/realTimeBTN"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        app:lottie_rawRes="@raw/stop_start"
-        app:lottie_autoPlay="false"
-        app:lottie_loop="false"
-        app:lottie_speed="2"
-        />
-
-<!--    <ImageView-->
-<!--        android:id="@+id/realTimeIV"-->
-<!--        android:layout_width="60dp"-->
-<!--        android:layout_height="60dp"-->
-<!--        android:background="@drawable/real_time_button" />-->
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <View
         android:layout_width="0dp"
@@ -55,7 +35,7 @@
 
     <ImageView
         android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:background="@drawable/gallery" />
 
     <View

@@ -9,20 +9,12 @@
     tools:viewBindingIgnore="true">
 
     <ImageView
-        android:id="@+id/info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|center_vertical"
-        android:layout_marginRight="25dp"
-        android:background="@drawable/info" />
-
-    <ImageView
         android:id="@+id/donate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start|center_vertical"
         android:layout_marginLeft="25dp"
-        android:background="@drawable/donate" />
+        android:background="@drawable/menu" />
 
     <ImageView
         android:id="@+id/icon"

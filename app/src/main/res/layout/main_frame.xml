@@ -32,7 +32,7 @@
             layout="@layout/bottom_sheet_behavior"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:behavior_peekHeight="150dp"
+            app:behavior_peekHeight="250dp"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
@@ -42,4 +42,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom" />
+
+    <include
+        android:id="@+id/startStop"
+        layout="@layout/start_stop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom" />
+
 </FrameLayout>
