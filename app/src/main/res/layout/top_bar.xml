@@ -8,13 +8,13 @@
     android:orientation="horizontal"
     tools:viewBindingIgnore="true">
 
-    <ImageView
-        android:id="@+id/donate"
+    <ImageButton
+        android:id="@+id/menu_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start|center_vertical"
         android:layout_marginLeft="25dp"
-        android:background="@drawable/menu" />
+        android:background="@drawable/menu"/>
 
     <ImageView
         android:id="@+id/icon"
