@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,6 +43,7 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
     private static final String TAG = "MainFrame";
     private static final int PERMISSION_REQUEST_CAMERA = 23;
     private BottomSheetBehavior bottomSheetBehavior;
+    private DisplayMetrics displayMetrics = new DisplayMetrics();
 
     @Inject
     LoadImageUseCase loadImageUseCase;
@@ -72,19 +74,8 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
     }
 
     public void init() {
+        ((MainActivity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheetBehaviorLayout.bottomSheetBehavior);
-
-        binding.bottomSheetBehaviorLayout.bottomSheetBehavior.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                binding.bottomSheetBehaviorLayout.bottomSheetBehavior.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-
-                DisplayMetrics displayMetrics = new DisplayMetrics();
-                ((MainActivity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-
-                bottomSheetBehavior.setPeekHeight(displayMetrics.heightPixels - binding.imageWithPredict.preview.getBottom() - binding.imageWithPredict.wordPredictTV.getHeight());
-            }
-        });
     }
 
     private void start() {
@@ -98,17 +89,17 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
     }
 
     private void initListeners() {
-        binding.controlMenu.realTimeBTN.setOnChangedStatusListener(new RealTimeButton.OnChangedStatusListener() {
-            @Override
-            public void onStart() {
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            }
-
-            @Override
-            public void onStop() {
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-            }
-        });
+//        binding.controlMenu.realTimeBTN.setOnChangedStatusListener(new RealTimeButton.OnChangedStatusListener() {
+//            @Override
+//            public void onStart() {
+//                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+//            }
+//
+//            @Override
+//            public void onStop() {
+//                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+//            }
+//        });
 
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
@@ -116,10 +107,10 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
                 Log.e(TAG, "onStateChanged: " + newState);
                 switch (newState){
                     case BottomSheetBehavior.STATE_EXPANDED:
-                        if (binding.controlMenu.realTimeBTN.isPlay()) binding.controlMenu.realTimeBTN.onStop();
+                        //if (binding.controlMenu.realTimeBTN.isPlay()) binding.controlMenu.realTimeBTN.onStop();
                         break;
                     case BottomSheetBehavior.STATE_COLLAPSED:
-                        if (!binding.controlMenu.realTimeBTN.isPlay()) binding.controlMenu.realTimeBTN.onStart();
+                        //if (!binding.controlMenu.realTimeBTN.isPlay()) binding.controlMenu.realTimeBTN.onStart();
                         break;
                 }
             }
@@ -127,6 +118,13 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
 
+            }
+        });
+
+        binding.topBar.menuBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) context).drawerLayout.open();
             }
         });
     }
@@ -147,7 +145,10 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
         binding.imageWithPredict.preview.setRotation(rotation);
         binding.imageWithPredict.preview.setImageBitmap(bitmap);
 
-        if (binding.controlMenu.realTimeBTN.isPlay()) recognizeImageUseCase.execute(image);
+        bottomSheetBehavior.setPeekHeight(displayMetrics.heightPixels - binding.imageWithPredict.preview.getBottom() - binding.imageWithPredict.wordPredictTV.getHeight());
+
+        //if (binding.controlMenu.realTimeBTN.isPlay()) recognizeImageUseCase.execute(image);
+        recognizeImageUseCase.execute(image);
     }
 
     @Override

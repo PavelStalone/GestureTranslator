@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     public NavController navController;
     public NavHostFragment navHostFragment;
+    public DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,20 +35,13 @@ public class MainActivity extends AppCompatActivity {
 
         Constant.MAIN = this;
 
-        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.navigateToMainFrame);
+        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = navHostFragment.getNavController();
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 //ВОТ ОТ СЮДА
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout_id);
+        drawerLayout = binding.drawerLayoutId;
 
-        ImageButton menuButton = findViewById(R.id.menu_btn);
-        menuButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.open();
-            }
-        });
 //    ДО СЮДА)
     }
 

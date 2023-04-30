@@ -6,7 +6,7 @@
     <ImageView
         android:id="@+id/preview"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:scaleType="centerCrop" />
 
@@ -14,11 +14,10 @@
         android:id="@+id/wordPredictTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="580dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="30dp"
+        android:layout_gravity="center_horizontal|bottom"
         android:background="@drawable/predict_background"
         android:paddingHorizontal="10dp"
+        android:layout_marginBottom="30dp"
         android:text="A"
         android:textColor="@color/white"
         android:textSize="25sp" />
