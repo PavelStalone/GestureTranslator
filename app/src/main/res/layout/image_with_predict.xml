@@ -10,6 +10,13 @@
         android:layout_gravity="top|center_horizontal"
         android:scaleType="centerCrop" />
 
+    <com.example.gesturetranslator.custom_views.PaintHand
+        android:id="@+id/paintHandView"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_gravity="top|center_horizontal"
+        android:scaleType="centerCrop"/>
+
     <TextView
         android:id="@+id/wordPredictTV"
         android:layout_width="wrap_content"

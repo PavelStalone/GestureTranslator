@@ -7,6 +7,7 @@ import android.util.Log;
 import android.util.Size;
 
 import androidx.annotation.NonNull;
+import androidx.camera.core.AspectRatio;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageProxy;
@@ -45,7 +46,7 @@ public class CameraManagerImpl implements CameraManager{
                     ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
 
                     ImageAnalysis imageAnalysis = new ImageAnalysis.Builder()
-                            .setTargetResolution(new Size(1024, 768))
+                            .setTargetAspectRatio(AspectRatio.RATIO_4_3)
                             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                             .build();
 

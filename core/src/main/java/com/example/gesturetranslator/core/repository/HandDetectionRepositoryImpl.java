@@ -1,5 +1,8 @@
 package com.example.gesturetranslator.core.repository;
 
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
+
 import com.example.gesturetranslator.core.managers.mediapipe_manager.MediaPipeManager;
 import com.example.gesturetranslator.core.managers.mediapipe_manager.listeners.MPDetectionListener;
 import com.example.gesturetranslator.core.managers.mediapipe_manager.models.MPDetection;
@@ -36,7 +39,10 @@ public class HandDetectionRepositoryImpl implements HandDetectionRepository {
     // Правила перевода для связи domain и core модулей
 
     private MPImageInput mapToMPImageInput(Image image) {
-        MPImage mpImage = new BitmapImageBuilder(image.getBitmap()).build();
+        Bitmap bitmap = image.getBitmap();
+        Matrix matrix = new Matrix();
+        matrix.postRotate(image.getRotaion());
+        MPImage mpImage = new BitmapImageBuilder(Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true)).build();
 
         return new MPImageInput(mpImage);
     }
@@ -44,6 +50,7 @@ public class HandDetectionRepositoryImpl implements HandDetectionRepository {
     private HandDetected mapToCoreHandDetection(MPDetection mpDetection) {
         float[] coordinates = new float[42];
         HandLandmarkerResult result = mpDetection.getResult();
+        MPImage mpImage = mpDetection.getMpImage();
 
         if (result.landmarks().size() != 0) {
 

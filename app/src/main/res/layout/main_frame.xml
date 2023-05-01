@@ -42,9 +42,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom" />
-
-    <com.example.gesturetranslator.custom_views.PaintHand
-        android:id="@+id/paintHandView"
-        android:layout_width="300dp"
-        android:layout_height="300dp"/>
 </FrameLayout>

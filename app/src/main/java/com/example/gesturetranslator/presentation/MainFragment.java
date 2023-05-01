@@ -100,7 +100,7 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
         } else {
             //starting();
             loadImageUseCase.execute(this);
-            recognizeImageUseCase.setOnRecogniseListener(this);
+//            recognizeImageUseCase.setOnRecogniseListener(this);
             detectHandUseCase.setOnDetectionHandListener(this);
         }
     }
@@ -158,7 +158,7 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
         binding.imageWithPredict.preview.setImageBitmap(bitmap);
 
         detectHandUseCase.execute(image);
-        if (binding.controlMenu.realTimeBTN.isPlay()) recognizeImageUseCase.execute(image);
+//        if (binding.controlMenu.realTimeBTN.isPlay()) recognizeImageUseCase.execute(image);
     }
 
     @Override
@@ -168,7 +168,7 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
 
     @Override
     public void detect(HandDetected handDetected) {
-        binding.paintHandView.drawHand(handDetected.getCoordinates());
+        binding.imageWithPredict.paintHandView.drawHand(handDetected.getCoordinates());
         Log.e(TAG, "coordinates: " + Arrays.toString(handDetected.getCoordinates()));
     }
 

@@ -62,9 +62,8 @@ public class PaintHand extends View {
         canvasBitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
         drawCanvas = new Canvas(canvasBitmap);
 
-        drawCanvas.rotate(90, getWidth() / 2, getHeight() / 2);
         for (int i = 0; i < coordinates.length; i += 2) {
-            drawCanvas.drawCircle(coordinates[i] * 200, coordinates[i + 1] * 200, 10, pointPaint);
+            drawCanvas.drawCircle(coordinates[i] * getWidth(), coordinates[i + 1] * getHeight(), 5, pointPaint);
         }
 
         invalidate();
