@@ -19,23 +19,27 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.example.gesturetranslator.R;
 import com.example.gesturetranslator.custom_views.RealTimeButton;
 import com.example.gesturetranslator.databinding.MainFrameBinding;
+import com.example.gesturetranslator.domain.listeners.DetectionHandListener;
 import com.example.gesturetranslator.domain.listeners.LoadImagesListener;
 import com.example.gesturetranslator.domain.listeners.RecognizeImageListener;
+import com.example.gesturetranslator.domain.models.HandDetected;
 import com.example.gesturetranslator.domain.models.Image;
 import com.example.gesturetranslator.domain.models.ImageClassifications;
+import com.example.gesturetranslator.domain.usecases.DetectHandUseCase;
 import com.example.gesturetranslator.domain.usecases.LoadImageUseCase;
 import com.example.gesturetranslator.domain.usecases.RecognizeImageUseCase;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+
+import java.util.Arrays;
 
 import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class MainFragment extends Fragment implements LoadImagesListener, RecognizeImageListener {
+public class MainFragment extends Fragment implements LoadImagesListener, RecognizeImageListener, DetectionHandListener {
     private MainFrameBinding binding;
     private Context context;
 
@@ -48,6 +52,9 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
 
     @Inject
     RecognizeImageUseCase recognizeImageUseCase;
+
+    @Inject
+    DetectHandUseCase detectHandUseCase;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,6 +101,7 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
             //starting();
             loadImageUseCase.execute(this);
             recognizeImageUseCase.setOnRecogniseListener(this);
+            detectHandUseCase.setOnDetectionHandListener(this);
         }
     }
 
@@ -114,12 +122,14 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 Log.e(TAG, "onStateChanged: " + newState);
-                switch (newState){
+                switch (newState) {
                     case BottomSheetBehavior.STATE_EXPANDED:
-                        if (binding.controlMenu.realTimeBTN.isPlay()) binding.controlMenu.realTimeBTN.onStop();
+                        if (binding.controlMenu.realTimeBTN.isPlay())
+                            binding.controlMenu.realTimeBTN.onStop();
                         break;
                     case BottomSheetBehavior.STATE_COLLAPSED:
-                        if (!binding.controlMenu.realTimeBTN.isPlay()) binding.controlMenu.realTimeBTN.onStart();
+                        if (!binding.controlMenu.realTimeBTN.isPlay())
+                            binding.controlMenu.realTimeBTN.onStart();
                         break;
                 }
             }
@@ -147,12 +157,18 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
         binding.imageWithPredict.preview.setRotation(rotation);
         binding.imageWithPredict.preview.setImageBitmap(bitmap);
 
+        detectHandUseCase.execute(image);
         if (binding.controlMenu.realTimeBTN.isPlay()) recognizeImageUseCase.execute(image);
     }
 
     @Override
     public void recognise(ImageClassifications imageClassifications) {
         binding.imageWithPredict.wordPredictTV.setText(String.format("%s %.2f", imageClassifications.getLabel(), imageClassifications.getPercent()) + "%");
+    }
+
+    @Override
+    public void detect(HandDetected handDetected) {
+        Log.e(TAG, "coordinates: " + Arrays.toString(handDetected.getCoordinates()));
     }
 
     @Override

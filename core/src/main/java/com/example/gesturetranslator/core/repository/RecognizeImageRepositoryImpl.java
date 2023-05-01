@@ -30,9 +30,6 @@ public class RecognizeImageRepositoryImpl implements RecognizeImageRepository {
     }
 
 
-
-
-
     // Правила перевода для связи domain и core модулей
 
     private TfLiteImage mapToCoreImage(Image image) {
