@@ -168,6 +168,7 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
 
     @Override
     public void detect(HandDetected handDetected) {
+        binding.paintHandView.drawHand(handDetected.getCoordinates());
         Log.e(TAG, "coordinates: " + Arrays.toString(handDetected.getCoordinates()));
     }
 
