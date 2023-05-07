@@ -12,13 +12,14 @@
         android:layout_height="5dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:src="@drawable/swipe_icon" />
+        android:src="@drawable/swipe_icon"
+        android:contentDescription="@null"/>
 
     <TextView
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="left|center_vertical"
+        android:gravity="start|center_vertical"
         android:textSize="20sp"
         android:textColor="@color/black"
         android:text="Текст для тестирования выдвижного меню"/>

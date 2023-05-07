@@ -5,7 +5,7 @@ import com.ortin.gesturetranslator.domain.models.Image;
 import com.ortin.gesturetranslator.domain.repository.HandDetectionRepository;
 
 public class DetectHandUseCase {
-    private HandDetectionRepository handDetectionRepository;
+    private final HandDetectionRepository handDetectionRepository;
 
     public DetectHandUseCase(HandDetectionRepository handDetectionRepository) {
         this.handDetectionRepository = handDetectionRepository;

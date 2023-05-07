@@ -1,5 +1,9 @@
 package com.ortin.gesturetranslator.feature.repository;
 
+import android.app.Activity;
+
+import androidx.lifecycle.LifecycleOwner;
+
 import com.ortin.gesturetranslator.domain.models.Image;
 import com.ortin.gesturetranslator.domain.repository.LoadImageRepository;
 import com.ortin.gesturetranslator.domain.listeners.LoadImagesListener;
@@ -15,8 +19,8 @@ public class LoadImageRepositoryImpl implements LoadImageRepository {
     }
 
     @Override
-    public void loadImages(LoadImagesListener loadImagesListener) {
-        cameraManager.loadImage(mapperToDomainListener(loadImagesListener));
+    public void loadImages(LoadImagesListener loadImagesListener, Activity activity) {
+        cameraManager.loadImage(mapperToDomainListener(loadImagesListener), (LifecycleOwner) activity);
     }
 
 

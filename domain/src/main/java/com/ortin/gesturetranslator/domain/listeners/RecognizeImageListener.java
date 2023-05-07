@@ -1,8 +1,8 @@
 package com.ortin.gesturetranslator.domain.listeners;
 
-import com.ortin.gesturetranslator.domain.models.ImageClassifications;
+import com.ortin.gesturetranslator.domain.models.ImageClassification;
 
 public interface RecognizeImageListener {
-    void recognise(ImageClassifications imageClassifications);
+    void recognise(ImageClassification imageClassification);
     void error(Exception exception);
 }

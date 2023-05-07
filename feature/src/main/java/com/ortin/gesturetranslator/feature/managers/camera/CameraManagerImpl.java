@@ -21,9 +21,8 @@ import com.google.common.util.concurrent.ListenableFuture;
 public class CameraManagerImpl implements CameraManager{
 
     private final Context context;
-    private CameraListener cameraListener;
-    ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
-    YUVtoRGB translator = new YUVtoRGB();
+    private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
+    private final YUVtoRGB translator = new YUVtoRGB();
     private Bitmap bitmap;
 
     public CameraManagerImpl(Context context) {
@@ -31,9 +30,7 @@ public class CameraManagerImpl implements CameraManager{
     }
 
     @Override
-    public void loadImage(CameraListener cameraListener) {
-        this.cameraListener = cameraListener;
-
+    public void loadImage(CameraListener cameraListener, LifecycleOwner lifecycleOwner) {
         cameraProviderFuture = ProcessCameraProvider.getInstance(context);
         cameraProviderFuture.addListener(new Runnable() {
             @Override
@@ -63,11 +60,10 @@ public class CameraManagerImpl implements CameraManager{
                         }
                     });
 
-                    cameraProvider.bindToLifecycle((LifecycleOwner) context, cameraSelector, imageAnalysis);
+                    cameraProvider.bindToLifecycle(lifecycleOwner, cameraSelector, imageAnalysis);
 
                 } catch (Exception e) {
                     if (cameraListener != null) cameraListener.error(e);
-                    throw new RuntimeException(e);
                 }
             }
         }, ContextCompat.getMainExecutor(context));

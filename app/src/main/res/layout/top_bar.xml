@@ -13,22 +13,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|center_vertical"
-        android:layout_marginRight="25dp"
-        android:background="@drawable/info" />
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/info"
+        android:contentDescription="@null" />
 
     <ImageView
         android:id="@+id/donate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start|center_vertical"
-        android:layout_marginLeft="25dp"
-        android:background="@drawable/donate" />
+        android:layout_marginStart="25dp"
+        android:background="@drawable/donate"
+        android:contentDescription="@null" />
 
     <ImageView
         android:id="@+id/icon"
         android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
-        android:background="@drawable/trace__1_" />
+        android:background="@drawable/trace__1_"
+        android:contentDescription="@null" />
 
 </FrameLayout>

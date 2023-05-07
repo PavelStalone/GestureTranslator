@@ -1,8 +1,8 @@
 package com.ortin.gesturetranslator.core.managers.tensor_flow_lite.listeners;
 
-import com.ortin.gesturetranslator.core.managers.tensor_flow_lite.models.TfLiteImageClasification;
+import com.ortin.gesturetranslator.core.managers.tensor_flow_lite.models.TfLiteImageClassification;
 
 public interface TfLiteRecognizeListener {
-    void recognise(TfLiteImageClasification tfLiteImageClasification);
+    void recognise(TfLiteImageClassification tfLiteImageClassification);
     void error(Exception exception);
 }

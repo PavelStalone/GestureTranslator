@@ -2,16 +2,15 @@ package com.ortin.gesturetranslator.presentation;
 
 import android.animation.Animator;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-
-import android.os.Handler;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.ortin.gesturetranslator.R;
 import com.ortin.gesturetranslator.databinding.FragmentLogotypeBinding;
@@ -22,13 +21,7 @@ public class LogotypeFragment extends Fragment {
     private FragmentLogotypeBinding binding;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentLogotypeBinding.inflate(inflater, container, false);
         return binding.getRoot();
@@ -49,7 +42,7 @@ public class LogotypeFragment extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Constant.MAIN.navController.navigate(R.id.navigateToMainFrame);
+                        Navigation.findNavController(binding.getRoot()).navigate(R.id.navigateToMainFrame);
                     }
                 }, 1000);
             }
@@ -64,5 +57,11 @@ public class LogotypeFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

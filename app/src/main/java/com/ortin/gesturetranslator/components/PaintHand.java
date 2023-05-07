@@ -1,4 +1,4 @@
-package com.ortin.gesturetranslator.custom_views;
+package com.ortin.gesturetranslator.components;
 
 import android.content.Context;
 import android.graphics.Bitmap;

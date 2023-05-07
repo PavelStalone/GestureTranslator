@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
         android:id="@+id/preview"
@@ -10,7 +11,7 @@
         android:layout_gravity="top|center_horizontal"
         android:scaleType="centerCrop" />
 
-    <com.ortin.gesturetranslator.custom_views.PaintHand
+    <com.ortin.gesturetranslator.components.PaintHand
         android:id="@+id/paintHandView"
         android:layout_width="match_parent"
         android:layout_height="400dp"
@@ -25,7 +26,7 @@
         android:layout_marginBottom="30dp"
         android:background="@drawable/predict_background"
         android:paddingHorizontal="10dp"
-        android:text="A"
+        tools:text="A"
         android:textColor="@color/white"
         android:textSize="25sp" />
 

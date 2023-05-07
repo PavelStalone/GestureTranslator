@@ -1,10 +1,10 @@
-package com.ortin.gesturetranslator.domain.models;
+package com.ortin.gesturetranslator.core.managers.tensor_flow_lite.models;
 
-public class ImageClassifications {
+public class TfLiteImageClassification {
     private final String label;
     private final float percent;
 
-    public ImageClassifications(String label, float percent) {
+    public TfLiteImageClassification(String label, float percent) {
         this.label = label;
         this.percent = percent;
     }

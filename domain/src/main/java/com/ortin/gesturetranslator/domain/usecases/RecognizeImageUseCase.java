@@ -5,7 +5,7 @@ import com.ortin.gesturetranslator.domain.models.Image;
 import com.ortin.gesturetranslator.domain.repository.RecognizeImageRepository;
 
 public class RecognizeImageUseCase {
-    private RecognizeImageRepository recognizeImageRepository;
+    private final RecognizeImageRepository recognizeImageRepository;
 
     public RecognizeImageUseCase(RecognizeImageRepository recognizeImageRepository) {
         this.recognizeImageRepository = recognizeImageRepository;

@@ -4,18 +4,18 @@ import android.graphics.Bitmap;
 
 public class Image {
     final Bitmap bitmap;
-    final int rotaion;
+    final int rotation;
 
-    public Image(Bitmap bitmap, int rotaion) {
+    public Image(Bitmap bitmap, int rotation) {
         this.bitmap = bitmap;
-        this.rotaion = rotaion;
+        this.rotation = rotation;
     }
 
     public Bitmap getBitmap() {
         return bitmap;
     }
 
-    public int getRotaion() {
-        return rotaion;
+    public int getRotation() {
+        return rotation;
     }
 }

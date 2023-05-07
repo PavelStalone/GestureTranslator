@@ -67,7 +67,7 @@ public class MediaPipeManagerImpl implements MediaPipeManager {
 
     private void errorDetection(RuntimeException exception) {
         if (mpDetectionListener != null) {
-            mpDetectionListener.error((Exception) exception);
+            mpDetectionListener.error(exception);
         }
     }
 }

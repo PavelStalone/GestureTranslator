@@ -6,7 +6,7 @@ import android.view.Surface;
 
 import com.ortin.gesturetranslator.core.managers.tensor_flow_lite.listeners.TfLiteRecognizeListener;
 import com.ortin.gesturetranslator.core.managers.tensor_flow_lite.models.TfLiteImage;
-import com.ortin.gesturetranslator.core.managers.tensor_flow_lite.models.TfLiteImageClasification;
+import com.ortin.gesturetranslator.core.managers.tensor_flow_lite.models.TfLiteImageClassification;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import org.tensorflow.lite.support.label.Category;
@@ -34,7 +34,7 @@ public class TfLiteManagerImpl implements TfLiteManager {
     private TfLiteRecognizeListener tfLiteRecognizeListener;
     private static boolean ban = false;
 
-    public static final String[] LABEL = new String[]{"А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Ь", "Ы", "Э", "Ю", "Я"};
+    public static final String[] LABELS = new String[]{"А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Ь", "Ы", "Э", "Ю", "Я"};
 
     public TfLiteManagerImpl(Context context) {
         this.context = context;
@@ -51,15 +51,15 @@ public class TfLiteManagerImpl implements TfLiteManager {
     public void recogniseImage(TfLiteImage tfLiteImage) {
         if (ban) return;
         ban = true;
-        Observable<TfLiteImageClasification> observable = Observable.defer(() -> new PredictMLObservable(tfLiteImage));
+        Observable<TfLiteImageClassification> observable = Observable.defer(() -> new PredictMLObservable(tfLiteImage));
 
-        Observer<TfLiteImageClasification> observer = new Observer<TfLiteImageClasification>() {
+        Observer<TfLiteImageClassification> observer = new Observer<TfLiteImageClassification>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
             }
 
             @Override
-            public void onNext(@NonNull TfLiteImageClasification tflImageClasification) {
+            public void onNext(@NonNull TfLiteImageClassification tflImageClasification) {
                 if (tfLiteRecognizeListener != null) {
                     tfLiteRecognizeListener.recognise(tflImageClasification);
                 }
@@ -89,7 +89,7 @@ public class TfLiteManagerImpl implements TfLiteManager {
         this.tfLiteRecognizeListener = tfLiteRecognizeListener;
     }
 
-    class PredictMLObservable implements ObservableSource<TfLiteImageClasification> {
+    class PredictMLObservable implements ObservableSource<TfLiteImageClassification> {
         private final static String TAG = "PredictMLObservable";
         private final TfLiteImage tfLiteImage;
 
@@ -98,7 +98,7 @@ public class TfLiteManagerImpl implements TfLiteManager {
         }
 
         @Override
-        public void subscribe(@io.reactivex.rxjava3.annotations.NonNull Observer<? super TfLiteImageClasification> observer) {
+        public void subscribe(@NonNull Observer<? super TfLiteImageClassification> observer) {
             observer.onNext(classify(tfLiteImage));
             observer.onComplete();
         }
@@ -123,7 +123,7 @@ public class TfLiteManagerImpl implements TfLiteManager {
             }
         }
 
-        private TfLiteImageClasification classify(TfLiteImage tfLiteImage) {
+        private TfLiteImageClassification classify(TfLiteImage tfLiteImage) {
             if (imageClassifer == null) {
                 setupClassifier();
             }
@@ -151,27 +151,26 @@ public class TfLiteManagerImpl implements TfLiteManager {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    printCategorys(categories);
+                    printCategories(categories);
                 }
                 Log.e(TAG, "results categories: " + results.get(0).getCategories().size());
             }
-            return new TfLiteImageClasification(LABEL[categories.get(0).getIndex()], categories.get(0).getScore() * 100);
+
+            if (categories != null)
+                return new TfLiteImageClassification(LABELS[categories.get(0).getIndex()], categories.get(0).getScore() * 100);
+            return null;
         }
 
         private ImageProcessingOptions.Orientation getOrientationFromRotation(int rotation) {
-            switch (rotation) {
-                case Surface.ROTATION_270:
-                    return ImageProcessingOptions.Orientation.BOTTOM_RIGHT;
-                case Surface.ROTATION_180:
-                    return ImageProcessingOptions.Orientation.RIGHT_BOTTOM;
-                case Surface.ROTATION_90:
-                    return ImageProcessingOptions.Orientation.TOP_LEFT;
-                default:
-                    return ImageProcessingOptions.Orientation.RIGHT_TOP;
-            }
+            return switch (rotation) {
+                case Surface.ROTATION_270 -> ImageProcessingOptions.Orientation.BOTTOM_RIGHT;
+                case Surface.ROTATION_180 -> ImageProcessingOptions.Orientation.RIGHT_BOTTOM;
+                case Surface.ROTATION_90 -> ImageProcessingOptions.Orientation.TOP_LEFT;
+                default -> ImageProcessingOptions.Orientation.RIGHT_TOP;
+            };
         }
 
-        private void printCategorys(List<Category> categories) {
+        private void printCategories(List<Category> categories) {
             for (int i = 0; i < categories.size(); i++) {
                 Log.e(TAG, "category[" + i + "]: " + categories.get(i).getLabel() + " " + categories.get(i).getScore());
             }
