@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.gesturetranslator'
+    namespace 'com.ortin.gesturetranslator'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.gesturetranslator"
+        applicationId "com.ortin.gesturetranslator"
         minSdk 25
         targetSdk 33
         versionCode 1

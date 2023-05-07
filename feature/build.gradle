@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.feature'
+    namespace 'com.ortin.gesturetranslator.feature'
     compileSdk 33
 
     defaultConfig {

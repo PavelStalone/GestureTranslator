@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/logotypeFragment"
-        android:name="com.example.gesturetranslator.presentation.LogotypeFragment"
+        android:name="com.ortin.gesturetranslator.presentation.LogotypeFragment"
         android:label="fragment_logotype"
         tools:layout="@layout/fragment_logotype" >
         <action
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.gesturetranslator.presentation.MainFragment"
+        android:name="com.ortin.gesturetranslator.presentation.MainFragment"
         android:label="MainFragment" />
 
 </navigation>

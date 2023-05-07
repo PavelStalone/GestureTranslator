@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.domain'
+    namespace 'com.ortin.gesturetranslator.domain'
     compileSdk 33
 
     defaultConfig {
