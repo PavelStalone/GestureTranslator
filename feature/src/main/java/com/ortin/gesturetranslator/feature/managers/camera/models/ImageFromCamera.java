@@ -1,4 +1,4 @@
-package com.ortin.gesturetranslator.feature.managers.camera_manager.models;
+package com.ortin.gesturetranslator.feature.managers.camera.models;
 
 import android.graphics.Bitmap;
 

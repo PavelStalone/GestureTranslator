@@ -1,12 +1,12 @@
-package com.ortin.gesturetranslator.core.managers.tensor_flow_lite_manager;
+package com.ortin.gesturetranslator.core.managers.tensor_flow_lite;
 
 import android.content.Context;
 import android.util.Log;
 import android.view.Surface;
 
-import com.ortin.gesturetranslator.core.managers.tensor_flow_lite_manager.listeners.TfLiteRecognizeListener;
-import com.ortin.gesturetranslator.core.managers.tensor_flow_lite_manager.models.TfLiteImage;
-import com.ortin.gesturetranslator.core.managers.tensor_flow_lite_manager.models.TfLiteImageClasification;
+import com.ortin.gesturetranslator.core.managers.tensor_flow_lite.listeners.TfLiteRecognizeListener;
+import com.ortin.gesturetranslator.core.managers.tensor_flow_lite.models.TfLiteImage;
+import com.ortin.gesturetranslator.core.managers.tensor_flow_lite.models.TfLiteImageClasification;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import org.tensorflow.lite.support.label.Category;

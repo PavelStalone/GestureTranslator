@@ -1,4 +1,4 @@
-package com.ortin.gesturetranslator.core.managers.mediapipe_manager.models;
+package com.ortin.gesturetranslator.core.managers.mediapipe.models;
 
 import com.google.mediapipe.framework.image.MPImage;
 

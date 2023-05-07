@@ -1,9 +1,9 @@
 package com.ortin.gesturetranslator.core.repository;
 
-import com.ortin.gesturetranslator.core.managers.tensor_flow_lite_manager.TfLiteManager;
-import com.ortin.gesturetranslator.core.managers.tensor_flow_lite_manager.listeners.TfLiteRecognizeListener;
-import com.ortin.gesturetranslator.core.managers.tensor_flow_lite_manager.models.TfLiteImage;
-import com.ortin.gesturetranslator.core.managers.tensor_flow_lite_manager.models.TfLiteImageClasification;
+import com.ortin.gesturetranslator.core.managers.tensor_flow_lite.TfLiteManager;
+import com.ortin.gesturetranslator.core.managers.tensor_flow_lite.listeners.TfLiteRecognizeListener;
+import com.ortin.gesturetranslator.core.managers.tensor_flow_lite.models.TfLiteImage;
+import com.ortin.gesturetranslator.core.managers.tensor_flow_lite.models.TfLiteImageClasification;
 import com.ortin.gesturetranslator.domain.listeners.RecognizeImageListener;
 import com.ortin.gesturetranslator.domain.models.Image;
 import com.ortin.gesturetranslator.domain.models.ImageClassifications;

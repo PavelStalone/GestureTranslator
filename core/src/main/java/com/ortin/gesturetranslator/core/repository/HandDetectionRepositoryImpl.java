@@ -3,10 +3,10 @@ package com.ortin.gesturetranslator.core.repository;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 
-import com.ortin.gesturetranslator.core.managers.mediapipe_manager.MediaPipeManager;
-import com.ortin.gesturetranslator.core.managers.mediapipe_manager.listeners.MPDetectionListener;
-import com.ortin.gesturetranslator.core.managers.mediapipe_manager.models.MPDetection;
-import com.ortin.gesturetranslator.core.managers.mediapipe_manager.models.MPImageInput;
+import com.ortin.gesturetranslator.core.managers.mediapipe.MediaPipeManager;
+import com.ortin.gesturetranslator.core.managers.mediapipe.listeners.MPDetectionListener;
+import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPDetection;
+import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPImageInput;
 import com.ortin.gesturetranslator.domain.listeners.DetectionHandListener;
 import com.ortin.gesturetranslator.domain.models.HandDetected;
 import com.ortin.gesturetranslator.domain.models.Image;

@@ -1,4 +1,4 @@
-package com.ortin.gesturetranslator.feature.managers.camera_manager;
+package com.ortin.gesturetranslator.feature.managers.camera;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,8 +13,8 @@ import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
-import com.ortin.gesturetranslator.feature.managers.camera_manager.listeners.CameraListener;
-import com.ortin.gesturetranslator.feature.managers.camera_manager.models.ImageFromCamera;
+import com.ortin.gesturetranslator.feature.managers.camera.listeners.CameraListener;
+import com.ortin.gesturetranslator.feature.managers.camera.models.ImageFromCamera;
 import com.ortin.gesturetranslator.feature.translators.YUVtoRGB;
 import com.google.common.util.concurrent.ListenableFuture;
 

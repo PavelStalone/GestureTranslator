@@ -3,8 +3,8 @@ package com.ortin.gesturetranslator.di;
 import android.content.Context;
 
 import com.ortin.gesturetranslator.domain.repository.LoadImageRepository;
-import com.ortin.gesturetranslator.feature.managers.camera_manager.CameraManager;
-import com.ortin.gesturetranslator.feature.managers.camera_manager.CameraManagerImpl;
+import com.ortin.gesturetranslator.feature.managers.camera.CameraManager;
+import com.ortin.gesturetranslator.feature.managers.camera.CameraManagerImpl;
 import com.ortin.gesturetranslator.feature.repository.LoadImageRepositoryImpl;
 
 import dagger.Module;

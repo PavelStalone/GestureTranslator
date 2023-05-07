@@ -1,11 +1,11 @@
-package com.ortin.gesturetranslator.core.managers.mediapipe_manager;
+package com.ortin.gesturetranslator.core.managers.mediapipe;
 
 import android.content.Context;
 import android.os.SystemClock;
 
-import com.ortin.gesturetranslator.core.managers.mediapipe_manager.listeners.MPDetectionListener;
-import com.ortin.gesturetranslator.core.managers.mediapipe_manager.models.MPDetection;
-import com.ortin.gesturetranslator.core.managers.mediapipe_manager.models.MPImageInput;
+import com.ortin.gesturetranslator.core.managers.mediapipe.listeners.MPDetectionListener;
+import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPDetection;
+import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPImageInput;
 import com.google.mediapipe.framework.image.MPImage;
 import com.google.mediapipe.tasks.core.BaseOptions;
 import com.google.mediapipe.tasks.vision.core.RunningMode;

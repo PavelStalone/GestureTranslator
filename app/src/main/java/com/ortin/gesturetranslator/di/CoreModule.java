@@ -2,10 +2,10 @@ package com.ortin.gesturetranslator.di;
 
 import android.content.Context;
 
-import com.ortin.gesturetranslator.core.managers.mediapipe_manager.MediaPipeManager;
-import com.ortin.gesturetranslator.core.managers.mediapipe_manager.MediaPipeManagerImpl;
-import com.ortin.gesturetranslator.core.managers.tensor_flow_lite_manager.TfLiteManager;
-import com.ortin.gesturetranslator.core.managers.tensor_flow_lite_manager.TfLiteManagerImpl;
+import com.ortin.gesturetranslator.core.managers.mediapipe.MediaPipeManager;
+import com.ortin.gesturetranslator.core.managers.mediapipe.MediaPipeManagerImpl;
+import com.ortin.gesturetranslator.core.managers.tensor_flow_lite.TfLiteManager;
+import com.ortin.gesturetranslator.core.managers.tensor_flow_lite.TfLiteManagerImpl;
 import com.ortin.gesturetranslator.core.repository.HandDetectionRepositoryImpl;
 import com.ortin.gesturetranslator.core.repository.RecognizeImageRepositoryImpl;
 import com.ortin.gesturetranslator.domain.repository.HandDetectionRepository;

@@ -3,9 +3,9 @@ package com.ortin.gesturetranslator.feature.repository;
 import com.ortin.gesturetranslator.domain.models.Image;
 import com.ortin.gesturetranslator.domain.repository.LoadImageRepository;
 import com.ortin.gesturetranslator.domain.listeners.LoadImagesListener;
-import com.ortin.gesturetranslator.feature.managers.camera_manager.listeners.CameraListener;
-import com.ortin.gesturetranslator.feature.managers.camera_manager.CameraManager;
-import com.ortin.gesturetranslator.feature.managers.camera_manager.models.ImageFromCamera;
+import com.ortin.gesturetranslator.feature.managers.camera.listeners.CameraListener;
+import com.ortin.gesturetranslator.feature.managers.camera.CameraManager;
+import com.ortin.gesturetranslator.feature.managers.camera.models.ImageFromCamera;
 
 public class LoadImageRepositoryImpl implements LoadImageRepository {
     private final CameraManager cameraManager;
