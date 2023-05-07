@@ -35,9 +35,11 @@ public class TfLiteManagerImpl implements TfLiteManager {
     private static boolean ban = false;
 
     public static final String[] LABELS = new String[]{"А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Ь", "Ы", "Э", "Ю", "Я"};
+    private final String modelName;
 
-    public TfLiteManagerImpl(Context context) {
+    public TfLiteManagerImpl(Context context, String modelName) {
         this.context = context;
+        this.modelName = modelName;
         ban = true;
         TfLiteVision.initialize(context).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -110,11 +112,9 @@ public class TfLiteManagerImpl implements TfLiteManager {
                     .setScoreThreshold(0.01f)
                     .setMaxResults(29);
 
-            BaseOptions.Builder baseOptionsBuilder = BaseOptions.builder().setNumThreads(2);
+            BaseOptions.Builder baseOptionsBuilder = BaseOptions.builder().setNumThreads(3);
 
             optionsBuilder.setBaseOptions(baseOptionsBuilder.build());
-
-            String modelName = "MobileNetV2.tflite";
 
             try {
                 imageClassifer = ImageClassifier.createFromFileAndOptions(context, modelName, optionsBuilder.build());

@@ -13,8 +13,6 @@ import com.ortin.gesturetranslator.R;
 
 public class PaintHand extends View {
 
-    private final Context context;
-
     private Paint drawPaint, canvasPaint, pointPaint;
     private Canvas drawCanvas;
     private Bitmap canvasBitmap;
@@ -33,7 +31,6 @@ public class PaintHand extends View {
 
     public PaintHand(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        this.context = context;
         init();
     }
 
@@ -41,14 +38,14 @@ public class PaintHand extends View {
         drawPaint = new Paint();
         pointPaint = new Paint();
 
-        drawPaint.setColor(context.getColor(R.color.black));
+        drawPaint.setColor(getContext().getColor(R.color.black));
         drawPaint.setAntiAlias(true);
         drawPaint.setStrokeWidth(10);
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeJoin(Paint.Join.ROUND);
         drawPaint.setStrokeCap(Paint.Cap.ROUND);
 
-        pointPaint.setColor(context.getColor(R.color.purple_500));
+        pointPaint.setColor(getContext().getColor(R.color.purple_500));
         pointPaint.setAntiAlias(true);
         pointPaint.setStrokeWidth(8);
         pointPaint.setStyle(Paint.Style.STROKE);

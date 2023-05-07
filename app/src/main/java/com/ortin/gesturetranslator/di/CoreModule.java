@@ -31,7 +31,7 @@ public class CoreModule {
     @Provides
     @Singleton
     TfLiteManager provideTFLManager(@ApplicationContext Context context) {
-        return new TfLiteManagerImpl(context);
+        return new TfLiteManagerImpl(context, "MobileNetV2.tflite");
     }
 
     @Provides
@@ -43,6 +43,6 @@ public class CoreModule {
     @Provides
     @Singleton
     MediaPipeManager provideMediaPipeManager(@ApplicationContext Context context) {
-        return new MediaPipeManagerImpl(context);
+        return new MediaPipeManagerImpl(context, "hand_landmarker.task");
     }
 }

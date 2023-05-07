@@ -19,8 +19,11 @@ public class MediaPipeManagerImpl implements MediaPipeManager {
 
     private HandLandmarker handLandmarker = null;
 
-    public MediaPipeManagerImpl(Context context) {
+    private final String modelName;
+
+    public MediaPipeManagerImpl(Context context, String modelName) {
         this.context = context;
+        this.modelName = modelName;
     }
 
     @Override
@@ -33,7 +36,6 @@ public class MediaPipeManagerImpl implements MediaPipeManager {
     }
 
     private void setupBuilder() {
-        String modelName = "hand_landmarker.task";
         BaseOptions.Builder baseOptionsBuilder = BaseOptions.builder().setModelAssetPath(modelName);
 
         BaseOptions baseOptions = baseOptionsBuilder.build();

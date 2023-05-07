@@ -1,6 +1,7 @@
 package com.ortin.gesturetranslator.presentation;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -44,8 +45,6 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
     private MainFrameBinding binding;
 
     private static final String TAG = "MainFrame";
-    private static final int PERMISSION_REQUEST_CAMERA = 23;
-    private BottomSheetBehavior<LinearLayout> bottomSheetBehavior;
 
     @Inject
     LoadImageUseCase loadImageUseCase;
@@ -94,7 +93,6 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
     }
 
     private void init() {
-        bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheetBehaviorLayout.bottomSheetBehavior);
 
         binding.bottomSheetBehaviorLayout.bottomSheetBehavior.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -104,7 +102,7 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
                 DisplayMetrics displayMetrics = new DisplayMetrics();
                 requireActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
-                bottomSheetBehavior.setPeekHeight(displayMetrics.heightPixels - binding.imageWithPredict.preview.getBottom() - binding.imageWithPredict.wordPredictTV.getHeight());
+                BottomSheetBehavior.from(binding.bottomSheetBehaviorLayout.bottomSheetBehavior).setPeekHeight(displayMetrics.heightPixels - binding.imageWithPredict.preview.getBottom() - binding.imageWithPredict.wordPredictTV.getHeight());
             }
         });
     }
@@ -114,12 +112,13 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
             mGetContent.launch(Manifest.permission.CAMERA);
         } else {
             loadImageUseCase.execute(this, requireActivity());
-//            recognizeImageUseCase.setOnRecogniseListener(this);
+            recognizeImageUseCase.setOnRecogniseListener(this);
             detectHandUseCase.setOnDetectionHandListener(this);
         }
     }
 
     private void initListeners() {
+        BottomSheetBehavior<LinearLayout> bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheetBehaviorLayout.bottomSheetBehavior);
         binding.controlMenu.realTimeBTN.setOnChangedStatusListener(new RealTimeButton.OnChangedStatusListener() {
             @Override
             public void onStart() {
@@ -165,9 +164,10 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
         binding.imageWithPredict.preview.setImageBitmap(bitmap);
 
         detectHandUseCase.execute(image);
-//        if (binding.controlMenu.realTimeBTN.isPlay()) recognizeImageUseCase.execute(image);
+        if (binding.controlMenu.realTimeBTN.isPlay()) recognizeImageUseCase.execute(image);
     }
 
+    @SuppressLint({"DefaultLocale", "SetTextI18n"})
     @Override
     public void recognise(ImageClassification imageClassification) {
         binding.imageWithPredict.wordPredictTV.setText(String.format("%s %.2f", imageClassification.getLabel(), imageClassification.getPercent()) + "%");
