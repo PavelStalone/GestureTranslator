@@ -27,11 +27,13 @@ import com.ortin.gesturetranslator.databinding.MainFrameBinding;
 import com.ortin.gesturetranslator.domain.listeners.DetectionHandListener;
 import com.ortin.gesturetranslator.domain.listeners.LoadImagesListener;
 import com.ortin.gesturetranslator.domain.listeners.RecognizeImageListener;
+import com.ortin.gesturetranslator.domain.models.CoordinateClassification;
 import com.ortin.gesturetranslator.domain.models.HandDetected;
 import com.ortin.gesturetranslator.domain.models.Image;
 import com.ortin.gesturetranslator.domain.models.ImageClassification;
 import com.ortin.gesturetranslator.domain.usecases.DetectHandUseCase;
 import com.ortin.gesturetranslator.domain.usecases.LoadImageUseCase;
+import com.ortin.gesturetranslator.domain.usecases.RecognizeCoordinateUseCase;
 import com.ortin.gesturetranslator.domain.usecases.RecognizeImageUseCase;
 
 import java.util.Arrays;
@@ -39,6 +41,9 @@ import java.util.Arrays;
 import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 @AndroidEntryPoint
 public class MainFragment extends Fragment implements LoadImagesListener, RecognizeImageListener, DetectionHandListener {
@@ -54,6 +59,9 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
 
     @Inject
     DetectHandUseCase detectHandUseCase;
+
+    @Inject
+    RecognizeCoordinateUseCase recognizeCoordinateUseCase;
 
     ActivityResultLauncher<String> mGetContent;
 
@@ -112,7 +120,7 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
             mGetContent.launch(Manifest.permission.CAMERA);
         } else {
             loadImageUseCase.execute(this, requireActivity());
-            recognizeImageUseCase.setOnRecogniseListener(this);
+            //recognizeImageUseCase.setOnRecogniseListener(this);
             detectHandUseCase.setOnDetectionHandListener(this);
         }
     }
@@ -164,7 +172,7 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
         binding.imageWithPredict.preview.setImageBitmap(bitmap);
 
         detectHandUseCase.execute(image);
-        if (binding.controlMenu.realTimeBTN.isPlay()) recognizeImageUseCase.execute(image);
+        //if (binding.controlMenu.realTimeBTN.isPlay()) recognizeImageUseCase.execute(image);
     }
 
     @SuppressLint({"DefaultLocale", "SetTextI18n"})
@@ -173,10 +181,16 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
         binding.imageWithPredict.wordPredictTV.setText(String.format("%s %.2f", imageClassification.getLabel(), imageClassification.getPercent()) + "%");
     }
 
+    @SuppressLint({"DefaultLocale", "SetTextI18n"})
     @Override
     public void detect(HandDetected handDetected) {
         binding.imageWithPredict.paintHandView.drawHand(handDetected.getCoordinates());
+
+        CoordinateClassification coordinateClassification = recognizeCoordinateUseCase.execute(handDetected);
+        Observable.just(String.format("%s %.2f", coordinateClassification.getLabel(), coordinateClassification.getPercent()) + "%").subscribeOn(AndroidSchedulers.mainThread()).subscribe(t -> binding.imageWithPredict.wordPredictTV.setText(t));
+        //binding.imageWithPredict.wordPredictTV.setText(String.format("%s %.2f", coordinateClassification.getLabel(), coordinateClassification.getPercent()) + "%");
         Log.e(TAG, "coordinates: " + Arrays.toString(handDetected.getCoordinates()));
+        Log.e(TAG, "label: " + coordinateClassification.getLabel() + " percent: " + coordinateClassification.getPercent());
     }
 
     @Override

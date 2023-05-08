@@ -2,9 +2,11 @@ package com.ortin.gesturetranslator.di;
 
 import com.ortin.gesturetranslator.domain.repository.HandDetectionRepository;
 import com.ortin.gesturetranslator.domain.repository.LoadImageRepository;
+import com.ortin.gesturetranslator.domain.repository.RecognizeCoordinateRepository;
 import com.ortin.gesturetranslator.domain.repository.RecognizeImageRepository;
 import com.ortin.gesturetranslator.domain.usecases.DetectHandUseCase;
 import com.ortin.gesturetranslator.domain.usecases.LoadImageUseCase;
+import com.ortin.gesturetranslator.domain.usecases.RecognizeCoordinateUseCase;
 import com.ortin.gesturetranslator.domain.usecases.RecognizeImageUseCase;
 
 import dagger.Module;
@@ -29,5 +31,10 @@ public class DomainModule {
     @Provides
     DetectHandUseCase provideDetectHandUseCase(HandDetectionRepository handDetectionRepository) {
         return new DetectHandUseCase(handDetectionRepository);
+    }
+
+    @Provides
+    RecognizeCoordinateUseCase provideRecognizeCoordinateUseCase(RecognizeCoordinateRepository recognizeCoordinateRepository) {
+        return new RecognizeCoordinateUseCase(recognizeCoordinateRepository);
     }
 }
