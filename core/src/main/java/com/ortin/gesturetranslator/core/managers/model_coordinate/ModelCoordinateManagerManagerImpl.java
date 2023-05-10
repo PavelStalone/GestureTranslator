@@ -1,8 +1,12 @@
 package com.ortin.gesturetranslator.core.managers.model_coordinate;
 
+import android.util.Log;
+
 import com.ortin.gesturetranslator.core.managers.model_coordinate.ml_models.MlModel;
 import com.ortin.gesturetranslator.core.managers.model_coordinate.models.ModelCoordinateArray;
 import com.ortin.gesturetranslator.core.managers.model_coordinate.models.ModelCoordinateClassificationArray;
+
+import java.util.Arrays;
 
 public class ModelCoordinateManagerManagerImpl implements ModelCoordinateManager {
 
@@ -10,6 +14,7 @@ public class ModelCoordinateManagerManagerImpl implements ModelCoordinateManager
 
     @Override
     public ModelCoordinateClassificationArray recognise(ModelCoordinateArray modelCoordinateArray) {
+        Log.e("recognise", "recognise: " + Arrays.toString(modelCoordinateArray.getCoordinate()));
         double[] results = MlModel.score(modelCoordinateArray.getCoordinate());
         double maxScore = 0.0;
         int maxIndex = 0;
