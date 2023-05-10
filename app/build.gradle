@@ -3,6 +3,8 @@ plugins {
 
     id 'dagger.hilt.android.plugin'
     id 'com.google.dagger.hilt.android'
+
+    id 'de.undercouch.download'
 }
 
 android {
@@ -38,6 +40,9 @@ android {
         noCompress 'tflite'
     }
 }
+
+project.ext.ASSET_DIR = projectDir.toString() + '/src/main/assets'
+apply from: 'download_tasks.gradle'
 
 dependencies {
     def lottieVersion = "3.4.0"

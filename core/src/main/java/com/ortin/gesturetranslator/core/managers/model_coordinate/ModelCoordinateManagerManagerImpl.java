@@ -19,6 +19,8 @@ public class ModelCoordinateManagerManagerImpl implements ModelCoordinateManager
         double maxScore = 0.0;
         int maxIndex = 0;
 
+        Log.e("recognise", "results: " + Arrays.toString(results));
+
         for (int i = 0; i < results.length; i++) {
             if (results[i] > maxScore) {
                 maxScore = results[i];
