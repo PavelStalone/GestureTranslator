@@ -34,7 +34,7 @@ public class TfLiteManagerImpl implements TfLiteManager {
     private TfLiteRecognizeListener tfLiteRecognizeListener;
     private static boolean ban = false;
 
-    public static final String[] LABELS = new String[]{"А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Ь", "Ы", "Э", "Ю", "Я"};
+    public static final String[] LABELS = new String[]{"А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Ы", "Ь", "Э", "Ю", "Я"};
     private final String modelName;
 
     public TfLiteManagerImpl(Context context, String modelName) {
