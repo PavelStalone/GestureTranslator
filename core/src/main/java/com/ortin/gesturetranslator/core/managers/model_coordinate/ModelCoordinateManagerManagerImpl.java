@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 public class ModelCoordinateManagerManagerImpl implements ModelCoordinateManager {
 
-    public static final String[] LABELS = new String[]{"А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Ь", "Ы", "Э", "Ю", "Я"};
+    public static final String[] LABELS = new String[]{"А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Ы", "Ь", "Э", "Ю", "Я"};
 
     @Override
     public ModelCoordinateClassificationArray recognise(ModelCoordinateArray modelCoordinateArray) {
