@@ -120,13 +120,6 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
 
             }
         });
-
-        binding.topBar.menuBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity) context).drawerLayout.open();
-            }
-        });
     }
 
     @Override

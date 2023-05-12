@@ -17,9 +17,9 @@
         android:layout_gravity="center_horizontal|bottom"
         android:background="@drawable/predict_background"
         android:paddingHorizontal="10dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="60dp"
         android:text="A"
-        android:textColor="@color/white"
+        android:textColor="@color/purple"
         android:textSize="25sp" />
 
 </FrameLayout>
