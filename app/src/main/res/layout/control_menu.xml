@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:background="@color/background"
     android:gravity="center"
+    android:paddingVertical="15dp">
     android:paddingVertical="25dp">
 
     <ImageView
@@ -20,8 +21,8 @@
 
     <ImageView
         android:id="@+id/flashLight"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="127dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/flashlight"
         android:contentDescription="@null"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -43,12 +44,6 @@
         app:lottie_rawRes="@raw/stop_start"
         app:lottie_speed="2" />
 
-    <!--    <ImageView-->
-    <!--        android:id="@+id/realTimeIV"-->
-    <!--        android:layout_width="60dp"-->
-    <!--        android:layout_height="60dp"-->
-    <!--        android:background="@drawable/real_time_button" />-->
-
     <ImageView
         android:id="@+id/gallery"
         android:layout_width="60dp"
@@ -59,5 +54,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/realTimeBTN"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/realTimeIV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/real_time_button" />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gallery" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

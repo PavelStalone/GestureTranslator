@@ -15,9 +15,25 @@
             app:destination="@id/mainFragment"
             app:enterAnim="@android:anim/slide_in_left" />
     </fragment>
+
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.ortin.gesturetranslator.presentation.MainFragment"
         android:label="MainFragment" />
+        android:name="com.example.gesturetranslator.presentation.MainFragment"
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_informationFragment"
+            app:destination="@id/informationFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/informationFragment"
+        android:name="com.example.gesturetranslator.presentation.InformationFragment"
+        android:label="InformationFragment" >
+        <action
+            android:id="@+id/action_informationFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 
 </navigation>
