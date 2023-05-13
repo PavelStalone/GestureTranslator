@@ -10,5 +10,6 @@
     <color name="background">#FFF3EDF7</color>
 
 
+    <color name="purple_500">#FF3500B3</color>
     <color name="gray">#FFCCCCCC</color>
 </resources>

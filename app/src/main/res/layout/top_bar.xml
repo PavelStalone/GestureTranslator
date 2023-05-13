@@ -5,16 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="55dp"
     android:background="@color/white"
-    android:orientation="horizontal"
-    tools:viewBindingIgnore="true">
+    android:orientation="horizontal">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/menuBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="10dp"
         android:layout_gravity="start|center_vertical"
         android:layout_marginStart="25dp"
-        android:background="@drawable/menu"
+        android:src="@drawable/menu"
         android:contentDescription="@null" />
 
     <ImageView

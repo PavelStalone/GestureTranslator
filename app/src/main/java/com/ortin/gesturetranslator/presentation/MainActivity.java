@@ -1,12 +1,19 @@
 package com.ortin.gesturetranslator.presentation;
 
+import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.Navigation;
 
+import com.google.android.material.navigation.NavigationView;
+import com.ortin.gesturetranslator.R;
 import com.ortin.gesturetranslator.databinding.ActivityMainBinding;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -16,19 +23,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private static final String TAG = "MainActivity";
     private ActivityMainBinding binding;
-    public NavController navController;
-    public NavHostFragment navHostFragment;
     public DrawerLayout drawerLayout;
     public NavigationView navigationView;
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
-
-        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-        navController = navHostFragment.getNavController();
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -50,16 +53,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.info_btn:
-                navController.navigate(R.id.action_mainFragment_to_informationFragment);
+                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_mainFragment_to_informationFragment);
                 break;
             case R.id.home_btn:
-//                navController.pop
         }
-
         drawerLayout.close();
         return false;
     }

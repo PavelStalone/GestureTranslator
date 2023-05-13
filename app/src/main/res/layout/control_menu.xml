@@ -5,19 +5,7 @@
     android:layout_height="wrap_content"
     android:background="@color/background"
     android:gravity="center"
-    android:paddingVertical="15dp">
     android:paddingVertical="25dp">
-
-    <ImageView
-        android:id="@+id/gestureList"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@drawable/gesture_list"
-        android:contentDescription="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/flashLight"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/flashLight"
@@ -27,7 +15,7 @@
         android:contentDescription="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/realTimeBTN"
-        app:layout_constraintStart_toEndOf="@id/gestureList"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -36,8 +24,8 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/gallery"
-        app:layout_constraintStart_toEndOf="@id/flashLight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="false"
         app:lottie_loop="false"
@@ -55,16 +43,14 @@
         app:layout_constraintStart_toEndOf="@id/realTimeBTN"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/realTimeIV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/real_time_button" />
-
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/gallery" />
+<!--    <ImageView-->
+<!--        android:id="@+id/realTimeIV"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:src="@drawable/real_time_button"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toStartOf="@id/gallery"-->
+<!--        app:layout_constraintStart_toEndOf="@id/flashLight"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

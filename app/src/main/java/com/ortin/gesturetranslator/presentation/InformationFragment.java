@@ -1,4 +1,4 @@
-package com.example.gesturetranslator.presentation;
+package com.ortin.gesturetranslator.presentation;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,17 +7,15 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.gesturetranslator.databinding.InformationLayoutBinding;
+import com.ortin.gesturetranslator.databinding.InformationLayoutBinding;
 
 public class InformationFragment extends Fragment {
 
     InformationLayoutBinding binding;
-    MainActivity context;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = Constant.MAIN;
     }
 
     @Override
