@@ -1,9 +1,12 @@
 package com.ortin.gesturetranslator.domain.usecases;
 
-import android.app.Activity;
+import android.app.Fragment;
 
-import com.ortin.gesturetranslator.domain.repository.LoadImageRepository;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+
 import com.ortin.gesturetranslator.domain.listeners.LoadImagesListener;
+import com.ortin.gesturetranslator.domain.repository.LoadImageRepository;
 
 public class LoadImageUseCase {
 
@@ -13,7 +16,7 @@ public class LoadImageUseCase {
         this.loadImageRepository = loadImageRepository;
     }
 
-    public void execute(LoadImagesListener loadImagesListener, Activity activity) {
-        loadImageRepository.loadImages(loadImagesListener, activity);
+    public void execute(LoadImagesListener loadImagesListener, LifecycleOwner lifecycleOwner) {
+        loadImageRepository.loadImages(loadImagesListener, lifecycleOwner);
     }
 }

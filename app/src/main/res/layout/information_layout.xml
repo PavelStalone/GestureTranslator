@@ -7,9 +7,9 @@
     tools:context=".presentation.InformationFragment">
 
     <LinearLayout
-        android:layout_gravity="center"
         android:layout_width="380dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:background="@drawable/rectangle">
 
         <TextView
@@ -20,13 +20,5 @@
             android:text="Текст с информацией"
             android:textColor="@color/background"
             android:textSize="20sp" />
-    </LinearLayout>
-
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="top"
-    android:orientation="vertical">
-
     </LinearLayout>
 </FrameLayout>

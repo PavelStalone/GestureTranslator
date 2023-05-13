@@ -119,7 +119,7 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
         if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             mGetContent.launch(Manifest.permission.CAMERA);
         } else {
-            loadImageUseCase.execute(this, requireActivity());
+            loadImageUseCase.execute(this,  this.getViewLifecycleOwner());
             //recognizeImageUseCase.setOnRecogniseListener(this);
             detectHandUseCase.setOnDetectionHandListener(this);
         }
@@ -181,16 +181,20 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
         binding.imageWithPredict.wordPredictTV.setText(String.format("%s %.2f", imageClassification.getLabel(), imageClassification.getPercent()) + "%");
     }
 
-    @SuppressLint({"DefaultLocale", "SetTextI18n"})
+    @SuppressLint({"DefaultLocale", "SetTextI18n", "CheckResult"})
     @Override
     public void detect(HandDetected handDetected) {
-        binding.imageWithPredict.paintHandView.drawHand(handDetected.getCoordinates());
+        if (binding != null) { // Костыль
+            binding.imageWithPredict.paintHandView.drawHand(handDetected.getCoordinates());
 
-        CoordinateClassification coordinateClassification = recognizeCoordinateUseCase.execute(handDetected);
-        Observable.just(String.format("%s %.2f", coordinateClassification.getLabel(), coordinateClassification.getPercent()) + "%").subscribeOn(AndroidSchedulers.mainThread()).subscribe(t -> binding.imageWithPredict.wordPredictTV.setText(t));
-        //binding.imageWithPredict.wordPredictTV.setText(String.format("%s %.2f", coordinateClassification.getLabel(), coordinateClassification.getPercent()) + "%");
-        Log.e(TAG, "coordinates: " + Arrays.toString(handDetected.getCoordinates()));
-        Log.e(TAG, "label: " + coordinateClassification.getLabel() + " percent: " + coordinateClassification.getPercent());
+            CoordinateClassification coordinateClassification = recognizeCoordinateUseCase.execute(handDetected);
+            Observable.just(String.format("%s %.2f", coordinateClassification.getLabel(), coordinateClassification.getPercent()) + "%").subscribeOn(AndroidSchedulers.mainThread()).subscribe(t -> {
+                if (binding != null) binding.imageWithPredict.wordPredictTV.setText(t);
+            });
+            //binding.imageWithPredict.wordPredictTV.setText(String.format("%s %.2f", coordinateClassification.getLabel(), coordinateClassification.getPercent()) + "%");
+            Log.e(TAG, "coordinates: " + Arrays.toString(handDetected.getCoordinates()));
+            Log.e(TAG, "label: " + coordinateClassification.getLabel() + " percent: " + coordinateClassification.getPercent());
+        }
     }
 
     @Override
