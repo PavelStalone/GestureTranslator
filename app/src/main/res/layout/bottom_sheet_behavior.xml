@@ -16,12 +16,19 @@
         android:contentDescription="@null"/>
 
     <TextView
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:theme="@style/TextAppearance.GestureTranslator.SecondaryText"
+        android:text="Распознанный текст"/>
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="start|center_vertical"
-        android:textSize="20sp"
-        android:textColor="@color/black"
+        android:theme="@style/TextAppearance.GestureTranslator.PrimaryText"
         android:text="Текст для тестирования выдвижного меню"/>
 
 </LinearLayout>

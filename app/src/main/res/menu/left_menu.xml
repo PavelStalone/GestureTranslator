@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
     <item
-        android:id="@+id/home_btn"
+        android:id="@+id/mainFragment"
         android:icon="@drawable/home_btn"
         android:title="Home" />
 
     <item
-        android:id="@+id/info_btn"
+        android:id="@+id/informationFragment"
         android:icon="@drawable/info"
         android:title="Information" />
 

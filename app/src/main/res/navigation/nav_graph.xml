@@ -3,18 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/logotypeFragment">
-
-    <fragment
-        android:id="@+id/logotypeFragment"
-        android:name="com.ortin.gesturetranslator.presentation.LogotypeFragment"
-        android:label="fragment_logotype"
-        tools:layout="@layout/fragment_logotype" >
-        <action
-            android:id="@+id/navigateToMainFrame"
-            app:destination="@id/mainFragment"
-            app:enterAnim="@android:anim/slide_in_left" />
-    </fragment>
+    app:startDestination="@id/mainFragment">
 
     <fragment
         android:id="@+id/mainFragment"
@@ -28,10 +17,6 @@
     <fragment
         android:id="@+id/informationFragment"
         android:name="com.ortin.gesturetranslator.presentation.InformationFragment"
-        android:label="InformationFragment" >
-        <action
-            android:id="@+id/action_informationFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
-    </fragment>
+        android:label="InformationFragment" />
 
 </navigation>

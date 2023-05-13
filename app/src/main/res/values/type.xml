@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextAppearance.GestureTranslator.PrimaryText" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">?attr/primaryTextColor</item>
+        <item name="android:textSize">?attr/primaryTextSize</item>
+    </style>
+
+    <style name="TextAppearance.GestureTranslator.SecondaryText" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">?attr/secondaryTextColor</item>
+        <item name="android:textSize">?attr/secondaryTextSize</item>
+    </style>
+
+    <style name="Widget.GestureTranslator.PredictionWord" parent="Widget.MaterialComponents.TextView">
+        <item name="android:background">@drawable/predict_background</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+</resources>

@@ -13,6 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.ortin.gesturetranslator.R;
@@ -23,10 +24,11 @@ import java.util.Objects;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private ActivityMainBinding binding;
+    private NavController navController;
     public DrawerLayout drawerLayout;
     public NavigationView navigationView;
 
@@ -39,15 +41,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        navController = ((NavHostFragment) Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))).getNavController();
+
         drawerLayout = binding.drawerLayoutId;
         navigationView = binding.menuNavigationView;
+
+        NavigationUI.setupWithNavController(navigationView, navController);
 
         initListeners();
     }
 
     private void initListeners() {
-        navigationView.setNavigationItemSelectedListener(this);
-
         binding.topBar.menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,19 +60,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-
-    @SuppressLint("NonConstantResourceId")
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        NavController navController = ((NavHostFragment) Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment))).getNavController();
-        switch (item.getItemId()) {
-            case R.id.info_btn:
-                navController.navigate(R.id.action_mainFragment_to_informationFragment);
-                break;
-            case R.id.home_btn:
-                navController.popBackStack();
-        }
-        drawerLayout.close();
-        return false;
+    protected void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }
