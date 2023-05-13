@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@color/white"
     tools:context=".presentation.MainFragment">
 
     <LinearLayout
@@ -13,9 +13,6 @@
         android:layout_gravity="top"
         android:orientation="vertical">
 
-        <include
-            android:id="@+id/topBar"
-            layout="@layout/top_bar" />
 
         <include
             android:id="@+id/imageWithPredict"
@@ -31,9 +28,9 @@
             android:id="@+id/bottomSheetBehaviorLayout"
             layout="@layout/bottom_sheet_behavior"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:behavior_peekHeight="150dp"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"/>
+            android:layout_height="948dp"
+            app:behavior_peekHeight="250dp"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <include
@@ -42,4 +39,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom" />
+
+
 </FrameLayout>
