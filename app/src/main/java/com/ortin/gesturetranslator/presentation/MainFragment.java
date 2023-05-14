@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -110,7 +111,7 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
                 DisplayMetrics displayMetrics = new DisplayMetrics();
                 requireActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
-                BottomSheetBehavior.from(binding.bottomSheetBehaviorLayout.bottomSheetBehavior).setPeekHeight(displayMetrics.heightPixels - binding.imageWithPredict.preview.getBottom() - binding.imageWithPredict.wordPredictTV.getHeight());
+                BottomSheetBehavior.from(binding.bottomSheetBehaviorLayout.bottomSheetBehavior).setPeekHeight(displayMetrics.heightPixels - binding.imageWithPredict.preview.getBottom());
             }
         });
     }
@@ -166,9 +167,7 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
     @Override
     public void getImage(Image image) {
         Bitmap bitmap = image.getBitmap();
-        int rotation = image.getRotation();
 
-        binding.imageWithPredict.preview.setRotation(rotation);
         binding.imageWithPredict.preview.setImageBitmap(bitmap);
 
         detectHandUseCase.execute(image);

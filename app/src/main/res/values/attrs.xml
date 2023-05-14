@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="backgroundViewColor" format="color|reference"/>
-
-    <attr name="primaryTextColor" format="color|reference"/>
-    <attr name="secondaryTextColor" format="color|reference"/>
-
     <attr name="primaryTextSize" format="dimension"/>
     <attr name="secondaryTextSize" format="dimension"/>
+
+    <attr name="mainDarkColor" format="color|reference"/>
+    <attr name="mainColor" format="color|reference"/>
+    <attr name="secondaryColor" format="color|reference"/>
+    <attr name="accentColor" format="color|reference"/>
+    <attr name="mainTextColor" format="color|reference"/>
+    <attr name="secondTextColor" format="color|reference"/>
 </resources>

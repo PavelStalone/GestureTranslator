@@ -40,9 +40,7 @@ public class HandDetectionRepositoryImpl implements HandDetectionRepository {
 
     private MPImageInput mapToMPImageInput(Image image) {
         Bitmap bitmap = image.getBitmap();
-        Matrix matrix = new Matrix();
-        matrix.postRotate(image.getRotation());
-        MPImage mpImage = new BitmapImageBuilder(Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true)).build();
+        MPImage mpImage = new BitmapImageBuilder(bitmap).build();
 
         return new MPImageInput(mpImage);
     }

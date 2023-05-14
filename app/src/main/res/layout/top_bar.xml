@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/topBar"
     android:layout_width="match_parent"
     android:layout_height="55dp"
-    android:background="@color/white"
+    android:background="?attr/mainColor"
     android:orientation="horizontal">
 
     <ImageView
@@ -15,7 +16,8 @@
         android:layout_gravity="start|center_vertical"
         android:layout_marginStart="25dp"
         android:src="@drawable/menu"
-        android:contentDescription="@null" />
+        android:contentDescription="@null"
+        app:tint="?attr/secondaryColor" />
 
     <ImageView
         android:id="@+id/icon"

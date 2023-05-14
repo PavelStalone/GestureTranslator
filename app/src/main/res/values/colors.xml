@@ -18,6 +18,13 @@
     <color name="secondary_text">#757575</color>
     <color name="divider_color">#BDBDBD</color>
 
+    <color name="primary_color_dark_night">#2E244E</color>
+    <color name="primary_color_night">#3A3058</color>
+    <color name="secondary_color_night">#F3F2F8</color>
+    <color name="accent_color_night">#161523</color>
+    <color name="main_text_color_night">#3E3D4B</color>
+    <color name="second_text_color_night">#6F6E7A</color>
+
     <color name="purple_500">#FF3500B3</color>
     <color name="gray">#FFCCCCCC</color>
 </resources>

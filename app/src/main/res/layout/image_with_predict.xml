@@ -7,14 +7,14 @@
     <ImageView
         android:id="@+id/preview"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="match_parent"
         android:layout_gravity="top|center_horizontal"
         android:scaleType="centerCrop" />
 
     <com.ortin.gesturetranslator.components.PaintHand
         android:id="@+id/paintHandView"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="match_parent"
         android:layout_gravity="top|center_horizontal"
         android:scaleType="centerCrop"/>
 
@@ -25,7 +25,7 @@
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="60dp"
         android:theme="@style/Widget.GestureTranslator.PredictionWord"
-        android:paddingHorizontal="10dp"
+        android:paddingHorizontal="15dp"
         tools:text="A" />
 
 </FrameLayout>

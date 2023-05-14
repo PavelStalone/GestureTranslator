@@ -2,6 +2,7 @@ package com.ortin.gesturetranslator.feature.managers.camera;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.media.Image;
 
 import androidx.annotation.NonNull;
@@ -52,6 +53,10 @@ public class CameraManagerImpl implements CameraManager{
                         public void analyze(@NonNull ImageProxy image) {
                             Image img = image.getImage();
                             bitmap = translator.translateYUV(img, context);
+
+                            Matrix matrix = new Matrix();
+                            matrix.postRotate(image.getImageInfo().getRotationDegrees());
+                            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 
                             ImageFromCamera imageFromCamera = new ImageFromCamera(bitmap, image.getImageInfo().getRotationDegrees());
                             if (cameraListener != null) cameraListener.getImage(imageFromCamera);

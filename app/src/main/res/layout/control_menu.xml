@@ -3,15 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:theme="@style/Widget.GestureTranslator.ControlMenu"
     android:gravity="center"
-    android:paddingVertical="13dp">
+    android:paddingVertical="13dp"
+    android:theme="@style/Widget.GestureTranslator.ControlMenu">
 
     <ImageView
         android:id="@+id/flashLight"
         android:layout_width="127dp"
         android:layout_height="wrap_content"
-        android:theme="@style/Widget.GestureTranslator.ItemMenu"
         android:background="@drawable/flashlight"
         android:contentDescription="@null"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -37,7 +36,6 @@
         android:id="@+id/gallery"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:theme="@style/Widget.GestureTranslator.ItemMenu"
         android:background="@drawable/gallery"
         android:contentDescription="@null"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -45,14 +43,14 @@
         app:layout_constraintStart_toEndOf="@id/realTimeBTN"
         app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <ImageView-->
-<!--        android:id="@+id/realTimeIV"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:src="@drawable/real_time_button"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toStartOf="@id/gallery"-->
-<!--        app:layout_constraintStart_toEndOf="@id/flashLight"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    <ImageView-->
+    <!--        android:id="@+id/realTimeIV"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:src="@drawable/real_time_button"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toStartOf="@id/gallery"-->
+    <!--        app:layout_constraintStart_toEndOf="@id/flashLight"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
