@@ -1,5 +1,6 @@
 package com.ortin.gesturetranslator.components;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -10,7 +11,6 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.ortin.gesturetranslator.R;
 
 public class RealTimeButton extends LottieAnimationView implements View.OnClickListener {
-    private final Context context;
     private boolean play = true;
     private OnChangedStatusListener onChangedStatusListener;
 
@@ -29,25 +29,27 @@ public class RealTimeButton extends LottieAnimationView implements View.OnClickL
 
     public RealTimeButton(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.context = context;
         init();
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private void init(){
-        this.setAnimation(R.raw.stop_start);
+        this.setBackground(getContext().getDrawable(R.drawable.background_realtime));
+        this.setAnimation(R.raw.play_stop);
         this.setRepeatCount(0);
+        this.setProgress(0f);
         this.setOnClickListener(this);
     }
 
     public void onStart(){
         play = true;
-        this.setAnimation(R.raw.start_stop);
+        this.setMinAndMaxProgress(0.5f, 1f);
         this.playAnimation();
     }
 
     public void onStop(){
         play = false;
-        this.setAnimation(R.raw.stop_start);
+        this.setMinAndMaxProgress(0f, 0.5f);
         this.playAnimation();
     }
 
