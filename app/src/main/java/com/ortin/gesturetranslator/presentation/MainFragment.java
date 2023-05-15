@@ -23,6 +23,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.ortin.gesturetranslator.components.OnChangedStatusListener;
 import com.ortin.gesturetranslator.components.RealTimeButton;
 import com.ortin.gesturetranslator.databinding.MainFrameBinding;
 import com.ortin.gesturetranslator.domain.listeners.DetectionHandListener;
@@ -128,7 +129,7 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
 
     private void initListeners() {
         BottomSheetBehavior<LinearLayout> bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheetBehaviorLayout.bottomSheetBehavior);
-        binding.controlMenu.realTimeBTN.setOnChangedStatusListener(new RealTimeButton.OnChangedStatusListener() {
+        binding.controlMenu.realTimeBTN.setOnChangedStatusListener(new OnChangedStatusListener() {
             @Override
             public void onStart() {
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
@@ -137,6 +138,18 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
             @Override
             public void onStop() {
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            }
+        });
+
+        binding.controlMenu.flashLight.setOnChangedStatusListener(new OnChangedStatusListener() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onStop() {
+
             }
         });
 

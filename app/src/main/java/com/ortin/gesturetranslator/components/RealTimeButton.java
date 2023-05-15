@@ -14,11 +14,6 @@ public class RealTimeButton extends LottieAnimationView implements View.OnClickL
     private boolean play = true;
     private OnChangedStatusListener onChangedStatusListener;
 
-    public interface OnChangedStatusListener{
-        void onStart();
-        void onStop();
-    }
-
     public RealTimeButton(Context context) {
         this(context, null);
     }

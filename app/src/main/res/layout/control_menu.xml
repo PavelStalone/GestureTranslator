@@ -7,8 +7,8 @@
     android:paddingVertical="13dp"
     android:theme="@style/Widget.GestureTranslator.ControlMenu">
 
-    <LinearLayout
-        android:id="@+id/flashLightLL"
+    <com.ortin.gesturetranslator.components.FlashLightButton
+        android:id="@+id/flashLight"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:gravity="center|center_horizontal"
@@ -16,25 +16,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/realTimeBTN"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            app:lottie_autoPlay="true"
-            app:lottie_colorFilter="?attr/secondaryColor"
-            app:lottie_loop="true"
-            app:lottie_progress="0"
-            app:lottie_rawRes="@raw/flashlight" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:gravity="center_horizontal"
-            android:textColor="?attr/secondaryColor"
-            android:textSize="12sp"
-            android:text="Фонарик"/>
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="parent"/>
 
 
     <com.ortin.gesturetranslator.components.RealTimeButton
