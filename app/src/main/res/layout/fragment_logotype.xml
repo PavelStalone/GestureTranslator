@@ -9,10 +9,13 @@
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationLogotype"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:scaleType="centerCrop"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="10dp"
         app:lottie_loop="false"
         app:lottie_autoPlay="true"
-        app:lottie_rawRes="@raw/logo_animation"/>
+        app:lottie_rawRes="@raw/logotype"
+        app:lottie_colorFilter="?attr/secondaryColor"/>
 
 </FrameLayout>

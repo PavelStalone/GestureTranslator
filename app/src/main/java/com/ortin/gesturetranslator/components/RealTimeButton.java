@@ -28,21 +28,22 @@ public class RealTimeButton extends LottieAnimationView implements View.OnClickL
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    private void init(){
+    private void init() {
         this.setBackground(getContext().getDrawable(R.drawable.background_realtime));
         this.setAnimation(R.raw.play_stop);
         this.setRepeatCount(0);
         this.setProgress(0f);
+        this.setSpeed(2.3f);
         this.setOnClickListener(this);
     }
 
-    public void onStart(){
+    public void onStart() {
         play = true;
         this.setMinAndMaxProgress(0.5f, 1f);
         this.playAnimation();
     }
 
-    public void onStop(){
+    public void onStop() {
         play = false;
         this.setMinAndMaxProgress(0f, 0.5f);
         this.playAnimation();
@@ -53,8 +54,7 @@ public class RealTimeButton extends LottieAnimationView implements View.OnClickL
         if (play) {
             onStop();
             if (onChangedStatusListener != null) onChangedStatusListener.onStop();
-        }
-        else {
+        } else {
             onStart();
             if (onChangedStatusListener != null) onChangedStatusListener.onStart();
         }
