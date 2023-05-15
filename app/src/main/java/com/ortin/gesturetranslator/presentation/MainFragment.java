@@ -205,15 +205,22 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
     @Override
     public void detect(HandDetected handDetected) {
         if (binding != null) { // Костыль
-            binding.imageWithPredict.paintHandView.drawHand(handDetected.getCoordinates());
+            if (handDetected != null) {
+                binding.imageWithPredict.paintHandView.drawHand(handDetected.getCoordinates());
 
-            CoordinateClassification coordinateClassification = recognizeCoordinateUseCase.execute(handDetected);
-            Observable.just(String.format("%s %.2f", coordinateClassification.getLabel(), coordinateClassification.getPercent()) + "%").subscribeOn(AndroidSchedulers.mainThread()).subscribe(t -> {
-                if (binding != null) binding.imageWithPredict.wordPredictTV.setText(t);
-            });
-            //binding.imageWithPredict.wordPredictTV.setText(String.format("%s %.2f", coordinateClassification.getLabel(), coordinateClassification.getPercent()) + "%");
-            Log.e(TAG, "coordinates: " + Arrays.toString(handDetected.getCoordinates()));
-            Log.e(TAG, "label: " + coordinateClassification.getLabel() + " percent: " + coordinateClassification.getPercent());
+                CoordinateClassification coordinateClassification = recognizeCoordinateUseCase.execute(handDetected);
+                Observable.just(String.format("%s %.2f", coordinateClassification.getLabel(), coordinateClassification.getPercent()) + "%").subscribeOn(AndroidSchedulers.mainThread()).subscribe(t -> {
+                    if (binding != null) binding.imageWithPredict.wordPredictTV.setText(t);
+                });
+                //binding.imageWithPredict.wordPredictTV.setText(String.format("%s %.2f", coordinateClassification.getLabel(), coordinateClassification.getPercent()) + "%");
+                Log.e(TAG, "coordinates: " + Arrays.toString(handDetected.getCoordinates()));
+                Log.e(TAG, "label: " + coordinateClassification.getLabel() + " percent: " + coordinateClassification.getPercent());
+            } else {
+                binding.imageWithPredict.paintHandView.clear();
+                Observable.just("None").subscribeOn(AndroidSchedulers.mainThread()).subscribe(t -> {
+                    if (binding != null) binding.imageWithPredict.wordPredictTV.setText(t);
+                });
+            }
         }
     }
 

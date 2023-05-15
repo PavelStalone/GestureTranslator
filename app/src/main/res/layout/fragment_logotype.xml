@@ -16,6 +16,6 @@
         app:lottie_loop="false"
         app:lottie_autoPlay="true"
         app:lottie_rawRes="@raw/logotype"
-        app:lottie_colorFilter="?attr/secondaryColor"/>
+        app:lottie_colorFilter="?attr/elementTextColor"/>
 
 </FrameLayout>

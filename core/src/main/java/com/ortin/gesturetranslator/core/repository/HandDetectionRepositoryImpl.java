@@ -46,6 +46,8 @@ public class HandDetectionRepositoryImpl implements HandDetectionRepository {
     }
 
     private HandDetected mapToCoreHandDetection(MPDetection mpDetection) {
+        if (mpDetection == null) return null;
+
         float[] coordinates = new float[42];
         HandLandmarkerResult result = mpDetection.getResult();
 

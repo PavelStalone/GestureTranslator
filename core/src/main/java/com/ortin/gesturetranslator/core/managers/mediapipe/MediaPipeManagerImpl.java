@@ -63,7 +63,8 @@ public class MediaPipeManagerImpl implements MediaPipeManager {
 
     private void resultDetection(HandLandmarkerResult result, MPImage mpImage) {
         if (mpDetectionListener != null) {
-            mpDetectionListener.detect(new MPDetection(result, mpImage));
+            if (result.landmarks().size() == 0) mpDetectionListener.detect(null);
+            else mpDetectionListener.detect(new MPDetection(result, mpImage));
         }
     }
 

@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.ortin.gesturetranslator.R;
@@ -55,13 +56,20 @@ public class PaintHand extends View {
         canvasPaint = new Paint(Paint.DITHER_FLAG);
     }
 
-    public void drawHand(float[] coordinates) {
+    public void drawHand(@NonNull float[] coordinates) {
         canvasBitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
         drawCanvas = new Canvas(canvasBitmap);
 
         for (int i = 0; i < coordinates.length; i += 2) {
             drawCanvas.drawCircle(coordinates[i] * getWidth(), coordinates[i + 1] * getHeight(), 5, pointPaint);
         }
+
+        invalidate();
+    }
+
+    public void clear(){
+        canvasBitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
+        drawCanvas = new Canvas(canvasBitmap);
 
         invalidate();
     }
