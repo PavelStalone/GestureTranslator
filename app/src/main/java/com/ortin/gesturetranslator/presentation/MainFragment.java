@@ -162,6 +162,14 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
 
             }
         });
+
+        binding.controlMenu.galleryLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.controlMenu.gallery.setProgress(0);
+                binding.controlMenu.gallery.playAnimation();
+            }
+        });
     }
 
     @Override

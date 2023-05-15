@@ -8,23 +8,32 @@
     android:theme="@style/Widget.GestureTranslator.ControlMenu">
 
     <LinearLayout
-        android:id="@+id/flashLight"
+        android:id="@+id/flashLightLL"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:gravity="center|center_horizontal"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/realTimeBTN"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/realTimeBTN"
         app:layout_constraintTop_toTopOf="parent">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/flashlight"
-        app:lottie_colorFilter="?attr/secondaryColor"/>
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:lottie_autoPlay="true"
+            app:lottie_colorFilter="?attr/secondaryColor"
+            app:lottie_loop="true"
+            app:lottie_progress="0"
+            app:lottie_rawRes="@raw/flashlight" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:gravity="center_horizontal"
+            android:textColor="?attr/secondaryColor"
+            android:textSize="12sp"
+            android:text="Фонарик"/>
     </LinearLayout>
 
 
@@ -37,29 +46,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="false"
+        app:lottie_colorFilter="?attr/secondaryColor"
         app:lottie_loop="false"
-        app:lottie_rawRes="@raw/play_stop"
-        app:lottie_colorFilter="?attr/secondaryColor"/>
+        app:lottie_rawRes="@raw/play_stop" />
 
-    <ImageView
-        android:id="@+id/gallery"
+    <LinearLayout
+        android:id="@+id/galleryLL"
         android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:background="@drawable/gallery"
-        android:contentDescription="@null"
+        android:layout_height="match_parent"
+        android:gravity="center|center_horizontal"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/realTimeBTN"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toStartOf="@id/realTimeBTN"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <!--    <ImageView-->
-    <!--        android:id="@+id/realTimeIV"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:src="@drawable/real_time_button"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toStartOf="@id/gallery"-->
-    <!--        app:layout_constraintStart_toEndOf="@id/flashLight"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/gallery"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:lottie_autoPlay="false"
+            app:lottie_colorFilter="?attr/secondaryColor"
+            app:lottie_loop="false"
+            app:lottie_progress="0"
+            app:lottie_rawRes="@raw/gallery" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:gravity="center_horizontal"
+            android:textColor="?attr/secondaryColor"
+            android:textSize="12sp"
+            android:text="Галлерея"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
