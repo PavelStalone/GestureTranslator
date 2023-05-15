@@ -13,7 +13,7 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
 
-        <item name="android:windowBackground">@color/primary_color_night</item>
+        <item name="android:windowBackground">@color/background</item>
         <item name="android:navigationBarColor">@color/primary_color_dark_night</item>
 
         <item name="primaryTextSize">20sp</item>
@@ -27,6 +27,8 @@
         <item name="accentColor">@color/accent_color_night</item>
         <item name="mainTextColor">@color/main_text_color_night</item>
         <item name="secondTextColor">@color/second_text_color_night</item>
+        <item name="elementTextColor">@color/element_text_color_night</item>
+        <item name="recogniseBackgroundColor">@color/recognise_background_color_night</item>
     </style>
 
     <style name="Base.Theme.GestureTranslator" parent="Base.V25.Night.Theme.GestureTranslator"/>

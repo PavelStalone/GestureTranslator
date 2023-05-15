@@ -9,4 +9,7 @@
     <attr name="accentColor" format="color|reference"/>
     <attr name="mainTextColor" format="color|reference"/>
     <attr name="secondTextColor" format="color|reference"/>
+
+    <attr name="elementTextColor" format="color|reference"/>
+    <attr name="recogniseBackgroundColor" format="color|reference"/>
 </resources>

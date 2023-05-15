@@ -12,7 +12,7 @@
 
     <style name="Widget.GestureTranslator.PredictionWord" parent="Widget.MaterialComponents.TextView">
         <item name="android:background">@drawable/predict_background</item>
-        <item name="android:textColor">?attr/secondaryColor</item>
+        <item name="android:textColor">?attr/elementTextColor</item>
         <item name="android:textSize">25sp</item>
     </style>
 </resources>

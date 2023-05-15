@@ -5,27 +5,32 @@
     <item
         android:id="@+id/mainFragment"
         android:icon="@drawable/home_btn"
+        android:iconTint="?attr/elementTextColor"
         android:title="Home" />
 
     <item
         android:id="@+id/informationFragment"
         android:icon="@drawable/info"
+        android:iconTint="?attr/elementTextColor"
         android:title="Information" />
 
     <item
         android:id="@+id/settings_btn"
         android:icon="@drawable/settings"
-        android:title="Settings"/>
+        android:iconTint="?attr/elementTextColor"
+        android:title="Settings" />
 
     <item
         android:id="@+id/gesture_list_btn"
         android:icon="@drawable/gesture_list"
-        android:title="Gesture list"/>
+        android:iconTint="?attr/elementTextColor"
+        android:title="Gesture list" />
 
 
     <item
         android:id="@+id/donate_btn"
         android:icon="@drawable/donate"
-        android:title="Donate"/>
+        android:iconTint="?attr/elementTextColor"
+        android:title="Donate" />
 
 </menu>

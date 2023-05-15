@@ -50,7 +50,7 @@
             android:layout_height="40dp"
             android:layout_marginBottom="-5dp"
             app:lottie_autoPlay="false"
-            app:lottie_colorFilter="?attr/secondaryColor"
+            app:lottie_colorFilter="?attr/elementTextColor"
             app:lottie_loop="false"
             app:lottie_progress="0"
             app:lottie_rawRes="@raw/gallery" />
@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:gravity="center_horizontal"
-            android:textColor="?attr/secondaryColor"
+            android:textColor="?attr/elementTextColor"
             android:textSize="12sp"
             android:text="Галлерея"/>
     </LinearLayout>
