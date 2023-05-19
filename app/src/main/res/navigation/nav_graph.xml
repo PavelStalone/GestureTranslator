@@ -12,11 +12,27 @@
         <action
             android:id="@+id/action_mainFragment_to_informationFragment"
             app:destination="@id/informationFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_gestureListFragment"
+            app:destination="@id/gestureListFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/informationFragment"
         android:name="com.ortin.gesturetranslator.presentation.InformationFragment"
-        android:label="InformationFragment" />
+        android:label="InformationFragment" >
+        <action
+            android:id="@+id/action_informationFragment_to_gestureListFragment"
+            app:destination="@id/gestureListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/gestureListFragment"
+        android:name="com.ortin.gesturetranslator.presentation.GestureListFragment"
+        android:label="GestureListFragment" >
+        <action
+            android:id="@+id/action_gestureListFragment_to_informationFragment"
+            app:destination="@id/informationFragment" />
+    </fragment>
 
 </navigation>
