@@ -12,7 +12,7 @@
         android:layout_marginTop="60dp"
         android:gravity="center_horizontal"
         android:text="Информация о приложении"
-        android:theme="@style/Widget.GestureTranslator.SecondaryText"
+        android:theme="@style/Widget.GestureTranslator.PrimaryText"
         android:textSize="25sp" />
 
     <LinearLayout

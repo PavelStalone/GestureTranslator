@@ -11,7 +11,8 @@
         android:layout_marginTop="70dp"
         android:gravity="center_horizontal"
         android:text="Список жестов"
-        android:theme="@style/Widget.GestureTranslator.SecondaryText"            android:textSize="20sp" />
+        android:theme="@style/Widget.GestureTranslator.SecondaryText"
+        android:textSize="20sp" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
