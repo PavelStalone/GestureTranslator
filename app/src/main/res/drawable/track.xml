@@ -4,7 +4,7 @@
         <shape android:shape="rectangle">
             <solid android:color="@color/primary_color_dark_day" />
             <corners android:radius="100dp" />
-            <stroke android:width="2dp" android:color="@color/black" />
+            <stroke android:width="2dp" android:color="@color/main_text_color_day" />
             <size android:height="30dp" />
         </shape>
     </item>
@@ -13,7 +13,7 @@
         <shape android:shape="rectangle">
             <solid android:color="@color/element_text_color_day" />
             <corners android:radius="100dp" />
-            <stroke android:width="2dp" android:color="@color/black"/>
+            <stroke android:width="2dp" android:color="@color/primary_color_dark_night" />
             <size android:height="30dp" />
         </shape>
     </item>
