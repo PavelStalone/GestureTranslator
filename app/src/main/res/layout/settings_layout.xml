@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     tools:context=".presentation.SettingsFragment">
 
@@ -13,39 +13,39 @@
         android:layout_marginTop="60dp"
         android:gravity="center_horizontal"
         android:text="Настройки"
-        android:theme="@style/Widget.GestureTranslator.PrimaryText"
-        android:textSize="25sp" />
-    <LinearLayout
+        android:textSize="25sp"
+        android:theme="@style/Widget.GestureTranslator.PrimaryText" />
+
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="220dp"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:orientation="horizontal"
+        android:paddingHorizontal="30dp">
 
-        <LinearLayout
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:background="@drawable/border"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:text="Включить ночную тему"
+            android:textSize="20sp"
+            android:theme="@style/Widget.GestureTranslator.SecondaryText" />
 
-            android:gravity="center">
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_compat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginStart="60dp"
+            android:thumb="@drawable/thumb"
+            app:track="@drawable/track" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:text="Включить ночную тему"
-                android:textSize="20sp"
-                android:theme="@style/Widget.GestureTranslator.SecondaryText" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="bottom"
+            android:background="@color/black" />
 
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/switch_compat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:thumb="@drawable/thumb"
-                app:track="@drawable/track" />
-
-        </LinearLayout>
-    </LinearLayout>
+    </FrameLayout>
 </FrameLayout>

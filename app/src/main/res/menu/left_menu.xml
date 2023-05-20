@@ -15,13 +15,13 @@
         android:title="Information" />
 
     <item
-        android:id="@+id/settings_btn"
+        android:id="@+id/settingsFragment"
         android:icon="@drawable/settings"
         android:iconTint="?attr/elementTextColor"
         android:title="Settings" />
 
     <item
-        android:id="@+id/gesture_list_btn"
+        android:id="@+id/gestureListFragment"
         android:icon="@drawable/gesture_list"
         android:iconTint="?attr/elementTextColor"
         android:title="Gesture list" />

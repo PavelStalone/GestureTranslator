@@ -42,7 +42,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="A" />
+                    android:text="A" />
             </FrameLayout>
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="Б" />
+                    android:text="Б" />
             </FrameLayout>
         </LinearLayout>
         <LinearLayout
@@ -82,7 +82,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="В" />
+                    android:text="В" />
             </FrameLayout>
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -99,7 +99,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="Г" />
+                    android:text="Г" />
             </FrameLayout>
         </LinearLayout>
         <LinearLayout
@@ -122,7 +122,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="Д" />
+                    android:text="Д" />
             </FrameLayout>
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -139,7 +139,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="Е" />
+                    android:text="Е" />
             </FrameLayout>
         </LinearLayout>
         <LinearLayout
@@ -162,7 +162,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="Ж" />
+                    android:text="Ж" />
             </FrameLayout>
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -179,7 +179,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="З" />
+                    android:text="З" />
             </FrameLayout>
         </LinearLayout>
         <LinearLayout
@@ -202,7 +202,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="И" />
+                    android:text="И" />
             </FrameLayout>
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -219,7 +219,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="К" />
+                    android:text="К" />
             </FrameLayout>
         </LinearLayout>
         <LinearLayout
@@ -242,7 +242,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="Л" />
+                    android:text="Л" />
             </FrameLayout>
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -259,7 +259,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="М" />
+                    android:text="М" />
             </FrameLayout>
         </LinearLayout>
         <LinearLayout
@@ -282,7 +282,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="Н" />
+                    android:text="Н" />
             </FrameLayout>
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -299,7 +299,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="О" />
+                    android:text="О" />
             </FrameLayout>
         </LinearLayout>
         <LinearLayout
@@ -322,7 +322,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="П" />
+                    android:text="П" />
             </FrameLayout>
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -339,7 +339,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="Р"/>
+                    android:text="Р"/>
             </FrameLayout>
         </LinearLayout>
         <LinearLayout
@@ -362,7 +362,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="С" />
+                    android:text="С" />
             </FrameLayout>
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -379,7 +379,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="Т" />
+                    android:text="Т" />
             </FrameLayout>
         </LinearLayout>
         <LinearLayout
@@ -402,7 +402,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="У" />
+                    android:text="У" />
             </FrameLayout>
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -419,7 +419,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="Ф" />
+                    android:text="Ф" />
             </FrameLayout>
         </LinearLayout>
         <LinearLayout
@@ -442,7 +442,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="Х" />
+                    android:text="Х" />
             </FrameLayout>
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -459,7 +459,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="Ц" />
+                    android:text="Ц" />
             </FrameLayout>
         </LinearLayout>
         <LinearLayout
@@ -482,7 +482,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="Ч" />
+                    android:text="Ч" />
             </FrameLayout>
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -499,7 +499,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="Ш" />
+                    android:text="Ш" />
             </FrameLayout>
         </LinearLayout>
         <LinearLayout
@@ -522,7 +522,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="Ы" />
+                    android:text="Ы" />
             </FrameLayout>
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -539,7 +539,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="Ь" />
+                    android:text="Ь" />
             </FrameLayout>
         </LinearLayout>
         <LinearLayout
@@ -562,7 +562,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="Э" />
+                    android:text="Э" />
             </FrameLayout>
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -579,7 +579,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="Ю" />
+                    android:text="Ю" />
             </FrameLayout>
         </LinearLayout>
         <LinearLayout
@@ -602,7 +602,7 @@
                     android:paddingHorizontal="15dp"
                     android:layout_gravity="bottom"
                     android:theme="@style/Widget.GestureTranslator.PredictionWord"
-                    tools:text="Я" />
+                    android:text="Я" />
             </FrameLayout>
         </LinearLayout>
     </LinearLayout>
