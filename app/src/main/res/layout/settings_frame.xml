@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="top|center_horizontal"
+    android:paddingHorizontal="20dp"
+    tools:context=".presentation.SettingsFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:text="Настройки"
+        android:textColor="?attr/mainTextColor"
+        android:textSize="24sp"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Включить темную тему"
+            android:textColor="?attr/mainTextColor"
+            android:textSize="18sp"/>
+
+        <com.ortin.gesturetranslator.components.ToggleTheme
+            android:id="@+id/toogleTheme"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="false"
+            app:lottie_repeatCount="0"
+            app:lottie_repeatMode="restart"
+            app:lottie_rawRes="@raw/toogle_theme_mode"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="?attr/secondTextColor"/>
+
+</LinearLayout>

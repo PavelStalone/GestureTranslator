@@ -15,7 +15,7 @@
         android:title="Information" />
 
     <item
-        android:id="@+id/settings_btn"
+        android:id="@+id/settingsFragment"
         android:icon="@drawable/settings"
         android:iconTint="?attr/elementTextColor"
         android:title="Settings" />

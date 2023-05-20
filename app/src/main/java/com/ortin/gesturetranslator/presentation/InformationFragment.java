@@ -7,11 +7,11 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import com.ortin.gesturetranslator.databinding.InformationLayoutBinding;
+import com.ortin.gesturetranslator.databinding.InformationFragmentBinding;
 
 public class InformationFragment extends Fragment {
 
-    InformationLayoutBinding binding;
+    InformationFragmentBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class InformationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = InformationLayoutBinding.inflate(inflater, container, false);
+        binding = InformationFragmentBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
