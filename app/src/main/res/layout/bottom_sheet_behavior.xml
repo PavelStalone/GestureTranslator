@@ -25,6 +25,7 @@
         android:text="Распознанный текст"/>
 
     <TextView
+        android:id="@+id/recognizeTextResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="start|center_vertical"

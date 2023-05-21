@@ -1,7 +1,5 @@
 package com.ortin.gesturetranslator.core.repository;
 
-import android.util.Log;
-
 import com.ortin.gesturetranslator.core.managers.model_coordinate.ModelCoordinateManager;
 import com.ortin.gesturetranslator.core.managers.model_coordinate.models.ModelCoordinateArray;
 import com.ortin.gesturetranslator.core.managers.model_coordinate.models.ModelCoordinateClassificationArray;
@@ -29,7 +27,7 @@ public class RecognizeCoordinateRepositoryImpl implements RecognizeCoordinateRep
         double[] coord = new double[oldCoord.length];
 
         for (int i = 0; i < oldCoord.length; i++) {
-            coord[i] = (double) oldCoord[i];
+            coord[i] = oldCoord[i];
         }
 
         double mainX = coord[0];
