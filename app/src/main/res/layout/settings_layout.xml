@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".presentation.SettingsFragment">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:gravity="center_horizontal"
+        android:text="Настройки"
+        android:textSize="25sp"
+        android:theme="@style/Widget.GestureTranslator.PrimaryText" />
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="150dp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="30dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:text="Включить ночную тему"
+            android:textSize="20sp"
+            android:theme="@style/Widget.GestureTranslator.SecondaryText" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_compat_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginStart="60dp"
+            android:thumb="@drawable/thumb"
+            app:track="@drawable/track" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="bottom"
+            android:background="@color/black" />
+
+    </FrameLayout>
+    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="320dp"
+    android:gravity="center_horizontal"
+    android:text="В разработке"
+    android:textSize="22sp"
+    android:theme="@style/Widget.GestureTranslator.PrimaryText" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="370dp"
+        android:orientation="vertical"
+        android:gravity="center">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="30dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:text="Подключить gpu"
+                android:textSize="20sp"
+                android:theme="@style/Widget.GestureTranslator.SecondaryText" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_compat_gpu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginStart="60dp"
+                android:thumb="@drawable/thumb"
+                app:track="@drawable/track" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="bottom"
+                android:background="@color/black" />
+
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="30dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:text="Показывать проценты"
+                android:textSize="20sp"
+                android:theme="@style/Widget.GestureTranslator.SecondaryText" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_compat_percents"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginStart="60dp"
+                android:thumb="@drawable/thumb"
+                app:track="@drawable/track" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="bottom"
+                android:background="@color/black" />
+        </FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:paddingHorizontal="30dp"
+            android:gravity="center">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Скорость перевода (кадров/сек)"
+            android:textSize="20sp"
+            android:theme="@style/Widget.GestureTranslator.SecondaryText" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:max="60"
+                android:progress="1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+                <TextView
+                    android:id="@+id/seekBarText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="20sp"
+                    android:theme="@style/Widget.GestureTranslator.SecondaryText" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="bottom"
+                android:background="@color/black" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

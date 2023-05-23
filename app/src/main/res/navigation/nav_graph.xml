@@ -13,6 +13,9 @@
             android:id="@+id/action_mainFragment_to_informationFragment"
             app:destination="@id/informationFragment" />
         <action
+            android:id="@+id/action_mainFragment_to_gestureListFragment"
+            app:destination="@id/gestureListFragment" />
+        <action
             android:id="@+id/action_mainFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
     </fragment>
@@ -21,10 +24,15 @@
         android:id="@+id/informationFragment"
         android:name="com.ortin.gesturetranslator.presentation.InformationFragment"
         android:label="InformationFragment" />
+
+    <fragment
+        android:id="@+id/gestureListFragment"
+        android:name="com.ortin.gesturetranslator.presentation.GestureListFragment"
+        android:label="GestureListFragment" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.ortin.gesturetranslator.presentation.SettingsFragment"
-        android:label="settings_frame"
-        tools:layout="@layout/settings_frame" />
+        android:label="settings_layout"
+        tools:layout="@layout/settings_layout" />
 
 </navigation>

@@ -6,19 +6,188 @@
     android:background="@color/white"
     tools:context=".presentation.InformationFragment">
 
-    <LinearLayout
-        android:layout_width="380dp"
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/rectangle">
+        android:layout_marginTop="60dp"
+        android:gravity="center_horizontal"
+        android:text="Информация о приложении"
+        android:theme="@style/Widget.GestureTranslator.PrimaryText"
+        android:textSize="25sp" />
 
-        <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center_horizontal"
-            android:text="Текст с информацией"
-            android:textColor="@color/background"
-            android:textSize="20sp" />
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Контакты"
+                android:theme="@style/Widget.GestureTranslator.SecondaryText"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/telegram_logo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:autoLink="web"
+                    android:linksClickable="true"
+                    android:text="tg.com/qongeeter"
+                    android:theme="@style/Widget.GestureTranslator.SecondaryText"                    android:textSize="20sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/gmail_logo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:autoLink="web"
+                    android:linksClickable="true"
+                    android:text="gmail.com/qongeeter"
+                    android:theme="@style/Widget.GestureTranslator.SecondaryText"                    android:textSize="20sp" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="47dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Блоги разработчиков"
+                android:theme="@style/Widget.GestureTranslator.SecondaryText"                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/telegram_logo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:autoLink="web"
+                    android:linksClickable="true"
+                    android:text="tg.com/qongeeter"
+                    android:theme="@style/Widget.GestureTranslator.SecondaryText"                    android:textSize="20sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/gmail_logo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:autoLink="web"
+                    android:linksClickable="true"
+                    android:text="gmail.com/qongeeter"
+                    android:theme="@style/Widget.GestureTranslator.SecondaryText"                    android:textSize="20sp" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="47dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Пожертвования"
+                android:theme="@style/Widget.GestureTranslator.SecondaryText"                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/telegram_logo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:autoLink="web"
+                    android:linksClickable="true"
+                    android:text="tg.com/qongeeter"
+                    android:theme="@style/Widget.GestureTranslator.SecondaryText"                    android:textSize="20sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/gmail_logo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:autoLink="web"
+                    android:linksClickable="true"
+                    android:text="gmail.com/qongeeter"
+                    android:theme="@style/Widget.GestureTranslator.SecondaryText"                    android:textSize="20sp" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </FrameLayout>
