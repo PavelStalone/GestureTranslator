@@ -1,6 +1,5 @@
 package com.ortin.gesturetranslator.feature.repository;
 
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.ortin.gesturetranslator.domain.listeners.LoadImagesListener;
@@ -21,9 +20,6 @@ public class LoadImageRepositoryImpl implements LoadImageRepository {
     public void loadImages(LoadImagesListener loadImagesListener, LifecycleOwner lifecycleOwner) {
         cameraManager.loadImage(mapperToDomainListener(loadImagesListener), lifecycleOwner);
     }
-
-
-
 
 
     // Правила перевода для связи domain и feature модулей

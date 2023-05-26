@@ -3,9 +3,13 @@ package com.ortin.gesturetranslator.di;
 import android.content.Context;
 
 import com.ortin.gesturetranslator.domain.repository.LoadImageRepository;
+import com.ortin.gesturetranslator.domain.repository.WordCompilerRepository;
 import com.ortin.gesturetranslator.feature.managers.camera.CameraManager;
 import com.ortin.gesturetranslator.feature.managers.camera.CameraManagerImpl;
+import com.ortin.gesturetranslator.feature.managers.word_compiler.WordCompilerManager;
+import com.ortin.gesturetranslator.feature.managers.word_compiler.WordCompilerManagerImpl;
 import com.ortin.gesturetranslator.feature.repository.LoadImageRepositoryImpl;
+import com.ortin.gesturetranslator.feature.repository.WordCompilerRepositoryImpl;
 
 import dagger.Module;
 import dagger.Provides;
@@ -24,5 +28,15 @@ public class FeatureModule {
     @Provides
     CameraManager provideCameraManager(@ActivityContext Context context) {
         return new CameraManagerImpl(context);
+    }
+
+    @Provides
+    WordCompilerRepository provideWordCompilerRepository(WordCompilerManager wordCompilerManager) {
+        return new WordCompilerRepositoryImpl(wordCompilerManager);
+    }
+
+    @Provides
+    WordCompilerManager provideWordCompilerManager() {
+        return new WordCompilerManagerImpl();
     }
 }

@@ -4,7 +4,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Matrix;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -24,8 +23,6 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.ortin.gesturetranslator.components.OnChangedStatusListener;
-import com.ortin.gesturetranslator.components.RealTimeButton;
-import com.ortin.gesturetranslator.components.WordCombiner;
 import com.ortin.gesturetranslator.databinding.MainFrameBinding;
 import com.ortin.gesturetranslator.domain.listeners.DetectionHandListener;
 import com.ortin.gesturetranslator.domain.listeners.LoadImagesListener;
@@ -38,6 +35,7 @@ import com.ortin.gesturetranslator.domain.usecases.DetectHandUseCase;
 import com.ortin.gesturetranslator.domain.usecases.LoadImageUseCase;
 import com.ortin.gesturetranslator.domain.usecases.RecognizeCoordinateUseCase;
 import com.ortin.gesturetranslator.domain.usecases.RecognizeImageUseCase;
+import com.ortin.gesturetranslator.domain.usecases.WordCompileUseCase;
 
 import java.util.Arrays;
 
@@ -46,7 +44,6 @@ import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 
 @AndroidEntryPoint
 public class MainFragment extends Fragment implements LoadImagesListener, RecognizeImageListener, DetectionHandListener {
@@ -58,6 +55,9 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
     LoadImageUseCase loadImageUseCase;
 
     @Inject
+    WordCompileUseCase wordCompileUseCase;
+
+    @Inject
     RecognizeImageUseCase recognizeImageUseCase;
 
     @Inject
@@ -65,8 +65,6 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
 
     @Inject
     RecognizeCoordinateUseCase recognizeCoordinateUseCase;
-
-    WordCombiner wordCombiner = new WordCombiner();
 
     ActivityResultLauncher<String> mGetContent;
 
@@ -106,6 +104,7 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
     }
 
     private void init() {
+        wordCompileUseCase.clearState();
 
         binding.bottomSheetBehaviorLayout.bottomSheetBehavior.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -124,7 +123,7 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
         if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             mGetContent.launch(Manifest.permission.CAMERA);
         } else {
-            loadImageUseCase.execute(this,  this.getViewLifecycleOwner());
+            loadImageUseCase.execute(this, this.getViewLifecycleOwner());
             //recognizeImageUseCase.setOnRecogniseListener(this);
             detectHandUseCase.setOnDetectionHandListener(this);
         }
@@ -136,7 +135,7 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
             @Override
             public void onStart() {
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                wordCombiner.clearState();
+                wordCompileUseCase.clearState();
             }
 
             @Override
@@ -216,13 +215,13 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
                 CoordinateClassification coordinateClassification = recognizeCoordinateUseCase.execute(handDetected);
 
                 if (coordinateClassification.getPercent() > 30f) {
-                    wordCombiner.addWord(coordinateClassification.getLabel());
+                    wordCompileUseCase.addLetter(coordinateClassification.getLabel());
                 }
 
                 Observable.just(String.format("%s %.2f", coordinateClassification.getLabel(), coordinateClassification.getPercent()) + "%").subscribeOn(AndroidSchedulers.mainThread()).subscribe(t -> {
                     if (binding != null) {
                         binding.imageWithPredict.wordPredictTV.setText(t);
-                        binding.bottomSheetBehaviorLayout.recognizeTextResult.setText(wordCombiner.getText());
+                        binding.bottomSheetBehaviorLayout.recognizeTextResult.setText(wordCompileUseCase.getWord());
                     }
                 });
 

@@ -1,10 +1,9 @@
-package com.ortin.gesturetranslator.components;
-
-import android.util.Log;
+package com.ortin.gesturetranslator.feature.managers.word_compiler;
 
 import java.util.HashMap;
 
-public class WordCombiner {
+public class WordCompilerManagerImpl implements WordCompilerManager {
+
     private final int MIN_FRAME_DETECT = 10;
     private final long MIN_SPACE_TIME = 3000L;
 
@@ -17,13 +16,14 @@ public class WordCombiner {
 
     private long lastTime;
 
-    public void addWord(String word) {
+    @Override
+    public void addLetter(String letter) {
         timeSpace = lastTime != 0L ? System.currentTimeMillis() - lastTime : 0L;
 
         if (timeSpace >= MIN_SPACE_TIME) text += " ";
 
         if (lastWord != null) {
-            if (lastWord.equals(word)) {
+            if (lastWord.equals(letter)) {
                 countFrameHold++;
                 if (countFrameHold >= MIN_FRAME_DETECT){
                     if (currentLastWord != null && !currentLastWord.equals(lastWord))
@@ -40,7 +40,7 @@ public class WordCombiner {
                 else frameSortedMap.put(lastWord, countFrameHold);
 
                 countFrameHold = 1;
-                lastWord = word;
+                lastWord = letter;
 
                 String checkWord = searchCurrentWord();
                 if (checkWord != null) {
@@ -53,12 +53,17 @@ public class WordCombiner {
                 }
             }
         } else {
-            lastWord = word;
+            lastWord = letter;
             countFrameHold = 1;
         }
 
 
         lastTime = System.currentTimeMillis();
+    }
+
+    @Override
+    public String getWord() {
+        return text;
     }
 
     private String searchCurrentWord() {
@@ -70,10 +75,7 @@ public class WordCombiner {
         return null;
     }
 
-    public String getText() {
-        return text;
-    }
-
+    @Override
     public void clearState(){
         text = "";
         lastWord = null;
