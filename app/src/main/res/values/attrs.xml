@@ -3,13 +3,17 @@
     <attr name="primaryTextSize" format="dimension"/>
     <attr name="secondaryTextSize" format="dimension"/>
 
-    <attr name="mainDarkColor" format="color|reference"/>
-    <attr name="mainColor" format="color|reference"/>
-    <attr name="secondaryColor" format="color|reference"/>
-    <attr name="accentColor" format="color|reference"/>
-    <attr name="mainTextColor" format="color|reference"/>
-    <attr name="secondTextColor" format="color|reference"/>
 
-    <attr name="elementTextColor" format="color|reference"/>
-    <attr name="recogniseBackgroundColor" format="color|reference"/>
+    <attr name="accentColor" format="color|reference"/>
+    <attr name="inactiveColor" format="color|reference"/>
+    <attr name="separatorColor" format="color|reference"/>
+    <attr name="descriptionColor" format="color|reference"/>
+    <attr name="textWhite" format="color|reference"/>
+
+    <attr name="backgroundColor" format="color|reference"/>
+    <attr name="secondaryColor" format="color|reference"/>
+    <attr name="textColor" format="color|reference"/>
+    <attr name="logoColor" format="color|reference"/>
+
+
 </resources>

@@ -1,32 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple">#FF6750A4</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="background">#FFF3EDF7</color>
+    <!---->
+    <!-- common colors -->
+    <color name="accent">#6A5ACD</color>
+    <color name="inactive">#CBCDDF</color>
+    <color name="separator">#848484</color>
+    <color name="description">#848484</color>
+    <color name="text_white">#FFFFFF</color>
+    <!---->
+    <!-- night theme -->
+    <color name="background_night">#0D0D0D</color>
+    <color name="secondary_night">#171618</color>
+    <color name="text_night">#D9D9D9</color>
+    <color name="logo_night_white">#FFFFFF</color>
+    <!---->
+    <!-- day theme -->
+    <color name="background_day">#FFFFFF</color>
+    <color name="secondary_day">#FFFFFF</color>
+    <color name="text_day">#49454F</color>
+    <color name="logo_day_black">#000000</color>
+    <!---->
 
-    <color name="primary_color_dark_day">#A8AABE</color>
-    <color name="primary_color_day">#CBCDDF</color>
-    <color name="secondary_color_day">#FDFBFC</color>
-    <color name="accent_color_day">#0A0A0A</color>
-    <color name="main_text_color_day">#252525</color>
-    <color name="second_text_color_day">#505050</color>
-    <color name="element_text_color_day">#4928AB</color>
-    <color name="recognise_background_color_day">#FDFBFC</color>
+    <!--    <color name="primary_color_dark_day">#A8AABE</color>-->
+    <!--    <color name="primary_color_day">#CBCDDF</color>-->
+    <!--    <color name="secondary_color_day">#FDFBFC</color>-->
+    <!--    <color name="accent_color_day">#0A0A0A</color>-->
+    <!--    <color name="main_text_color_day">#252525</color>-->
+    <!--    <color name="second_text_color_day">#505050</color>-->
+    <!--    <color name="element_text_color_day">#4928AB</color>-->
+    <!--    <color name="recognise_background_color_day">#FDFBFC</color>-->
 
-    <color name="primary_color_dark_night">#2E244E</color>
-    <color name="primary_color_night">#3A3058</color>
-    <color name="secondary_color_night">#F3F2F8</color>
-    <color name="accent_color_night">#161523</color>
-    <color name="main_text_color_night">#3E3D4B</color>
-    <color name="second_text_color_night">#6F6E7A</color>
-    <color name="element_text_color_night">#F3F2F8</color>
-    <color name="recognise_background_color_night">#3A3058</color>
+    <!--    <color name="primary_color_dark_night">#2E244E</color>-->
+    <!--    <color name="primary_color_night">#3A3058</color>-->
+    <!--    <color name="secondary_color_night">#F3F2F8</color>-->
+    <!--    <color name="accent_color_night">#161523</color>-->
+    <!--    <color name="main_text_color_night">#3E3D4B</color>-->
+    <!--    <color name="second_text_color_night">#6F6E7A</color>-->
+    <!--    <color name="element_text_color_night">#F3F2F8</color>-->
+    <!--    <color name="recognise_background_color_night">#3A3058</color>-->
 
-    <color name="purple_500">#FF3500B3</color>
-    <color name="gray">#FFCCCCCC</color>
+    <!--    <color name="purple_500">#FF3500B3</color>-->
+    <!--    <color name="gray">#FFCCCCCC</color>-->
 </resources>

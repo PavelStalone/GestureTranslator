@@ -1,26 +1,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Base.V25.Theme.GestureTranslator" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/primary_color_day</item>
-        <item name="colorSecondary">@color/secondary_color_day</item>
 
-        <item name="colorPrimaryDark">@color/primary_color_dark_day</item>
+        <item name="accentColor">@color/accent</item>
+        <item name="inactiveColor">@color/inactive</item>
+        <item name="separatorColor">@color/separator</item>
+        <item name="descriptionColor">@color/description</item>
+        <item name="textWhite">@color/text_white</item>
 
-        <item name="android:windowBackground">@color/background</item>
-        <item name="android:navigationBarColor">@color/primary_color_dark_day</item>
+        <item name="backgroundColor">@color/background_day</item>
+        <item name="secondaryColor">@color/secondary_day</item>
+        <item name="textColor">@color/text_day</item>
+        <item name="logoColor">@color/logo_day_black</item>
 
-        <item name="backgroundColor">@color/background</item>
+        <item name="android:windowBackground">@color/background_day</item>
+        <item name="android:navigationBarColor">@color/background_day</item>
+
 
         <item name="primaryTextSize">20sp</item>
         <item name="secondaryTextSize">20sp</item>
 
-        <item name="mainDarkColor">@color/primary_color_dark_day</item>
-        <item name="mainColor">@color/primary_color_day</item>
-        <item name="secondaryColor">@color/secondary_color_day</item>
-        <item name="accentColor">@color/accent_color_day</item>
-        <item name="mainTextColor">@color/main_text_color_day</item>
-        <item name="secondTextColor">@color/second_text_color_day</item>
-        <item name="elementTextColor">@color/element_text_color_day</item>
-        <item name="recogniseBackgroundColor">@color/recognise_background_color_day</item>
     </style>
 
     <style name="Base.Theme.GestureTranslator" parent="Base.V25.Theme.GestureTranslator"/>

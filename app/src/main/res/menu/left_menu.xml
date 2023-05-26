@@ -5,32 +5,34 @@
     <item
         android:id="@+id/mainFragment"
         android:icon="@drawable/home_btn"
-        android:iconTint="?attr/elementTextColor"
-        android:title="Home" />
-
-    <item
-        android:id="@+id/informationFragment"
-        android:icon="@drawable/info"
-        android:iconTint="?attr/elementTextColor"
-        android:title="Information" />
-
-    <item
-        android:id="@+id/settingsFragment"
-        android:icon="@drawable/settings"
-        android:iconTint="?attr/elementTextColor"
-        android:title="Settings" />
+        android:iconTint="?attr/textColor"
+        android:title="Домой" />
 
     <item
         android:id="@+id/gestureListFragment"
         android:icon="@drawable/gesture_list"
-        android:iconTint="?attr/elementTextColor"
-        android:title="Gesture list" />
-
+        android:iconTint="?attr/textColor"
+        android:title="Жесты" />
 
     <item
-        android:id="@+id/donate_btn"
-        android:icon="@drawable/donate"
-        android:iconTint="?attr/elementTextColor"
-        android:title="Donate" />
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/settings"
+        android:iconTint="?attr/textColor"
+        android:title="Настройки" />
 
+<!--Ебануть разделить как то надо, если он нужен(в Figma есть)-->
+
+    <item
+        android:id="@+id/informationFragment"
+        android:icon="@drawable/info"
+        android:iconTint="?attr/textColor"
+        android:title="О приложении" />
+
+    <item
+        android:id="@+id/bugReportFragment"
+        android:icon="@drawable/bug"
+        android:iconTint="?attr/textColor"
+        android:title="Багрепорт" />
+
+<!--Сюда ебануть версию приложения вниуз экрана-->
 </menu>
