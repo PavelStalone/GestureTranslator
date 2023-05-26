@@ -20,7 +20,7 @@
         android:iconTint="?attr/textColor"
         android:title="Настройки" />
 
-<!--Ебануть разделить как то надо, если он нужен(в Figma есть)-->
+<!--Добавить  разделитель как то надо, если он нужен(в Figma есть)-->
 
     <item
         android:id="@+id/informationFragment"
@@ -34,5 +34,5 @@
         android:iconTint="?attr/textColor"
         android:title="Багрепорт" />
 
-<!--Сюда ебануть версию приложения вниуз экрана-->
+<!--Сюда добавить версию приложения вниуз экрана-->
 </menu>

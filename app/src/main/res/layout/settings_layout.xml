@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="?attr/backgroundColor"
     tools:context=".presentation.SettingsFragment">
 
     <TextView
@@ -14,12 +14,11 @@
         android:gravity="center_horizontal"
         android:text="Настройки"
         android:textSize="25sp"
-        android:theme="@style/Widget.GestureTranslator.PrimaryText" />
-
+        android:textColor="?attr/textColor"/>
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
         android:orientation="horizontal"
         android:paddingHorizontal="30dp">
@@ -29,23 +28,34 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start|center_vertical"
             android:text="Включить ночную тему"
-            android:textSize="20sp"
-            android:theme="@style/Widget.GestureTranslator.SecondaryText" />
+            android:textSize="18sp"
+            android:textColor="?attr/textColor"/>
+
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch_compat_theme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="75dp"
+            android:layout_height="39dp"
             android:layout_gravity="end|center_vertical"
             android:layout_marginStart="60dp"
             android:thumb="@drawable/thumb"
             app:track="@drawable/track" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:gravity="center_vertical"
+            android:text="Пояснение к настройке, где будет краткое описание
+             того, как она работает и прочее, прочее."
+            android:textColor="?attr/descriptionColor"/>
+
+    <!--  Отступ ебануть хз как -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_gravity="bottom"
-            android:background="@color/black" />
+            android:background="?attr/separatorColor" />
 
     </FrameLayout>
 
@@ -55,9 +65,8 @@
         android:layout_marginTop="320dp"
         android:gravity="center_horizontal"
         android:text="В разработке"
-        android:textSize="22sp"
-        android:theme="@style/Widget.GestureTranslator.PrimaryText" />
-
+        android:textSize="25sp"
+        android:textColor="?attr/textColor"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -76,12 +85,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center_vertical"
                 android:text="Подключить gpu"
-                android:textSize="20sp"
-                android:theme="@style/Widget.GestureTranslator.SecondaryText" />
+                android:textSize="18sp"
+                android:textColor="?attr/textColor"/>
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/switch_compat_gpu"
-                android:layout_width="wrap_content"
+                android:layout_width="27dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|center_vertical"
                 android:layout_marginStart="60dp"
@@ -92,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_gravity="bottom"
-                android:background="@color/black" />
+                android:background="?attr/separatorColor" />
 
         </FrameLayout>
 
@@ -107,9 +116,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center_vertical"
                 android:text="Показывать проценты"
-                android:textSize="20sp"
-                android:theme="@style/Widget.GestureTranslator.SecondaryText" />
-
+                android:textSize="18sp"
+                android:textColor="?attr/textColor"/>
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/switch_compat_percents"
                 android:layout_width="wrap_content"
@@ -123,54 +131,57 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_gravity="bottom"
-                android:background="@color/black" />
+                android:background="?attr/separatorColor" />
         </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:gravity="center"
+            android:gravity="start"
             android:orientation="vertical"
-            android:paddingHorizontal="30dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Скорость перевода (кадров/сек)"
-                android:textSize="20sp"
-                android:theme="@style/Widget.GestureTranslator.SecondaryText" />
+            android:paddingStart="30dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="start"
                 android:orientation="horizontal">
 
-                <SeekBar
-                    android:id="@+id/seekBar"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:max="60"
-                    android:progress="1"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent" />
-
                 <TextView
-                    android:id="@+id/seekBarText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textSize="20sp"
-                    android:theme="@style/Widget.GestureTranslator.PrimaryText" />
-            </LinearLayout>
+                    android:text="Скорость распознавания"
+                    android:textSize="18sp"
+                    android:textColor="?attr/textColor"/>
+                <FrameLayout
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="80dp"
+                    android:orientation="vertical">
 
-            <View
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:spinnerMode="dropdown"
+                        android:entries="@array/frames_per_second"
+                        android:background="?attr/textWhite"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:layout_gravity="bottom"
+                        android:background="?attr/accentColor" />
+                </FrameLayout>
+
+            </LinearLayout>
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="bottom"
-                android:background="@color/black" />
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Пояснение к настройке, где будет краткое описание
+             того, как она работает и прочее, прочее."
+                android:textColor="?attr/descriptionColor"/>
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>
