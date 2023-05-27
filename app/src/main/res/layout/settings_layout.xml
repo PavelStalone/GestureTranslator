@@ -16,48 +16,54 @@
         android:textColor="?attr/textColor"
         android:textSize="25sp" />
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:paddingHorizontal="30dp">
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start|center_vertical"
-            android:text="Включить ночную тему"
-            android:textColor="?attr/textColor"
-            android:textSize="18sp" />
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Включить ночную тему"
+                android:textColor="?attr/textColor"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switch_compat_theme"
-            android:layout_width="75dp"
-            android:layout_height="39dp"
-            android:layout_gravity="end|center_vertical"
-            android:layout_marginStart="60dp"
-            android:thumb="@drawable/thumb"
-            app:track="@drawable/track" />
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_compat_theme"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:thumb="@drawable/thumb"
+                app:track="@drawable/track"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
             android:gravity="center_vertical"
             android:text="Пояснение к настройке, где будет краткое описание
              того, как она работает и прочее, прочее."
             android:textColor="?attr/descriptionColor" />
-
-        <!--  Отступ ебануть хз как -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginTop="16dp"
             android:layout_gravity="bottom"
             android:background="?attr/separatorColor" />
 
-    </FrameLayout>
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
@@ -75,67 +81,100 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:paddingHorizontal="30dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/textGpu"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Включить обработку по gpu"
+                    android:textColor="?attr/textColor"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_compat_gpu"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:thumb="@drawable/thumb"
+                    app:track="@drawable/track"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+            </LinearLayout>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start|center_vertical"
-                android:text="Подключить gpu"
-                android:textColor="?attr/textColor"
-                android:textSize="18sp" />
-
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/switch_compat_gpu"
-                android:layout_width="27dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginStart="60dp"
-                android:thumb="@drawable/thumb"
-                app:track="@drawable/track" />
-
+                android:gravity="center_vertical"
+                android:text="Пояснение к настройке, где будет краткое описание
+             того, как она работает и прочее, прочее."
+                android:textColor="?attr/descriptionColor" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginTop="16dp"
                 android:layout_gravity="bottom"
                 android:background="?attr/separatorColor" />
 
-        </FrameLayout>
-
-        <FrameLayout
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:paddingHorizontal="30dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/textPercents"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Включить показ процентов"
+                    android:textColor="?attr/textColor"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_compat_percents"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:thumb="@drawable/thumb"
+                    app:track="@drawable/track"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+            </LinearLayout>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start|center_vertical"
-                android:text="Показывать проценты"
-                android:textColor="?attr/textColor"
-                android:textSize="18sp" />
-
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/switch_compat_percents"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginStart="60dp"
-                android:thumb="@drawable/thumb"
-                app:track="@drawable/track" />
-
+                android:gravity="center_vertical"
+                android:text="Пояснение к настройке, где будет краткое описание
+             того, как она работает и прочее, прочее."
+                android:textColor="?attr/descriptionColor" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginTop="16dp"
                 android:layout_gravity="bottom"
                 android:background="?attr/separatorColor" />
-        </FrameLayout>
 
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -157,7 +196,7 @@
                     android:textColor="?attr/textColor"
                     android:textSize="18sp" />
 
-                <FrameLayout
+                <LinearLayout
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="80dp"
@@ -176,8 +215,7 @@
                         android:layout_height="3dp"
                         android:layout_gravity="bottom"
                         android:background="?attr/accentColor" />
-                </FrameLayout>
-
+                </LinearLayout>
             </LinearLayout>
 
             <TextView
