@@ -17,8 +17,6 @@
         android:layout_marginStart="25dp"
         android:src="@drawable/menu"
         android:contentDescription="@null"/>
-<!--    не уверен, что это нужно могу
-app:tint="?attr/secondaryColor" />-->
 
     <ImageView
         android:id="@+id/icon"

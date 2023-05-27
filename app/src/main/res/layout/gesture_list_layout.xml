@@ -6,6 +6,7 @@
     android:background="?attr/backgroundColor"
     android:orientation="vertical"
     tools:context=".presentation.GestureListFragment">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,628 +15,674 @@
         android:text="Список жестов"
         android:textColor="?attr/textColor"
         android:textSize="20sp" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:paddingBottom="10dp">
-         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/a"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="A" />
-            </FrameLayout>
-            <FrameLayout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="10dp">
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/b"/>
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <TextView
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/a" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="A"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+
+                <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="Б" />
-            </FrameLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/v"/>
+                    android:layout_marginStart="50dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="В" />
-            </FrameLayout>
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/g"/>
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/b" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="Г" />
-            </FrameLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/d"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="Б"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+            </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="Д" />
-            </FrameLayout>
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/ye"/>
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <TextView
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/v" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="В"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+
+                <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="Е" />
-            </FrameLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/zh"/>
+                    android:layout_marginStart="50dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="Ж" />
-            </FrameLayout>
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/z"/>
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/g" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="З" />
-            </FrameLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/i"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="Г"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+            </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="И" />
-            </FrameLayout>
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/k"/>
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <TextView
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/d" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="Д"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+
+                <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="К" />
-            </FrameLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/l"/>
+                    android:layout_marginStart="50dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="Л" />
-            </FrameLayout>
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/m"/>
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/ye" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="М" />
-            </FrameLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/n"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="Е"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+            </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="Н" />
-            </FrameLayout>
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/o"/>
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <TextView
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/zh" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="Ж"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+
+                <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="О" />
-            </FrameLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/p"/>
+                    android:layout_marginStart="50dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="П" />
-            </FrameLayout>
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/r"/>
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/z" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="Р"/>
-            </FrameLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/s"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="З"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+            </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="С" />
-            </FrameLayout>
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/t"/>
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <TextView
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/i" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="И"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+
+                <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="Т" />
-            </FrameLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/u"/>
+                    android:layout_marginStart="50dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="У" />
-            </FrameLayout>
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/f"/>
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/k" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="Ф" />
-            </FrameLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/h"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="К"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+            </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="Х" />
-            </FrameLayout>
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/c"/>
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <TextView
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/l" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="Л"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+
+                <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="Ц" />
-            </FrameLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/ch"/>
+                    android:layout_marginStart="50dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="Ч" />
-            </FrameLayout>
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/sh"/>
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/m" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="Ш" />
-            </FrameLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/bi"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="М"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+            </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="Ы" />
-            </FrameLayout>
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/soft_sign"/>
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <TextView
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/n" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="Н"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+
+                <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="Ь" />
-            </FrameLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/e"/>
+                    android:layout_marginStart="50dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="Э" />
-            </FrameLayout>
-            <FrameLayout
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/o" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="О"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/yu"/>
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <TextView
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/p" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="П"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+
+                <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="Ю" />
-            </FrameLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <FrameLayout
+                    android:layout_marginStart="50dp">
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/r" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="Р"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:src="@drawable/ya"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <TextView
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/s" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="С"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+
+                <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="@drawable/rectangle"
-                    android:layout_gravity="bottom"
-                    android:textColor="?attr/textWhite"
-                    android:text="Я" />
-            </FrameLayout>
+                    android:layout_marginStart="50dp">
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/t" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="Т"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/u" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="У"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp">
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/f" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="Ф"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/h" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="Х"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp">
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/c" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="Ц"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/ch" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="Ч"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp">
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/sh" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="Ш"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/bi" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="Ы"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp">
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/soft_sign" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="Ь"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/e" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="Э"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp">
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/yu" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="Ю"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/ya" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:text="Я"
+                        android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
+                </FrameLayout>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
     </ScrollView>
 </LinearLayout>

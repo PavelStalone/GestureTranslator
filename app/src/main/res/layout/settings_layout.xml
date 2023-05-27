@@ -13,8 +13,8 @@
         android:layout_marginTop="60dp"
         android:gravity="center_horizontal"
         android:text="Настройки"
-        android:textSize="25sp"
-        android:textColor="?attr/textColor"/>
+        android:textColor="?attr/textColor"
+        android:textSize="25sp" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -28,8 +28,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start|center_vertical"
             android:text="Включить ночную тему"
-            android:textSize="18sp"
-            android:textColor="?attr/textColor"/>
+            android:textColor="?attr/textColor"
+            android:textSize="18sp" />
 
 
         <androidx.appcompat.widget.SwitchCompat
@@ -48,9 +48,9 @@
             android:gravity="center_vertical"
             android:text="Пояснение к настройке, где будет краткое описание
              того, как она работает и прочее, прочее."
-            android:textColor="?attr/descriptionColor"/>
+            android:textColor="?attr/descriptionColor" />
 
-    <!--  Отступ ебануть хз как -->
+        <!--  Отступ ебануть хз как -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -65,8 +65,9 @@
         android:layout_marginTop="320dp"
         android:gravity="center_horizontal"
         android:text="В разработке"
-        android:textSize="25sp"
-        android:textColor="?attr/textColor"/>
+        android:textColor="?attr/textColor"
+        android:textSize="25sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -85,8 +86,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center_vertical"
                 android:text="Подключить gpu"
-                android:textSize="18sp"
-                android:textColor="?attr/textColor"/>
+                android:textColor="?attr/textColor"
+                android:textSize="18sp" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/switch_compat_gpu"
@@ -116,8 +117,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center_vertical"
                 android:text="Показывать проценты"
-                android:textSize="18sp"
-                android:textColor="?attr/textColor"/>
+                android:textColor="?attr/textColor"
+                android:textSize="18sp" />
+
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/switch_compat_percents"
                 android:layout_width="wrap_content"
@@ -152,8 +154,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Скорость распознавания"
-                    android:textSize="18sp"
-                    android:textColor="?attr/textColor"/>
+                    android:textColor="?attr/textColor"
+                    android:textSize="18sp" />
+
                 <FrameLayout
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
@@ -164,9 +167,10 @@
                         android:id="@+id/spinner"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:spinnerMode="dropdown"
+                        android:background="?attr/textWhite"
                         android:entries="@array/frames_per_second"
-                        android:background="?attr/textWhite"/>
+                        android:spinnerMode="dropdown" />
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="3dp"
@@ -175,13 +179,14 @@
                 </FrameLayout>
 
             </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:text="Пояснение к настройке, где будет краткое описание
              того, как она работает и прочее, прочее."
-                android:textColor="?attr/descriptionColor"/>
+                android:textColor="?attr/descriptionColor" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>
