@@ -14,7 +14,7 @@
         android:layout_height="40dp"
         android:padding="10dp"
         android:layout_gravity="start|center_vertical"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="10dp"
         android:src="@drawable/menu"
         android:contentDescription="@null"/>
 
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|center"
-        android:layout_marginEnd="18dp"
+        android:layout_marginEnd="20dp"
         android:contentDescription="@null"
         android:background="@drawable/logo" />
 
