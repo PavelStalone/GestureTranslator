@@ -125,7 +125,7 @@
                         <ImageView
                             android:layout_width="58dp"
                             android:layout_height="58dp"
-                            android:src="@drawable/hand_logo_ortin"/>
+                            android:src="@drawable/pavel_stalone"/>
                         <Button
                             android:id="@+id/pavel_stalone_github_button"
                             android:layout_width="130dp"
@@ -180,7 +180,7 @@
                         <ImageView
                             android:layout_width="58dp"
                             android:layout_height="58dp"
-                            android:src="@drawable/hand_logo_ortin"/>
+                            android:src="@drawable/glebix"/>
                         <Button
                             android:id="@+id/glebix_github_button"
                             android:layout_width="130dp"
@@ -235,7 +235,7 @@
                         <ImageView
                             android:layout_width="58dp"
                             android:layout_height="58dp"
-                            android:src="@drawable/hand_logo_ortin"/>
+                            android:src="@drawable/qondeeter"/>
                         <Button
                             android:id="@+id/qondeeter_github_button"
                             android:layout_width="130dp"
@@ -290,7 +290,7 @@
                         <ImageView
                             android:layout_width="58dp"
                             android:layout_height="58dp"
-                            android:src="@drawable/hand_logo_ortin"/>
+                            android:src="@drawable/sova"/>
                         <Button
                             android:id="@+id/sova_github_button"
                             android:layout_width="130dp"
@@ -345,7 +345,7 @@
                         <ImageView
                             android:layout_width="58dp"
                             android:layout_height="58dp"
-                            android:src="@drawable/hand_logo_ortin"/>
+                            android:src="@drawable/glazeezalg"/>
                         <Button
                             android:id="@+id/glazeezalg_github_button"
                             android:layout_width="130dp"
@@ -400,7 +400,7 @@
                         <ImageView
                             android:layout_width="58dp"
                             android:layout_height="58dp"
-                            android:src="@drawable/hand_logo_ortin"/>
+                            android:src="@drawable/sever"/>
                         <Button
                             android:id="@+id/sever_github_button"
                             android:layout_width="130dp"

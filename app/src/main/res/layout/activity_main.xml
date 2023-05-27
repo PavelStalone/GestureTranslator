@@ -36,7 +36,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:menu="@menu/left_menu"
-        app:itemIconTint="@color/purple"
-        app:itemTextColor="@color/purple"/>
+        app:itemIconTint="?attr/textColor"
+        app:itemTextColor="?attr/textColor"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
