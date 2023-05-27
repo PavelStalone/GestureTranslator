@@ -5,7 +5,7 @@
     android:id="@+id/topBar"
     android:layout_width="match_parent"
     android:layout_height="55dp"
-    android:background="?attr/mainColor"
+    android:background="?attr/backgroundColor"
     android:orientation="horizontal">
 
     <ImageView
@@ -16,8 +16,9 @@
         android:layout_gravity="start|center_vertical"
         android:layout_marginStart="25dp"
         android:src="@drawable/menu"
-        android:contentDescription="@null"
-        app:tint="?attr/secondaryColor" />
+        android:contentDescription="@null"/>
+<!--    не уверен, что это нужно могу
+app:tint="?attr/secondaryColor" />-->
 
     <ImageView
         android:id="@+id/icon"

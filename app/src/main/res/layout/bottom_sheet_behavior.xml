@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:theme="@style/Widget.GestureTranslator.SecondaryText"
+        android:textColor="?attr/descriptionColor"
         android:text="Распознанный текст"/>
 
     <TextView
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="start|center_vertical"
-        android:theme="@style/Widget.GestureTranslator.PrimaryText"
+        android:textColor="?attr/textColor"
         android:text="Текст для тестирования выдвижного меню"/>
 
 </LinearLayout>
