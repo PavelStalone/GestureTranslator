@@ -9,9 +9,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -24,14 +25,14 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="115dp"
+                android:layout_marginTop="15dp"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/hand_logo_ortin" />
 
             <LinearLayout
                 android:layout_width="360dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="210dp"
+                android:layout_marginTop="20dp"
                 android:layout_gravity="center_horizontal"
                 android:orientation="vertical">
                 <TextView
@@ -85,7 +86,7 @@
             <LinearLayout
                 android:layout_width="360dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="547dp"
+                android:layout_marginTop="28dp"
                 android:layout_gravity="center_horizontal"
                 android:orientation="vertical">
 
@@ -427,6 +428,6 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </FrameLayout>
+        </LinearLayout>
     </ScrollView>
 </FrameLayout>
