@@ -19,7 +19,8 @@
     <style name="Widget.GestureTranslator.GestureListLetter" parent="Widget.MaterialComponents.TextView">
         <item name="android:background">@drawable/predict_background</item>
         <item name="android:textColor">?attr/textWhite</item>
-        <item name="android:colorBackground">?attr/accentColor</item>
+        <item name="android:paddingHorizontal" tools:targetApi="o">12dp</item>
+        <item name="android:backgroundTint">?attr/accentColor</item>
         <item name="android:textSize">20sp</item>
     </style>
 </resources>
