@@ -3,191 +3,430 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="?attr/backgroundColor"
     tools:context=".presentation.InformationFragment">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:gravity="center_horizontal"
-        android:text="Информация о приложении"
-        android:theme="@style/Widget.GestureTranslator.PrimaryText"
-        android:textSize="25sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:orientation="vertical">
-
-        <LinearLayout
+        android:layout_height="wrap_content">
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
+            android:layout_height="wrap_content">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
                 android:gravity="center_horizontal"
-                android:text="Контакты"
-                android:theme="@style/Widget.GestureTranslator.SecondaryText"
-                android:textSize="20sp" />
+                android:text="О приложении"
+                android:textColor="?attr/textColor"
+                android:textSize="25sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="115dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/hand_logo_ortin" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="360dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/telegram_logo" />
-
+                android:layout_marginTop="210dp"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
+                    android:gravity="center_horizontal"
+                    android:text="Gesture Translator - настолько класная прилажуха что даже сложно придумать соизмеримо класное описание, так что я над ним еще подумаю, но вы не уходите пока что"
+                    android:textColor="?attr/descriptionColor"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/web_app_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="17dp"
+                    android:background="@drawable/url_button"
+                    android:text="Сайт приложения"
+                    android:textColor="?attr/accentColor"
+                    android:clickable="true"
                     android:autoLink="web"
                     android:linksClickable="true"
-                    android:text="tg.com/qongeeter"
-                    android:theme="@style/Widget.GestureTranslator.SecondaryText"                    android:textSize="20sp" />
+                    android:onClick="goToWebApplication"
+                    />
+                <Button
+                    android:id="@+id/app_github_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="17dp"
+                    android:background="@drawable/url_button"
+                    android:text="Github приложения"
+                    android:textColor="?attr/accentColor"
+                    android:clickable="true"
+                    android:autoLink="web"
+                    android:linksClickable="true"
+                    android:onClick="goToAppGithub"
+                    />
+                <Button
+                    android:id="@+id/donate_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="17dp"
+                    android:background="@drawable/url_button"
+                    android:text="Пожертвования"
+                    android:textColor="?attr/accentColor"
+                    android:clickable="true"/>
+        <!--            Не знаю нужна ли тут ссылка-->
+        <!--            android:autoLink="web"-->
+        <!--            android:linksClickable="true"-->
+        <!--            android:onClick="goToAppGithub"-->
             </LinearLayout>
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="360dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/gmail_logo" />
+                android:layout_marginTop="547dp"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:autoLink="web"
-                    android:linksClickable="true"
-                    android:text="gmail.com/qongeeter"
-                    android:theme="@style/Widget.GestureTranslator.SecondaryText"                    android:textSize="20sp" />
+                    android:gravity="center_horizontal"
+                    android:text="Разработчики"
+                    android:textColor="?attr/textColor"
+                    android:textSize="25sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="PavelStalone"
+                        android:textColor="?attr/textColor"
+                        android:textSize="20sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Team lead, Android developer and ML engineer"
+                        android:textColor="?attr/descriptionColor"
+                        android:textSize="15sp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="58dp"
+                            android:layout_height="58dp"
+                            android:src="@drawable/hand_logo_ortin"/>
+                        <Button
+                            android:id="@+id/pavel_stalone_github_button"
+                            android:layout_width="130dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="20dp"
+                            android:background="@drawable/url_button"
+                            android:text="Github"
+                            android:textColor="?attr/accentColor"
+                            android:clickable="true"
+                            android:autoLink="web"
+                            android:linksClickable="true"
+                            android:onClick="goToPavelStaloneGithub"/>
+                        <Button
+                            android:id="@+id/pavel_stalone_contacts_button"
+                            android:layout_width="130dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="20dp"
+                            android:background="@drawable/url_button"
+                            android:text="Контакты"
+                            android:textColor="?attr/accentColor"
+                            android:clickable="true"
+                            android:autoLink="web"
+                            android:linksClickable="true"
+                            android:onClick="goToPavelStaloneContacts"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Glebix"
+                        android:textColor="?attr/textColor"
+                        android:textSize="20sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ML engineer, Android and Web developer"
+                        android:textColor="?attr/descriptionColor"
+                        android:textSize="15sp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="58dp"
+                            android:layout_height="58dp"
+                            android:src="@drawable/hand_logo_ortin"/>
+                        <Button
+                            android:id="@+id/glebix_github_button"
+                            android:layout_width="130dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="20dp"
+                            android:background="@drawable/url_button"
+                            android:text="Github"
+                            android:textColor="?attr/accentColor"
+                            android:clickable="true"
+                            android:autoLink="web"
+                            android:linksClickable="true"
+                            android:onClick="goToGlebixGithub"/>
+                        <Button
+                            android:id="@+id/glebix_contacts_button"
+                            android:layout_width="130dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="20dp"
+                            android:background="@drawable/url_button"
+                            android:text="Контакты"
+                            android:textColor="?attr/accentColor"
+                            android:clickable="true"
+                            android:autoLink="web"
+                            android:linksClickable="true"
+                            android:onClick="goToGlebixContacts"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Qondeeter"
+                        android:textColor="?attr/textColor"
+                        android:textSize="20sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="UI/UX - designer and data engineer"
+                        android:textColor="?attr/descriptionColor"
+                        android:textSize="15sp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="58dp"
+                            android:layout_height="58dp"
+                            android:src="@drawable/hand_logo_ortin"/>
+                        <Button
+                            android:id="@+id/qondeeter_github_button"
+                            android:layout_width="130dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="20dp"
+                            android:background="@drawable/url_button"
+                            android:text="Github"
+                            android:textColor="?attr/accentColor"
+                            android:clickable="true"
+                            android:autoLink="web"
+                            android:linksClickable="true"
+                            android:onClick="goToQondeeterGithub"/>
+                        <Button
+                            android:id="@+id/qondeeter_contacts_button"
+                            android:layout_width="130dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="20dp"
+                            android:background="@drawable/url_button"
+                            android:text="Контакты"
+                            android:textColor="?attr/accentColor"
+                            android:clickable="true"
+                            android:autoLink="web"
+                            android:linksClickable="true"
+                            android:onClick="goToQondeetercontacts"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Sova"
+                        android:textColor="?attr/textColor"
+                        android:textSize="20sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="UI/UX - writer and data engineer"
+                        android:textColor="?attr/descriptionColor"
+                        android:textSize="15sp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="58dp"
+                            android:layout_height="58dp"
+                            android:src="@drawable/hand_logo_ortin"/>
+                        <Button
+                            android:id="@+id/sova_github_button"
+                            android:layout_width="130dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="20dp"
+                            android:background="@drawable/url_button"
+                            android:text="Github"
+                            android:textColor="?attr/accentColor"
+                            android:clickable="true"
+                            android:autoLink="web"
+                            android:linksClickable="true"
+                            android:onClick="goToSovaGithub"/>
+                        <Button
+                            android:id="@+id/sova_contacts_button"
+                            android:layout_width="130dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="20dp"
+                            android:background="@drawable/url_button"
+                            android:text="Контакты"
+                            android:textColor="?attr/accentColor"
+                            android:clickable="true"
+                            android:autoLink="web"
+                            android:linksClickable="true"
+                            android:onClick="goToSovaContacts"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Glazeezalg"
+                        android:textColor="?attr/textColor"
+                        android:textSize="20sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Analyst"
+                        android:textColor="?attr/descriptionColor"
+                        android:textSize="15sp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="58dp"
+                            android:layout_height="58dp"
+                            android:src="@drawable/hand_logo_ortin"/>
+                        <Button
+                            android:id="@+id/glazeezalg_github_button"
+                            android:layout_width="130dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="20dp"
+                            android:background="@drawable/url_button"
+                            android:text="Github"
+                            android:textColor="?attr/accentColor"
+                            android:clickable="true"
+                            android:autoLink="web"
+                            android:linksClickable="true"
+                            android:onClick="goToGlazeezalgGithub"/>
+                        <Button
+                            android:id="@+id/glazeezalg_contacts_button"
+                            android:layout_width="130dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="20dp"
+                            android:background="@drawable/url_button"
+                            android:text="Контакты"
+                            android:textColor="?attr/accentColor"
+                            android:clickable="true"
+                            android:autoLink="web"
+                            android:linksClickable="true"
+                            android:onClick="goToGlazeezalgContacts"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Sever"
+                        android:textColor="?attr/textColor"
+                        android:textSize="20sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Teach lead and mentor"
+                        android:textColor="?attr/descriptionColor"
+                        android:textSize="15sp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="58dp"
+                            android:layout_height="58dp"
+                            android:src="@drawable/hand_logo_ortin"/>
+                        <Button
+                            android:id="@+id/sever_github_button"
+                            android:layout_width="130dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="20dp"
+                            android:background="@drawable/url_button"
+                            android:text="Github"
+                            android:textColor="?attr/accentColor"
+                            android:clickable="true"
+                            android:autoLink="web"
+                            android:linksClickable="true"
+                            android:onClick="goToSeverGithub"/>
+                        <Button
+                            android:id="@+id/sever_contacts_button"
+                            android:layout_width="130dp"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="20dp"
+                            android:background="@drawable/url_button"
+                            android:text="Контакты"
+                            android:textColor="?attr/accentColor"
+                            android:clickable="true"
+                            android:autoLink="web"
+                            android:linksClickable="true"
+                            android:onClick="goToSeverContacts"/>
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="47dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="Блоги разработчиков"
-                android:theme="@style/Widget.GestureTranslator.SecondaryText"                android:textSize="20sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/telegram_logo" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:autoLink="web"
-                    android:linksClickable="true"
-                    android:text="tg.com/qongeeter"
-                    android:theme="@style/Widget.GestureTranslator.SecondaryText"                    android:textSize="20sp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/gmail_logo" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:autoLink="web"
-                    android:linksClickable="true"
-                    android:text="gmail.com/qongeeter"
-                    android:theme="@style/Widget.GestureTranslator.SecondaryText"                    android:textSize="20sp" />
-            </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="47dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="Пожертвования"
-                android:theme="@style/Widget.GestureTranslator.SecondaryText"                android:textSize="20sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/telegram_logo" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:autoLink="web"
-                    android:linksClickable="true"
-                    android:text="tg.com/qongeeter"
-                    android:theme="@style/Widget.GestureTranslator.SecondaryText"                    android:textSize="20sp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/gmail_logo" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:autoLink="web"
-                    android:linksClickable="true"
-                    android:text="gmail.com/qongeeter"
-                    android:theme="@style/Widget.GestureTranslator.SecondaryText"                    android:textSize="20sp" />
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
+        </FrameLayout>
+    </ScrollView>
 </FrameLayout>
