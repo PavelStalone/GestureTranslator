@@ -8,4 +8,17 @@
         <item>"45"</item>
         <item>"60"</item>
     </string-array>
+    
+    <!-- Левое меню -->
+    <string name="left_menu_home">Домой</string>
+    <string name="left_menu_gesture_list">Жесты</string>
+    <string name="left_menu_settings">Настройки</string>
+    <string name="left_menu_info">О приложении</string>
+    <string name="left_menu_bug_reports">Багрепорт</string>
+    <string name="left_menu_privacy">Политика конфиденциальности</string>
+    <string name="left_menu_conditions">Условия использования</string>
+    <string name="left_menu_app_version">Версия приложения: 1.0</string>
+
+    
+    
 </resources>

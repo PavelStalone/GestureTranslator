@@ -8,19 +8,19 @@
         android:id="@+id/mainFragment"
         android:icon="@drawable/home_btn"
         android:iconTint="?attr/textColor"
-        android:title="Домой" />
+        android:title="@string/left_menu_home" />
 
     <item
         android:id="@+id/gestureListFragment"
         android:icon="@drawable/gesture_list"
         android:iconTint="?attr/textColor"
-        android:title="Жесты" />
+        android:title="@string/left_menu_gesture_list" />
 
     <item
         android:id="@+id/settingsFragment"
         android:icon="@drawable/settings"
         android:iconTint="?attr/textColor"
-        android:title="Настройки" />
+        android:title="@string/left_menu_settings" />
     </group>
 
 <!--Добавить  разделитель как то надо, если он нужен(в Figma есть)-->
@@ -29,13 +29,13 @@
         android:id="@+id/informationFragment"
         android:icon="@drawable/info"
         android:iconTint="?attr/textColor"
-        android:title="О приложении" />
+        android:title="@string/left_menu_info" />
 
     <item
         android:id="@+id/bugReportFragment"
         android:icon="@drawable/bug"
         android:iconTint="?attr/textColor"
-        android:title="Багрепорт" />
+        android:title="@string/left_menu_info" />
 
 <!--Сюда добавить версию приложения вниуз экрана-->
 </menu>
