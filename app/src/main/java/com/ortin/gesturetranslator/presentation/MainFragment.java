@@ -147,12 +147,12 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
         binding.controlMenu.flashLight.setOnChangedStatusListener(new OnChangedStatusListener() {
             @Override
             public void onStart() {
-
+                loadImageUseCase.setStatusFlashlight(true);
             }
 
             @Override
             public void onStop() {
-
+                loadImageUseCase.setStatusFlashlight(false);
             }
         });
 
@@ -246,6 +246,7 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        loadImageUseCase.setStatusFlashlight(false);
         binding = null;
     }
 }

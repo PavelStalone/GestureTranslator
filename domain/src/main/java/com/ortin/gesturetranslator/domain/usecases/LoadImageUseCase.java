@@ -1,8 +1,5 @@
 package com.ortin.gesturetranslator.domain.usecases;
 
-import android.app.Fragment;
-
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.ortin.gesturetranslator.domain.listeners.LoadImagesListener;
@@ -18,5 +15,9 @@ public class LoadImageUseCase {
 
     public void execute(LoadImagesListener loadImagesListener, LifecycleOwner lifecycleOwner) {
         loadImageRepository.loadImages(loadImagesListener, lifecycleOwner);
+    }
+
+    public void setStatusFlashlight(boolean mode) {
+        loadImageRepository.setStatusFlashlight(mode);
     }
 }

@@ -21,6 +21,11 @@ public class LoadImageRepositoryImpl implements LoadImageRepository {
         cameraManager.loadImage(mapperToDomainListener(loadImagesListener), lifecycleOwner);
     }
 
+    @Override
+    public void setStatusFlashlight(boolean mode) {
+        cameraManager.setStatusFlashlight(mode);
+    }
+
 
     // Правила перевода для связи domain и feature модулей
 

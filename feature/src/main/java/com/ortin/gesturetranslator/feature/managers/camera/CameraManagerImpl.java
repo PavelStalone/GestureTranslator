@@ -7,6 +7,7 @@ import android.media.Image;
 
 import androidx.annotation.NonNull;
 import androidx.camera.core.AspectRatio;
+import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageProxy;
@@ -14,17 +15,18 @@ import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
+import com.google.common.util.concurrent.ListenableFuture;
 import com.ortin.gesturetranslator.feature.managers.camera.listeners.CameraListener;
 import com.ortin.gesturetranslator.feature.managers.camera.models.ImageFromCamera;
 import com.ortin.gesturetranslator.feature.translators.YUVtoRGB;
-import com.google.common.util.concurrent.ListenableFuture;
 
-public class CameraManagerImpl implements CameraManager{
+public class CameraManagerImpl implements CameraManager {
 
     private final Context context;
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     private final YUVtoRGB translator = new YUVtoRGB();
     private Bitmap bitmap;
+    private Camera camera;
 
     public CameraManagerImpl(Context context) {
         this.context = context;
@@ -65,12 +67,19 @@ public class CameraManagerImpl implements CameraManager{
                         }
                     });
 
-                    cameraProvider.bindToLifecycle(lifecycleOwner, cameraSelector, imageAnalysis);
+                    camera = cameraProvider.bindToLifecycle(lifecycleOwner, cameraSelector, imageAnalysis);
 
                 } catch (Exception e) {
                     if (cameraListener != null) cameraListener.error(e);
                 }
             }
         }, ContextCompat.getMainExecutor(context));
+    }
+
+    @Override
+    public void setStatusFlashlight(boolean mode) {
+        if (camera != null){
+            camera.getCameraControl().enableTorch(mode);
+        }
     }
 }

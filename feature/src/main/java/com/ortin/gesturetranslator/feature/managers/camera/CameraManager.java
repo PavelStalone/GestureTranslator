@@ -6,4 +6,5 @@ import com.ortin.gesturetranslator.feature.managers.camera.listeners.CameraListe
 
 public interface CameraManager {
     void loadImage(CameraListener cameraListener, LifecycleOwner lifecycleOwner);
+    void setStatusFlashlight(boolean mode);
 }
