@@ -20,6 +20,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.ortin.gesturetranslator.components.OnChangedStatusListener;
@@ -51,6 +54,8 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
 
     private static final String TAG = "MainFrame";
 
+    private MainViewModel viewModel;
+
     @Inject
     LoadImageUseCase loadImageUseCase;
 
@@ -66,11 +71,12 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
     @Inject
     RecognizeCoordinateUseCase recognizeCoordinateUseCase;
 
-    ActivityResultLauncher<String> mGetContent;
+    private ActivityResultLauncher<String> mGetContent;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         registerPermissionListener();
     }
 
@@ -130,6 +136,10 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
     }
 
     private void initListeners() {
+        viewModel.getLiveData().observe(getViewLifecycleOwner(), s -> {
+
+        });
+
         BottomSheetBehavior<LinearLayout> bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheetBehaviorLayout.bottomSheetBehavior);
         binding.controlMenu.realTimeBTN.setOnChangedStatusListener(new OnChangedStatusListener() {
             @Override
@@ -148,11 +158,13 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
             @Override
             public void onStart() {
                 loadImageUseCase.setStatusFlashlight(true);
+                viewModel.onFlashLight();
             }
 
             @Override
             public void onStop() {
                 loadImageUseCase.setStatusFlashlight(false);
+                viewModel.offFlashLight();
             }
         });
 
