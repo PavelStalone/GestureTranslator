@@ -39,14 +39,14 @@ public class PaintHand extends View {
         drawPaint = new Paint();
         pointPaint = new Paint();
 
-        drawPaint.setColor(getContext().getColor(R.color.black));
+        drawPaint.setColor(getContext().getColor(R.color.logo_day_black));
         drawPaint.setAntiAlias(true);
         drawPaint.setStrokeWidth(10);
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeJoin(Paint.Join.ROUND);
         drawPaint.setStrokeCap(Paint.Cap.ROUND);
 
-        pointPaint.setColor(getContext().getColor(R.color.purple_500));
+        pointPaint.setColor(getContext().getColor(R.color.accent));
         pointPaint.setAntiAlias(true);
         pointPaint.setStrokeWidth(8);
         pointPaint.setStyle(Paint.Style.STROKE);

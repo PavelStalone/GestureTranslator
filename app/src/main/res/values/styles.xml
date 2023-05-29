@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Widget.GestureTranslator.ControlMenu" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="android:background">?attr/mainColor</item>
+        <item name="android:background">?attr/backgroundColor</item>
     </style>
 </resources>

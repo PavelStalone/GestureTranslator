@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical|start"
+    android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PavelStalone"
+            android:textColor="?attr/textColor"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Team lead, Android developer and ML engineer"
+            android:textColor="?attr/descriptionColor"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
+                android:src="@drawable/pavel_stalone"
+                android:contentDescription="@null"/>
+
+            <Button
+                android:id="@+id/gitHubBTN"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:maxWidth="137dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="20dp"
+                android:autoLink="web"
+                android:background="@drawable/url_button"
+                android:linksClickable="true"
+                android:text="Github"
+                android:textColor="?attr/accentColor" />
+
+            <Button
+                android:id="@+id/contactBTN"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:maxWidth="137dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="20dp"
+                android:autoLink="web"
+                android:background="@drawable/url_button"
+                android:linksClickable="true"
+                android:text="Контакты"
+                android:textColor="?attr/accentColor" />
+        </LinearLayout>
+
+</LinearLayout>

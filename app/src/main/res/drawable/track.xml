@@ -2,18 +2,16 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_checked="true">
         <shape android:shape="rectangle">
-            <solid android:color="@color/primary_color_dark_day" />
+            <solid android:color="?attr/accentColor" />
             <corners android:radius="100dp" />
-            <stroke android:width="2dp" android:color="@color/main_text_color_day" />
             <size android:height="30dp" />
         </shape>
     </item>
 
     <item android:state_checked="false">
         <shape android:shape="rectangle">
-            <solid android:color="@color/element_text_color_day" />
+            <solid android:color="?attr/inactiveColor" />
             <corners android:radius="100dp" />
-            <stroke android:width="2dp" android:color="@color/primary_color_dark_night" />
             <size android:height="30dp" />
         </shape>
     </item>

@@ -5,7 +5,7 @@
     android:id="@+id/topBar"
     android:layout_width="match_parent"
     android:layout_height="55dp"
-    android:background="?attr/mainColor"
+    android:background="?attr/backgroundColor"
     android:orientation="horizontal">
 
     <ImageView
@@ -14,17 +14,16 @@
         android:layout_height="40dp"
         android:padding="10dp"
         android:layout_gravity="start|center_vertical"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="10dp"
         android:src="@drawable/menu"
-        android:contentDescription="@null"
-        app:tint="?attr/secondaryColor" />
+        android:contentDescription="@null"/>
 
     <ImageView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|center"
-        android:layout_marginEnd="18dp"
+        android:layout_marginEnd="20dp"
         android:contentDescription="@null"
         android:background="@drawable/logo" />
 

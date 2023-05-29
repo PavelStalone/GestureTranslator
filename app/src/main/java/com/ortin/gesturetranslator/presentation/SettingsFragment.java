@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 
@@ -16,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.ortin.gesturetranslator.R;
 import com.ortin.gesturetranslator.databinding.SettingsLayoutBinding;
 
-public class SettingsFragment extends Fragment implements CompoundButton.OnCheckedChangeListener, SeekBar.OnSeekBarChangeListener{
+public class SettingsFragment extends Fragment implements CompoundButton.OnCheckedChangeListener{
     private SettingsLayoutBinding binding;
 
     @Override
@@ -31,11 +33,9 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         super.onViewCreated(view, savedInstanceState);
 
         binding.switchCompatTheme.setOnCheckedChangeListener(this);
-
-        binding.seekBar.setOnSeekBarChangeListener((SeekBar.OnSeekBarChangeListener) this);
-        binding.seekBar.getProgressDrawable().setColorFilter(getContext().getColor(R.color.element_text_color_day), PorterDuff.Mode.SRC_ATOP);
-        binding.seekBar.getThumb().setColorFilter(getContext().getColor(R.color.element_text_color_day), PorterDuff.Mode.SRC_ATOP);
-    }
+//      Паш, если нужно отсюда имменно брать значение для балаболки, то вроде это делается так
+//        binding.spinner.getSelectedItem().toString();
+        }
 
     @Override
     public void onDestroyView() {
@@ -49,17 +49,4 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
 
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        binding.seekBarText.setText(String.valueOf(progress));
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-    }
 }

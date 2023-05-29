@@ -2,35 +2,40 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
+    <group
+        android:id="@+id/menu_top">
     <item
         android:id="@+id/mainFragment"
         android:icon="@drawable/home_btn"
-        android:iconTint="?attr/elementTextColor"
-        android:title="Home" />
-
-    <item
-        android:id="@+id/informationFragment"
-        android:icon="@drawable/info"
-        android:iconTint="?attr/elementTextColor"
-        android:title="Information" />
-
-    <item
-        android:id="@+id/settingsFragment"
-        android:icon="@drawable/settings"
-        android:iconTint="?attr/elementTextColor"
-        android:title="Settings" />
+        android:iconTint="?attr/textColor"
+        android:title="@string/left_menu_home" />
 
     <item
         android:id="@+id/gestureListFragment"
         android:icon="@drawable/gesture_list"
-        android:iconTint="?attr/elementTextColor"
-        android:title="Gesture list" />
-
+        android:iconTint="?attr/textColor"
+        android:title="@string/left_menu_gesture_list" />
 
     <item
-        android:id="@+id/donate_btn"
-        android:icon="@drawable/donate"
-        android:iconTint="?attr/elementTextColor"
-        android:title="Donate" />
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/settings"
+        android:iconTint="?attr/textColor"
+        android:title="@string/left_menu_settings" />
+    </group>
 
+<!--Добавить  разделитель как то надо, если он нужен(в Figma есть)-->
+
+    <item
+        android:id="@+id/informationFragment"
+        android:icon="@drawable/info"
+        android:iconTint="?attr/textColor"
+        android:title="@string/left_menu_info" />
+
+    <item
+        android:id="@+id/bugReportFragment"
+        android:icon="@drawable/bug"
+        android:iconTint="?attr/textColor"
+        android:title="@string/left_menu_info" />
+
+<!--Сюда добавить версию приложения вниуз экрана-->
 </menu>

@@ -3,16 +3,16 @@
 
     <item android:state_checked="true">
         <shape android:shape="oval">
-            <solid android:color="@android:color/white" />
-            <stroke android:width="2dp" android:color="@color/main_text_color_day" />
+            <solid android:color="?attr/backgroundColor" />
+            <stroke android:width="2dp" android:color="?attr/accentColor" />
             <size android:width="30dp" android:height="30dp" />
         </shape>
     </item>
 
     <item android:state_checked="false">
         <shape android:shape="oval">
-            <solid android:color="@android:color/white" />
-            <stroke android:width="2dp" android:color="@color/primary_color_dark_night" />
+            <solid android:color="?attr/backgroundColor" />
+            <stroke android:width="2dp" android:color="?attr/inactiveColor" />
             <size android:width="30dp" android:height="30dp" />
         </shape>
     </item>

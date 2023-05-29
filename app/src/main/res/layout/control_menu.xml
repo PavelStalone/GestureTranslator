@@ -14,6 +14,7 @@
         android:gravity="center|center_horizontal"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:lottie_colorFilter="?attr/accentColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/realTimeBTN"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -50,7 +51,7 @@
             android:layout_height="40dp"
             android:layout_marginBottom="-5dp"
             app:lottie_autoPlay="false"
-            app:lottie_colorFilter="?attr/elementTextColor"
+            app:lottie_colorFilter="?attr/accentColor"
             app:lottie_loop="false"
             app:lottie_progress="0"
             app:lottie_rawRes="@raw/gallery" />
@@ -59,9 +60,9 @@
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:gravity="center_horizontal"
-            android:textColor="?attr/elementTextColor"
+            android:textColor="?attr/textColor"
             android:textSize="12sp"
-            android:text="Галлерея"/>
+            android:text="@string/control_menu_galery"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

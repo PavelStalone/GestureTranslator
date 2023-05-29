@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Widget.GestureTranslator.PrimaryText" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textColor">?attr/mainTextColor</item>
+        <item name="android:textColor">?attr/textColor</item>
         <item name="android:textSize">?attr/primaryTextSize</item>
     </style>
 
     <style name="Widget.GestureTranslator.SecondaryText" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textColor">?attr/secondTextColor</item>
+        <item name="android:textColor">?attr/descriptionColor</item>
         <item name="android:textSize">?attr/secondaryTextSize</item>
     </style>
 
     <style name="Widget.GestureTranslator.PredictionWord" parent="Widget.MaterialComponents.TextView">
         <item name="android:background">@drawable/predict_background</item>
-        <item name="android:textColor">?attr/elementTextColor</item>
+        <item name="android:textColor">?attr/accentColor</item>
         <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="Widget.GestureTranslator.GestureListLetter" parent="Widget.MaterialComponents.TextView">
+        <item name="android:background">@drawable/predict_background</item>
+        <item name="android:textColor">?attr/textWhite</item>
+        <item name="android:paddingHorizontal" tools:targetApi="o">12dp</item>
+        <item name="android:backgroundTint">?attr/accentColor</item>
+        <item name="android:textSize">20sp</item>
     </style>
 </resources>
