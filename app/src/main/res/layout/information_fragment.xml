@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:gravity="center_horizontal"
-            android:text="О приложении"
+            android:text="@string/information_fragment_about_app"
             android:textColor="?attr/textColor"
             android:textSize="25sp" />
 
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="21dp"
             android:gravity="center_horizontal"
-            android:text="Gesture Translator - настолько класная прилажуха что даже сложно придумать соизмеримо класное описание, так что я над ним еще подумаю, но вы не уходите пока что"
+            android:text="@string/information_fragment_app_description"
             android:textColor="?attr/descriptionColor"
             android:textSize="20sp" />
 
@@ -48,7 +48,7 @@
             android:clickable="true"
             android:linksClickable="true"
             android:onClick="goToWebApplication"
-            android:text="Сайт приложения"
+            android:text="@string/information_fragment_web_app_button"
             android:textColor="?attr/accentColor" />
 
         <Button
@@ -61,7 +61,7 @@
             android:clickable="true"
             android:linksClickable="true"
             android:onClick="goToAppGithub"
-            android:text="Github приложения"
+            android:text="@string/information_fragment_app_github_button"
             android:textColor="?attr/accentColor" />
 
         <Button
@@ -71,7 +71,7 @@
             android:layout_marginTop="17dp"
             android:background="@drawable/url_button"
             android:clickable="true"
-            android:text="Пожертвования"
+            android:text="@string/information_fragment_donate_button"
             android:textColor="?attr/accentColor" />
         <!--            Не знаю нужна ли тут ссылка-->
         <!--            android:autoLink="web"-->
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:gravity="center_horizontal"
-            android:text="Разработчики"
+            android:text="@string/information_fragment_about_team"
             android:textColor="?attr/textColor"
             android:textSize="25sp" />
 

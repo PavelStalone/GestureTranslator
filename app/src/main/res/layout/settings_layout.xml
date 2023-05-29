@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:gravity="center_horizontal"
-            android:text="Настройки"
+            android:text="@string/settings_layout_header"
             android:textColor="?attr/textColor"
             android:textSize="25sp" />
 
@@ -35,7 +35,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Включить ночную тему"
+                android:text="@string/settings_layout_switch_theme_to_night"
                 android:textColor="?attr/textColor"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -58,8 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center_vertical"
-            android:text="Пояснение к настройке, где будет краткое описание
-             того, как она работает и прочее, прочее."
+            android:text="@string/settings_layout_switch_theme_description"
             android:textColor="?attr/descriptionColor" />
 
         <TextView
@@ -67,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:gravity="center_horizontal"
-            android:text="В разработке"
+            android:text="@string/settings_layout_development_header"
             android:textColor="?attr/textColor"
             android:textSize="25sp" />
 
@@ -83,7 +82,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Включить обработку по gpu"
+                android:text="@string/settings_layout_switch_gpu_on"
                 android:textColor="?attr/textColor"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -106,8 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center_vertical"
-            android:text="Пояснение к настройке, где будет краткое описание
-             того, как она работает и прочее, прочее."
+            android:text="@string/settings_layout_switch_gpu_description"
             android:textColor="?attr/descriptionColor" />
 
         <View
@@ -129,7 +127,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Включить показ процентов"
+                android:text="@string/settings_layout_switch_percents_on"
                 android:textColor="?attr/textColor"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -152,8 +150,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center_vertical"
-            android:text="Пояснение к настройке, где будет краткое описание
-             того, как она работает и прочее, прочее."
+            android:text="@string/settings_layout_switch_percents_description"
             android:textColor="?attr/descriptionColor" />
 
         <View
@@ -174,7 +171,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Скорость распознавания"
+                android:text="@string/settings_layout_switch_speed"
                 android:textColor="?attr/textColor"
                 android:textSize="18sp" />
 
@@ -204,8 +201,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center_vertical"
-            android:text="Пояснение к настройке, где будет краткое описание
-             того, как она работает и прочее, прочее."
+            android:text="@string/settings_layout_switch_speed_description"
             android:textColor="?attr/descriptionColor" />
     </LinearLayout>
 </ScrollView>

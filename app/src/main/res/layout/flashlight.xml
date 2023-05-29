@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:gravity="center_horizontal"
-        android:text="Фонарик"
+        android:text="@string/control_menu_flashlight"
         android:textColor="?attr/textColor"
         android:textSize="12sp" />
 

@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:theme="@style/Widget.GestureTranslator.SecondaryText"
         android:gravity="center"
-        android:text="Распознанный текст"/>
+        android:text="@string/bottom_sheet_header"/>
 
     <TextView
         android:id="@+id/recognizeTextResult"

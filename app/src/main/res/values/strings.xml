@@ -19,6 +19,38 @@
     <string name="left_menu_conditions">Условия использования</string>
     <string name="left_menu_app_version">Версия приложения: 1.0</string>
 
-    
-    
+    <!-- Выдвижная панель -->
+    <string name="bottom_sheet_header">Распознанный текст</string>
+
+    <!-- Нижняя панель управления -->
+    <string name="control_menu_galery">Галлерея</string>
+    <string name="control_menu_flashlight">Фонарик</string>
+
+    <!-- Список жестов -->
+    <string name="gesture_list_header">Список жестов</string>
+
+    <!-- Информация оп приложении-->
+    <string name="information_fragment_about_app">О приложении</string>
+    <string name="information_fragment_app_description">Gesture Translator - настолько класная прилажуха что даже сложно придумать соизмеримо класное описание, так что я над ним еще подумаю, но вы не уходите пока что</string>
+    <string name="information_fragment_web_app_button">Сайт приложения</string>
+    <string name="information_fragment_app_github_button">github приложения</string>
+    <string name="information_fragment_donate_button">Пожертвования</string>
+    <string name="information_fragment_about_team">Разработчики</string>
+
+    <!-- Настройки -->
+    <string name="settings_layout_header">Настройки</string>
+    <string name="settings_layout_switch_theme_to_night">Включить ночную тему</string>
+    <string name="settings_layout_switch_theme_to_day">Включить светлую тему</string>
+    <string name="settings_layout_switch_theme_description">Нажимая на переключатель Вы меняете основные цвета приложения со светлых на темные и наоборот</string>
+    <string name="settings_layout_development_header">В разработке</string>
+    <string name="settings_layout_switch_gpu_on">Включить обработку по gpu</string>
+    <string name="settings_layout_switch_gpu_off">Выключить обработку по gpu</string>
+    <string name="settings_layout_switch_gpu_description">Нажимая на переключатель, Вы увеличиваете производительность за счет видео чипа</string>
+    <string name="settings_layout_switch_percents_on">Включить показ процентов</string>
+    <string name="settings_layout_switch_percents_off">Выключить показ процентов</string>
+    <string name="settings_layout_switch_percents_description">Нажимая на переключатель, Вы включаете или выключаете отображение процента точности распознавания жеста</string>
+    <string name="settings_layout_switch_speed">Скорость распознавания</string>
+    <string name="settings_layout_switch_speed_description">В выпадающем меню Вы можете выбрать, с какой скоростью будут считываться жесты с камеры</string>
+
+
 </resources>
