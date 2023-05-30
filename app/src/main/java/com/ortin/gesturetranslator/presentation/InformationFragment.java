@@ -55,14 +55,14 @@ public class InformationFragment extends Fragment {
         List<DevelopCard> cards = new ArrayList<>();
         cards.add(new DevelopCard("PavelStalone", "Team lead, Android developer and ML engineer", R.drawable.pavel_stalone, "https://github.com/PavelStalone", ""));
         cards.add(new DevelopCard("Glebix", "ML engineer, Android and Web developer", R.drawable.glebix, "https://github.com/PoroshinGA", ""));
-        cards.add(new DevelopCard("Qondeeter", "UI/UX - designer and data engineer", R.drawable.qondeeter, "https://github.com/kond1ter", ""));
+        cards.add(new DevelopCard("qondeeter", "UI/UX - designer and data engineer", R.drawable.qondeeter, "https://github.com/kond1ter", ""));
         cards.add(new DevelopCard("Sova", "UI/UX - writer and data engineer", R.drawable.sova, "https://github.com/N1kySSS", ""));
         cards.add(new DevelopCard("Glazeezalg", "Analyst", R.drawable.glazeezalg, "https://github.com/glazeezalg", ""));
         cards.add(new DevelopCard("Sever", "Teach lead and mentor", R.drawable.sever, "https://github.com/jacksever", ""));
 
         CardsAdapter adapter = new CardsAdapter(cards);
         binding.developCardsRV.setAdapter(adapter);
-        binding.developCardsRV.addItemDecoration(new SpacesItemDecoration(20));
+        binding.developCardsRV.addItemDecoration(new SpacesItemDecoration(75));
     }
 
     class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder> {

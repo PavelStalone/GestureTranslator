@@ -33,8 +33,6 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         super.onViewCreated(view, savedInstanceState);
 
         binding.switchCompatTheme.setOnCheckedChangeListener(this);
-//      Паш, если нужно отсюда имменно брать значение для балаболки, то вроде это делается так
-//        binding.spinner.getSelectedItem().toString();
         }
 
     @Override
@@ -45,8 +43,13 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (isChecked)AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        if (isChecked) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            binding.textView.setText(R.string.settings_layout_switch_theme_to_day);
+        }
+        else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            binding.textView.setText(R.string.settings_layout_switch_theme_to_night);
+        }
     }
-
 }
