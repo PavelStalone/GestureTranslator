@@ -35,7 +35,7 @@
         android:id="@+id/bugReportFragment"
         android:icon="@drawable/bug"
         android:iconTint="?attr/textColor"
-        android:title="@string/left_menu_info" />
+        android:title="@string/left_menu_bug_reports" />
 
 <!--Сюда добавить версию приложения вниуз экрана-->
 </menu>
