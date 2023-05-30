@@ -53,6 +53,7 @@ public class MainViewModel extends ViewModel implements LoadImagesListener, Dete
     private void init() {
         mainLiveData.setValue(new MainFrameState());
         predictLiveData.setValue(new PredictState());
+
         wordCompileUseCase.clearState();
     }
 
@@ -126,6 +127,7 @@ public class MainViewModel extends ViewModel implements LoadImagesListener, Dete
         mainLiveData.setValue(new MainFrameState(mainFrameState.isFlashlight(), true, BottomSheetBehavior.STATE_COLLAPSED));
         PredictState predictState = predictLiveData.getValue();
         predictLiveData.setValue(new PredictState(predictState.getImageFromCamera(), "", predictState.getPredictLetter(), predictState.getCoordinateHand()));
+        wordCompileUseCase.clearState();
     }
 
     public void onStopRealTimeButton() {
