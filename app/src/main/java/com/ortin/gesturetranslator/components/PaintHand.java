@@ -68,10 +68,12 @@ public class PaintHand extends View {
     }
 
     public void clear(){
-        canvasBitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
-        drawCanvas = new Canvas(canvasBitmap);
+        if (getWidth() > 0 && getHeight() > 0) {
+            canvasBitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
+            drawCanvas = new Canvas(canvasBitmap);
 
-        invalidate();
+            invalidate();
+        }
     }
 
     @Override

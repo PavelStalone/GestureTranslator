@@ -12,9 +12,10 @@ import com.ortin.gesturetranslator.databinding.FlashlightBinding;
 
 public class FlashLightButton extends LinearLayout {
 
-    FlashlightBinding binding;
+    private boolean state = false;
 
-    private boolean status = false;
+    private FlashlightBinding binding;
+
     private OnChangedStatusListener onChangedStatusListener = null;
 
     public FlashLightButton(Context context) {
@@ -35,29 +36,38 @@ public class FlashLightButton extends LinearLayout {
         init();
     }
 
+
     private void init() {
         binding.flashLight.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                status = !status;
-                if (status) {
-                    binding.flashLight.setMinAndMaxProgress(0f, 0.5f);
-                    binding.flashLight.playAnimation();
-                    if (onChangedStatusListener != null) onChangedStatusListener.onStart();
-                } else {
-                    binding.flashLight.setMinAndMaxProgress(0.5f, 1f);
-                    binding.flashLight.playAnimation();
-                    if (onChangedStatusListener != null) onChangedStatusListener.onStop();
-                }
+                state = !state;
+                checkState();
             }
         });
     }
 
-    public boolean getStatus(){
-        return status;
+    public void setOnChangedStatusListener(OnChangedStatusListener onChangedStatusListener) {
+        this.onChangedStatusListener = onChangedStatusListener;
     }
 
-    public void setOnChangedStatusListener(OnChangedStatusListener onChangedStatusListener){
-        this.onChangedStatusListener = onChangedStatusListener;
+    private void checkState() {
+        if (state) {
+            binding.flashLight.setMinAndMaxProgress(0f, 0.5f);
+            if (onChangedStatusListener != null) onChangedStatusListener.onStart();
+        } else {
+            binding.flashLight.setMinAndMaxProgress(0.5f, 1f);
+            if (onChangedStatusListener != null) onChangedStatusListener.onStop();
+        }
+        binding.flashLight.playAnimation();
+    }
+
+    public void setState(boolean state){
+        this.state = state;
+        checkState();
+    }
+
+    public boolean getState(){
+        return state;
     }
 }

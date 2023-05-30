@@ -3,7 +3,6 @@ package com.ortin.gesturetranslator.presentation;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -20,56 +19,25 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.ortin.gesturetranslator.components.OnChangedStatusListener;
 import com.ortin.gesturetranslator.databinding.MainFrameBinding;
-import com.ortin.gesturetranslator.domain.listeners.DetectionHandListener;
-import com.ortin.gesturetranslator.domain.listeners.LoadImagesListener;
-import com.ortin.gesturetranslator.domain.listeners.RecognizeImageListener;
-import com.ortin.gesturetranslator.domain.models.CoordinateClassification;
-import com.ortin.gesturetranslator.domain.models.HandDetected;
-import com.ortin.gesturetranslator.domain.models.Image;
-import com.ortin.gesturetranslator.domain.models.ImageClassification;
-import com.ortin.gesturetranslator.domain.usecases.DetectHandUseCase;
-import com.ortin.gesturetranslator.domain.usecases.LoadImageUseCase;
-import com.ortin.gesturetranslator.domain.usecases.RecognizeCoordinateUseCase;
-import com.ortin.gesturetranslator.domain.usecases.RecognizeImageUseCase;
-import com.ortin.gesturetranslator.domain.usecases.WordCompileUseCase;
-
-import java.util.Arrays;
-
-import javax.inject.Inject;
+import com.ortin.gesturetranslator.models.MainFrameState;
+import com.ortin.gesturetranslator.models.PredictState;
 
 import dagger.hilt.android.AndroidEntryPoint;
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Observable;
 
 @AndroidEntryPoint
-public class MainFragment extends Fragment implements LoadImagesListener, RecognizeImageListener, DetectionHandListener {
+public class MainFragment extends Fragment {
     private MainFrameBinding binding;
-
     private static final String TAG = "MainFrame";
 
     private MainViewModel viewModel;
 
-    @Inject
-    LoadImageUseCase loadImageUseCase;
-
-    @Inject
-    WordCompileUseCase wordCompileUseCase;
-
-    @Inject
-    RecognizeImageUseCase recognizeImageUseCase;
-
-    @Inject
-    DetectHandUseCase detectHandUseCase;
-
-    @Inject
-    RecognizeCoordinateUseCase recognizeCoordinateUseCase;
+    private PredictState lastPredictState;
+    private MainFrameState lastMainFrameState;
 
     private ActivityResultLauncher<String> mGetContent;
 
@@ -91,9 +59,9 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        checkPermission();
         init();
         initListeners();
-        start();
     }
 
     private void registerPermissionListener() {
@@ -101,7 +69,7 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
             @Override
             public void onActivityResult(Boolean result) {
                 if (result) {
-                    start();
+                    checkPermission();
                 } else {
                     mGetContent.launch(Manifest.permission.CAMERA);
                 }
@@ -109,8 +77,17 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
         });
     }
 
+    private void checkPermission() {
+        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            mGetContent.launch(Manifest.permission.CAMERA);
+        } else {
+            viewModel.startRealTimeImagining(getViewLifecycleOwner());
+        }
+    }
+
     private void init() {
-        wordCompileUseCase.clearState();
+        lastPredictState = null;
+        lastMainFrameState = null;
 
         binding.bottomSheetBehaviorLayout.bottomSheetBehavior.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -125,45 +102,66 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
         });
     }
 
-    private void start() {
-        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            mGetContent.launch(Manifest.permission.CAMERA);
-        } else {
-            loadImageUseCase.execute(this, this.getViewLifecycleOwner());
-            //recognizeImageUseCase.setOnRecogniseListener(this);
-            detectHandUseCase.setOnDetectionHandListener(this);
-        }
-    }
-
     private void initListeners() {
-        viewModel.getLiveData().observe(getViewLifecycleOwner(), s -> {
+        BottomSheetBehavior<LinearLayout> bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheetBehaviorLayout.bottomSheetBehavior);
 
+        viewModel.getMainLiveData().observe(getViewLifecycleOwner(), state -> {
+            if (lastMainFrameState == null) {
+                binding.controlMenu.realTimeBTN.setState(state.isRealtimeButton());
+                binding.controlMenu.flashLight.setState(state.isFlashlight());
+                bottomSheetBehavior.setState(state.getBottomSheetBehavior());
+            } else {
+                if (lastMainFrameState.isRealtimeButton() != state.isRealtimeButton())
+                    binding.controlMenu.realTimeBTN.setState(state.isRealtimeButton());
+                if (lastMainFrameState.isFlashlight() != state.isFlashlight())
+                    binding.controlMenu.flashLight.setState(state.isFlashlight());
+                if (lastMainFrameState.getBottomSheetBehavior() != state.getBottomSheetBehavior())
+                    bottomSheetBehavior.setState(state.getBottomSheetBehavior());
+            }
+
+            lastMainFrameState = state;
         });
 
-        BottomSheetBehavior<LinearLayout> bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheetBehaviorLayout.bottomSheetBehavior);
+        viewModel.getPredictLiveData().observe(getViewLifecycleOwner(), state -> {
+            if (lastPredictState == null) {
+                binding.imageWithPredict.preview.setImageBitmap(state.getImageFromCamera());
+                binding.imageWithPredict.wordPredictTV.setText(state.getPredictLetter());
+                binding.bottomSheetBehaviorLayout.recognizeTextResult.setText(state.getPredictWord());
+            } else {
+                if (lastPredictState.getImageFromCamera() != state.getImageFromCamera())
+                    binding.imageWithPredict.preview.setImageBitmap(state.getImageFromCamera());
+                if (!lastPredictState.getPredictLetter().equals(state.getPredictLetter()))
+                    binding.imageWithPredict.wordPredictTV.setText(state.getPredictLetter());
+                if (!lastPredictState.getPredictWord().equals(state.getPredictWord()))
+                    binding.bottomSheetBehaviorLayout.recognizeTextResult.setText(state.getPredictWord());
+            }
+            if (state.getCoordinateHand() != null)
+                binding.imageWithPredict.paintHandView.drawHand(state.getCoordinateHand());
+            else binding.imageWithPredict.paintHandView.clear();
+
+            lastPredictState = state;
+        });
+
         binding.controlMenu.realTimeBTN.setOnChangedStatusListener(new OnChangedStatusListener() {
             @Override
             public void onStart() {
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                wordCompileUseCase.clearState();
+                viewModel.onStartRealTimeButton();
             }
 
             @Override
             public void onStop() {
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                viewModel.onStopRealTimeButton();
             }
         });
 
         binding.controlMenu.flashLight.setOnChangedStatusListener(new OnChangedStatusListener() {
             @Override
             public void onStart() {
-                loadImageUseCase.setStatusFlashlight(true);
                 viewModel.onFlashLight();
             }
 
             @Override
             public void onStop() {
-                loadImageUseCase.setStatusFlashlight(false);
                 viewModel.offFlashLight();
             }
         });
@@ -171,17 +169,11 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                Log.e(TAG, "onStateChanged: " + newState);
                 switch (newState) {
-                    case BottomSheetBehavior.STATE_EXPANDED:
-                        if (binding.controlMenu.realTimeBTN.isPlay())
-                            binding.controlMenu.realTimeBTN.onStop();
-                        break;
-                    case BottomSheetBehavior.STATE_COLLAPSED:
-                        if (!binding.controlMenu.realTimeBTN.isPlay())
-                            binding.controlMenu.realTimeBTN.onStart();
-                        break;
-                    default:
+                    case BottomSheetBehavior.STATE_EXPANDED -> viewModel.bottomSheetExpanded();
+                    case BottomSheetBehavior.STATE_COLLAPSED -> viewModel.bottomSheetCollapsed();
+                    default -> {
+                    }
                 }
             }
 
@@ -201,64 +193,9 @@ public class MainFragment extends Fragment implements LoadImagesListener, Recogn
     }
 
     @Override
-    public void getImage(Image image) {
-        Bitmap bitmap = image.getBitmap();
-
-        binding.imageWithPredict.preview.setImageBitmap(bitmap);
-
-
-        if (binding.controlMenu.realTimeBTN.isPlay()) detectHandUseCase.execute(image);
-        //if (binding.controlMenu.realTimeBTN.isPlay()) recognizeImageUseCase.execute(image);
-    }
-
-    @SuppressLint({"DefaultLocale", "SetTextI18n"})
-    @Override
-    public void recognise(ImageClassification imageClassification) {
-        binding.imageWithPredict.wordPredictTV.setText(String.format("%s %.2f", imageClassification.getLabel(), imageClassification.getPercent()) + "%");
-    }
-
-    @SuppressLint({"DefaultLocale", "SetTextI18n", "CheckResult"})
-    @Override
-    public void detect(HandDetected handDetected) {
-        if (binding != null) { // Костыль
-            if (handDetected != null) {
-                binding.imageWithPredict.paintHandView.drawHand(handDetected.getCoordinates());
-
-                CoordinateClassification coordinateClassification = recognizeCoordinateUseCase.execute(handDetected);
-
-                if (coordinateClassification.getPercent() > 30f) {
-                    wordCompileUseCase.addLetter(coordinateClassification.getLabel());
-                }
-
-                Observable.just(String.format("%s %.2f", coordinateClassification.getLabel(), coordinateClassification.getPercent()) + "%").subscribeOn(AndroidSchedulers.mainThread()).subscribe(t -> {
-                    if (binding != null) {
-                        binding.imageWithPredict.wordPredictTV.setText(t);
-                        binding.bottomSheetBehaviorLayout.recognizeTextResult.setText(wordCompileUseCase.getWord());
-                    }
-                });
-
-                //binding.imageWithPredict.wordPredictTV.setText(String.format("%s %.2f", coordinateClassification.getLabel(), coordinateClassification.getPercent()) + "%");
-                Log.e(TAG, "coordinates: " + Arrays.toString(handDetected.getCoordinates()));
-                Log.e(TAG, "label: " + coordinateClassification.getLabel() + " percent: " + coordinateClassification.getPercent());
-            } else {
-                binding.imageWithPredict.paintHandView.clear();
-                Observable.just("").subscribeOn(AndroidSchedulers.mainThread()).subscribe(t -> {
-                    if (binding != null) binding.imageWithPredict.wordPredictTV.setText(t);
-                });
-            }
-        }
-    }
-
-    @Override
-    public void error(Exception exception) {
-        Log.e(TAG, "Error!  [!]");
-        exception.printStackTrace();
-    }
-
-    @Override
     public void onDestroyView() {
         super.onDestroyView();
-        loadImageUseCase.setStatusFlashlight(false);
+        viewModel.offFlashLight();
         binding = null;
     }
 }

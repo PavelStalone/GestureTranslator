@@ -11,7 +11,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.ortin.gesturetranslator.R;
 
 public class RealTimeButton extends LottieAnimationView implements View.OnClickListener {
-    private boolean play = true;
+    private boolean state = true;
     private OnChangedStatusListener onChangedStatusListener;
 
     public RealTimeButton(Context context) {
@@ -37,34 +37,33 @@ public class RealTimeButton extends LottieAnimationView implements View.OnClickL
         this.setOnClickListener(this);
     }
 
-    public void onStart() {
-        play = true;
-        this.setMinAndMaxProgress(0.5f, 1f);
-        this.playAnimation();
-    }
-
-    public void onStop() {
-        play = false;
-        this.setMinAndMaxProgress(0f, 0.5f);
+    private void checkState(){
+        if (state){
+            this.setMinAndMaxProgress(0.5f, 1f);
+            if (onChangedStatusListener != null) onChangedStatusListener.onStart();
+        } else {
+            this.setMinAndMaxProgress(0f, 0.5f);
+            if (onChangedStatusListener != null) onChangedStatusListener.onStop();
+        }
         this.playAnimation();
     }
 
     @Override
     public void onClick(View view) {
-        if (play) {
-            onStop();
-            if (onChangedStatusListener != null) onChangedStatusListener.onStop();
-        } else {
-            onStart();
-            if (onChangedStatusListener != null) onChangedStatusListener.onStart();
-        }
+        state = !state;
+        checkState();
     }
 
     public void setOnChangedStatusListener(OnChangedStatusListener onChangedStatusListener) {
         this.onChangedStatusListener = onChangedStatusListener;
     }
 
-    public boolean isPlay() {
-        return play;
+    public boolean getState() {
+        return state;
+    }
+
+    public void setState(boolean status){
+        state = status;
+        checkState();
     }
 }

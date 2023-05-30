@@ -11,31 +11,40 @@ import com.ortin.gesturetranslator.feature.managers.word_compiler.WordCompilerMa
 import com.ortin.gesturetranslator.feature.repository.LoadImageRepositoryImpl;
 import com.ortin.gesturetranslator.feature.repository.WordCompilerRepositoryImpl;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.android.components.ActivityComponent;
+import dagger.hilt.android.components.ViewModelComponent;
 import dagger.hilt.android.qualifiers.ActivityContext;
+import dagger.hilt.android.qualifiers.ApplicationContext;
+import dagger.hilt.components.SingletonComponent;
 
 @Module
-@InstallIn(ActivityComponent.class)
+@InstallIn(SingletonComponent.class)
 public class FeatureModule {
     @Provides
+    @Singleton
     LoadImageRepository provideLoadImageRepository(CameraManager cameraManager) {
         return new LoadImageRepositoryImpl(cameraManager);
     }
 
     @Provides
-    CameraManager provideCameraManager(@ActivityContext Context context) {
+    @Singleton
+    CameraManager provideCameraManager(@ApplicationContext Context context) {
         return new CameraManagerImpl(context);
     }
 
     @Provides
+    @Singleton
     WordCompilerRepository provideWordCompilerRepository(WordCompilerManager wordCompilerManager) {
         return new WordCompilerRepositoryImpl(wordCompilerManager);
     }
 
     @Provides
+    @Singleton
     WordCompilerManager provideWordCompilerManager() {
         return new WordCompilerManagerImpl();
     }

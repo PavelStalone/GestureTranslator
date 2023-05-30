@@ -1,50 +1,151 @@
 package com.ortin.gesturetranslator.presentation;
 
+import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.util.Log;
+
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.ortin.gesturetranslator.domain.listeners.DetectionHandListener;
 import com.ortin.gesturetranslator.domain.listeners.LoadImagesListener;
-import com.ortin.gesturetranslator.domain.listeners.RecognizeImageListener;
+import com.ortin.gesturetranslator.domain.models.CoordinateClassification;
+import com.ortin.gesturetranslator.domain.models.HandDetected;
+import com.ortin.gesturetranslator.domain.models.Image;
 import com.ortin.gesturetranslator.domain.usecases.DetectHandUseCase;
 import com.ortin.gesturetranslator.domain.usecases.LoadImageUseCase;
 import com.ortin.gesturetranslator.domain.usecases.RecognizeCoordinateUseCase;
-import com.ortin.gesturetranslator.domain.usecases.RecognizeImageUseCase;
 import com.ortin.gesturetranslator.domain.usecases.WordCompileUseCase;
+import com.ortin.gesturetranslator.models.MainFrameState;
+import com.ortin.gesturetranslator.models.PredictState;
 
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
 
 @HiltViewModel
-public class MainViewModel extends ViewModel {
+public class MainViewModel extends ViewModel implements LoadImagesListener, DetectionHandListener {
+    private static final String TAG = "MainViewModel";
 
     private LoadImageUseCase loadImageUseCase;
-    private RecognizeImageUseCase recognizeImageUseCase;
     private WordCompileUseCase wordCompileUseCase;
     private DetectHandUseCase detectHandUseCase;
     private RecognizeCoordinateUseCase recognizeCoordinateUseCase;
 
-    private final MutableLiveData<String> liveData = new MutableLiveData<>();
+    private final MutableLiveData<MainFrameState> mainLiveData = new MutableLiveData<>();
+    private final MutableLiveData<PredictState> predictLiveData = new MutableLiveData<>();
 
     @Inject
-    public MainViewModel(LoadImageUseCase loadImageUseCase, RecognizeImageUseCase recognizeImageUseCase, WordCompileUseCase wordCompileUseCase, DetectHandUseCase detectHandUseCase, RecognizeCoordinateUseCase recognizeCoordinateUseCase) {
+    public MainViewModel(LoadImageUseCase loadImageUseCase, RecognizeCoordinateUseCase recognizeCoordinateUseCase, WordCompileUseCase wordCompileUseCase, DetectHandUseCase detectHandUseCase) {
         this.loadImageUseCase = loadImageUseCase;
-        this.recognizeImageUseCase = recognizeImageUseCase;
+        this.recognizeCoordinateUseCase = recognizeCoordinateUseCase;
         this.wordCompileUseCase = wordCompileUseCase;
         this.detectHandUseCase = detectHandUseCase;
-        this.recognizeCoordinateUseCase = recognizeCoordinateUseCase;
+
+        init();
     }
 
-    public LiveData<String> getLiveData(){
-        return liveData;
+    private void init() {
+        mainLiveData.setValue(new MainFrameState());
+        predictLiveData.setValue(new PredictState());
+        wordCompileUseCase.clearState();
     }
 
-    public void onFlashLight(){
-
-    }
-    public void offFlashLight(){
-
+    public void startRealTimeImagining(LifecycleOwner lifecycleOwner) {
+        loadImageUseCase.execute(this, lifecycleOwner);
+        detectHandUseCase.setOnDetectionHandListener(this);
     }
 
+    @Override
+    public void getImage(Image image) {
+        Bitmap bitmap = image.getBitmap();
+
+        PredictState predictState = predictLiveData.getValue();
+        predictLiveData.setValue(new PredictState(bitmap, predictState.getPredictWord(), predictState.getPredictLetter(), predictState.getCoordinateHand()));
+
+        if (mainLiveData.getValue().isRealtimeButton()) detectHandUseCase.execute(image);
+    }
+
+    @SuppressLint({"DefaultLocale", "SetTextI18n", "CheckResult"})
+    @Override
+    public void detect(HandDetected handDetected) {
+        if (handDetected != null) {
+            CoordinateClassification coordinateClassification = recognizeCoordinateUseCase.execute(handDetected);
+
+            if (coordinateClassification.getPercent() > 30f) {
+                wordCompileUseCase.addLetter(coordinateClassification.getLabel());
+            }
+
+            String predictLetter = String.format("%s %.2f", coordinateClassification.getLabel(), coordinateClassification.getPercent()) + "%";
+
+            PredictState predictState = predictLiveData.getValue();
+            Observable.just(predictState).subscribeOn(AndroidSchedulers.mainThread()).subscribe(t -> {
+                predictLiveData.setValue(new PredictState(t.getImageFromCamera(), wordCompileUseCase.getWord(), predictLetter, handDetected.getCoordinates()));
+            });
+        } else {
+            PredictState predictState = predictLiveData.getValue();
+            Observable.just(predictState).subscribeOn(AndroidSchedulers.mainThread()).subscribe(t -> {
+                predictLiveData.setValue(new PredictState(t.getImageFromCamera(), t.getPredictWord(), "", null));
+            });
+
+        }
+    }
+
+    @Override
+    public void error(Exception exception) {
+        Log.e(TAG, "Error!  [!]");
+        exception.printStackTrace();
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        offFlashLight();
+        Log.e(TAG, "cleared [!]");
+    }
+
+    public void onFlashLight() {
+        loadImageUseCase.setStatusFlashlight(true);
+        MainFrameState mainFrameState = mainLiveData.getValue();
+        mainLiveData.setValue(new MainFrameState(true, mainFrameState.isRealtimeButton(), mainFrameState.getBottomSheetBehavior()));
+    }
+
+    public void offFlashLight() {
+        loadImageUseCase.setStatusFlashlight(false);
+        MainFrameState mainFrameState = mainLiveData.getValue();
+        mainLiveData.setValue(new MainFrameState(false, mainFrameState.isRealtimeButton(), mainFrameState.getBottomSheetBehavior()));
+    }
+
+    public void onStartRealTimeButton() {
+        MainFrameState mainFrameState = mainLiveData.getValue();
+        mainLiveData.setValue(new MainFrameState(mainFrameState.isFlashlight(), true, BottomSheetBehavior.STATE_COLLAPSED));
+        PredictState predictState = predictLiveData.getValue();
+        predictLiveData.setValue(new PredictState(predictState.getImageFromCamera(), "", predictState.getPredictLetter(), predictState.getCoordinateHand()));
+    }
+
+    public void onStopRealTimeButton() {
+        MainFrameState mainFrameState = mainLiveData.getValue();
+        mainLiveData.setValue(new MainFrameState(mainFrameState.isFlashlight(), false, BottomSheetBehavior.STATE_EXPANDED));
+    }
+
+    public void bottomSheetCollapsed() {
+        onStartRealTimeButton();
+    }
+
+    public void bottomSheetExpanded() {
+        onStopRealTimeButton();
+    }
+
+    public LiveData<MainFrameState> getMainLiveData() {
+        return mainLiveData;
+    }
+
+    public LiveData<PredictState> getPredictLiveData() {
+        return predictLiveData;
+    }
 }
