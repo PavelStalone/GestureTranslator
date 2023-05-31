@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/backgroundColor"
+    android:orientation="vertical"
+    tools:context=".presentation.ImageFromGalleryFragment">
+
+    <ImageView
+        android:id="@+id/preview_from_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top|center_horizontal"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop" />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="bottom">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sheet_behavior_background"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/Widget.GestureTranslator.SecondaryText"
+                android:gravity="center"
+                android:text="@string/bottom_sheet_header"/>
+            
+            <TextView
+                android:id="@+id/letter_from_gallery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/accentColor"
+                android:textSize="40sp"
+                android:text="А"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="15dp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/separatorColor"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/secondaryColor"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/gallery_button"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginHorizontal="26dp"
+                android:layout_marginVertical="15dp"
+                android:maxWidth="360dp"
+                android:background="@drawable/url_button"
+                android:text="@string/image_from_gallery_repeat_button"
+                android:textColor="?attr/accentColor" />
+        </LinearLayout>
+
+    </LinearLayout>
+        
+
+</FrameLayout>

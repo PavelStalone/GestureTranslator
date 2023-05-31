@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
     <group
-        android:id="@+id/menu_top">
+        android:id="@+id/menu_top"
+        android:checkableBehavior="single">
     <item
         android:id="@+id/mainFragment"
         android:icon="@drawable/home_btn"

@@ -52,5 +52,7 @@
     <string name="settings_layout_switch_speed">Скорость распознавания</string>
     <string name="settings_layout_switch_speed_description">В выпадающем меню Вы можете выбрать, с какой скоростью будут считываться жесты с камеры</string>
 
+    <!-- Буква из галереи -->
+    <string name="image_from_gallery_repeat_button">Распознать еще</string>
 
 </resources>
