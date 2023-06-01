@@ -4,21 +4,24 @@ import com.ortin.gesturetranslator.domain.repository.HandDetectionRepository;
 import com.ortin.gesturetranslator.domain.repository.LoadImageRepository;
 import com.ortin.gesturetranslator.domain.repository.RecognizeCoordinateRepository;
 import com.ortin.gesturetranslator.domain.repository.RecognizeImageRepository;
+import com.ortin.gesturetranslator.domain.repository.SettingsRepository;
 import com.ortin.gesturetranslator.domain.repository.WordCompilerRepository;
 import com.ortin.gesturetranslator.domain.usecases.DetectHandUseCase;
 import com.ortin.gesturetranslator.domain.usecases.LoadImageUseCase;
 import com.ortin.gesturetranslator.domain.usecases.RecognizeCoordinateUseCase;
 import com.ortin.gesturetranslator.domain.usecases.RecognizeImageUseCase;
+import com.ortin.gesturetranslator.domain.usecases.SaveSettingsUseCase;
 import com.ortin.gesturetranslator.domain.usecases.WordCompileUseCase;
 
 import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
+import dagger.hilt.android.components.ActivityComponent;
 import dagger.hilt.android.components.FragmentComponent;
 import dagger.hilt.android.components.ViewModelComponent;
 
 @Module
-@InstallIn(ViewModelComponent.class)
+@InstallIn({ViewModelComponent.class, FragmentComponent.class, ActivityComponent.class})
 public class DomainModule {
 
     @Provides
@@ -44,5 +47,10 @@ public class DomainModule {
     @Provides
     RecognizeCoordinateUseCase provideRecognizeCoordinateUseCase(RecognizeCoordinateRepository recognizeCoordinateRepository) {
         return new RecognizeCoordinateUseCase(recognizeCoordinateRepository);
+    }
+
+    @Provides
+    SaveSettingsUseCase provideSaveSettingsUseCase(SettingsRepository settingsRepository){
+        return new SaveSettingsUseCase(settingsRepository);
     }
 }

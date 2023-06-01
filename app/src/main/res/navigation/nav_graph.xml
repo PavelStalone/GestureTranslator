@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/logotypeFragment">
 
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.ortin.gesturetranslator.presentation.MainFragment"
-        android:label="MainFragment" >
+        android:label="MainFragment"
+        tools:layout="@layout/main_frame">
         <action
             android:id="@+id/action_mainFragment_to_informationFragment"
             app:destination="@id/informationFragment" />
@@ -23,16 +24,27 @@
     <fragment
         android:id="@+id/informationFragment"
         android:name="com.ortin.gesturetranslator.presentation.InformationFragment"
-        android:label="InformationFragment" />
+        android:label="InformationFragment"
+        tools:layout="@layout/information_fragment" />
 
     <fragment
         android:id="@+id/gestureListFragment"
         android:name="com.ortin.gesturetranslator.presentation.GestureListFragment"
-        android:label="GestureListFragment" />
+        android:label="GestureListFragment"
+        tools:layout="@layout/gesture_list_layout" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.ortin.gesturetranslator.presentation.SettingsFragment"
         android:label="settings_layout"
         tools:layout="@layout/settings_layout" />
+    <fragment
+        android:id="@+id/logotypeFragment"
+        android:name="com.ortin.gesturetranslator.presentation.LogotypeFragment"
+        android:label="LogotypeFragment"
+        tools:layout="@layout/fragment_logotype">
+        <action
+            android:id="@+id/action_logotypeFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 
 </navigation>
