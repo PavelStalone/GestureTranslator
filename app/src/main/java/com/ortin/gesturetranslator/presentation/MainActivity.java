@@ -69,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
         binding.topBar.menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drawerLayout.open();
+                if (drawerLayout.isOpen()) drawerLayout.close();
+                else drawerLayout.open();
             }
         });
 

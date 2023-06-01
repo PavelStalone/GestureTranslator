@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,7 +42,13 @@ public class SettingsFragment extends Fragment {
     }
 
     private void init() {
-        binding.switchCompatTheme.setChecked(saveSettingsUseCase.getTheme());
+        if (saveSettingsUseCase.getTheme()){
+            binding.switchCompatTheme.setChecked(true);
+            binding.themeSettingsInfo.setText(R.string.settings_layout_switch_theme_to_day);
+        } else {
+            binding.switchCompatTheme.setChecked(false);
+            binding.themeSettingsInfo.setText(R.string.settings_layout_switch_theme_to_night);
+        }
         binding.switchCompatGpu.setChecked(saveSettingsUseCase.getGpu());
         binding.switchCompatPercents.setChecked(saveSettingsUseCase.getPercent());
 
@@ -56,8 +61,13 @@ public class SettingsFragment extends Fragment {
 
     private void initListeners() {
         binding.switchCompatTheme.setOnCheckedChangeListener(((compoundButton, b) -> {
-            if (b) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            if (b) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                binding.themeSettingsInfo.setText(R.string.settings_layout_switch_theme_to_day);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                binding.themeSettingsInfo.setText(R.string.settings_layout_switch_theme_to_night);
+            }
 
             saveSettingsUseCase.setTheme(b);
         }));

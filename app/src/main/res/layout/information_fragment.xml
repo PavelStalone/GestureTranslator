@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
+            android:contentDescription="@null"
             android:src="@drawable/hand_logo_ortin" />
 
         <TextView
@@ -47,7 +48,6 @@
             android:background="@drawable/url_button"
             android:clickable="true"
             android:linksClickable="true"
-            android:onClick="goToWebApplication"
             android:text="@string/information_fragment_web_app_button"
             android:textColor="?attr/accentColor" />
 
@@ -60,7 +60,6 @@
             android:background="@drawable/url_button"
             android:clickable="true"
             android:linksClickable="true"
-            android:onClick="goToAppGithub"
             android:text="@string/information_fragment_app_github_button"
             android:textColor="?attr/accentColor" />
 
@@ -73,10 +72,6 @@
             android:clickable="true"
             android:text="@string/information_fragment_donate_button"
             android:textColor="?attr/accentColor" />
-        <!--            Не знаю нужна ли тут ссылка-->
-        <!--            android:autoLink="web"-->
-        <!--            android:linksClickable="true"-->
-        <!--            android:onClick="goToAppGithub"-->
 
         <TextView
             android:layout_width="match_parent"

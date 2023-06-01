@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".presentation.MainActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <include
+        android:id="@+id/topBar"
+        layout="@layout/top_bar" />
 
-        <include
-            android:id="@+id/topBar"
-            layout="@layout/top_bar" />
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"
@@ -27,25 +27,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navGraph="@navigation/nav_graph" />
-    </LinearLayout>
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/menuNavigationView"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:itemIconTint="@color/menu_state_list"
-        app:itemTextColor="@color/menu_state_list"
-        app:menu="@menu/left_menu">
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/menuNavigationView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:itemIconTint="@color/menu_state_list"
+            app:itemTextColor="@color/menu_state_list"
+            app:menu="@menu/left_menu">
 
-        <include
-            layout="@layout/bottom_info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|start"
-            android:layout_marginStart="20dp"
-            android:layout_marginBottom="20dp" />
+            <include
+                layout="@layout/bottom_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|start"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="20dp" />
 
-    </com.google.android.material.navigation.NavigationView>
+        </com.google.android.material.navigation.NavigationView>
+    </androidx.drawerlayout.widget.DrawerLayout>
 
-</androidx.drawerlayout.widget.DrawerLayout>
+</LinearLayout>
