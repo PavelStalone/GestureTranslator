@@ -46,7 +46,6 @@
             android:layout_marginTop="17dp"
             android:autoLink="web"
             android:background="@drawable/url_button"
-            android:clickable="true"
             android:linksClickable="true"
             android:text="@string/information_fragment_web_app_button"
             android:textColor="?attr/accentColor" />
@@ -58,7 +57,6 @@
             android:layout_marginTop="17dp"
             android:autoLink="web"
             android:background="@drawable/url_button"
-            android:clickable="true"
             android:linksClickable="true"
             android:text="@string/information_fragment_app_github_button"
             android:textColor="?attr/accentColor" />
@@ -69,7 +67,6 @@
             android:layout_height="45dp"
             android:layout_marginTop="17dp"
             android:background="@drawable/url_button"
-            android:clickable="true"
             android:text="@string/information_fragment_donate_button"
             android:textColor="?attr/accentColor" />
 
