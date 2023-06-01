@@ -2,7 +2,11 @@ package com.ortin.gesturetranslator.di;
 
 import android.content.Context;
 
+import com.ortin.gesturetranslator.data.repository.SettingsRepositoryImpl;
+import com.ortin.gesturetranslator.data.storage.SettingsStorage;
+import com.ortin.gesturetranslator.data.storage.SharedPrefSettingsStorage;
 import com.ortin.gesturetranslator.domain.repository.LoadImageRepository;
+import com.ortin.gesturetranslator.domain.repository.SettingsRepository;
 import com.ortin.gesturetranslator.domain.repository.WordCompilerRepository;
 import com.ortin.gesturetranslator.feature.managers.camera.CameraManager;
 import com.ortin.gesturetranslator.feature.managers.camera.CameraManagerImpl;
@@ -16,36 +20,21 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
-import dagger.hilt.android.components.ActivityComponent;
-import dagger.hilt.android.components.ViewModelComponent;
-import dagger.hilt.android.qualifiers.ActivityContext;
 import dagger.hilt.android.qualifiers.ApplicationContext;
 import dagger.hilt.components.SingletonComponent;
 
 @Module
 @InstallIn(SingletonComponent.class)
-public class FeatureModule {
+public class DataModule {
     @Provides
     @Singleton
-    LoadImageRepository provideLoadImageRepository(CameraManager cameraManager) {
-        return new LoadImageRepositoryImpl(cameraManager);
+    SettingsRepository provideSettingsRepository(SettingsStorage settingsStorage) {
+        return new SettingsRepositoryImpl(settingsStorage);
     }
 
     @Provides
     @Singleton
-    CameraManager provideCameraManager(@ApplicationContext Context context) {
-        return new CameraManagerImpl(context);
-    }
-
-    @Provides
-    @Singleton
-    WordCompilerRepository provideWordCompilerRepository(WordCompilerManager wordCompilerManager) {
-        return new WordCompilerRepositoryImpl(wordCompilerManager);
-    }
-
-    @Provides
-    @Singleton
-    WordCompilerManager provideWordCompilerManager() {
-        return new WordCompilerManagerImpl();
+    SettingsStorage provideSettingsStorage(@ApplicationContext Context context) {
+        return new SharedPrefSettingsStorage(context);
     }
 }
