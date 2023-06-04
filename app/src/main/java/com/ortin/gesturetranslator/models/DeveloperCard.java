@@ -1,4 +1,4 @@
-package com.ortin.models;
+package com.ortin.gesturetranslator.models;
 
 public class DeveloperCard {
     private final String name;

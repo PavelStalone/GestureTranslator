@@ -3,6 +3,7 @@ package com.ortin.gesturetranslator.presentation;
 import android.animation.Animator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,9 @@ public class LogotypeFragment extends Fragment {
 
             @Override
             public void onAnimationEnd(@NonNull Animator animator) {
-                Navigation.findNavController(binding.getRoot()).navigate(R.id.action_logotypeFragment_to_mainFragment);
+                Log.e("Logotype", "onBackPressed: " + Navigation.findNavController(binding.getRoot()).getBackQueue().size());
+                Navigation.findNavController(binding.getRoot()).getBackQueue().clear();
+                Navigation.findNavController(binding.getRoot()).navigate(R.id.mainFragment);
             }
 
             @Override

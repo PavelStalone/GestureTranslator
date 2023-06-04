@@ -1,9 +1,13 @@
 package com.ortin.gesturetranslator.presentation;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.Manifest;
-import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.ortin.gesturetranslator.components.OnChangedStatusListener;
@@ -40,6 +45,7 @@ public class MainFragment extends Fragment {
     private MainFrameState lastMainFrameState;
 
     private ActivityResultLauncher<String> mGetContent;
+    private ActivityResultLauncher<Intent> pickVisualLauncher;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,6 +66,7 @@ public class MainFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         checkPermission();
+        registerActivityForPickImage();
         init();
         initListeners();
     }
@@ -73,6 +80,19 @@ public class MainFragment extends Fragment {
                 } else {
                     mGetContent.launch(Manifest.permission.CAMERA);
                 }
+            }
+        });
+    }
+
+    private void registerActivityForPickImage() {
+        pickVisualLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                Uri uri = result.getData().getData();
+                Log.d("PhotoPicker", "Selected URI: " + uri);
+
+                Navigation.findNavController(binding.getRoot()).navigate(MainFragmentDirections.actionToImageFromGalleryFragment(uri));
+            } else {
+                Log.d("PhotoPicker", "No media selected");
             }
         });
     }
@@ -188,6 +208,8 @@ public class MainFragment extends Fragment {
             public void onClick(View v) {
                 binding.controlMenu.gallery.setProgress(0);
                 binding.controlMenu.gallery.playAnimation();
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                pickVisualLauncher.launch(intent);
             }
         });
     }

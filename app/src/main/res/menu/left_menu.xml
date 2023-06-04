@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
     <group
-        android:id="@+id/menu_top"
-        android:checkableBehavior="single">
+        android:id="@+id/menu_top">
     <item
         android:id="@+id/mainFragment"
         android:icon="@drawable/home_btn"
@@ -26,6 +25,8 @@
 
 <!--Добавить  разделитель как то надо, если он нужен(в Figma есть)-->
 
+    <group
+        android:id="@+id/info">
     <item
         android:id="@+id/informationFragment"
         android:icon="@drawable/info"
@@ -37,6 +38,7 @@
         android:icon="@drawable/bug"
         android:iconTint="?attr/textColor"
         android:title="@string/left_menu_bug_reports" />
+    </group>
 
 <!--Сюда добавить версию приложения вниуз экрана-->
 </menu>
