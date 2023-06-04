@@ -4,31 +4,38 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:paddingVertical="5dp"
     android:theme="@style/Widget.GestureTranslator.ControlMenu">
+
+    <View
+        android:id="@+id/controlMenu_separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/separatorColor"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <com.ortin.gesturetranslator.components.FlashLightButton
         android:id="@+id/flashLight"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
         android:gravity="center|center_horizontal"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:lottie_colorFilter="?attr/accentColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/realTimeBTN"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="@id/controlMenu_separator"/>
 
 
     <com.ortin.gesturetranslator.components.RealTimeButton
         android:id="@+id/realTimeBTN"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginVertical="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/controlMenu_separator"
         app:lottie_autoPlay="false"
         app:lottie_colorFilter="?attr/secondaryColor"
         app:lottie_loop="false"
@@ -38,12 +45,13 @@
         android:id="@+id/galleryLL"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
         android:gravity="center|center_horizontal"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/realTimeBTN"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="@id/controlMenu_separator">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/gallery"
