@@ -1,9 +1,13 @@
 package com.ortin.gesturetranslator.presentation;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +24,11 @@ import java.util.List;
 public class InformationFragment extends Fragment {
 
     InformationFragmentBinding binding;
+    private final Context context;
+
+    public InformationFragment(Context context) {
+        this.context = context;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,21 +45,48 @@ public class InformationFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        View.OnClickListener clickListener = viewForUrl -> {
+            String url = "https://github.com/PavelStalone/GestureTranslator";
+
+            if (viewForUrl == binding.appGithubButton) {
+                url = "https://github.com/PavelStalone/GestureTranslator";
+            } else if (viewForUrl == binding.webAppButton) {
+                url = "https://gesture-recognition-web-6jdc-git-master-poroshinga.vercel.app/";
+            }
+
+            goToUrl(url, context);
+        };
+        binding.appGithubButton.setOnClickListener(clickListener);
+        binding.webAppButton.setOnClickListener(clickListener);
         init();
     }
 
     private void init() {
         List<DeveloperCard> cards = new ArrayList<>();
-        cards.add(new DeveloperCard("PavelStalone", "Team lead, Android developer and ML engineer", R.drawable.pavel_stalone, "https://github.com/PavelStalone", ""));
-        cards.add(new DeveloperCard("Glebix", "ML engineer, Android and Web developer", R.drawable.glebix, "https://github.com/PoroshinGA", ""));
-        cards.add(new DeveloperCard("qondeeter", "UI/UX - designer and data engineer", R.drawable.qondeeter, "https://github.com/kond1ter", ""));
-        cards.add(new DeveloperCard("Sova", "UI/UX - writer and data engineer", R.drawable.sova, "https://github.com/N1kySSS", ""));
-        cards.add(new DeveloperCard("Glazeezalg", "Analyst", R.drawable.glazeezalg, "https://github.com/glazeezalg", ""));
-        cards.add(new DeveloperCard("Sever", "Teach lead and mentor", R.drawable.sever, "https://github.com/jacksever", ""));
+        cards.add(new DeveloperCard("PavelStalone", "Team lead, Android developer and ML engineer", R.drawable.pavel_stalone, "https://github.com/PavelStalone", "https://vk.com/pasha_just_pasha"));
+        cards.add(new DeveloperCard("Glebix", "ML engineer, Android and Web developer", R.drawable.glebix, "https://github.com/PoroshinGA", "https://t.me/Glebsobaka"));
+        cards.add(new DeveloperCard("qondeeter", "UI/UX - designer and data engineer", R.drawable.qondeeter, "https://github.com/kond1ter", "https://t.me/qondeeter"));
+        cards.add(new DeveloperCard("Sova", "UI/UX - writer and data engineer", R.drawable.sova, "https://github.com/N1kySSS", "https://vk.com/sova___666"));
+        cards.add(new DeveloperCard("Glazeezalg", "Analyst", R.drawable.glazeezalg, "https://github.com/glazeezalg", "https://t.me/Dmitriy_kkk"));
+        cards.add(new DeveloperCard("Sever", "Teach lead and mentor", R.drawable.sever, "https://github.com/jacksever", "https://t.me/jasever"));
 
         CardsAdapter adapter = new CardsAdapter(cards, requireContext());
         binding.developCardsRV.setAdapter(adapter);
         binding.developCardsRV.addItemDecoration(new SpacesItemDecoration(75));
+    }
+
+
+    private boolean goToUrl(@NonNull String url, Context context) {
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            if (intent.resolveActivity(context.getPackageManager()) != null) {
+                context.startActivity(intent);
+                return true;
+            }
+        } catch (Exception ignore) {
+            Toast.makeText(context, "Error attempting launchURL", Toast.LENGTH_SHORT).show();
+        }
+        return false;
     }
 
     @Override
