@@ -23,7 +23,7 @@
     <string name="bottom_sheet_header">Распознанный текст</string>
 
     <!-- Нижняя панель управления -->
-    <string name="control_menu_galery">Галлерея</string>
+    <string name="control_menu_galery">Галерея</string>
     <string name="control_menu_flashlight">Фонарик</string>
 
     <!-- Список жестов -->
