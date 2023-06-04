@@ -64,9 +64,12 @@ public class ImageFromGalleryFragment extends Fragment implements DetectionHandL
         initListeners();
     }
 
+    @SuppressLint("IntentReset")
     private void initListeners() {
         binding.galleryButton.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            intent.setType("image/*");
+
             pickVisualLauncher.launch(intent);
         });
     }
