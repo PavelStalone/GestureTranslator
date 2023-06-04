@@ -12,7 +12,6 @@
         android:layout_height="500dp"
         android:layout_width="match_parent"
         layout="@layout/image_with_predict"
-        android:layout_marginBottom="20dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +30,7 @@
             android:id="@+id/bottomSheetBehaviorLayout"
             layout="@layout/bottom_sheet_behavior"
             android:layout_width="match_parent"
-            android:layout_height="948dp"
+            android:layout_height="match_parent"
             app:behavior_peekHeight="250dp"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ortin.gesturetranslator.R;
 import com.ortin.gesturetranslator.databinding.InformationFragmentBinding;
@@ -23,12 +25,7 @@ import java.util.List;
 
 public class InformationFragment extends Fragment {
 
-    InformationFragmentBinding binding;
-    private final Context context;
-
-    public InformationFragment(Context context) {
-        this.context = context;
-    }
+    private InformationFragmentBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,20 +42,8 @@ public class InformationFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        View.OnClickListener clickListener = viewForUrl -> {
-            String url = "https://github.com/PavelStalone/GestureTranslator";
-
-            if (viewForUrl == binding.appGithubButton) {
-                url = "https://github.com/PavelStalone/GestureTranslator";
-            } else if (viewForUrl == binding.webAppButton) {
-                url = "https://gesture-recognition-web-6jdc-git-master-poroshinga.vercel.app/";
-            }
-
-            goToUrl(url, context);
-        };
-        binding.appGithubButton.setOnClickListener(clickListener);
-        binding.webAppButton.setOnClickListener(clickListener);
         init();
+        initListeners();
     }
 
     private void init() {
@@ -70,11 +55,33 @@ public class InformationFragment extends Fragment {
         cards.add(new DeveloperCard("Glazeezalg", "Analyst", R.drawable.glazeezalg, "https://github.com/glazeezalg", "https://t.me/Dmitriy_kkk"));
         cards.add(new DeveloperCard("Sever", "Teach lead and mentor", R.drawable.sever, "https://github.com/jacksever", "https://t.me/jasever"));
 
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext()){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        binding.developCardsRV.setLayoutManager(linearLayoutManager);
         CardsAdapter adapter = new CardsAdapter(cards, requireContext());
         binding.developCardsRV.setAdapter(adapter);
         binding.developCardsRV.addItemDecoration(new SpacesItemDecoration(75));
     }
 
+    private void initListeners() {
+        View.OnClickListener clickListener = viewForUrl -> {
+            String url = "https://github.com/PavelStalone/GestureTranslator";
+
+            if (viewForUrl == binding.appGithubButton) {
+                url = "https://github.com/PavelStalone/GestureTranslator";
+            } else if (viewForUrl == binding.webAppButton) {
+                url = "https://gesture-recognition-web-6jdc-git-master-poroshinga.vercel.app/";
+            }
+
+            goToUrl(url, requireContext());
+        };
+        binding.appGithubButton.setOnClickListener(clickListener);
+        binding.webAppButton.setOnClickListener(clickListener);
+    }
 
     private boolean goToUrl(@NonNull String url, Context context) {
         try {

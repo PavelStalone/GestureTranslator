@@ -21,9 +21,10 @@
 
     <!-- Выдвижная панель -->
     <string name="bottom_sheet_header">Распознанный текст</string>
+    <string name="bottom_sheet_header_gallery">Распознанная буква</string>
 
     <!-- Нижняя панель управления -->
-    <string name="control_menu_galery">Галерея</string>
+    <string name="control_menu_gallery">Галерея</string>
     <string name="control_menu_flashlight">Фонарик</string>
 
     <!-- Список жестов -->

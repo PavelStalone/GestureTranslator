@@ -119,9 +119,17 @@ public class ImageFromGalleryFragment extends Fragment implements DetectionHandL
 
             String predictLetter = String.format("%s %.2f", coordinateClassification.getLabel(), coordinateClassification.getPercent()) + "%";
             Log.e("Gallery", "label: " + coordinateClassification.getLabel());
-            Observable.just(predictLetter).subscribeOn(AndroidSchedulers.mainThread()).subscribe(t -> binding.letterFromGallery.setText(t));
+            Observable.just(predictLetter).subscribeOn(AndroidSchedulers.mainThread()).subscribe(t -> {
+                if (binding != null) {
+                    binding.letterFromGallery.setText(t);
+                }
+            });
         } else {
-            Observable.just("None").subscribeOn(AndroidSchedulers.mainThread()).subscribe(t -> binding.letterFromGallery.setText(t));
+            Observable.just("None").subscribeOn(AndroidSchedulers.mainThread()).subscribe(t -> {
+                if (binding != null) {
+                    binding.letterFromGallery.setText(t);
+                }
+            });
         }
     }
 

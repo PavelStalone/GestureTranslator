@@ -62,7 +62,7 @@
             android:gravity="center_horizontal"
             android:textColor="?attr/textColor"
             android:textSize="12sp"
-            android:text="@string/control_menu_galery"/>
+            android:text="@string/control_menu_gallery"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@ package com.ortin.gesturetranslator.components;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -32,13 +33,14 @@ public class RealTimeButton extends LottieAnimationView implements View.OnClickL
         this.setBackground(getContext().getDrawable(R.drawable.background_realtime));
         this.setAnimation(R.raw.play_stop);
         this.setRepeatCount(0);
-        this.setProgress(0f);
+        this.setMinAndMaxProgress(0f,0.1f);
+        this.playAnimation();
         this.setSpeed(2.3f);
         this.setOnClickListener(this);
     }
 
-    private void checkState(){
-        if (state){
+    private void checkState() {
+        if (state) {
             this.setMinAndMaxProgress(0.5f, 1f);
             if (onChangedStatusListener != null) onChangedStatusListener.onStart();
         } else {
@@ -62,7 +64,7 @@ public class RealTimeButton extends LottieAnimationView implements View.OnClickL
         return state;
     }
 
-    public void setState(boolean status){
+    public void setState(boolean status) {
         state = status;
         checkState();
     }

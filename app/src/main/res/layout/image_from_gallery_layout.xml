@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:theme="@style/Widget.GestureTranslator.SecondaryText"
                 android:gravity="center"
-                android:text="@string/bottom_sheet_header"/>
+                android:text="@string/bottom_sheet_header_gallery"/>
             
             <TextView
                 android:id="@+id/letter_from_gallery"
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="?attr/accentColor"
                 android:textSize="40sp"
-                android:text="А"
+                tools:text="А"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="15dp"/>
         </LinearLayout>
