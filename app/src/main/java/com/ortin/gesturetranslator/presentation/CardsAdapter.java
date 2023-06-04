@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ortin.gesturetranslator.databinding.DevelopCardItemBinding;
-import com.ortin.models.DeveloperCard;
+import com.ortin.gesturetranslator.models.DeveloperCard;
 
 import java.util.List;
 

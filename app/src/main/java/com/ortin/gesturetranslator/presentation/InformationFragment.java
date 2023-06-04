@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.ortin.gesturetranslator.R;
 import com.ortin.gesturetranslator.databinding.InformationFragmentBinding;
 import com.ortin.gesturetranslator.decorators.SpacesItemDecoration;
-import com.ortin.models.DeveloperCard;
+import com.ortin.gesturetranslator.models.DeveloperCard;
 
 import java.util.ArrayList;
 import java.util.List;

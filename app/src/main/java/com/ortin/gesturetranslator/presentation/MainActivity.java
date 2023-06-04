@@ -3,7 +3,9 @@ package com.ortin.gesturetranslator.presentation;
 import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = binding.drawerLayoutId;
         navigationView = binding.menuNavigationView;
 
-        NavigationUI.setupWithNavController(navigationView, navController);
+        //NavigationUI.setupWithNavController(navigationView, navController);
         hideControl();
     }
 
@@ -83,6 +85,38 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        navigationView.setNavigationItemSelectedListener(item -> {
+            if (item.getItemId() != navController.getCurrentDestination().getId()) {
+                switch (item.getItemId()) {
+                    case R.id.mainFragment -> navController.navigate(R.id.mainFragment);
+                    case R.id.gestureListFragment -> {
+                        if (navController.getCurrentDestination().getId() == R.id.mainFragment) {
+                            navController.navigate(R.id.action_mainFragment_to_gestureListFragment);
+                        } else {
+                            navController.navigate(R.id.gestureListFragment);
+                        }
+                    }
+                    case R.id.settingsFragment -> {
+                        if (navController.getCurrentDestination().getId() == R.id.mainFragment) {
+                            navController.navigate(R.id.action_mainFragment_to_settingsFragment);
+                        } else {
+                            navController.navigate(R.id.settingsFragment);
+                        }
+                    }
+                    case R.id.informationFragment -> {
+                        if (navController.getCurrentDestination().getId() == R.id.mainFragment) {
+                            navController.navigate(R.id.action_mainFragment_to_informationFragment);
+                        } else {
+                            navController.navigate(R.id.informationFragment);
+                        }
+                    }
+                }
+                drawerLayout.close();
+                return true;
+            }
+            return false;
+        });
     }
 
     private void hideControl() {
@@ -97,7 +131,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (navController.getCurrentDestination().getId() == R.id.mainFragment) {
+        Log.e("MainActivity", "onBackPressed: " + navController.getBackQueue().size());
+        if (navController.getBackQueue().size() <= 2) {
             finish();
         } else {
             super.onBackPressed();

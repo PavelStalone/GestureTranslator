@@ -15,10 +15,17 @@
             app:destination="@id/informationFragment" />
         <action
             android:id="@+id/action_mainFragment_to_gestureListFragment"
-            app:destination="@id/gestureListFragment" />
+            app:destination="@id/gestureListFragment"
+            app:launchSingleTop="true"/>
         <action
             android:id="@+id/action_mainFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/settingsFragment"
+            app:launchSingleTop="true"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/actionToImageFromGalleryFragment"
+            app:destination="@id/imageFromGalleryFragment" />
     </fragment>
 
     <fragment
@@ -35,7 +42,7 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.ortin.gesturetranslator.presentation.SettingsFragment"
-        android:label="settings_layout"
+        android:label="SettingsFragment"
         tools:layout="@layout/settings_layout" />
     <fragment
         android:id="@+id/logotypeFragment"
@@ -45,6 +52,15 @@
         <action
             android:id="@+id/action_logotypeFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/imageFromGalleryFragment"
+        android:name="com.ortin.gesturetranslator.presentation.ImageFromGalleryFragment"
+        android:label="image_from_gallery_layout"
+        tools:layout="@layout/image_from_gallery_layout" >
+        <argument
+            android:name="image"
+            app:argType="android.net.Uri" />
     </fragment>
 
 </navigation>
