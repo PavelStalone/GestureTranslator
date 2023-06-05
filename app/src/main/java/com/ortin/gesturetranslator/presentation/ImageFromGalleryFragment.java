@@ -120,7 +120,7 @@ public class ImageFromGalleryFragment extends Fragment implements DetectionHandL
         if (handDetected != null) {
             CoordinateClassification coordinateClassification = recognizeCoordinateUseCase.execute(handDetected);
 
-            String predictLetter = String.format("%s %.2f", coordinateClassification.getLabel(), coordinateClassification.getPercent()) + "%";
+            String predictLetter = String.format("%s", coordinateClassification.getLabel());
             Log.e("Gallery", "label: " + coordinateClassification.getLabel());
             Observable.just(predictLetter).subscribeOn(AndroidSchedulers.mainThread()).subscribe(t -> {
                 if (binding != null) {

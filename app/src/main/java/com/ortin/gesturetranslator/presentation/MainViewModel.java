@@ -82,7 +82,7 @@ public class MainViewModel extends ViewModel implements LoadImagesListener, Dete
                 wordCompileUseCase.addLetter(coordinateClassification.getLabel());
             }
 
-            String predictLetter = String.format("%s %.2f", coordinateClassification.getLabel(), coordinateClassification.getPercent()) + "%";
+            String predictLetter = String.format("%s", coordinateClassification.getLabel());
 
             PredictState predictState = predictLiveData.getValue();
             Observable.just(predictState).subscribeOn(AndroidSchedulers.mainThread()).subscribe(t -> {
