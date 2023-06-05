@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.ortin.gesturetranslator.R;
 import com.ortin.gesturetranslator.databinding.SettingsLayoutBinding;
-import com.ortin.gesturetranslator.domain.usecases.SaveSettingsUseCase;
+import com.ortin.gesturetranslator.domain.usecases.SaveLoadSettingsUseCase;
 
 import javax.inject.Inject;
 
@@ -25,7 +25,7 @@ public class SettingsFragment extends Fragment {
     private SettingsLayoutBinding binding;
 
     @Inject
-    SaveSettingsUseCase saveSettingsUseCase;
+    SaveLoadSettingsUseCase saveLoadSettingsUseCase;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -42,18 +42,18 @@ public class SettingsFragment extends Fragment {
     }
 
     private void init() {
-        if (saveSettingsUseCase.getTheme()){
+        if (saveLoadSettingsUseCase.getTheme()){
             binding.switchCompatTheme.setChecked(true);
             binding.themeSettingsInfo.setText(R.string.settings_layout_switch_theme_to_day);
         } else {
             binding.switchCompatTheme.setChecked(false);
             binding.themeSettingsInfo.setText(R.string.settings_layout_switch_theme_to_night);
         }
-        binding.switchCompatGpu.setChecked(saveSettingsUseCase.getGpu());
-        binding.switchCompatPercents.setChecked(saveSettingsUseCase.getPercent());
+        binding.switchCompatGpu.setChecked(saveLoadSettingsUseCase.getGpu());
+        binding.switchCompatPercents.setChecked(saveLoadSettingsUseCase.getPercent());
 
         ArrayAdapter adapter = (ArrayAdapter) binding.spinner.getAdapter();
-        int position = adapter.getPosition(String.valueOf(saveSettingsUseCase.getSpeedFrameDetection()));
+        int position = adapter.getPosition(String.valueOf(saveLoadSettingsUseCase.getSpeedFrameDetection()));
         binding.spinner.setSelection(position);
 
         initListeners();
@@ -69,21 +69,21 @@ public class SettingsFragment extends Fragment {
                 binding.themeSettingsInfo.setText(R.string.settings_layout_switch_theme_to_night);
             }
 
-            saveSettingsUseCase.setTheme(b);
+            saveLoadSettingsUseCase.setTheme(b);
         }));
 
         binding.switchCompatGpu.setOnCheckedChangeListener(((compoundButton, b) -> {
-            saveSettingsUseCase.setGpu(b);
+            saveLoadSettingsUseCase.setGpu(b);
         }));
 
         binding.switchCompatPercents.setOnCheckedChangeListener(((compoundButton, b) -> {
-            saveSettingsUseCase.setPercent(b);
+            saveLoadSettingsUseCase.setPercent(b);
         }));
 
         binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                saveSettingsUseCase.setSpeedFrameDetection(Integer.parseInt(adapterView.getSelectedItem().toString()));
+                saveLoadSettingsUseCase.setSpeedFrameDetection(Integer.parseInt(adapterView.getSelectedItem().toString()));
             }
 
             @Override

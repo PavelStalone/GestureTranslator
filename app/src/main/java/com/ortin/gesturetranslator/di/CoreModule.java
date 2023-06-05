@@ -5,7 +5,7 @@ import android.content.Context;
 import com.ortin.gesturetranslator.core.managers.mediapipe.MediaPipeManager;
 import com.ortin.gesturetranslator.core.managers.mediapipe.MediaPipeManagerImpl;
 import com.ortin.gesturetranslator.core.managers.model_coordinate.ModelCoordinateManager;
-import com.ortin.gesturetranslator.core.managers.model_coordinate.ModelCoordinateManagerManagerImpl;
+import com.ortin.gesturetranslator.core.managers.model_coordinate.ModelCoordinateManagerImpl;
 import com.ortin.gesturetranslator.core.managers.tensor_flow_lite.TfLiteManager;
 import com.ortin.gesturetranslator.core.managers.tensor_flow_lite.TfLiteManagerImpl;
 import com.ortin.gesturetranslator.core.repository.HandDetectionRepositoryImpl;
@@ -59,6 +59,6 @@ public class CoreModule {
     @Provides
     @Singleton
     ModelCoordinateManager provideModelCoordinateManager() {
-        return new ModelCoordinateManagerManagerImpl();
+        return new ModelCoordinateManagerImpl();
     }
 }

@@ -8,7 +8,7 @@ import com.ortin.gesturetranslator.core.managers.model_coordinate.models.ModelCo
 
 import java.util.Arrays;
 
-public class ModelCoordinateManagerManagerImpl implements ModelCoordinateManager {
+public class ModelCoordinateManagerImpl implements ModelCoordinateManager {
 
     public static final String[] LABELS = new String[]{"А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Ы", "Ь", "Э", "Ю", "Я"};
 

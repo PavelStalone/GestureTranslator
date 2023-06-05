@@ -5,7 +5,6 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -16,12 +15,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.ortin.gesturetranslator.R;
 import com.ortin.gesturetranslator.databinding.ActivityMainBinding;
-import com.ortin.gesturetranslator.domain.usecases.SaveSettingsUseCase;
+import com.ortin.gesturetranslator.domain.usecases.SaveLoadSettingsUseCase;
 
 import java.util.Objects;
 
@@ -37,14 +35,14 @@ public class MainActivity extends AppCompatActivity {
     public NavigationView navigationView;
 
     @Inject
-    SaveSettingsUseCase saveSettingsUseCase;
+    SaveLoadSettingsUseCase saveLoadSettingsUseCase;
 
     @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (saveSettingsUseCase.getTheme())
+        if (saveLoadSettingsUseCase.getTheme())
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 

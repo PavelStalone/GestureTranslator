@@ -3,11 +3,11 @@ package com.ortin.gesturetranslator.domain.usecases;
 import com.ortin.gesturetranslator.domain.models.SettingsDomain;
 import com.ortin.gesturetranslator.domain.repository.SettingsRepository;
 
-public class SaveSettingsUseCase {
+public class SaveLoadSettingsUseCase {
 
     private final SettingsRepository settingsRepository;
 
-    public SaveSettingsUseCase(SettingsRepository settingsRepository) {
+    public SaveLoadSettingsUseCase(SettingsRepository settingsRepository) {
         this.settingsRepository = settingsRepository;
     }
 
