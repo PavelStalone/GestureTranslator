@@ -39,7 +39,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.GestureTranslator.CardViewCorner">
+                    app:cardCornerRadius="8dp">
 
                     <ImageView
                         android:layout_width="130dp"
@@ -55,9 +55,10 @@
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
                 </androidx.cardview.widget.CardView>
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
                     android:layout_marginStart="50dp">
 
                     <ImageView
@@ -72,7 +73,7 @@
                         android:gravity="center"
                         android:text="Б"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
 
             <LinearLayout
@@ -82,9 +83,10 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp">
 
                     <ImageView
                         android:layout_width="130dp"
@@ -98,11 +100,12 @@
                         android:gravity="center"
                         android:text="В"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
                     android:layout_marginStart="50dp">
 
                     <ImageView
@@ -117,7 +120,7 @@
                         android:gravity="center"
                         android:text="Г"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
 
             <LinearLayout
@@ -127,9 +130,10 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp">
 
                     <ImageView
                         android:layout_width="130dp"
@@ -143,11 +147,12 @@
                         android:gravity="center"
                         android:text="Д"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
                     android:layout_marginStart="50dp">
 
                     <ImageView
@@ -162,7 +167,7 @@
                         android:gravity="center"
                         android:text="Е"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
 
             <LinearLayout
@@ -172,9 +177,10 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp">
 
                     <ImageView
                         android:layout_width="130dp"
@@ -188,11 +194,12 @@
                         android:gravity="center"
                         android:text="Ж"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
                     android:layout_marginStart="50dp">
 
                     <ImageView
@@ -207,7 +214,7 @@
                         android:gravity="center"
                         android:text="З"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
 
             <LinearLayout
@@ -217,9 +224,10 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp">
 
                     <ImageView
                         android:layout_width="130dp"
@@ -233,11 +241,12 @@
                         android:gravity="center"
                         android:text="И"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
                     android:layout_marginStart="50dp">
 
                     <ImageView
@@ -252,7 +261,7 @@
                         android:gravity="center"
                         android:text="К"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
 
             <LinearLayout
@@ -262,9 +271,10 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp">
 
                     <ImageView
                         android:layout_width="130dp"
@@ -278,11 +288,12 @@
                         android:gravity="center"
                         android:text="Л"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
                     android:layout_marginStart="50dp">
 
                     <ImageView
@@ -297,7 +308,7 @@
                         android:gravity="center"
                         android:text="М"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
 
             <LinearLayout
@@ -307,9 +318,10 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp">
 
                     <ImageView
                         android:layout_width="130dp"
@@ -323,11 +335,12 @@
                         android:gravity="center"
                         android:text="Н"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
                     android:layout_marginStart="50dp">
 
                     <ImageView
@@ -342,7 +355,7 @@
                         android:gravity="center"
                         android:text="О"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
 
             <LinearLayout
@@ -352,9 +365,10 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp">
 
                     <ImageView
                         android:layout_width="130dp"
@@ -368,11 +382,12 @@
                         android:gravity="center"
                         android:text="П"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
                     android:layout_marginStart="50dp">
 
                     <ImageView
@@ -387,7 +402,7 @@
                         android:gravity="center"
                         android:text="Р"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
 
             <LinearLayout
@@ -397,9 +412,10 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp">
 
                     <ImageView
                         android:layout_width="130dp"
@@ -413,11 +429,12 @@
                         android:gravity="center"
                         android:text="С"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
                     android:layout_marginStart="50dp">
 
                     <ImageView
@@ -432,7 +449,7 @@
                         android:gravity="center"
                         android:text="Т"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
 
             <LinearLayout
@@ -442,9 +459,10 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp">
 
                     <ImageView
                         android:layout_width="130dp"
@@ -458,11 +476,12 @@
                         android:gravity="center"
                         android:text="У"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
                     android:layout_marginStart="50dp">
 
                     <ImageView
@@ -477,7 +496,7 @@
                         android:gravity="center"
                         android:text="Ф"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
 
             <LinearLayout
@@ -487,9 +506,10 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp">
 
                     <ImageView
                         android:layout_width="130dp"
@@ -503,11 +523,12 @@
                         android:gravity="center"
                         android:text="Х"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
                     android:layout_marginStart="50dp">
 
                     <ImageView
@@ -522,7 +543,7 @@
                         android:gravity="center"
                         android:text="Ц"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
 
             <LinearLayout
@@ -532,9 +553,10 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp">
 
                     <ImageView
                         android:layout_width="130dp"
@@ -548,11 +570,12 @@
                         android:gravity="center"
                         android:text="Ч"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
                     android:layout_marginStart="50dp">
 
                     <ImageView
@@ -567,7 +590,7 @@
                         android:gravity="center"
                         android:text="Ш"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
 
             <LinearLayout
@@ -577,9 +600,10 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp">
 
                     <ImageView
                         android:layout_width="130dp"
@@ -593,11 +617,12 @@
                         android:gravity="center"
                         android:text="Ы"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
                     android:layout_marginStart="50dp">
 
                     <ImageView
@@ -612,7 +637,7 @@
                         android:gravity="center"
                         android:text="Ь"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
 
             <LinearLayout
@@ -622,9 +647,10 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp">
 
                     <ImageView
                         android:layout_width="130dp"
@@ -638,11 +664,12 @@
                         android:gravity="center"
                         android:text="Э"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
                     android:layout_marginStart="50dp">
 
                     <ImageView
@@ -657,7 +684,7 @@
                         android:gravity="center"
                         android:text="Ю"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
 
             <LinearLayout
@@ -667,9 +694,10 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <FrameLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp">
 
                     <ImageView
                         android:layout_width="130dp"
@@ -683,7 +711,7 @@
                         android:gravity="center"
                         android:text="Я"
                         android:theme="@style/Widget.GestureTranslator.GestureListLetter" />
-                </FrameLayout>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

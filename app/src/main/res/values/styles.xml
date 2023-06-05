@@ -3,8 +3,4 @@
     <style name="Widget.GestureTranslator.ControlMenu" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="android:background">?attr/backgroundColor</item>
     </style>
-
-    <style name="Widget.GestureTranslator.CardViewCorner" parent="Widget.MaterialComponents.CardView">
-        <item name="cardCornerRadius">8dp</item>
-    </style>
 </resources>
