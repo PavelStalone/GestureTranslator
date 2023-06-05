@@ -21,7 +21,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Версия приложения: 1.0"
+        android:text="Версия приложения: 1.1"
         android:textColor="?attr/descriptionColor"
         android:textSize="10sp"/>
 </LinearLayout>
