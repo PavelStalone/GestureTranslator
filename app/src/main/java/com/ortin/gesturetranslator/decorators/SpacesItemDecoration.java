@@ -16,7 +16,7 @@ public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
-        layoutParams.bottomMargin = space;
+        layoutParams.topMargin = space;
         view.setLayoutParams(layoutParams);
     }
 }
