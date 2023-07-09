@@ -1,7 +1,9 @@
 package com.ortin.gesturetranslator.presentation;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -108,6 +110,10 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             navController.navigate(R.id.informationFragment);
                         }
+                    }
+                    case R.id.bugReportFragment -> {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://docs.google.com/forms/d/e/1FAIpQLSfYhL5HzYcU939IDzZaLKuvblHfcme5FoPHW5-qPmvCA-5obg/viewform?usp=sf_link"));
+                        startActivity(intent);
                     }
                 }
                 drawerLayout.close();
