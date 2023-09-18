@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.fragment.NavHostFragment;
@@ -86,30 +87,28 @@ public class MainActivity extends AppCompatActivity {
 
         navigationView.setNavigationItemSelectedListener(item -> {
             if (item.getItemId() != navController.getCurrentDestination().getId()) {
-                switch (item.getItemId()) {
-                    case R.id.mainFragment -> navController.navigate(R.id.mainFragment);
-                    case R.id.gestureListFragment -> {
-                        if (navController.getCurrentDestination().getId() == R.id.mainFragment) {
-                            navController.navigate(R.id.action_mainFragment_to_gestureListFragment);
-                        } else {
-                            navController.navigate(R.id.gestureListFragment);
-                        }
+                if (item.getItemId() == R.id.mainFragment) {
+                    navController.navigate(R.id.mainFragment);
+                } else if (item.getItemId() == R.id.gestureListFragment) {
+                    if (navController.getCurrentDestination().getId() == R.id.mainFragment) {
+                        navController.navigate(R.id.action_mainFragment_to_gestureListFragment);
+                    } else {
+                        navController.navigate(R.id.gestureListFragment);
                     }
-                    case R.id.settingsFragment -> {
-                        if (navController.getCurrentDestination().getId() == R.id.mainFragment) {
-                            navController.navigate(R.id.action_mainFragment_to_settingsFragment);
-                        } else {
-                            navController.navigate(R.id.settingsFragment);
-                        }
+                } else if (item.getItemId() == R.id.settingsFragment) {
+                    if (navController.getCurrentDestination().getId() == R.id.mainFragment) {
+                        navController.navigate(R.id.action_mainFragment_to_settingsFragment);
+                    } else {
+                        navController.navigate(R.id.settingsFragment);
                     }
-                    case R.id.informationFragment -> {
-                        if (navController.getCurrentDestination().getId() == R.id.mainFragment) {
-                            navController.navigate(R.id.action_mainFragment_to_informationFragment);
-                        } else {
-                            navController.navigate(R.id.informationFragment);
-                        }
+                } else if (item.getItemId() == R.id.informationFragment) {
+                    if (navController.getCurrentDestination().getId() == R.id.mainFragment) {
+                        navController.navigate(R.id.action_mainFragment_to_informationFragment);
+                    } else {
+                        navController.navigate(R.id.informationFragment);
                     }
                 }
+
                 drawerLayout.close();
                 return true;
             }
@@ -129,8 +128,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Log.e("MainActivity", "onBackPressed: " + navController.getBackQueue().size());
-        if (navController.getBackQueue().size() <= 2) {
+        var previousEntry = navController.getPreviousBackStackEntry();
+        Log.e("MainActivity", "onBackPressed: previousEntry = " + previousEntry);
+
+        if (previousEntry == null) {
             finish();
         } else {
             super.onBackPressed();
