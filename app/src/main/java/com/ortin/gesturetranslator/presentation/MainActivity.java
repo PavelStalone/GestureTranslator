@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.fragment.NavHostFragment;
@@ -109,10 +108,9 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         navController.navigate(R.id.informationFragment);
                     }
-                    case R.id.bugReportFragment -> {
-                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://docs.google.com/forms/d/e/1FAIpQLSfYhL5HzYcU939IDzZaLKuvblHfcme5FoPHW5-qPmvCA-5obg/viewform?usp=sf_link"));
-                        startActivity(intent);
-                    }
+                } else if (item.getItemId() == R.id.bugReportFragment) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://docs.google.com/forms/d/e/1FAIpQLSfYhL5HzYcU939IDzZaLKuvblHfcme5FoPHW5-qPmvCA-5obg/viewform?usp=sf_link"));
+                    startActivity(intent);
                 }
 
                 drawerLayout.close();
