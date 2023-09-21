@@ -48,9 +48,9 @@ public class LogotypeFragment extends Fragment {
 
             @Override
             public void onAnimationEnd(@NonNull Animator animator) {
-                Log.e("Logotype", "onBackPressed: " + Navigation.findNavController(binding.getRoot()).getBackQueue().size());
-                Navigation.findNavController(binding.getRoot()).getBackQueue().clear();
-                Navigation.findNavController(binding.getRoot()).navigate(R.id.mainFragment);
+                var navController = Navigation.findNavController(binding.getRoot());
+                navController.popBackStack(navController.getGraph().getStartDestination(), false);
+                navController.navigate(R.id.mainFragment);
             }
 
             @Override

@@ -1,17 +1,17 @@
-
 buildscript {
     repositories {
         google()
     }
+
     dependencies {
-        def nav_version = "2.5.3"
+        def nav_version = "2.7.2"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
     }
 }
 
 plugins {
-    id 'com.android.application' version '7.4.0' apply false
-    id 'com.android.library' version '7.4.0' apply false
-    id 'com.google.dagger.hilt.android' version '2.44' apply false
+    id 'com.android.application' version '8.1.1' apply false
+    id 'com.android.library' version '8.1.1' apply false
+    id 'com.google.dagger.hilt.android' version '2.48' apply false
     id 'de.undercouch.download' version '4.1.2' apply false
 }
