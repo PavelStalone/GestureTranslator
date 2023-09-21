@@ -5,12 +5,12 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.media.Image;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.OptIn;
 import androidx.camera.core.AspectRatio;
 import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
+import androidx.camera.core.ExperimentalGetImage;
 import androidx.camera.core.ImageAnalysis;
-import androidx.camera.core.ImageProxy;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
@@ -36,6 +36,7 @@ public class CameraManagerImpl implements CameraManager {
     public void loadImage(CameraListener cameraListener, LifecycleOwner lifecycleOwner) {
         cameraProviderFuture = ProcessCameraProvider.getInstance(context);
         cameraProviderFuture.addListener(new Runnable() {
+            @OptIn(markerClass = ExperimentalGetImage.class)
             @Override
             public void run() {
                 try {
@@ -50,21 +51,18 @@ public class CameraManagerImpl implements CameraManager {
                             .requireLensFacing(CameraSelector.LENS_FACING_BACK)
                             .build();
 
-                    imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(context), new ImageAnalysis.Analyzer() {
-                        @Override
-                        public void analyze(@NonNull ImageProxy image) {
-                            Image img = image.getImage();
-                            bitmap = translator.translateYUV(img, context);
+                    imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(context), image -> {
+                        Image img = image.getImage();
+                        bitmap = translator.translateYUV(img, context);
 
-                            Matrix matrix = new Matrix();
-                            matrix.postRotate(image.getImageInfo().getRotationDegrees());
-                            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+                        Matrix matrix = new Matrix();
+                        matrix.postRotate(image.getImageInfo().getRotationDegrees());
+                        bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 
-                            ImageFromCamera imageFromCamera = new ImageFromCamera(bitmap, image.getImageInfo().getRotationDegrees());
-                            if (cameraListener != null) cameraListener.getImage(imageFromCamera);
+                        ImageFromCamera imageFromCamera = new ImageFromCamera(bitmap, image.getImageInfo().getRotationDegrees());
+                        if (cameraListener != null) cameraListener.getImage(imageFromCamera);
 
-                            image.close();
-                        }
+                        image.close();
                     });
 
                     camera = cameraProvider.bindToLifecycle(lifecycleOwner, cameraSelector, imageAnalysis);
@@ -78,7 +76,7 @@ public class CameraManagerImpl implements CameraManager {
 
     @Override
     public void setStatusFlashlight(boolean mode) {
-        if (camera != null){
+        if (camera != null) {
             camera.getCameraControl().enableTorch(mode);
         }
     }

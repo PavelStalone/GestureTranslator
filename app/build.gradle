@@ -1,23 +1,19 @@
 plugins {
     id 'com.android.application'
-
     id 'dagger.hilt.android.plugin'
     id 'com.google.dagger.hilt.android'
-
     id 'androidx.navigation.safeargs'
-
     id 'de.undercouch.download'
 }
 
 android {
-
     namespace 'com.ortin.gesturetranslator'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.ortin.gesturetranslator"
         minSdk 25
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.1"
 
@@ -30,6 +26,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
@@ -54,19 +51,23 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
     implementation "io.reactivex.rxjava3:rxjava:3.0.13"
 
-    implementation "androidx.navigation:navigation-fragment:2.5.3"
-    implementation "androidx.navigation:navigation-ui:2.5.3"
+    implementation "androidx.navigation:navigation-fragment:2.7.2"
+    implementation "androidx.navigation:navigation-ui:2.7.2"
 
-    implementation "com.google.dagger:hilt-android:2.44"
-    annotationProcessor 'com.google.dagger:hilt-compiler:2.44'
+    implementation "com.google.dagger:hilt-android:2.48"
+    annotationProcessor 'com.google.dagger:hilt-compiler:2.48'
 
     implementation project(path: ':domain')
     implementation project(path: ':feature')
     implementation project(path: ':core')
     implementation project(path: ':data')
 
+    constraints {
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0"
+    }
+
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
