@@ -8,13 +8,6 @@ on:
       - feature/*
       - bugfix/*
       - hotfix/*
-  pull_request:
-    branches:
-      - main
-      - release/*
-      - feature/*
-      - bugfix/*
-      - hotfix/*
 
 jobs:
   check_job:
