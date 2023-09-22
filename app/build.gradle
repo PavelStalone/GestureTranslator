@@ -4,7 +4,6 @@ plugins {
     id 'com.google.dagger.hilt.android'
     id 'androidx.navigation.safeargs'
     id 'de.undercouch.download'
-
     id "org.gradle.android.cache-fix"
 }
 
@@ -42,8 +41,6 @@ android {
         noCompress 'tflite'
     }
 }
-
-apply plugin: "org.gradle.android.cache-fix"
 
 project.ext.ASSET_DIR = projectDir.toString() + '/src/main/assets'
 apply from: 'download_tasks.gradle'
