@@ -4,6 +4,7 @@ plugins {
     id 'com.google.dagger.hilt.android'
     id 'androidx.navigation.safeargs'
     id 'de.undercouch.download'
+    id "org.gradle.android.cache-fix"
 }
 
 android {
