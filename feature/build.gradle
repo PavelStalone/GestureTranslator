@@ -2,7 +2,6 @@ plugins {
     id 'com.android.library'
     id "org.gradle.android.cache-fix"
     id 'org.jetbrains.kotlin.android'
-
 }
 
 android {
