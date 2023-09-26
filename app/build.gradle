@@ -48,8 +48,6 @@ android {
     }
 }
 
-apply plugin: "org.gradle.android.cache-fix"
-
 project.ext.ASSET_DIR = projectDir.toString() + '/src/main/assets'
 apply from: 'download_tasks.gradle'
 
