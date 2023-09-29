@@ -8,7 +8,7 @@ import com.ortin.gesturetranslator.domain.models.HandDetected
 import com.ortin.gesturetranslator.domain.repository.RecognizeCoordinateRepository
 import kotlin.math.abs
 
-class RecognizeCoordinateRepositoryImpl(val modelCoordinateManager: ModelCoordinateManager) :
+class RecognizeCoordinateRepositoryImpl(private val modelCoordinateManager: ModelCoordinateManager) :
     RecognizeCoordinateRepository {
     override fun recognise(handDetected: HandDetected): CoordinateClassification =
         mapToCoreCoordinateClassification(modelCoordinateManager.recognise(mapToCoreCoordinate(handDetected)))
@@ -53,7 +53,6 @@ class RecognizeCoordinateRepositoryImpl(val modelCoordinateManager: ModelCoordin
             coord[i] *= coefX
             coord[i + 1] *= coefY
         }
-
         return ModelCoordinateArray(coord)
     }
 

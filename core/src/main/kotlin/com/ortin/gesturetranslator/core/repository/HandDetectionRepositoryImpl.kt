@@ -11,7 +11,7 @@ import com.ortin.gesturetranslator.domain.models.Image
 import com.ortin.gesturetranslator.domain.repository.HandDetectionRepository
 import java.lang.Exception
 
-class HandDetectionRepositoryImpl(val mediaPipeManager: MediaPipeManager) :
+class HandDetectionRepositoryImpl(private val mediaPipeManager: MediaPipeManager) :
     HandDetectionRepository {
     override fun detectImage(image: Image) =
         mediaPipeManager.detectImage(mapToMPImageInput(image))
