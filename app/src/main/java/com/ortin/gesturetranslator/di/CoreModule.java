@@ -1,7 +1,6 @@
 package com.ortin.gesturetranslator.di;
 
 import android.content.Context;
-
 import com.ortin.gesturetranslator.core.managers.mediapipe.MediaPipeManager;
 import com.ortin.gesturetranslator.core.managers.mediapipe.MediaPipeManagerImpl;
 import com.ortin.gesturetranslator.core.managers.model_coordinate.ModelCoordinateManager;
