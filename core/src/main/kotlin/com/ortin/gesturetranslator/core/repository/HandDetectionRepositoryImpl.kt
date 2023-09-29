@@ -23,7 +23,9 @@ class HandDetectionRepositoryImpl(val mediaPipeManager: MediaPipeManager) :
     private fun mapToMPImageInput(image: Image): MPImageInput =
         MPImageInput(BitmapImageBuilder(image.bitmap).build())
 
-    private fun mapToCoreHandDetection(mpDetection: MPDetection): HandDetected {
+    private fun mapToCoreHandDetection(mpDetection: MPDetection?): HandDetected? {
+        mpDetection ?: return null
+
         val coordinates = FloatArray(42)
         val result = mpDetection.result
 
@@ -45,8 +47,9 @@ class HandDetectionRepositoryImpl(val mediaPipeManager: MediaPipeManager) :
 
     private fun mapToCoreListener(detectionHandListener: DetectionHandListener): MPDetectionListener {
         return object : MPDetectionListener {
-            override fun detect(mpDetection: MPDetection) =
+            override fun detect(mpDetection: MPDetection?) {
                 detectionHandListener.detect(mapToCoreHandDetection(mpDetection))
+            }
 
             override fun error(exception: Exception?) =
                 detectionHandListener.error(exception)

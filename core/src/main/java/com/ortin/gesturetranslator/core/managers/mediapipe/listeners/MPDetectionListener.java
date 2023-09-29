@@ -5,7 +5,7 @@ import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPDetection;
 import io.reactivex.rxjava3.annotations.NonNull;
 
 public interface MPDetectionListener {
-    void detect(@NonNull MPDetection mpDetection);
+    void detect(MPDetection mpDetection);
 
     void error(Exception exception);
 }
