@@ -51,7 +51,7 @@ class HandDetectionRepositoryImpl(private val mediaPipeManager: MediaPipeManager
                 detectionHandListener.detect(mapToCoreHandDetection(mpDetection))
             }
 
-            override fun error(exception: Exception?) =
+            override fun error(exception: Exception) =
                 detectionHandListener.error(exception)
         }
     }
