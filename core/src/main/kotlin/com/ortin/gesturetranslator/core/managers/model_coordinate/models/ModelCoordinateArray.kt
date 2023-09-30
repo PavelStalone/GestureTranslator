@@ -6,13 +6,8 @@ package com.ortin.gesturetranslator.core.managers.model_coordinate.models
          if (javaClass != other?.javaClass) return false
 
          other as ModelCoordinateArray
-
-         if (!coordinate.contentEquals(other.coordinate)) return false
-
-         return true
+         return coordinate.contentEquals(other.coordinate)
      }
 
-     override fun hashCode(): Int {
-         return coordinate.contentHashCode()
-     }
+     override fun hashCode(): Int = coordinate.contentHashCode()
  }
