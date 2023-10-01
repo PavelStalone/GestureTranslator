@@ -10,7 +10,7 @@ on:
       - hotfix/*
 
 jobs:
-  check_job:
+  check:
     runs-on: ubuntu-latest
 
     steps:
@@ -36,7 +36,7 @@ jobs:
       - name: Gradle check
         run: ./gradlew check
 
-  release_job:
+  assembleRelease:
     runs-on: ubuntu-latest
 
     steps:
