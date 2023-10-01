@@ -9,7 +9,6 @@ import com.ortin.gesturetranslator.domain.listeners.DetectionHandListener
 import com.ortin.gesturetranslator.domain.models.HandDetected
 import com.ortin.gesturetranslator.domain.models.Image
 import com.ortin.gesturetranslator.domain.repository.HandDetectionRepository
-import java.lang.Exception
 
 class HandDetectionRepositoryImpl(private val mediaPipeManager: MediaPipeManager) :
     HandDetectionRepository {
@@ -51,8 +50,7 @@ class HandDetectionRepositoryImpl(private val mediaPipeManager: MediaPipeManager
                 detectionHandListener.detect(mapToCoreHandDetection(mpDetection))
             }
 
-            override fun error(exception: Exception?) =
-                detectionHandListener.error(exception)
+            override fun error(exception: Exception) = detectionHandListener.error(exception)
         }
     }
 }
