@@ -21,17 +21,17 @@ class LoadImageRepositoryImpl(private val cameraManager: CameraManager) : LoadIm
     }
 
     // Translation rules for domain and feature modules
-    private fun mapToDomain(imageFromCamera: ImageFromCamera): Image {
-        return Image(imageFromCamera.image, imageFromCamera.rotaion)
+    private fun ImageFromCamera.mapToDomain(): Image {
+        return Image(this.image, this.rotaion)
     }
 
     private fun mapperToDomainListener(loadImagesListener: LoadImagesListener): CameraListener {
         return object : CameraListener {
-            override fun getImage(imageFromCamera: ImageFromCamera?) {
-                loadImagesListener.getImage(imageFromCamera?.let { mapToDomain(it) })
+            override fun getImage(imageFromCamera: ImageFromCamera) {
+                loadImagesListener.getImage(imageFromCamera.mapToDomain() )
             }
 
-            override fun error(exception: Exception?) {
+            override fun error(exception: Exception) {
                 loadImagesListener.error(exception)
             }
         }

@@ -55,7 +55,7 @@ class WordCompilerManagerImpl : WordCompilerManager {
     }
 
     private fun searchCurrentWord(): String? {
-        for (key in frameSortedMap.keys) {
+        frameSortedMap.keys.forEach { key ->
             if (frameSortedMap[key]!! >= MIN_FRAME_DETECT) {
                 return key
             }
