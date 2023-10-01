@@ -49,7 +49,7 @@ class MediaPipeManagerImpl(val context: Context, private val modelPath: String) 
         }
     }
 
-    private fun errorDetection(exception: RuntimeException) {
+    private fun errorDetection(exception: Exception) {
         mpDetectionListener?.error(exception)
     }
 }
