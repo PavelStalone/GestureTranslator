@@ -14,6 +14,6 @@ class WordCompilerRepositoryImpl(private val wordCompilerManager: WordCompilerMa
     }
 
     override fun getWord(): String {
-        return wordCompilerManager.word
+        return wordCompilerManager.getWord()
     }
 }

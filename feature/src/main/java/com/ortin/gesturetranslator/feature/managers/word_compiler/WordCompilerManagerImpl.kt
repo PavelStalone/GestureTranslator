@@ -47,7 +47,6 @@ class WordCompilerManagerImpl : WordCompilerManager {
             lastWord = letter
             countFrameHold = 1
         }
-
         lastTime = System.currentTimeMillis()
     }
 

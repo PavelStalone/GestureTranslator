@@ -27,11 +27,11 @@ class LoadImageRepositoryImpl(private val cameraManager: CameraManager) : LoadIm
 
     private fun mapperToDomainListener(loadImagesListener: LoadImagesListener): CameraListener {
         return object : CameraListener {
-            override fun getImage(imageFromCamera: ImageFromCamera) {
-                loadImagesListener.getImage(mapToDomain(imageFromCamera))
+            override fun getImage(imageFromCamera: ImageFromCamera?) {
+                loadImagesListener.getImage(imageFromCamera?.let { mapToDomain(it) })
             }
 
-            override fun error(exception: Exception) {
+            override fun error(exception: Exception?) {
                 loadImagesListener.error(exception)
             }
         }

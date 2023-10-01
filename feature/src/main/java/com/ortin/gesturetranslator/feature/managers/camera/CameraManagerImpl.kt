@@ -60,7 +60,6 @@ class CameraManagerImpl(private val context: Context) : CameraManager {
                     cameraListener?.getImage(imageFromCamera)
                     image.close()
                 }
-
                 camera =
                     lifecycleOwner?.let { cameraProvider.bindToLifecycle(it, cameraSelector, imageAnalysis) }
             } catch (e: Exception) {
