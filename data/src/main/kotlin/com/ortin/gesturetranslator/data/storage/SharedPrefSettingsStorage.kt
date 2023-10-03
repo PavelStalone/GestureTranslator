@@ -5,17 +5,6 @@ import android.content.SharedPreferences
 import com.ortin.gesturetranslator.data.models.Settings
 
 class SharedPrefSettingsStorage(context: Context): SettingsStorage {
-    companion object {
-        private const val SHARED_PREFS_NAME: String = "settings"
-        private const val KEY_THEME: String = "theme"
-        private const val KEY_GPU: String = "gpu"
-        private const val KEY_PERCENT: String = "percent"
-        private const val KEY_SPEED_FRAME_DETECTION: String = "speed_frame_detection"
-        private const val DEFAULT_THEME: Boolean = false
-        private const val DEFAULT_GPU: Boolean = false
-        private const val DEFAULT_PERCENT: Boolean = false
-        private const val DEFAULT_SPEED_FRAME_DETECTION: Int = 10
-    }
     private val sharedPreferences: SharedPreferences =
         context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
 
@@ -46,11 +35,7 @@ class SharedPrefSettingsStorage(context: Context): SettingsStorage {
         return true
     }
 
-    override fun getPercent(): Settings {
-        val settings = Settings()
-        settings.percent = sharedPreferences.getBoolean(KEY_PERCENT, DEFAULT_PERCENT)
-        return settings
-    }
+    override fun getPercent(): Settings = Settings().apply { percent = sharedPreferences.getBoolean(KEY_PERCENT, DEFAULT_PERCENT) }
 
     override fun saveSpeedFrameDetection(settings: Settings): Boolean {
         sharedPreferences.edit().putInt(KEY_SPEED_FRAME_DETECTION, settings.speedFrameDetection)
@@ -65,4 +50,15 @@ class SharedPrefSettingsStorage(context: Context): SettingsStorage {
         return settings
     }
 
+    companion object {
+        private const val SHARED_PREFS_NAME: String = "settings"
+        private const val KEY_THEME: String = "theme"
+        private const val KEY_GPU: String = "gpu"
+        private const val KEY_PERCENT: String = "percent"
+        private const val KEY_SPEED_FRAME_DETECTION: String = "speed_frame_detection"
+        private const val DEFAULT_THEME: Boolean = false
+        private const val DEFAULT_GPU: Boolean = false
+        private const val DEFAULT_PERCENT: Boolean = false
+        private const val DEFAULT_SPEED_FRAME_DETECTION: Int = 10
+    }
 }
