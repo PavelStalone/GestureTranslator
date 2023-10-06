@@ -13,7 +13,7 @@ class LoadImageRepositoryImpl(private val cameraManager: CameraManager) : LoadIm
         loadImagesListener: LoadImagesListener,
         lifecycleOwner: LifecycleOwner
     ) {
-        cameraManager.loadImage(mapperToDomainListener(loadImagesListener), lifecycleOwner)
+        cameraManager.loadImage(loadImagesListener.mapToDomainListener(), lifecycleOwner)
     }
 
     override fun setStatusFlashlight(mode: Boolean) {
@@ -21,19 +21,16 @@ class LoadImageRepositoryImpl(private val cameraManager: CameraManager) : LoadIm
     }
 
     // Translation rules for domain and feature modules
-    private fun ImageFromCamera.mapToDomain(): Image {
-        return Image(this.image, this.rotaion)
-    }
+    private fun ImageFromCamera.mapToDomain(): Image = Image(this.image, this.rotaion)
 
-    private fun mapperToDomainListener(loadImagesListener: LoadImagesListener): CameraListener {
-        return object : CameraListener {
+    private fun LoadImagesListener.mapToDomainListener(): CameraListener =
+        object : CameraListener {
             override fun getImage(imageFromCamera: ImageFromCamera) {
-                loadImagesListener.getImage(imageFromCamera.mapToDomain() )
+                this@mapToDomainListener.getImage(imageFromCamera.mapToDomain())
             }
 
             override fun error(exception: Exception) {
-                loadImagesListener.error(exception)
+                this@mapToDomainListener.error(exception)
             }
         }
-    }
 }
