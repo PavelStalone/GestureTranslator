@@ -19,7 +19,6 @@ class BitmapAnalyzer(
                 Bitmap.Config.ARGB_8888
             )
         image.use { bitmapBuffer.copyPixelsFromBuffer(image.planes[0].buffer) }
-        image.close()
 
         val matrix = Matrix().apply {
             postRotate(image.imageInfo.rotationDegrees.toFloat())
