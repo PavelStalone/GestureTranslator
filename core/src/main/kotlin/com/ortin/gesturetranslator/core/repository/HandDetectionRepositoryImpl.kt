@@ -1,32 +1,60 @@
 package com.ortin.gesturetranslator.core.repository
 
-import com.google.mediapipe.framework.image.BitmapImageBuilder
+import com.google.mediapipe.tasks.vision.core.RunningMode
+import com.ortin.gesturetranslator.core.managers.mediapipe.HandLandmarkerHelper
 import com.ortin.gesturetranslator.core.managers.mediapipe.MediaPipeManager
 import com.ortin.gesturetranslator.core.managers.mediapipe.listeners.MPDetectionListener
 import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPDetection
 import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPImageInput
+import com.ortin.gesturetranslator.core.managers.mediapipe.models.SettingsModel
 import com.ortin.gesturetranslator.domain.listeners.DetectionHandListener
+import com.ortin.gesturetranslator.domain.models.Delegation
 import com.ortin.gesturetranslator.domain.models.HandDetected
 import com.ortin.gesturetranslator.domain.models.Image
+import com.ortin.gesturetranslator.domain.models.InputMode
+import com.ortin.gesturetranslator.domain.models.SettingsMediaPipe
 import com.ortin.gesturetranslator.domain.repository.HandDetectionRepository
 
 class HandDetectionRepositoryImpl(private val mediaPipeManager: MediaPipeManager) :
     HandDetectionRepository {
     override fun detectImage(image: Image) =
-        mediaPipeManager.detectImage(mapToMPImageInput(image))
+        mediaPipeManager.detectImage(image.mapToMPImageInput())
 
-    override fun setDetectionHandListener(detectionHandListener: DetectionHandListener) =
-        mediaPipeManager.setMPDetectionListener(mapToCoreListener(detectionHandListener))
+    override fun setDetectionHandListener(
+        detectionHandListener: DetectionHandListener,
+        settingsMediaPipe: SettingsMediaPipe
+    ) =
+        mediaPipeManager.setMPDetectionListener(
+            detectionHandListener.mapToCoreListener(),
+            settingsMediaPipe.mapToSettingsModel()
+        )
 
     // Правила перевода для связи domain и core модулей
-    private fun mapToMPImageInput(image: Image): MPImageInput =
-        MPImageInput(BitmapImageBuilder(image.bitmap).build())
+    private fun Image.mapToMPImageInput(): MPImageInput = MPImageInput(this.bitmap)
 
-    private fun mapToCoreHandDetection(mpDetection: MPDetection?): HandDetected? {
-        mpDetection ?: return null
+    private fun SettingsMediaPipe.mapToSettingsModel(): SettingsModel =
+        SettingsModel(
+            minHandDetectionConfidence = this.minHandDetectionConfidence,
+            minHandTrackingConfidence = this.minHandTrackingConfidence,
+            minHandPresenceConfidence = this.minHandPresenceConfidence,
+            maxNumHands = this.maxNumHands,
+            currentDelegate = when (this.currentDelegate) {
+                Delegation.DELEGATE_CPU -> HandLandmarkerHelper.DELEGATE_CPU
+                Delegation.DELEGATE_GPU -> HandLandmarkerHelper.DELEGATE_GPU
+            },
+            runningMode = when (this.runningMode) {
+                InputMode.LIVE_STREAM -> RunningMode.LIVE_STREAM
+                InputMode.IMAGE -> RunningMode.IMAGE
+                InputMode.VIDEO -> RunningMode.VIDEO
+            }
+        )
+
+
+    private fun MPDetection?.mapToCoreHandDetection(): HandDetected? {
+        this ?: return null
 
         val coordinates = FloatArray(42)
-        val result = mpDetection.result
+        val result = this.results[0]
 
         if (result.landmarks().size != 0) {
             val iterator = result.landmarks()[0].iterator()
@@ -44,13 +72,12 @@ class HandDetectionRepositoryImpl(private val mediaPipeManager: MediaPipeManager
         return HandDetected(coordinates)
     }
 
-    private fun mapToCoreListener(detectionHandListener: DetectionHandListener): MPDetectionListener {
+    private fun DetectionHandListener.mapToCoreListener(): MPDetectionListener {
         return object : MPDetectionListener {
-            override fun detect(mpDetection: MPDetection?) {
-                detectionHandListener.detect(mapToCoreHandDetection(mpDetection))
-            }
+            override fun onResults(mpDetection: MPDetection?) =
+                this@mapToCoreListener.detect(mpDetection.mapToCoreHandDetection())
 
-            override fun error(exception: Exception) = detectionHandListener.error(exception)
+            override fun onError(exception: Exception) = this@mapToCoreListener.error(exception)
         }
     }
 }

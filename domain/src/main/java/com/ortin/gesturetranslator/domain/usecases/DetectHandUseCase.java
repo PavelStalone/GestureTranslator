@@ -2,6 +2,7 @@ package com.ortin.gesturetranslator.domain.usecases;
 
 import com.ortin.gesturetranslator.domain.listeners.DetectionHandListener;
 import com.ortin.gesturetranslator.domain.models.Image;
+import com.ortin.gesturetranslator.domain.models.SettingsMediaPipe;
 import com.ortin.gesturetranslator.domain.repository.HandDetectionRepository;
 
 public class DetectHandUseCase {
@@ -16,6 +17,6 @@ public class DetectHandUseCase {
     }
 
     public void setOnDetectionHandListener(DetectionHandListener detectionHandListener) {
-        handDetectionRepository.setDetectionHandListener(detectionHandListener);
+        handDetectionRepository.setDetectionHandListener(detectionHandListener, new SettingsMediaPipe());
     }
 }
