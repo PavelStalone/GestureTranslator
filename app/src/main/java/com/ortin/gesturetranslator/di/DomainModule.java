@@ -12,7 +12,6 @@ import com.ortin.gesturetranslator.domain.usecases.RecognizeCoordinateUseCase;
 import com.ortin.gesturetranslator.domain.usecases.RecognizeImageUseCase;
 import com.ortin.gesturetranslator.domain.usecases.SaveLoadSettingsUseCase;
 import com.ortin.gesturetranslator.domain.usecases.WordCompileUseCase;
-
 import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
@@ -50,7 +49,7 @@ public class DomainModule {
     }
 
     @Provides
-    SaveLoadSettingsUseCase provideSaveSettingsUseCase(SettingsRepository settingsRepository){
+    SaveLoadSettingsUseCase provideSaveSettingsUseCase(SettingsRepository settingsRepository) {
         return new SaveLoadSettingsUseCase(settingsRepository);
     }
 }

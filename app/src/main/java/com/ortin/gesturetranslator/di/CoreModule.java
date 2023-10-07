@@ -1,7 +1,6 @@
 package com.ortin.gesturetranslator.di;
 
 import android.content.Context;
-
 import com.ortin.gesturetranslator.core.managers.mediapipe.MediaPipeManager;
 import com.ortin.gesturetranslator.core.managers.mediapipe.MediaPipeManagerImpl;
 import com.ortin.gesturetranslator.core.managers.model_coordinate.ModelCoordinateManager;
@@ -14,9 +13,7 @@ import com.ortin.gesturetranslator.core.repository.RecognizeImageRepositoryImpl;
 import com.ortin.gesturetranslator.domain.repository.HandDetectionRepository;
 import com.ortin.gesturetranslator.domain.repository.RecognizeCoordinateRepository;
 import com.ortin.gesturetranslator.domain.repository.RecognizeImageRepository;
-
 import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
