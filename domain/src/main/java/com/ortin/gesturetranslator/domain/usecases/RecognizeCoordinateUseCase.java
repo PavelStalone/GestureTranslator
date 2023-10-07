@@ -1,7 +1,7 @@
 package com.ortin.gesturetranslator.domain.usecases;
 
 import com.ortin.gesturetranslator.domain.models.CoordinateClassification;
-import com.ortin.gesturetranslator.domain.models.HandDetected;
+import com.ortin.gesturetranslator.domain.models.ImageDetected;
 import com.ortin.gesturetranslator.domain.repository.RecognizeCoordinateRepository;
 
 public class RecognizeCoordinateUseCase {
@@ -11,7 +11,7 @@ public class RecognizeCoordinateUseCase {
         this.recognizeCoordinateRepository = recognizeCoordinateRepository;
     }
 
-    public CoordinateClassification execute(HandDetected handDetected) {
-        return recognizeCoordinateRepository.recognise(handDetected);
+    public CoordinateClassification execute(ImageDetected imageDetected) {
+        return recognizeCoordinateRepository.recognise(imageDetected);
     }
 }

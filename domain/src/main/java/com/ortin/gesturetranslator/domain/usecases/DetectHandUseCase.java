@@ -1,8 +1,7 @@
 package com.ortin.gesturetranslator.domain.usecases;
 
+import android.graphics.Bitmap;
 import com.ortin.gesturetranslator.domain.listeners.DetectionHandListener;
-import com.ortin.gesturetranslator.domain.models.Image;
-import com.ortin.gesturetranslator.domain.models.SettingsMediaPipe;
 import com.ortin.gesturetranslator.domain.repository.HandDetectionRepository;
 
 public class DetectHandUseCase {
@@ -12,11 +11,11 @@ public class DetectHandUseCase {
         this.handDetectionRepository = handDetectionRepository;
     }
 
-    public void execute(Image image) {
-        handDetectionRepository.detectImage(image);
+    public void execute(Bitmap image) {
+        handDetectionRepository.detectLiveStream(image);
     }
 
     public void setOnDetectionHandListener(DetectionHandListener detectionHandListener) {
-        handDetectionRepository.setDetectionHandListener(detectionHandListener, new SettingsMediaPipe());
+        handDetectionRepository.setMPDetectionListener(detectionHandListener);
     }
 }

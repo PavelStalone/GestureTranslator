@@ -13,13 +13,14 @@ import com.google.mediapipe.tasks.vision.core.RunningMode
 import com.google.mediapipe.tasks.vision.handlandmarker.HandLandmarker
 import com.google.mediapipe.tasks.vision.handlandmarker.HandLandmarkerResult
 import com.ortin.gesturetranslator.core.managers.mediapipe.listeners.MPDetectionListener
-import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPDetection
+import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPImageDetection
+import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPVideoDetection
 import com.ortin.gesturetranslator.core.managers.mediapipe.models.SettingsModel
 
 class HandLandmarkerHelper(
     val context: Context,
     val modelPath: String,
-    var handLandmarkerHelperListener: MPDetectionListener?,
+    var handLandmarkerHelperListener: MPDetectionListener? = null,
     var settingsModel: SettingsModel = SettingsModel(),
 ) {
     private var handLandmarker: HandLandmarker? = null
@@ -49,17 +50,6 @@ class HandLandmarkerHelper(
         }
 
         baseOptionBuilder.setModelAssetPath(modelPath)
-
-        when (settingsModel.runningMode) {
-            RunningMode.LIVE_STREAM -> {
-                if (handLandmarkerHelperListener == null) {
-                    throw IllegalStateException(
-                        "handLandmarkerHelperListener must be set when runningMode is LIVE_STREAM."
-                    )
-                }
-            }
-            else -> {}
-        }
 
         try {
             val baseOptions = baseOptionBuilder.build()
@@ -92,6 +82,11 @@ class HandLandmarkerHelper(
                 "Attempting to call detectLiveStream while not using RunningMode.LIVE_STREAM"
             )
         }
+        if (handLandmarkerHelperListener == null) {
+            throw IllegalStateException(
+                "handLandmarkerHelperListener must be set when runningMode is LIVE_STREAM."
+            )
+        }
 
         val frameTime = SystemClock.uptimeMillis()
         val mpImage = BitmapImageBuilder(image).build()
@@ -106,7 +101,7 @@ class HandLandmarkerHelper(
     fun detectVideoFile(
         videoUri: Uri,
         inferenceIntervalMs: Long
-    ): MPDetection? {
+    ): MPVideoDetection? {
         if (settingsModel.runningMode != RunningMode.VIDEO) {
             throw IllegalArgumentException(
                 "Attempting to call detectVideoFile while not using RunningMode.VIDEO"
@@ -116,7 +111,6 @@ class HandLandmarkerHelper(
         val startTime = SystemClock.uptimeMillis()
         var didErrorOccurred = false
 
-        // Load frames from the video and run the hand landmarker.
         val retriever = MediaMetadataRetriever()
         retriever.setDataSource(context, videoUri)
         val videoLengthMs =
@@ -163,7 +157,6 @@ class HandLandmarkerHelper(
                     )
                 }
         }
-
         retriever.release()
 
         val inferenceTimePerFrameMs =
@@ -172,11 +165,11 @@ class HandLandmarkerHelper(
         return if (didErrorOccurred) {
             null
         } else {
-            MPDetection(resultList, inferenceTimePerFrameMs, height, width)
+            MPVideoDetection(resultList, inferenceTimePerFrameMs, height, width)
         }
     }
 
-    fun detectImage(image: Bitmap): MPDetection? {
+    fun detectImage(image: Bitmap): MPImageDetection? {
         if (settingsModel.runningMode != RunningMode.IMAGE) {
             throw IllegalArgumentException(
                 "Attempting to call detectImage" +
@@ -185,20 +178,15 @@ class HandLandmarkerHelper(
         }
 
         val startTime = SystemClock.uptimeMillis()
-
         val mpImage = BitmapImageBuilder(image).build()
 
         handLandmarker?.detect(mpImage)?.also { landmarkResult ->
-            return if (landmarkResult.landmarks().size == 0) {
-                null
-            } else {
-                MPDetection(
-                    listOf(landmarkResult),
-                    SystemClock.uptimeMillis() - startTime,
-                    image.height,
-                    image.width
-                )
-            }
+            return MPImageDetection(
+                landmarkResult,
+                SystemClock.uptimeMillis() - startTime,
+                image.height,
+                image.width
+            )
         }
 
         handLandmarkerHelperListener?.onError(
@@ -215,16 +203,12 @@ class HandLandmarkerHelper(
         val inferenceTime = finishTimeMs - result.timestampMs()
 
         handLandmarkerHelperListener?.onResults(
-            if (result.landmarks().size == 0) {
-                null
-            } else {
-                MPDetection(
-                    listOf(result),
-                    inferenceTime,
-                    input.height,
-                    input.width
-                )
-            }
+            MPImageDetection(
+                result,
+                inferenceTime,
+                input.height,
+                input.width
+            )
         )
     }
 
@@ -233,8 +217,6 @@ class HandLandmarkerHelper(
     }
 
     companion object {
-        private const val TAG = "HandLandmarkerHelper"
-
         const val DELEGATE_CPU = 0
         const val DELEGATE_GPU = 1
         const val DEFAULT_HAND_DETECTION_CONFIDENCE = 0.5F
