@@ -5,46 +5,34 @@ import com.ortin.gesturetranslator.domain.repository.SettingsRepository
 
 class SaveLoadSettingsUseCase(private val settingsRepository: SettingsRepository) {
     fun setTheme(theme: Boolean): Boolean {
-        val settingsDomain = SettingsDomain()
-        settingsDomain.setTheme(theme)
+        val settingsDomain = SettingsDomain(theme = theme)
         return settingsRepository.saveTheme(settingsDomain)
     }
 
     fun setGpu(gpu: Boolean): Boolean {
-        val settingsDomain = SettingsDomain()
-        settingsDomain.setGpu(gpu)
+        val settingsDomain = SettingsDomain(gpu = gpu)
         return settingsRepository.saveGpu(settingsDomain)
     }
 
     fun setPercent(percent: Boolean): Boolean {
-        val settingsDomain = SettingsDomain()
-        settingsDomain.setPercent(percent)
+        val settingsDomain = SettingsDomain(percent = percent)
         return settingsRepository.savePercent(settingsDomain)
     }
 
     fun setSpeedFrameDetection(speedFrameDetection: Int): Boolean {
-        val settingsDomain = SettingsDomain()
-        settingsDomain.setSpeedFrameDetection(speedFrameDetection)
+        val settingsDomain = SettingsDomain(speedFrameDetection = speedFrameDetection)
         return settingsRepository.saveSpeedFrameDetection(settingsDomain)
     }
 
-    fun getTheme(): Boolean {
-        val settingsDomain = settingsRepository.getTheme()
-        return settingsDomain.isTheme()
-    }
+    fun getTheme(): Boolean =
+        settingsRepository.getTheme().theme
 
-    fun getGpu(): Boolean {
-        val settingsDomain = settingsRepository.getGpu()
-        return settingsDomain.isGpu()
-    }
+    fun getGpu(): Boolean =
+        settingsRepository.getGpu().gpu
 
-    fun getPercent(): Boolean {
-        val settingsDomain = settingsRepository.getPercent()
-        return settingsDomain.isPercent()
-    }
+    fun getPercent(): Boolean =
+        settingsRepository.getPercent().percent
 
-    fun getSpeedFrameDetection(): Int {
-        val settingsDomain = settingsRepository.getSpeedFrameDetection()
-        return settingsDomain.getSpeedFrameDetection()
-    }
+    fun getSpeedFrameDetection(): Int =
+        settingsRepository.getSpeedFrameDetection().speedFrameDetection
 }

@@ -1,8 +1,8 @@
 package com.ortin.gesturetranslator.data.models
 
 data class Settings(
-    var theme: Boolean = true,
-    var gpu: Boolean = true,
-    var percent: Boolean = true,
-    var speedFrameDetection: Int = 30
+    val theme: Boolean = true,
+    val gpu: Boolean = true,
+    val percent: Boolean = true,
+    val speedFrameDetection: Int = 30
 )

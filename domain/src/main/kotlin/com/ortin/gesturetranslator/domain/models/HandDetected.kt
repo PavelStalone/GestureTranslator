@@ -1,3 +1,3 @@
 package com.ortin.gesturetranslator.domain.models
 
-data class HandDetected(val coordinates: Array<Float>)
+data class HandDetected(val coordinates: FloatArray)
