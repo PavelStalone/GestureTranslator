@@ -29,7 +29,8 @@ class SharedPrefSettingsStorage(context: Context): SettingsStorage {
         return true
     }
 
-    override fun getPercent(): Settings = Settings(percent = sharedPreferences.getBoolean(KEY_PERCENT, DEFAULT_PERCENT))
+    override fun getPercent(): Settings =
+        Settings(percent = sharedPreferences.getBoolean(KEY_PERCENT, DEFAULT_PERCENT))
 
     override fun saveSpeedFrameDetection(settings: Settings): Boolean {
         sharedPreferences.edit().putInt(KEY_SPEED_FRAME_DETECTION, settings.speedFrameDetection)
