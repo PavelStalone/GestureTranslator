@@ -27,21 +27,18 @@ class SettingsRepositoryImpl(private val settingsStorage: SettingsStorage) : Set
     override fun getSpeedFrameDetection(): SettingsDomain =
         settingsStorage.getSpeedFrameDetection().mapToDomain()
 
-    private fun SettingsDomain.mapToData(): Settings {
-        val settings = Settings()
-        settings.theme = this.isTheme
-        settings.percent = this.isPercent
-        settings.speedFrameDetection = this.speedFrameDetection
-        settings.gpu = this.isGpu
-        return settings
-    }
+    private fun SettingsDomain.mapToData(): Settings =
+        Settings(
+            theme = this.theme,
+            percent = this.percent,
+            speedFrameDetection = this.speedFrameDetection,
+            gpu = this.gpu
+        )
 
-    private fun Settings.mapToDomain(): SettingsDomain {
-        val settingsDomain = SettingsDomain()
-        settingsDomain.isTheme = this.theme
-        settingsDomain.isGpu = this.gpu
-        settingsDomain.isPercent = this.percent
-        settingsDomain.speedFrameDetection = this.speedFrameDetection
-        return settingsDomain
-    }
+    private fun Settings.mapToDomain(): SettingsDomain =
+        SettingsDomain(
+            theme = this.theme,
+            gpu = this.gpu, percent = this.percent,
+            speedFrameDetection = this.speedFrameDetection
+        )
 }
