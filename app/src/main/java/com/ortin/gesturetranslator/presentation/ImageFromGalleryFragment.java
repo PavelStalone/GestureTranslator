@@ -25,7 +25,6 @@ import com.bumptech.glide.request.transition.Transition;
 import com.ortin.gesturetranslator.databinding.ImageFromGalleryLayoutBinding;
 import com.ortin.gesturetranslator.domain.listeners.DetectionHandListener;
 import com.ortin.gesturetranslator.domain.models.CoordinateClassification;
-import com.ortin.gesturetranslator.domain.models.Image;
 import com.ortin.gesturetranslator.domain.models.ImageDetected;
 import com.ortin.gesturetranslator.domain.usecases.DetectHandUseCase;
 import com.ortin.gesturetranslator.domain.usecases.RecognizeCoordinateUseCase;
@@ -77,8 +76,7 @@ public class ImageFromGalleryFragment extends Fragment implements DetectionHandL
     private void init() {
         Uri uri = ImageFromGalleryFragmentArgs.fromBundle(getArguments()).getImage();
         binding.previewFromGallery.setImageURI(uri);
-        detectHandUseCase.setOnDetectionHandListener(this);
-
+        detectHandUseCase.setMPDetectionListener(this);
         predictUri(uri);
     }
 
@@ -102,7 +100,7 @@ public class ImageFromGalleryFragment extends Fragment implements DetectionHandL
                     @Override
                     public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                         Log.e("Gallery", "onResourceReady: " + resource);
-                        detectHandUseCase.execute(resource);
+                        detectHandUseCase.detectLiveStream(resource);
                     }
                 });
     }

@@ -55,7 +55,7 @@ public class MainViewModel extends ViewModel implements LoadImagesListener, Dete
 
     public void startRealTimeImagining(LifecycleOwner lifecycleOwner) {
         loadImageUseCase.execute(this, lifecycleOwner);
-        detectHandUseCase.setOnDetectionHandListener(this);
+        detectHandUseCase.setMPDetectionListener(this);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class MainViewModel extends ViewModel implements LoadImagesListener, Dete
         predictLiveData.setValue(new PredictState(bitmap, predictState.getPredictWord(), predictState.getPredictLetter(), predictState.getCoordinateHand()));
 
         if (mainLiveData.getValue().isRealtimeButton())
-            detectHandUseCase.execute(image.getBitmap());
+            detectHandUseCase.detectLiveStream(image.getBitmap());
     }
 
     @SuppressLint({"DefaultLocale", "SetTextI18n", "CheckResult"})
