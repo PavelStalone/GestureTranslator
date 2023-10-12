@@ -13,29 +13,24 @@ class SharedPrefSettingsStorage(context: Context): SettingsStorage {
         return true
     }
 
-    override fun getTheme(): Settings {
-        val settings = Settings()
-        settings.theme = sharedPreferences.getBoolean(KEY_THEME, DEFAULT_THEME)
-        return settings
-    }
+    override fun getTheme(): Settings =
+        Settings(theme = sharedPreferences.getBoolean(KEY_THEME, DEFAULT_THEME))
 
     override fun saveGpu(settings: Settings): Boolean {
         sharedPreferences.edit().putBoolean(KEY_GPU, settings.gpu).apply()
         return true
     }
 
-    override fun getGpu(): Settings {
-        val settings = Settings()
-        settings.gpu = sharedPreferences.getBoolean(KEY_GPU, DEFAULT_GPU)
-        return settings
-    }
+    override fun getGpu(): Settings =
+        Settings(gpu = sharedPreferences.getBoolean(KEY_GPU, DEFAULT_GPU))
 
     override fun savePercent(settings: Settings): Boolean {
         sharedPreferences.edit().putBoolean(KEY_PERCENT, settings.percent).apply()
         return true
     }
 
-    override fun getPercent(): Settings = Settings().apply { percent = sharedPreferences.getBoolean(KEY_PERCENT, DEFAULT_PERCENT) }
+    override fun getPercent(): Settings =
+        Settings(percent = sharedPreferences.getBoolean(KEY_PERCENT, DEFAULT_PERCENT))
 
     override fun saveSpeedFrameDetection(settings: Settings): Boolean {
         sharedPreferences.edit().putInt(KEY_SPEED_FRAME_DETECTION, settings.speedFrameDetection)
@@ -43,12 +38,8 @@ class SharedPrefSettingsStorage(context: Context): SettingsStorage {
         return true
     }
 
-    override fun getSpeedFrameDetection(): Settings {
-        val settings = Settings()
-        settings.speedFrameDetection =
-            sharedPreferences.getInt(KEY_SPEED_FRAME_DETECTION, DEFAULT_SPEED_FRAME_DETECTION)
-        return settings
-    }
+    override fun getSpeedFrameDetection(): Settings =
+        Settings(speedFrameDetection = sharedPreferences.getInt(KEY_SPEED_FRAME_DETECTION, DEFAULT_SPEED_FRAME_DETECTION))
 
     companion object {
         private const val SHARED_PREFS_NAME: String = "settings"
