@@ -6,7 +6,11 @@ import com.ortin.gesturetranslator.domain.models.CameraFacingSettings
 import com.ortin.gesturetranslator.domain.repository.LoadImageRepository
 
 class LoadImageUseCase(private val loadImageRepository: LoadImageRepository) {
-    fun execute(loadImagesListener: LoadImagesListener, lifecycleOwner: LifecycleOwner, cameraFacing: CameraFacingSettings = CameraFacingSettings.LENS_FACING_BACK) {
+    fun execute(
+        loadImagesListener: LoadImagesListener,
+        lifecycleOwner: LifecycleOwner,
+        cameraFacing: CameraFacingSettings = CameraFacingSettings.LENS_FACING_BACK
+    ) {
         loadImageRepository.loadImages(loadImagesListener, lifecycleOwner, cameraFacing)
     }
 

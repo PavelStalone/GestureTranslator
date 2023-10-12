@@ -15,7 +15,11 @@ class LoadImageRepositoryImpl(private val cameraManager: CameraManager) : LoadIm
         lifecycleOwner: LifecycleOwner,
         cameraFacing: CameraFacingSettings
     ) {
-        cameraManager.loadImage(loadImagesListener.mapToDomainListener(), lifecycleOwner, cameraFacing.mode)
+        cameraManager.loadImage(
+            loadImagesListener.mapToDomainListener(),
+            lifecycleOwner,
+            cameraFacing.mode
+        )
     }
 
     override fun setStatusFlashlight(mode: Boolean) {
