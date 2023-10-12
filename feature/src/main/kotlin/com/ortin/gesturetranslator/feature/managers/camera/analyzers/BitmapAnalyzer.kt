@@ -33,8 +33,13 @@ class BitmapAnalyzer(
             }
         }
         val rotatedBitmap = Bitmap.createBitmap(
-            bitmapBuffer, 0, 0, bitmapBuffer.width, bitmapBuffer.height,
-            matrix, true
+            bitmapBuffer,
+            0,
+            0,
+            bitmapBuffer.width,
+            bitmapBuffer.height,
+            matrix,
+            true
         )
 
         listener.invoke(

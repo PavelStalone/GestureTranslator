@@ -2,6 +2,7 @@ package com.ortin.gesturetranslator.feature.repository
 
 import androidx.lifecycle.LifecycleOwner
 import com.ortin.gesturetranslator.domain.listeners.LoadImagesListener
+import com.ortin.gesturetranslator.domain.models.CameraFacingSettings
 import com.ortin.gesturetranslator.domain.models.Image
 import com.ortin.gesturetranslator.domain.repository.LoadImageRepository
 import com.ortin.gesturetranslator.feature.managers.camera.CameraManager
@@ -11,9 +12,10 @@ import com.ortin.gesturetranslator.feature.managers.camera.models.ImageFromCamer
 class LoadImageRepositoryImpl(private val cameraManager: CameraManager) : LoadImageRepository {
     override fun loadImages(
         loadImagesListener: LoadImagesListener,
-        lifecycleOwner: LifecycleOwner
+        lifecycleOwner: LifecycleOwner,
+        cameraFacing: CameraFacingSettings
     ) {
-        cameraManager.loadImage(loadImagesListener.mapToDomainListener(), lifecycleOwner)
+        cameraManager.loadImage(loadImagesListener.mapToDomainListener(), lifecycleOwner, cameraFacing.mode)
     }
 
     override fun setStatusFlashlight(mode: Boolean) {

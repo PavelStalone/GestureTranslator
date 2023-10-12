@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.ortin.gesturetranslator.domain.listeners.DetectionHandListener;
 import com.ortin.gesturetranslator.domain.listeners.LoadImagesListener;
+import com.ortin.gesturetranslator.domain.models.CameraFacingSettings;
 import com.ortin.gesturetranslator.domain.models.CoordinateClassification;
 import com.ortin.gesturetranslator.domain.models.HandDetected;
 import com.ortin.gesturetranslator.domain.models.Image;
@@ -58,7 +59,7 @@ public class MainViewModel extends ViewModel implements LoadImagesListener, Dete
     }
 
     public void startRealTimeImagining(LifecycleOwner lifecycleOwner) {
-        loadImageUseCase.execute(this, lifecycleOwner);
+        loadImageUseCase.execute(this, lifecycleOwner, CameraFacingSettings.LENS_FACING_BACK);
         detectHandUseCase.setOnDetectionHandListener(this);
     }
 
