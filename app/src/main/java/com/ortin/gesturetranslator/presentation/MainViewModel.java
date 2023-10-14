@@ -19,8 +19,8 @@ import com.ortin.gesturetranslator.domain.usecases.DetectHandUseCase;
 import com.ortin.gesturetranslator.domain.usecases.LoadImageUseCase;
 import com.ortin.gesturetranslator.domain.usecases.RecognizeCoordinateUseCase;
 import com.ortin.gesturetranslator.domain.usecases.WordCompileUseCase;
-import com.ortin.gesturetranslator.models.MainFrameState;
-import com.ortin.gesturetranslator.models.PredictState;
+import com.ortin.gesturetranslator.app.models.MainFrameState;
+import com.ortin.gesturetranslator.app.models.PredictState;
 
 import javax.inject.Inject;
 

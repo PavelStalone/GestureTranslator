@@ -16,8 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
-
-import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -27,12 +25,11 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.ortin.gesturetranslator.components.OnChangedStatusListener;
 import com.ortin.gesturetranslator.databinding.MainFrameBinding;
-import com.ortin.gesturetranslator.models.MainFrameState;
-import com.ortin.gesturetranslator.models.PredictState;
+import com.ortin.gesturetranslator.app.models.MainFrameState;
+import com.ortin.gesturetranslator.app.models.PredictState;
 
 import dagger.hilt.android.AndroidEntryPoint;
 

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.ortin.gesturetranslator.R;
 import com.ortin.gesturetranslator.databinding.InformationFragmentBinding;
 import com.ortin.gesturetranslator.decorators.SpacesItemDecoration;
-import com.ortin.gesturetranslator.models.DeveloperCard;
+import com.ortin.gesturetranslator.app.models.DeveloperCard;
 
 import java.util.ArrayList;
 import java.util.List;
