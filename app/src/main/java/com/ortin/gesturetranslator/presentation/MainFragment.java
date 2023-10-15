@@ -126,14 +126,14 @@ public class MainFragment extends Fragment {
 
         viewModel.getMainLiveData().observe(getViewLifecycleOwner(), state -> {
             if (lastMainFrameState == null) {
-                binding.controlMenu.realTimeBTN.setState(state.isRealtimeButton());
-                binding.controlMenu.flashLight.setState(state.isFlashlight());
+                binding.controlMenu.realTimeBTN.setState(state.getRealTimeButton());
+                binding.controlMenu.flashLight.setState(state.getFlashLight());
                 bottomSheetBehavior.setState(state.getBottomSheetBehavior());
             } else {
-                if (lastMainFrameState.isRealtimeButton() != state.isRealtimeButton())
-                    binding.controlMenu.realTimeBTN.setState(state.isRealtimeButton());
-                if (lastMainFrameState.isFlashlight() != state.isFlashlight())
-                    binding.controlMenu.flashLight.setState(state.isFlashlight());
+                if (lastMainFrameState.getRealTimeButton() != state.getRealTimeButton())
+                    binding.controlMenu.realTimeBTN.setState(state.getRealTimeButton());
+                if (lastMainFrameState.getRealTimeButton() != state.getRealTimeButton())
+                    binding.controlMenu.flashLight.setState(state.getFlashLight());
                 if (lastMainFrameState.getBottomSheetBehavior() != state.getBottomSheetBehavior())
                     bottomSheetBehavior.setState(state.getBottomSheetBehavior());
             }

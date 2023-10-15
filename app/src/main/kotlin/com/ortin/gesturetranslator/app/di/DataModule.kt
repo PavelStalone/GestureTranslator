@@ -17,13 +17,13 @@ import javax.inject.Singleton
 class DataModule {
     @Provides
     @Singleton
-    fun provideSettingsRepository(settingsStorage: SettingsStorage?): SettingsRepository {
+    fun provideSettingsRepository(settingsStorage: SettingsStorage): SettingsRepository {
         return SettingsRepositoryImpl(settingsStorage)
     }
 
     @Provides
     @Singleton
-    fun provideSettingsStorage(@ApplicationContext context: Context?): SettingsStorage {
+    fun provideSettingsStorage(@ApplicationContext context: Context): SettingsStorage {
         return SharedPrefSettingsStorage(context)
     }
 }

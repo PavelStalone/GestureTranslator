@@ -15,7 +15,7 @@ class RecognizeCoordinateRepositoryImpl(private val modelCoordinateManager: Mode
 
     // Правила перевода для связи domain и core модулей
     private fun mapToCoreCoordinate(handDetected: HandDetected): ModelCoordinateArray {
-        val oldCoord = handDetected.coordinates
+        val oldCoord = handDetected.coordinates()
         val coord = DoubleArray(oldCoord.size).mapIndexed { index, _ -> oldCoord[index].toDouble() }
             .toDoubleArray()
 

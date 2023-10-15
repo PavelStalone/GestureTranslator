@@ -25,8 +25,8 @@ import javax.inject.Singleton
 class CoreModule {
     @Provides
     @Singleton
-    fun provideRecogniseImageRepository(tfLiteManager: TfLiteManager?): RecognizeImageRepository {
-        return RecognizeImageRepositoryImpl(tfLiteManager!!)
+    fun provideRecogniseImageRepository(tfLiteManager: TfLiteManager): RecognizeImageRepository {
+        return RecognizeImageRepositoryImpl(tfLiteManager)
     }
 
     @Provides
@@ -37,20 +37,20 @@ class CoreModule {
 
     @Provides
     @Singleton
-    fun provideHandDetectionRepository(mediaPipeManager: MediaPipeManager?): HandDetectionRepository {
-        return HandDetectionRepositoryImpl(mediaPipeManager!!)
+    fun provideHandDetectionRepository(mediaPipeManager: MediaPipeManager): HandDetectionRepository {
+        return HandDetectionRepositoryImpl(mediaPipeManager)
     }
 
     @Provides
     @Singleton
-    fun provideMediaPipeManager(@ApplicationContext context: Context?): MediaPipeManager {
+    fun provideMediaPipeManager(@ApplicationContext context: Context): MediaPipeManager {
         return MediaPipeManagerImpl(context, "hand_landmarker.task")
     }
 
     @Provides
     @Singleton
-    fun provideRecognizeCoordinateRepository(modelCoordinateManager: ModelCoordinateManager?): RecognizeCoordinateRepository {
-        return RecognizeCoordinateRepositoryImpl(modelCoordinateManager!!)
+    fun provideRecognizeCoordinateRepository(modelCoordinateManager: ModelCoordinateManager): RecognizeCoordinateRepository {
+        return RecognizeCoordinateRepositoryImpl(modelCoordinateManager)
     }
 
     @Provides

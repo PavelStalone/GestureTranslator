@@ -1,6 +1,6 @@
 package com.ortin.gesturetranslator.app.models
 
-class DeveloperCard(
+data class DeveloperCard(
     val name: String,
     val description: String,
     val icon: Int,

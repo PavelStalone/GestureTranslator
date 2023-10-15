@@ -18,37 +18,45 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.components.FragmentComponent
 import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
-@InstallIn(ViewModelComponent::class, FragmentComponent::class, ActivityComponent::class)
+@InstallIn(SingletonComponent::class)
 class DomainModule {
     @Provides
-    fun provideLoadImageUseCase(loadImageRepository: LoadImageRepository?): LoadImageUseCase {
+    @Singleton
+    fun provideLoadImageUseCase(loadImageRepository: LoadImageRepository): LoadImageUseCase {
         return LoadImageUseCase(loadImageRepository)
     }
 
     @Provides
-    fun provideWordCompileUseCase(wordCompilerRepository: WordCompilerRepository?): WordCompileUseCase {
+    @Singleton
+    fun provideWordCompileUseCase(wordCompilerRepository: WordCompilerRepository): WordCompileUseCase {
         return WordCompileUseCase(wordCompilerRepository)
     }
 
     @Provides
-    fun provideRecognizeImageUseCase(recognizeImageRepository: RecognizeImageRepository?): RecognizeImageUseCase {
+    @Singleton
+    fun provideRecognizeImageUseCase(recognizeImageRepository: RecognizeImageRepository): RecognizeImageUseCase {
         return RecognizeImageUseCase(recognizeImageRepository)
     }
 
     @Provides
-    fun provideDetectHandUseCase(handDetectionRepository: HandDetectionRepository?): DetectHandUseCase {
+    @Singleton
+    fun provideDetectHandUseCase(handDetectionRepository: HandDetectionRepository): DetectHandUseCase {
         return DetectHandUseCase(handDetectionRepository)
     }
 
     @Provides
-    fun provideRecognizeCoordinateUseCase(recognizeCoordinateRepository: RecognizeCoordinateRepository?): RecognizeCoordinateUseCase {
+    @Singleton
+    fun provideRecognizeCoordinateUseCase(recognizeCoordinateRepository: RecognizeCoordinateRepository): RecognizeCoordinateUseCase {
         return RecognizeCoordinateUseCase(recognizeCoordinateRepository)
     }
 
     @Provides
-    fun provideSaveSettingsUseCase(settingsRepository: SettingsRepository?): SaveLoadSettingsUseCase {
+    @Singleton
+    fun provideSaveSettingsUseCase(settingsRepository: SettingsRepository): SaveLoadSettingsUseCase {
         return SaveLoadSettingsUseCase(settingsRepository)
     }
 }

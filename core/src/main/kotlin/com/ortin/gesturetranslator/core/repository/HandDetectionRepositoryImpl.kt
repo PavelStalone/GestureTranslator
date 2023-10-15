@@ -26,7 +26,7 @@ class HandDetectionRepositoryImpl(private val mediaPipeManager: MediaPipeManager
     private fun mapToCoreHandDetection(mpDetection: MPDetection?): HandDetected? {
         mpDetection ?: return null
 
-        val coordinates = FloatArray(42)
+        val coordinates = MutableList(42) {0f}
         val result = mpDetection.result
 
         if (result.landmarks().size != 0) {

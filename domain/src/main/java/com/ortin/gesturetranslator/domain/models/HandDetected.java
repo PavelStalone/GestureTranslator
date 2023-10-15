@@ -1,13 +1,6 @@
 package com.ortin.gesturetranslator.domain.models;
 
-public class HandDetected {
-    private final float[] coordinates;
+import java.util.List;
 
-    public HandDetected(float[] coordinates) {
-        this.coordinates = coordinates;
-    }
-
-    public float[] getCoordinates() {
-        return coordinates;
-    }
+public record HandDetected(List<Float> coordinates) {
 }

@@ -21,20 +21,20 @@ import javax.inject.Singleton
 class FeatureModule {
     @Provides
     @Singleton
-    fun provideLoadImageRepository(cameraManager: CameraManager?): LoadImageRepository {
-        return LoadImageRepositoryImpl(cameraManager!!)
+    fun provideLoadImageRepository(cameraManager: CameraManager): LoadImageRepository {
+        return LoadImageRepositoryImpl(cameraManager)
     }
 
     @Provides
     @Singleton
-    fun provideCameraManager(@ApplicationContext context: Context?): CameraManager {
-        return CameraManagerImpl(context!!)
+    fun provideCameraManager(@ApplicationContext context: Context): CameraManager {
+        return CameraManagerImpl(context)
     }
 
     @Provides
     @Singleton
-    fun provideWordCompilerRepository(wordCompilerManager: WordCompilerManager?): WordCompilerRepository {
-        return WordCompilerRepositoryImpl(wordCompilerManager!!)
+    fun provideWordCompilerRepository(wordCompilerManager: WordCompilerManager): WordCompilerRepository {
+        return WordCompilerRepositoryImpl(wordCompilerManager)
     }
 
     @Provides
