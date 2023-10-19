@@ -74,9 +74,7 @@ class HandLandmarkerHelper(
         }
     }
 
-    fun detectLiveStream(
-        image: Bitmap
-    ) {
+    fun detectLiveStream(image: Bitmap) {
         if (settingsModel.runningMode != RunningMode.LIVE_STREAM) {
             throw IllegalArgumentException(
                 "Attempting to call detectLiveStream while not using RunningMode.LIVE_STREAM"
@@ -129,33 +127,29 @@ class HandLandmarkerHelper(
         for (i in 0..numberOfFrameToRead) {
             val timestampMs = i * inferenceIntervalMs // ms
 
-            retriever
-                .getFrameAtTime(
-                    timestampMs * 1000, // convert from ms to micro-s
-                    MediaMetadataRetriever.OPTION_CLOSEST
-                )
-                ?.let { frame ->
-                    val argb8888Frame =
-                        if (frame.config == Bitmap.Config.ARGB_8888) frame
-                        else frame.copy(Bitmap.Config.ARGB_8888, false)
-                    val mpImage = BitmapImageBuilder(argb8888Frame).build()
+            retriever.getFrameAtTime(
+                timestampMs * 1000, // convert from ms to micro-s
+                MediaMetadataRetriever.OPTION_CLOSEST
+            )?.let { frame ->
+                val argb8888Frame =
+                    if (frame.config == Bitmap.Config.ARGB_8888) frame
+                    else frame.copy(Bitmap.Config.ARGB_8888, false)
+                val mpImage = BitmapImageBuilder(argb8888Frame).build()
 
-                    handLandmarker?.detectForVideo(mpImage, timestampMs)
-                        ?.let { detectionResult ->
-                            resultList.add(detectionResult)
-                        } ?: {
-                        didErrorOccurred = true
-                        handLandmarkerHelperListener?.onError(
-                            RuntimeException("com.ortin.gesturetranslator.core.managers.mediapipe.models.MPDetection could not be returned in detectVideoFile")
-                        )
-                    }
-                }
-                ?: run {
+                handLandmarker?.detectForVideo(mpImage, timestampMs)?.let { detectionResult ->
+                    resultList.add(detectionResult)
+                } ?: {
                     didErrorOccurred = true
                     handLandmarkerHelperListener?.onError(
-                        RuntimeException("Frame at specified time could not be retrieved when detecting in video")
+                        RuntimeException("com.ortin.gesturetranslator.core.managers.mediapipe.models.MPDetection could not be returned in detectVideoFile")
                     )
                 }
+            } ?: run {
+                didErrorOccurred = true
+                handLandmarkerHelperListener?.onError(
+                    RuntimeException("Frame at specified time could not be retrieved when detecting in video")
+                )
+            }
         }
         retriever.release()
 

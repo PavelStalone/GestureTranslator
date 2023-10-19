@@ -10,9 +10,7 @@ import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPVideoDetecti
 import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPVideoInput
 import com.ortin.gesturetranslator.core.managers.mediapipe.models.SettingsModel
 import com.ortin.gesturetranslator.domain.listeners.DetectionHandListener
-import com.ortin.gesturetranslator.domain.models.Delegation
 import com.ortin.gesturetranslator.domain.models.ImageDetected
-import com.ortin.gesturetranslator.domain.models.InputMode
 import com.ortin.gesturetranslator.domain.models.SettingsMediaPipe
 import com.ortin.gesturetranslator.domain.models.VideoDetected
 import com.ortin.gesturetranslator.domain.models.VideoFileDecode
@@ -40,7 +38,7 @@ class HandDetectionRepositoryImpl(private val mediaPipeManager: MediaPipeManager
 
     // Правила перевода для связи domain и core модулей
     private fun MPImageDetection?.mapToCoreImageDetected(): ImageDetected? {
-        this ?: return null
+        if (this == null) return null
 
         val coordinates = MutableList(42) { 0f }
         val result = this.result
@@ -65,7 +63,7 @@ class HandDetectionRepositoryImpl(private val mediaPipeManager: MediaPipeManager
     }
 
     private fun MPVideoDetection?.mapToVideDetected(): VideoDetected? {
-        this ?: return null
+        if (this == null) return null
 
         val results = MutableList<ImageDetected?>(this.results.size) { null }
 
@@ -108,13 +106,13 @@ class HandDetectionRepositoryImpl(private val mediaPipeManager: MediaPipeManager
             minHandPresenceConfidence = this.minHandPresenceConfidence,
             maxNumHands = this.maxNumHands,
             currentDelegate = when (this.currentDelegate) {
-                Delegation.DELEGATE_CPU -> HandLandmarkerHelper.DELEGATE_CPU
-                Delegation.DELEGATE_GPU -> HandLandmarkerHelper.DELEGATE_GPU
+                SettingsMediaPipe.Delegation.DELEGATE_CPU -> HandLandmarkerHelper.DELEGATE_CPU
+                SettingsMediaPipe.Delegation.DELEGATE_GPU -> HandLandmarkerHelper.DELEGATE_GPU
             },
             runningMode = when (this.runningMode) {
-                InputMode.LIVE_STREAM -> RunningMode.LIVE_STREAM
-                InputMode.IMAGE -> RunningMode.IMAGE
-                InputMode.VIDEO -> RunningMode.VIDEO
+                SettingsMediaPipe.InputMode.LIVE_STREAM -> RunningMode.LIVE_STREAM
+                SettingsMediaPipe.InputMode.IMAGE -> RunningMode.IMAGE
+                SettingsMediaPipe.InputMode.VIDEO -> RunningMode.VIDEO
             }
         )
 
