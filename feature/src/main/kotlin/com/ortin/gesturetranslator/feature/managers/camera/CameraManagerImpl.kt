@@ -7,19 +7,20 @@ import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.resolutionselector.AspectRatioStrategy
 import androidx.camera.core.resolutionselector.ResolutionSelector
 import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import com.google.common.util.concurrent.ListenableFuture
 import com.ortin.gesturetranslator.feature.managers.camera.analyzers.BitmapAnalyzer
 import com.ortin.gesturetranslator.feature.managers.camera.listeners.CameraListener
+import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.concurrent.Executor
 import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
+import javax.inject.Inject
 
-class CameraManagerImpl(
-    private val context: Context,
-    private val cameraExecutor: ExecutorService = Executors.newSingleThreadExecutor(),
-    private val outputExecutor: Executor = ContextCompat.getMainExecutor(context)
+class CameraManagerImpl @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val cameraExecutor: ExecutorService,
+    private val outputExecutor: Executor,
+    private val cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
 ) : CameraManager {
     private var camera: Camera? = null
 
@@ -28,9 +29,6 @@ class CameraManagerImpl(
         lifecycleOwner: LifecycleOwner,
         cameraFacing: Int
     ) {
-        val cameraProviderFuture: ListenableFuture<ProcessCameraProvider> =
-            ProcessCameraProvider.getInstance(context)
-
         cameraProviderFuture.addListener({
             try {
                 val cameraProvider = cameraProviderFuture.get()

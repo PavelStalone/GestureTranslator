@@ -16,9 +16,9 @@ class LoadImageRepositoryImpl(private val cameraManager: CameraManager) : LoadIm
         cameraFacing: CameraFacingSettings
     ) {
         cameraManager.loadImage(
-            loadImagesListener.mapToDomainListener(),
-            lifecycleOwner,
-            cameraFacing.mode
+            cameraListener = loadImagesListener.mapToDomainListener(),
+            lifecycleOwner = lifecycleOwner,
+            cameraFacing = cameraFacing.mode
         )
     }
 
