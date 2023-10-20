@@ -2,6 +2,8 @@ package com.ortin.gesturetranslator.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+// Light color scheme
+
 val md_theme_light_primary = Color(0xFF99405D)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
 val md_theme_light_primaryContainer = Color(0xFFFFD9E1)
@@ -32,6 +34,8 @@ val md_theme_light_surfaceTint = Color(0xFF99405D)
 val md_theme_light_outlineVariant = Color(0xFFD6C2C5)
 val md_theme_light_scrim = Color(0xFF000000)
 
+// Dark color cheme
+
 val md_theme_dark_primary = Color(0xFFFFB1C5)
 val md_theme_dark_onPrimary = Color(0xFF5E112F)
 val md_theme_dark_primaryContainer = Color(0xFF7B2946)
@@ -61,6 +65,5 @@ val md_theme_dark_inversePrimary = Color(0xFF99405D)
 val md_theme_dark_surfaceTint = Color(0xFFFFB1C5)
 val md_theme_dark_outlineVariant = Color(0xFF514346)
 val md_theme_dark_scrim = Color(0xFF000000)
-
 
 val seed = Color(0xFF783C4E)

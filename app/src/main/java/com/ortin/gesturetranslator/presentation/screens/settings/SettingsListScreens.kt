@@ -1,4 +1,4 @@
-package com.ortin.gesturetranslator.presentation.screens
+package com.ortin.gesturetranslator.presentation.screens.settings
 
 val settingsScreens = listOf(
     SettingsScreens.Premium,

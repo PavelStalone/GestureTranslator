@@ -2,6 +2,7 @@ package com.ortin.gesturetranslator.presentation.ui.theme
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,14 +17,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SurfaceText(text: String) {
+fun SurfaceText(text: String, modifier: Modifier = Modifier) {
     Surface(
+        modifier = modifier,
         shape = MaterialTheme.shapes.medium,
         color = MaterialTheme.colorScheme.surface,
-        modifier = Modifier.fillMaxWidth(),
         tonalElevation = 2.dp
     ) {
         Box(modifier = Modifier.padding(15.dp)) {
@@ -35,11 +37,24 @@ fun SurfaceText(text: String) {
     }
 }
 
+@Preview
 @Composable
-fun ThemedButton(text: String, isPrimary: Boolean, isCentered: Boolean, onClick: () -> Unit) {
+fun SurfaceTextPreview() {
+    OrtinTheme {
+        SurfaceText(text = "")
+    }
+}
+
+@Composable
+fun MainButton(
+    text: String,
+    isPrimary: Boolean,
+    isCentered: Boolean,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+) {
     Button(
-        modifier = Modifier
-            .fillMaxWidth(),
+        modifier = modifier,
         colors = if (isPrimary) ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primary,
             contentColor = MaterialTheme.colorScheme.onPrimary
@@ -48,7 +63,6 @@ fun ThemedButton(text: String, isPrimary: Boolean, isCentered: Boolean, onClick:
             containerColor = MaterialTheme.colorScheme.secondaryContainer,
             contentColor = MaterialTheme.colorScheme.onSecondaryContainer
         ),
-
         contentPadding = PaddingValues(20.dp, 15.dp),
         onClick = { onClick() },
     ) {
@@ -69,6 +83,19 @@ fun ThemedButton(text: String, isPrimary: Boolean, isCentered: Boolean, onClick:
                     else MaterialTheme.colorScheme.onSecondaryContainer,
                 )
             )
+        }
+    }
+}
+
+@Preview
+@Composable
+fun MainButtonsPreview() {
+    OrtinTheme {
+        Column {
+            MainButton(text = "Example text", isPrimary = true, isCentered = true) {}
+            MainButton(text = "Example text", isPrimary = false, isCentered = true) {}
+            MainButton(text = "Example text", isPrimary = true, isCentered = false) {}
+            MainButton(text = "Example text", isPrimary = false, isCentered = false) {}
         }
     }
 }

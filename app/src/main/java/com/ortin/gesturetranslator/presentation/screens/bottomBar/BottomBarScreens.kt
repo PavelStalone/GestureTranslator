@@ -1,9 +1,8 @@
-package com.ortin.gesturetranslator.presentation.screens
+package com.ortin.gesturetranslator.presentation.screens.bottomBar
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.ui.graphics.vector.ImageVector
-import kotlin.reflect.KClass
 
 val bottomBarScreens = listOf(
     BottomBarScreens.Home,
