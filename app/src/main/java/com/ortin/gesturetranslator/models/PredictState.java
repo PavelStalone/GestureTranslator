@@ -2,17 +2,17 @@ package com.ortin.gesturetranslator.models;
 
 import android.graphics.Bitmap;
 
+import java.util.List;
+
 public class PredictState {
     private Bitmap imageFromCamera = null;
     private String predictWord = "";
     private String predictLetter = "";
-    private float[] coordinateHand = null;
+    private List<Float> coordinateHand = null;
 
-    public PredictState() {
+    public PredictState() {}
 
-    }
-
-    public PredictState(Bitmap imageFromCamera, String predictWord, String predictLetter, float[] coordinateHand) {
+    public PredictState(Bitmap imageFromCamera, String predictWord, String predictLetter, List<Float> coordinateHand) {
         this.imageFromCamera = imageFromCamera;
         this.predictWord = predictWord;
         this.predictLetter = predictLetter;
@@ -27,7 +27,7 @@ public class PredictState {
         return predictWord;
     }
 
-    public float[] getCoordinateHand() {
+    public List<Float> getCoordinateHand() {
         return coordinateHand;
     }
 

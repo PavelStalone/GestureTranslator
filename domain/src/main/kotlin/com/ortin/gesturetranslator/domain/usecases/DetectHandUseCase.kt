@@ -1,15 +1,28 @@
 package com.ortin.gesturetranslator.domain.usecases
 
+import android.graphics.Bitmap
 import com.ortin.gesturetranslator.domain.listeners.DetectionHandListener
-import com.ortin.gesturetranslator.domain.models.Image
+import com.ortin.gesturetranslator.domain.models.ImageDetected
+import com.ortin.gesturetranslator.domain.models.SettingsMediaPipe
+import com.ortin.gesturetranslator.domain.models.VideoDetected
+import com.ortin.gesturetranslator.domain.models.VideoFileDecode
 import com.ortin.gesturetranslator.domain.repository.HandDetectionRepository
 
 class DetectHandUseCase(private val handDetectionRepository: HandDetectionRepository) {
-    fun execute(image: Image) {
-        handDetectionRepository.detectImage(image)
+    fun detectImage(image: Bitmap): ImageDetected? = handDetectionRepository.detectImage(image)
+
+    fun detectVideoFile(videoFile: VideoFileDecode): VideoDetected? =
+        handDetectionRepository.detectVideoFile(videoFile)
+
+    fun detectLiveStream(image: Bitmap) {
+        handDetectionRepository.detectLiveStream(image)
     }
 
-    fun setOnDetectionHandListener(detectionHandListener: DetectionHandListener) {
-        handDetectionRepository.setDetectionHandListener(detectionHandListener)
+    fun setSettingsModel(settingsMediaPipe: SettingsMediaPipe) {
+        handDetectionRepository.setSettingsModel(settingsMediaPipe)
+    }
+
+    fun setMPDetectionListener(detectionHandListener: DetectionHandListener) {
+        handDetectionRepository.setMPDetectionListener(detectionHandListener)
     }
 }

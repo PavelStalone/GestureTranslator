@@ -11,7 +11,8 @@ import com.ortin.gesturetranslator.domain.repository.RecognizeImageRepository
 import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
 
-class RecognizeImageRepositoryImpl(private val tfLiteManager: TfLiteManager) : RecognizeImageRepository {
+class RecognizeImageRepositoryImpl(private val tfLiteManager: TfLiteManager) :
+    RecognizeImageRepository {
     override fun recogniseImage(image: Image) =
         tfLiteManager.recogniseImage(mapToCoreImage(image))
 
@@ -22,15 +23,15 @@ class RecognizeImageRepositoryImpl(private val tfLiteManager: TfLiteManager) : R
     private fun mapToCoreImage(image: Image): TfLiteImage {
         val imageProcessor = ImageProcessor.Builder().build()
         val tensorImage = imageProcessor.process(TensorImage.fromBitmap(image.bitmap))
+
         return TfLiteImage(tensorImage, image.rotation)
     }
 
-    private fun mapToCoreImageClassification(tfLiteImageClassification: TfLiteImageClassification): ImageClassification {
-        return ImageClassification(
+    private fun mapToCoreImageClassification(tfLiteImageClassification: TfLiteImageClassification): ImageClassification =
+        ImageClassification(
             tfLiteImageClassification.label,
             tfLiteImageClassification.percent
         )
-    }
 
     private fun mapToCoreListener(recognizeImageListener: RecognizeImageListener): TfLiteRecognizeListener {
         return object : TfLiteRecognizeListener {

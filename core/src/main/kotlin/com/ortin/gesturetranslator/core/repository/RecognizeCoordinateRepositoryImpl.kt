@@ -4,22 +4,22 @@ import com.ortin.gesturetranslator.core.managers.model_coordinate.ModelCoordinat
 import com.ortin.gesturetranslator.core.managers.model_coordinate.models.ModelCoordinateArray
 import com.ortin.gesturetranslator.core.managers.model_coordinate.models.ModelCoordinateClassificationArray
 import com.ortin.gesturetranslator.domain.models.CoordinateClassification
-import com.ortin.gesturetranslator.domain.models.HandDetected
+import com.ortin.gesturetranslator.domain.models.ImageDetected
 import com.ortin.gesturetranslator.domain.repository.RecognizeCoordinateRepository
 import kotlin.math.abs
 
 class RecognizeCoordinateRepositoryImpl(private val modelCoordinateManager: ModelCoordinateManager) :
     RecognizeCoordinateRepository {
-    override fun recognise(handDetected: HandDetected): CoordinateClassification =
-        mapToCoreCoordinateClassification(modelCoordinateManager.recognise(mapToCoreCoordinate(handDetected)))
+    override fun recognise(imageDetected: ImageDetected): CoordinateClassification =
+        mapToCoreCoordinateClassification(modelCoordinateManager.recognise(mapToCoreCoordinate(imageDetected)))
 
     // Правила перевода для связи domain и core модулей
-    private fun mapToCoreCoordinate(handDetected: HandDetected): ModelCoordinateArray {
-        val oldCoord = handDetected.coordinates
+    private fun mapToCoreCoordinate(imageDetected: ImageDetected): ModelCoordinateArray {
+        val oldCoord = imageDetected.coordinates
         val coord = List(oldCoord.size){ index -> oldCoord[index].toDouble() }.toMutableList()
 
-        var mainX = coord[0]
-        var mainY = coord[1]
+        val mainX = coord[0]
+        val mainY = coord[1]
         var minX = 10.0
         var minY = 10.0
 
@@ -52,6 +52,7 @@ class RecognizeCoordinateRepositoryImpl(private val modelCoordinateManager: Mode
             coord[i] *= coefX
             coord[i + 1] *= coefY
         }
+
         return ModelCoordinateArray(coord)
     }
 

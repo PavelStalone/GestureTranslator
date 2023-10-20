@@ -1,8 +1,8 @@
 package com.ortin.gesturetranslator.core.managers.mediapipe.listeners
 
-import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPDetection
+import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPImageDetection
 
 interface MPDetectionListener {
-    fun detect(mpDetection: MPDetection?)
-    fun error(exception: Exception)
+    fun onResults(mpImageDetection: MPImageDetection?)
+    fun onError(exception: Exception)
 }

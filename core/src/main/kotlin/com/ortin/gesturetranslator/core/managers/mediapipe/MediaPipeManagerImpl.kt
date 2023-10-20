@@ -1,55 +1,44 @@
 package com.ortin.gesturetranslator.core.managers.mediapipe
 
 import android.content.Context
-import android.os.SystemClock
-import com.google.mediapipe.framework.image.MPImage
-import com.google.mediapipe.tasks.core.BaseOptions
-import com.google.mediapipe.tasks.vision.core.RunningMode
-import com.google.mediapipe.tasks.vision.handlandmarker.HandLandmarker
-import com.google.mediapipe.tasks.vision.handlandmarker.HandLandmarker.HandLandmarkerOptions
-import com.google.mediapipe.tasks.vision.handlandmarker.HandLandmarkerResult
+import android.graphics.Bitmap
 import com.ortin.gesturetranslator.core.managers.mediapipe.listeners.MPDetectionListener
-import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPDetection
-import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPImageInput
+import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPImageDetection
+import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPVideoDetection
+import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPVideoInput
+import com.ortin.gesturetranslator.core.managers.mediapipe.models.SettingsModel
 
-class MediaPipeManagerImpl(val context: Context, private val modelPath: String) : MediaPipeManager {
-    private var mpDetectionListener: MPDetectionListener? = null
-    private var handLandmarker: HandLandmarker? = null
+class MediaPipeManagerImpl(val context: Context, modelPath: String) : MediaPipeManager {
+    private var handLandmarkerHelper: HandLandmarkerHelper
 
-    override fun detectImage(mpImageInput: MPImageInput) {
-        handLandmarker ?: setupBuilder()
-        handLandmarker?.detectAsync(mpImageInput.mpImage, SystemClock.uptimeMillis())
+    init {
+        handLandmarkerHelper = HandLandmarkerHelper(
+            context = context,
+            modelPath = modelPath
+        )
+    }
+
+    override fun detectImage(image: Bitmap): MPImageDetection? =
+        handLandmarkerHelper.detectImage(image)
+
+    override fun detectVideoFile(videoFile: MPVideoInput): MPVideoDetection? =
+        handLandmarkerHelper.detectVideoFile(videoFile.videoUri, videoFile.inferenceIntervalMs)
+
+    override fun detectLiveStream(image: Bitmap) =
+        handLandmarkerHelper.detectLiveStream(image)
+
+    override fun setSettingsModel(settingsModel: SettingsModel) {
+        handLandmarkerHelper.settingsModel = settingsModel
+        handLandmarkerHelper.update()
     }
 
     override fun setMPDetectionListener(mpDetectionListener: MPDetectionListener) {
-        this.mpDetectionListener = mpDetectionListener
+        handLandmarkerHelper.handLandmarkerHelperListener = mpDetectionListener
+        handLandmarkerHelper.update()
     }
 
-    private fun setupBuilder() {
-        val baseOptionsBuilder = BaseOptions.builder().setModelAssetPath(modelPath)
-        val baseOptions = baseOptionsBuilder.build()
-        val optionsBuilder = HandLandmarkerOptions.builder()
-            .setBaseOptions(baseOptions)
-            .setMinHandDetectionConfidence(0.5f) // Минимальная оценка достоверности для обнаружения рук, которая считается успешной в модели обнаружения ладоней
-            .setMinTrackingConfidence(0.5f) // Минимальная оценка достоверности для того, чтобы отслеживание рук считалось успешным
-            .setMinHandPresenceConfidence(0.5f) // Минимальная оценка достоверности для оценки присутствия руки в модели обнаружения ориентира руки
-            .setNumHands(1) // Максимальное количество рук, обнаруженных Детектором ориентиров рук
-            .setRunningMode(RunningMode.LIVE_STREAM) // Устанавливает режим работы для задачи ручного ориентира
-            .setResultListener(this::resultDetection)
-            .setErrorListener(this::errorDetection)
-        val options = optionsBuilder.build()
-
-        handLandmarker = HandLandmarker.createFromOptions(context, options)
-    }
-
-    private fun resultDetection(result: HandLandmarkerResult, mpImage: MPImage) {
-        mpDetectionListener?.let {
-            if (result.landmarks().size == 0) it.detect(null)
-            else it.detect(MPDetection(result, mpImage))
-        }
-    }
-
-    private fun errorDetection(exception: Exception) {
-        mpDetectionListener?.error(exception)
+    private fun HandLandmarkerHelper.update() {
+        this.clearHandLandmarker()
+        this.setupHandLandmarker()
     }
 }

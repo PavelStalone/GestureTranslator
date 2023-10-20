@@ -3,27 +3,23 @@ package com.ortin.gesturetranslator.presentation;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.util.Log;
-
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.ortin.gesturetranslator.domain.listeners.DetectionHandListener;
 import com.ortin.gesturetranslator.domain.listeners.LoadImagesListener;
 import com.ortin.gesturetranslator.domain.models.CoordinateClassification;
-import com.ortin.gesturetranslator.domain.models.HandDetected;
 import com.ortin.gesturetranslator.domain.models.Image;
+import com.ortin.gesturetranslator.domain.models.ImageDetected;
 import com.ortin.gesturetranslator.domain.usecases.DetectHandUseCase;
 import com.ortin.gesturetranslator.domain.usecases.LoadImageUseCase;
 import com.ortin.gesturetranslator.domain.usecases.RecognizeCoordinateUseCase;
 import com.ortin.gesturetranslator.domain.usecases.WordCompileUseCase;
 import com.ortin.gesturetranslator.models.MainFrameState;
 import com.ortin.gesturetranslator.models.PredictState;
-
 import javax.inject.Inject;
-
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -59,7 +55,7 @@ public class MainViewModel extends ViewModel implements LoadImagesListener, Dete
 
     public void startRealTimeImagining(LifecycleOwner lifecycleOwner) {
         loadImageUseCase.execute(this, lifecycleOwner);
-        detectHandUseCase.setOnDetectionHandListener(this);
+        detectHandUseCase.setMPDetectionListener(this);
     }
 
     @Override
@@ -69,14 +65,15 @@ public class MainViewModel extends ViewModel implements LoadImagesListener, Dete
         PredictState predictState = predictLiveData.getValue();
         predictLiveData.setValue(new PredictState(bitmap, predictState.getPredictWord(), predictState.getPredictLetter(), predictState.getCoordinateHand()));
 
-        if (mainLiveData.getValue().isRealtimeButton()) detectHandUseCase.execute(image);
+        if (mainLiveData.getValue().isRealtimeButton())
+            detectHandUseCase.detectLiveStream(image.getBitmap());
     }
 
     @SuppressLint({"DefaultLocale", "SetTextI18n", "CheckResult"})
     @Override
-    public void detect(HandDetected handDetected) {
-        if (handDetected != null) {
-            CoordinateClassification coordinateClassification = recognizeCoordinateUseCase.execute(handDetected);
+    public void detect(ImageDetected imageDetected) {
+        if (imageDetected != null) {
+            CoordinateClassification coordinateClassification = recognizeCoordinateUseCase.execute(imageDetected);
 
             if (coordinateClassification.getPercent() > 30f) {
                 wordCompileUseCase.addLetter(coordinateClassification.getLabel());
@@ -86,7 +83,7 @@ public class MainViewModel extends ViewModel implements LoadImagesListener, Dete
 
             PredictState predictState = predictLiveData.getValue();
             Observable.just(predictState).subscribeOn(AndroidSchedulers.mainThread()).subscribe(t -> {
-                predictLiveData.setValue(new PredictState(t.getImageFromCamera(), wordCompileUseCase.getWord(), predictLetter, handDetected.getCoordinates()));
+                predictLiveData.setValue(new PredictState(t.getImageFromCamera(), wordCompileUseCase.getWord(), predictLetter, imageDetected.getCoordinates()));
             });
         } else {
             PredictState predictState = predictLiveData.getValue();
