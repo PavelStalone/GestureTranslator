@@ -6,12 +6,9 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import com.ortin.gesturetranslator.R;
-
 import java.util.List;
 
 public class PaintHand extends View {

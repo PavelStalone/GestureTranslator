@@ -8,4 +8,3 @@ data class PredictState(
     val predictLetter: String = "",
     val coordinateHand: List<Float>? = null
 )
-    

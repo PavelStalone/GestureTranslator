@@ -65,7 +65,7 @@ public class MainViewModel extends ViewModel implements LoadImagesListener, Dete
         PredictState predictState = predictLiveData.getValue();
         predictLiveData.setValue(new PredictState(bitmap, predictState.getPredictWord(), predictState.getPredictLetter(), predictState.getCoordinateHand()));
 
-        if (mainLiveData.getValue().getRealtimeButton())
+        if (mainLiveData.getValue().getRealTimeButton())
             detectHandUseCase.detectLiveStream(image.getBitmap());
     }
 
@@ -83,7 +83,7 @@ public class MainViewModel extends ViewModel implements LoadImagesListener, Dete
 
             PredictState predictState = predictLiveData.getValue();
             Observable.just(predictState).subscribeOn(AndroidSchedulers.mainThread()).subscribe(t -> {
-                predictLiveData.setValue(new PredictState(t.getImageFromCamera(), wordCompileUseCase.getWord(), predictLetter, imageDetected.coordinates()));
+                predictLiveData.setValue(new PredictState(t.getImageFromCamera(), wordCompileUseCase.getWord(), predictLetter, imageDetected.getCoordinates()));
             });
         } else {
             PredictState predictState = predictLiveData.getValue();
