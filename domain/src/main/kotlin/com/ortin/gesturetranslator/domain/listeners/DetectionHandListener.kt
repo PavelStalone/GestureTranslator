@@ -1,9 +1,9 @@
 package com.ortin.gesturetranslator.domain.listeners
 
-import com.ortin.gesturetranslator.domain.models.HandDetected
+import com.ortin.gesturetranslator.domain.models.ImageDetected
 
 interface DetectionHandListener {
-    fun detect(handDetected: HandDetected?)
+    fun detect(imageDetected: ImageDetected?)
 
     fun error(exception: Exception)
 }
