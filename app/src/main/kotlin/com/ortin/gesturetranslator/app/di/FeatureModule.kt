@@ -1,6 +1,5 @@
 package com.ortin.gesturetranslator.app.di
 
-import android.content.Context
 import com.ortin.gesturetranslator.domain.repository.LoadImageRepository
 import com.ortin.gesturetranslator.domain.repository.WordCompilerRepository
 import com.ortin.gesturetranslator.feature.managers.camera.CameraManager
@@ -13,10 +12,6 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
