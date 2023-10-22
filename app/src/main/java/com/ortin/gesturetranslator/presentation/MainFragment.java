@@ -1,7 +1,6 @@
 package com.ortin.gesturetranslator.presentation;
 
 import static android.app.Activity.RESULT_OK;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -30,7 +29,6 @@ import com.ortin.gesturetranslator.components.OnChangedStatusListener;
 import com.ortin.gesturetranslator.databinding.MainFrameBinding;
 import com.ortin.gesturetranslator.app.models.MainFrameState;
 import com.ortin.gesturetranslator.app.models.PredictState;
-
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
@@ -138,6 +136,7 @@ public class MainFragment extends Fragment {
                     bottomSheetBehavior.setState(state.getBottomSheetBehavior());
             }
 
+            binding.controlMenu.flashLight.setState(state.getFlashLight());
             lastMainFrameState = state;
         });
 

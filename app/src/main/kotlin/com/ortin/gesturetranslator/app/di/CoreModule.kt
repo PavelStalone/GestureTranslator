@@ -31,7 +31,7 @@ class CoreModule {
 
     @Provides
     @Singleton
-    fun provideTFLManager(@ApplicationContext context: Context?): TfLiteManager {
+    fun provideTFLManager(@ApplicationContext context: Context): TfLiteManager {
         return TfLiteManagerImpl(context, "MobileNetV2.tflite")
     }
 
