@@ -4,8 +4,10 @@ import com.ortin.gesturetranslator.data.models.Settings
 import com.ortin.gesturetranslator.data.storage.SettingsStorage
 import com.ortin.gesturetranslator.domain.models.SettingsDomain
 import com.ortin.gesturetranslator.domain.repository.SettingsRepository
+import javax.inject.Inject
 
-class SettingsRepositoryImpl(private val settingsStorage: SettingsStorage) : SettingsRepository {
+class SettingsRepositoryImpl @Inject constructor(private val settingsStorage: SettingsStorage) :
+    SettingsRepository {
     override fun saveTheme(settingsDomain: SettingsDomain): Boolean =
         settingsStorage.saveTheme(settingsDomain.mapToData())
 
