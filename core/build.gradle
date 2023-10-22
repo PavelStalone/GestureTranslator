@@ -2,6 +2,8 @@ plugins {
     id 'com.android.library'
     id "org.gradle.android.cache-fix"
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -46,6 +48,12 @@ dependencies {
      * Modules implementations
      */
     implementation project(path: ':domain')
+
+    /**
+     * Injection implementations
+     */
+    implementation "com.google.dagger:hilt-android:2.48"
+    kapt "com.google.dagger:hilt-compiler:2.48"
 
     /**
      * Tests implementations

@@ -10,8 +10,9 @@ import com.ortin.gesturetranslator.domain.models.ImageClassification
 import com.ortin.gesturetranslator.domain.repository.RecognizeImageRepository
 import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
+import javax.inject.Inject
 
-class RecognizeImageRepositoryImpl(private val tfLiteManager: TfLiteManager) :
+class RecognizeImageRepositoryImpl @Inject constructor(private val tfLiteManager: TfLiteManager) :
     RecognizeImageRepository {
     override fun recogniseImage(image: Image) =
         tfLiteManager.recogniseImage(mapToCoreImage(image))

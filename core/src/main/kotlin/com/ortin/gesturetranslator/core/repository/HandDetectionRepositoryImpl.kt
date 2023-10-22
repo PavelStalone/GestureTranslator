@@ -15,8 +15,9 @@ import com.ortin.gesturetranslator.domain.models.SettingsMediaPipe
 import com.ortin.gesturetranslator.domain.models.VideoDetected
 import com.ortin.gesturetranslator.domain.models.VideoFileDecode
 import com.ortin.gesturetranslator.domain.repository.HandDetectionRepository
+import javax.inject.Inject
 
-class HandDetectionRepositoryImpl(private val mediaPipeManager: MediaPipeManager) :
+class HandDetectionRepositoryImpl @Inject constructor(private val mediaPipeManager: MediaPipeManager) :
     HandDetectionRepository {
     override fun detectImage(image: Bitmap): ImageDetected? =
         mediaPipeManager.detectImage(image).mapToCoreImageDetected()
