@@ -1,4 +1,4 @@
-package com.ortin.gesturetranslator.di
+package com.ortin.gesturetranslator.app.di
 
 import com.ortin.gesturetranslator.domain.repository.LoadImageRepository
 import com.ortin.gesturetranslator.domain.repository.WordCompilerRepository
