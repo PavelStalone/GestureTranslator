@@ -9,6 +9,10 @@ import com.ortin.gesturetranslator.feature.managers.word_compiler.WordCompilerMa
 import com.ortin.gesturetranslator.feature.managers.word_compiler.WordCompilerManagerImpl
 import com.ortin.gesturetranslator.feature.repository.LoadImageRepositoryImpl
 import com.ortin.gesturetranslator.feature.repository.WordCompilerRepositoryImpl
+import dagger.Binds
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,17 +22,11 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class FeatureModule {
+object FeatureModule {
     @Provides
     @Singleton
     fun provideLoadImageRepository(cameraManager: CameraManager): LoadImageRepository {
         return LoadImageRepositoryImpl(cameraManager)
-    }
-
-    @Provides
-    @Singleton
-    fun provideCameraManager(@ApplicationContext context: Context): CameraManager {
-        return CameraManagerImpl(context)
     }
 
     @Provides
@@ -42,4 +40,11 @@ class FeatureModule {
     fun provideWordCompilerManager(): WordCompilerManager {
         return WordCompilerManagerImpl()
     }
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class FeatureModuleBind {
+    @Binds
+    abstract fun bindCameraManager(cameraManagerImpl: CameraManagerImpl): CameraManager
 }

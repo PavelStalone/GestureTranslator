@@ -1,85 +1,73 @@
 package com.ortin.gesturetranslator.feature.managers.camera
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Matrix
-import androidx.annotation.OptIn
-import androidx.camera.core.AspectRatio
 import androidx.camera.core.Camera
 import androidx.camera.core.CameraSelector
-import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.ImageProxy
+import androidx.camera.core.resolutionselector.AspectRatioStrategy
+import androidx.camera.core.resolutionselector.ResolutionSelector
 import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import com.google.common.util.concurrent.ListenableFuture
+import com.ortin.gesturetranslator.feature.managers.camera.analyzers.BitmapAnalyzer
 import com.ortin.gesturetranslator.feature.managers.camera.listeners.CameraListener
-import com.ortin.gesturetranslator.feature.managers.camera.models.ImageFromCamera
-import com.ortin.gesturetranslator.feature.translators.YUVtoRGB
+import dagger.hilt.android.qualifiers.ApplicationContext
+import java.util.concurrent.Executor
+import java.util.concurrent.ExecutorService
+import javax.inject.Inject
 
-class CameraManagerImpl(private val context: Context) : CameraManager {
-    private var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>? = null
-    private val translator: YUVtoRGB = YUVtoRGB()
-
-    private lateinit var bitmap: Bitmap
+class CameraManagerImpl @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val cameraExecutor: ExecutorService,
+    private val outputExecutor: Executor,
+    private val cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
+) : CameraManager {
     private var camera: Camera? = null
 
-    @OptIn(ExperimentalGetImage::class)
-    override fun loadImage(cameraListener: CameraListener?, lifecycleOwner: LifecycleOwner?) {
-        cameraProviderFuture = ProcessCameraProvider.getInstance(context)
-        cameraProviderFuture?.addListener({
+    override fun loadImage(
+        cameraListener: CameraListener,
+        lifecycleOwner: LifecycleOwner,
+        cameraFacing: Int
+    ) {
+        cameraProviderFuture.addListener({
             try {
-                val cameraProvider = cameraProviderFuture?.get()
-                val imageAnalysis = ImageAnalysis.Builder()
-                    .setTargetAspectRatio(AspectRatio.RATIO_4_3)
-                    .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                    .build()
+                val cameraProvider = cameraProviderFuture.get()
+                    ?: throw IllegalStateException("Camera initialization failed")
+
                 val cameraSelector = CameraSelector.Builder()
-                    .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+                    .requireLensFacing(cameraFacing)
                     .build()
 
-                imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(context)) { image: ImageProxy ->
-                    val img = image.image
-                    if (img != null) {
-                        bitmap = translator.translateYUV(img, context)
-
-                        val matrix = Matrix()
-                        matrix.postRotate(image.imageInfo.rotationDegrees.toFloat())
-
-                        bitmap = Bitmap.createBitmap(
-                            bitmap,
-                            0,
-                            0,
-                            bitmap.width,
-                            bitmap.height,
-                            matrix,
-                            true
-                        )
-                        val imageFromCamera =
-                            ImageFromCamera(bitmap, image.imageInfo.rotationDegrees)
-
-                        cameraListener?.getImage(imageFromCamera)
-                        image.close()
+                val imageAnalysis = ImageAnalysis.Builder()
+                    .setResolutionSelector(
+                        ResolutionSelector.Builder()
+                            .setAspectRatioStrategy(AspectRatioStrategy.RATIO_4_3_FALLBACK_AUTO_STRATEGY)
+                            .build()
+                    )
+                    .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                    .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888)
+                    .build()
+                    .also {
+                        it.setAnalyzer(cameraExecutor, BitmapAnalyzer(cameraFacing) { image ->
+                            outputExecutor.execute {
+                                cameraListener.getImage(image)
+                            }
+                        })
                     }
-                }
-                camera =
-                    lifecycleOwner?.let {
-                        cameraProvider?.bindToLifecycle(
-                            it,
-                            cameraSelector,
-                            imageAnalysis
-                        )
-                    }
+
+                cameraProvider.unbindAll()
+                camera = cameraProvider.bindToLifecycle(
+                    lifecycleOwner,
+                    cameraSelector,
+                    imageAnalysis
+                )
             } catch (e: Exception) {
-                cameraListener?.error(e)
+                cameraListener.error(e)
             }
-        }, ContextCompat.getMainExecutor(context))
+        }, outputExecutor)
     }
 
     override fun setStatusFlashlight(mode: Boolean) {
-        if (camera != null) {
-            camera!!.cameraControl.enableTorch(mode)
-        }
+        camera?.cameraControl?.enableTorch(mode)
     }
 }
