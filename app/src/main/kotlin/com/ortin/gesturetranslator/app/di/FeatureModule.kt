@@ -10,36 +10,26 @@ import com.ortin.gesturetranslator.feature.repository.LoadImageRepositoryImpl
 import com.ortin.gesturetranslator.feature.repository.WordCompilerRepositoryImpl
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object FeatureModule {
-    @Provides
-    @Singleton
-    fun provideLoadImageRepository(cameraManager: CameraManager): LoadImageRepository {
-        return LoadImageRepositoryImpl(cameraManager)
-    }
-
-    @Provides
-    @Singleton
-    fun provideWordCompilerRepository(wordCompilerManager: WordCompilerManager): WordCompilerRepository {
-        return WordCompilerRepositoryImpl(wordCompilerManager)
-    }
-
-    @Provides
-    @Singleton
-    fun provideWordCompilerManager(): WordCompilerManager {
-        return WordCompilerManagerImpl()
-    }
-}
-
-@Module
-@InstallIn(SingletonComponent::class)
 abstract class FeatureModuleBind {
     @Binds
+    @Singleton
     abstract fun bindCameraManager(cameraManagerImpl: CameraManagerImpl): CameraManager
+
+    @Binds
+    @Singleton
+    abstract fun provideLoadImageRepository(loadImageRepositoryImpl: LoadImageRepositoryImpl): LoadImageRepository
+
+    @Binds
+    @Singleton
+    abstract fun provideWordCompilerManager(wordCompilerManagerImpl: WordCompilerManagerImpl): WordCompilerManager
+
+    @Binds
+    @Singleton
+    abstract fun provideWordCompilerRepository(wordCompilerRepositoryImpl: WordCompilerRepositoryImpl): WordCompilerRepository
 }
