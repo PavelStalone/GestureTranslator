@@ -36,11 +36,7 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
     implementation "io.reactivex.rxjava3:rxjava:3.1.5"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
-
     implementation 'com.google.mediapipe:tasks-vision:latest.release'
-
-    implementation 'org.tensorflow:tensorflow-lite-task-vision-play-services:0.4.2'
-    implementation 'com.google.android.gms:play-services-tflite-gpu:16.1.0'
 
     /**
      * Modules implementations
