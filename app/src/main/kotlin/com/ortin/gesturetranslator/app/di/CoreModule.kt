@@ -1,4 +1,4 @@
-//package com.ortin.gesturetranslator.app.di
+package com.ortin.gesturetranslator.app.di
 //
 //import android.content.Context
 //import com.ortin.gesturetranslator.core.managers.mediapipe.MediaPipeManager
