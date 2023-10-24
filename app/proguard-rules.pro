@@ -19,6 +19,15 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
-
 -dontwarn javax.lang.model.**
 -dontwarn autovalue.shaded.com.squareup.javapoet.**
+-dontwarn javax.annotation.processing.SupportedAnnotationTypes.*
+-dontwarn javax.lang.model.SourceVersion.**
+-dontwarn javax.lang.model.element.Element.**
+-dontwarn javax.lang.model.element.ElementKind.**
+-dontwarn javax.lang.model.element.Modifier.**
+-dontwarn javax.lang.model.type.TypeMirror.**
+-dontwarn javax.lang.model.type.TypeVisito.**
+-dontwarn javax.lang.model.util.SimpleTypeVisitor8.**
+-dontwarn javax.annotation.processing.AbstractProcessor.**
+-dontwarn javax.annotation.processing.**
