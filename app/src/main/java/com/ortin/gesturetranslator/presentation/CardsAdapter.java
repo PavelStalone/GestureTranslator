@@ -7,22 +7,11 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.AsyncDifferConfig;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.ortin.gesturetranslator.R;
 import com.ortin.gesturetranslator.databinding.DevelopCardItemBinding;
-import com.ortin.gesturetranslator.domain.models.Image;
-import com.ortin.gesturetranslator.models.DeveloperCard;
-
+import com.ortin.gesturetranslator.app.models.DeveloperCard;
 import java.util.List;
 
 public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder> {

@@ -6,18 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
-
 import com.ortin.gesturetranslator.R;
 import com.ortin.gesturetranslator.databinding.SettingsLayoutBinding;
 import com.ortin.gesturetranslator.domain.usecases.SaveLoadSettingsUseCase;
-
 import javax.inject.Inject;
-
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint

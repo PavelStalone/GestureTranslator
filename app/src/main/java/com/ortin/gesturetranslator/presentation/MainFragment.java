@@ -1,7 +1,6 @@
 package com.ortin.gesturetranslator.presentation;
 
 import static android.app.Activity.RESULT_OK;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -16,8 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
-
-import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -27,14 +24,12 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.ortin.gesturetranslator.app.presentation.MainViewModel;
 import com.ortin.gesturetranslator.components.OnChangedStatusListener;
 import com.ortin.gesturetranslator.databinding.MainFrameBinding;
-import com.ortin.gesturetranslator.models.MainFrameState;
-import com.ortin.gesturetranslator.models.PredictState;
-
+import com.ortin.gesturetranslator.app.models.MainFrameState;
+import com.ortin.gesturetranslator.app.models.PredictState;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
@@ -129,19 +124,20 @@ public class MainFragment extends Fragment {
         BottomSheetBehavior<LinearLayout> bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheetBehaviorLayout.bottomSheetBehavior);
 
         viewModel.getMainLiveData().observe(getViewLifecycleOwner(), state -> {
+            binding.controlMenu.flashLight.setState(state.getFlashLight());
             if (lastMainFrameState == null) {
-                binding.controlMenu.realTimeBTN.setState(state.isRealtimeButton());
-                binding.controlMenu.flashLight.setState(state.isFlashlight());
+                binding.controlMenu.realTimeBTN.setState(state.getRealTimeButton());
                 bottomSheetBehavior.setState(state.getBottomSheetBehavior());
             } else {
-                if (lastMainFrameState.isRealtimeButton() != state.isRealtimeButton())
-                    binding.controlMenu.realTimeBTN.setState(state.isRealtimeButton());
-                if (lastMainFrameState.isFlashlight() != state.isFlashlight())
-                    binding.controlMenu.flashLight.setState(state.isFlashlight());
+                if (lastMainFrameState.getRealTimeButton() != state.getRealTimeButton())
+                    binding.controlMenu.realTimeBTN.setState(state.getRealTimeButton());
+                if (lastMainFrameState.getFlashLight() != state.getFlashLight())
+                    binding.controlMenu.flashLight.setState(state.getFlashLight());
                 if (lastMainFrameState.getBottomSheetBehavior() != state.getBottomSheetBehavior())
                     bottomSheetBehavior.setState(state.getBottomSheetBehavior());
             }
 
+            binding.controlMenu.flashLight.setState(state.getFlashLight());
             lastMainFrameState = state;
         });
 

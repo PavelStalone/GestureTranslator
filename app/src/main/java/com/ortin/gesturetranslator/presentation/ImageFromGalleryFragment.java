@@ -25,8 +25,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.ortin.gesturetranslator.databinding.ImageFromGalleryLayoutBinding;
 import com.ortin.gesturetranslator.domain.listeners.DetectionHandListener;
 import com.ortin.gesturetranslator.domain.models.CoordinateClassification;
-import com.ortin.gesturetranslator.domain.models.HandDetected;
-import com.ortin.gesturetranslator.domain.models.Image;
+import com.ortin.gesturetranslator.domain.models.ImageDetected;
 import com.ortin.gesturetranslator.domain.usecases.DetectHandUseCase;
 import com.ortin.gesturetranslator.domain.usecases.RecognizeCoordinateUseCase;
 
@@ -77,8 +76,7 @@ public class ImageFromGalleryFragment extends Fragment implements DetectionHandL
     private void init() {
         Uri uri = ImageFromGalleryFragmentArgs.fromBundle(getArguments()).getImage();
         binding.previewFromGallery.setImageURI(uri);
-        detectHandUseCase.setOnDetectionHandListener(this);
-
+        detectHandUseCase.setMPDetectionListener(this);
         predictUri(uri);
     }
 
@@ -102,7 +100,7 @@ public class ImageFromGalleryFragment extends Fragment implements DetectionHandL
                     @Override
                     public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                         Log.e("Gallery", "onResourceReady: " + resource);
-                        detectHandUseCase.execute(new Image(resource, 0));
+                        detectHandUseCase.detectLiveStream(resource);
                     }
                 });
     }
@@ -115,10 +113,10 @@ public class ImageFromGalleryFragment extends Fragment implements DetectionHandL
 
     @SuppressLint("CheckResult")
     @Override
-    public void detect(HandDetected handDetected) {
-        Log.e("Gallery", "detect: " + handDetected);
-        if (handDetected != null) {
-            CoordinateClassification coordinateClassification = recognizeCoordinateUseCase.execute(handDetected);
+    public void detect(ImageDetected imageDetected) {
+        Log.e("Gallery", "detect: " + imageDetected);
+        if (imageDetected != null) {
+            CoordinateClassification coordinateClassification = recognizeCoordinateUseCase.execute(imageDetected);
 
             String predictLetter = String.format("%s", coordinateClassification.getLabel());
             Log.e("Gallery", "label: " + coordinateClassification.getLabel());

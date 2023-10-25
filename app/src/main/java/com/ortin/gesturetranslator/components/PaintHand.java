@@ -6,11 +6,10 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import com.ortin.gesturetranslator.R;
+import java.util.List;
 
 public class PaintHand extends View {
 
@@ -56,18 +55,18 @@ public class PaintHand extends View {
         canvasPaint = new Paint(Paint.DITHER_FLAG);
     }
 
-    public void drawHand(@NonNull float[] coordinates) {
+    public void drawHand(@NonNull List<Float> coordinates) {
         canvasBitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
         drawCanvas = new Canvas(canvasBitmap);
 
-        for (int i = 0; i < coordinates.length; i += 2) {
-            drawCanvas.drawCircle(coordinates[i] * getWidth(), coordinates[i + 1] * getHeight(), 5, pointPaint);
+        for (int i = 0; i < coordinates.size(); i += 2) {
+            drawCanvas.drawCircle(coordinates.get(i) * getWidth(), coordinates.get(i + 1) * getHeight(), 5, pointPaint);
         }
 
         invalidate();
     }
 
-    public void clear(){
+    public void clear() {
         if (getWidth() > 0 && getHeight() > 0) {
             canvasBitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
             drawCanvas = new Canvas(canvasBitmap);
@@ -84,7 +83,7 @@ public class PaintHand extends View {
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(@NonNull Canvas canvas) {
         super.onDraw(canvas);
 
         canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
