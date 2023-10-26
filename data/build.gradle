@@ -2,7 +2,7 @@ plugins {
     id 'com.android.library'
     id "org.gradle.android.cache-fix"
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
+    id 'com.google.devtools.ksp'
     id 'com.google.dagger.hilt.android'
 }
 
@@ -41,7 +41,7 @@ dependencies {
      * Injection implementations
      */
     implementation "com.google.dagger:hilt-android:2.48"
-    kapt "com.google.dagger:hilt-compiler:2.48"
+    ksp "com.google.dagger:hilt-compiler:2.48"
     
     /**
      * Room implementations
@@ -49,7 +49,7 @@ dependencies {
     def room_version = "2.5.2"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
+    ksp "androidx.room:room-compiler:$room_version"
 
     /**
      * Async implementations
