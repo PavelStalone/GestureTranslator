@@ -96,6 +96,7 @@ dependencies {
     implementation project(path: ':feature')
     implementation project(path: ':core')
     implementation project(path: ':data')
+    implementation project(path: ':ui')
 
     constraints {
         implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.0"
