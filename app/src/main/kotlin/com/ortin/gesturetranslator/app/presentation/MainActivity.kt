@@ -24,17 +24,13 @@ import java.util.Objects
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
-    private var binding: ActivityMainBinding? =
-        ActivityMainBinding.inflate(LayoutInflater.from(this))
-    private var navController: NavController = (Objects.requireNonNull<Fragment?>(
-        supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
-    ) as NavHostFragment).navController
-    private var drawerLayout: DrawerLayout? = binding?.drawerLayoutId
-    private var navigationView: NavigationView? = binding?.menuNavigationView
-
-
     @Inject
     lateinit var saveLoadSettingsUseCase: SaveLoadSettingsUseCase
+
+    private var binding: ActivityMainBinding? = ActivityMainBinding.inflate(LayoutInflater.from(this))
+    private var navController: NavController = (Objects.requireNonNull<Fragment?>(supportFragmentManager.findFragmentById(R.id.nav_host_fragment)) as NavHostFragment).navController
+    private var drawerLayout: DrawerLayout? = binding?.drawerLayoutId
+    private var navigationView: NavigationView? = binding?.menuNavigationView
 
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
-        setContentView(binding!!.root)
+        setContentView(binding?.root)
 
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         init()
@@ -56,9 +52,8 @@ class MainActivity : AppCompatActivity() {
         navController = (Objects.requireNonNull(
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
         ) as NavHostFragment).navController
-        drawerLayout = binding!!.drawerLayoutId
-        navigationView = binding!!.menuNavigationView
-
+        drawerLayout = binding?.drawerLayoutId
+        navigationView = binding?.menuNavigationView
         //NavigationUI.setupWithNavController(navigationView, navController);
         hideControl()
     }
@@ -85,23 +80,23 @@ class MainActivity : AppCompatActivity() {
         )
 
         navigationView?.setNavigationItemSelectedListener { item: MenuItem ->
-            if (item.itemId != navController.currentDestination!!.id) {
+            if (item.itemId != navController.currentDestination?.id) {
                 if (item.itemId == R.id.mainFragment) {
                     navController.navigate(R.id.mainFragment)
                 } else if (item.itemId == R.id.gestureListFragment) {
-                    if (navController.currentDestination!!.id == R.id.mainFragment) {
+                    if (navController.currentDestination?.id == R.id.mainFragment) {
                         navController.navigate(R.id.action_mainFragment_to_gestureListFragment)
                     } else {
                         navController.navigate(R.id.gestureListFragment)
                     }
                 } else if (item.itemId == R.id.settingsFragment) {
-                    if (navController.currentDestination!!.id == R.id.mainFragment) {
+                    if (navController.currentDestination?.id == R.id.mainFragment) {
                         navController.navigate(R.id.action_mainFragment_to_settingsFragment)
                     } else {
                         navController.navigate(R.id.settingsFragment)
                     }
                 } else if (item.itemId == R.id.informationFragment) {
-                    if (navController.currentDestination!!.id == R.id.mainFragment) {
+                    if (navController.currentDestination?.id == R.id.mainFragment) {
                         navController.navigate(R.id.action_mainFragment_to_informationFragment)
                     } else {
                         navController.navigate(R.id.informationFragment)
@@ -113,7 +108,7 @@ class MainActivity : AppCompatActivity() {
                     )
                     startActivity(intent)
                 }
-                drawerLayout!!.close()
+                drawerLayout?.close()
                 return@setNavigationItemSelectedListener true
             }
             false

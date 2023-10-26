@@ -7,16 +7,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.ortin.gesturetranslator.app.models.MainFrameState
+import com.ortin.gesturetranslator.app.models.PredictState
 import com.ortin.gesturetranslator.domain.listeners.DetectionHandListener
 import com.ortin.gesturetranslator.domain.listeners.LoadImagesListener
-import com.ortin.gesturetranslator.domain.models.HandDetected
 import com.ortin.gesturetranslator.domain.models.Image
+import com.ortin.gesturetranslator.domain.models.ImageDetected
 import com.ortin.gesturetranslator.domain.usecases.DetectHandUseCase
 import com.ortin.gesturetranslator.domain.usecases.LoadImageUseCase
 import com.ortin.gesturetranslator.domain.usecases.RecognizeCoordinateUseCase
 import com.ortin.gesturetranslator.domain.usecases.WordCompileUseCase
-import com.ortin.gesturetranslator.models.MainFrameState
-import com.ortin.gesturetranslator.models.PredictState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -39,21 +39,19 @@ class MainViewModel @Inject constructor(
         wordCompileUseCase.clearState()
     }
 
-
     fun startRealTimeImagining(lifecycleOwner: LifecycleOwner) {
         loadImageUseCase.execute(this, lifecycleOwner)
-        detectHandUseCase.setOnDetectionHandListener(this)
+        detectHandUseCase.setMPDetectionListener(this)
     }
-
 
     private companion object {
         const val TAG = "MainViewModel"
     }
 
     @SuppressLint("DefaultLocale", "SetTextI18n", "CheckResult")
-    override fun detect(handDetected: HandDetected?) {
-        if (handDetected != null) {
-            val coordinateClassification = recognizeCoordinateUseCase.execute(handDetected)
+    override fun detect(imageDetected: ImageDetected?) {
+        if (imageDetected != null) {
+            val coordinateClassification = recognizeCoordinateUseCase.execute(imageDetected)
 
             if (coordinateClassification.percent > 30f) {
                 wordCompileUseCase.addLetter(coordinateClassification.label)
@@ -67,7 +65,7 @@ class MainViewModel @Inject constructor(
                     predictState?.imageFromCamera,
                     wordCompileUseCase.getWord(),
                     predictLetter,
-                    handDetected.coordinates
+                    imageDetected.coordinates
                 )
             }
         } else {
@@ -85,14 +83,8 @@ class MainViewModel @Inject constructor(
 
     override fun getImage(image: Image) {
         val bitmap = image.bitmap
-        val predictState = predictLiveData.value
-        predictLiveData.value = PredictState(
-            bitmap,
-            predictState?.predictWord,
-            predictState?.predictLetter,
-            predictState?.coordinateHand
-        )
-        if (mainLiveData.value?.isRealtimeButton == true) detectHandUseCase.execute(image)
+        predictLiveData.value = predictLiveData.value?.copy(imageFromCamera = bitmap)
+        if (mainLiveData.value?.realTimeButton == true) detectHandUseCase.detectLiveStream(bitmap)
     }
 
     override fun error(exception: Exception) {
@@ -108,43 +100,22 @@ class MainViewModel @Inject constructor(
 
     fun onFlashLight() {
         loadImageUseCase.setStatusFlashlight(true)
-        val mainFrameState = mainLiveData.value
-        mainLiveData.value = MainFrameState(
-            true,
-            mainFrameState!!.isRealtimeButton,
-            mainFrameState.bottomSheetBehavior
-        )
+        mainLiveData.value = mainLiveData.value?.copy(flashLight = true)
     }
 
     fun offFlashLight() {
         loadImageUseCase.setStatusFlashlight(false)
-        val mainFrameState = mainLiveData.value
-        mainLiveData.value =
-            MainFrameState(
-                false,
-                mainFrameState!!.isRealtimeButton,
-                mainFrameState.bottomSheetBehavior
-            )
+        mainLiveData.value = mainLiveData.value?.copy(flashLight = false)
     }
 
     fun onStartRealTimeButton() {
-        val mainFrameState = mainLiveData.value
-        mainLiveData.value =
-            MainFrameState(mainFrameState!!.isFlashlight, true, BottomSheetBehavior.STATE_COLLAPSED)
-        val predictState = predictLiveData.value
-        predictLiveData.value = PredictState(
-            predictState!!.imageFromCamera,
-            "",
-            predictState.predictLetter,
-            predictState.coordinateHand
-        )
+        mainLiveData.value = mainLiveData.value?.copy(realTimeButton = true, bottomSheetBehavior = BottomSheetBehavior.STATE_COLLAPSED)
+        predictLiveData.value = predictLiveData.value?.copy(predictWord = "")
         wordCompileUseCase.clearState()
     }
 
     fun onStopRealTimeButton() {
-        val mainFrameState = mainLiveData.value
-        mainLiveData.value =
-            MainFrameState(mainFrameState!!.isFlashlight, false, BottomSheetBehavior.STATE_EXPANDED)
+        mainLiveData.value = mainLiveData.value?.copy(realTimeButton = true, bottomSheetBehavior = BottomSheetBehavior.STATE_EXPANDED)
     }
 
     fun bottomSheetCollapsed() {
