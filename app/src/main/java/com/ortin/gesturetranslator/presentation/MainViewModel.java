@@ -18,8 +18,8 @@ import com.ortin.gesturetranslator.domain.usecases.DetectHandUseCase;
 import com.ortin.gesturetranslator.domain.usecases.LoadImageUseCase;
 import com.ortin.gesturetranslator.domain.usecases.RecognizeCoordinateUseCase;
 import com.ortin.gesturetranslator.domain.usecases.WordCompileUseCase;
-import com.ortin.gesturetranslator.models.MainFrameState;
-import com.ortin.gesturetranslator.models.PredictState;
+import com.ortin.gesturetranslator.app.models.MainFrameState;
+import com.ortin.gesturetranslator.app.models.PredictState;
 import javax.inject.Inject;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -66,7 +66,7 @@ public class MainViewModel extends ViewModel implements LoadImagesListener, Dete
         PredictState predictState = predictLiveData.getValue();
         predictLiveData.setValue(new PredictState(bitmap, predictState.getPredictWord(), predictState.getPredictLetter(), predictState.getCoordinateHand()));
 
-        if (mainLiveData.getValue().isRealtimeButton())
+        if (mainLiveData.getValue().getRealTimeButton())
             detectHandUseCase.detectLiveStream(image.getBitmap());
     }
 
@@ -111,18 +111,18 @@ public class MainViewModel extends ViewModel implements LoadImagesListener, Dete
     public void onFlashLight() {
         loadImageUseCase.setStatusFlashlight(true);
         MainFrameState mainFrameState = mainLiveData.getValue();
-        mainLiveData.setValue(new MainFrameState(true, mainFrameState.isRealtimeButton(), mainFrameState.getBottomSheetBehavior()));
+        mainLiveData.setValue(new MainFrameState(true, mainFrameState.getRealTimeButton(), mainFrameState.getBottomSheetBehavior()));
     }
 
     public void offFlashLight() {
         loadImageUseCase.setStatusFlashlight(false);
         MainFrameState mainFrameState = mainLiveData.getValue();
-        mainLiveData.setValue(new MainFrameState(false, mainFrameState.isRealtimeButton(), mainFrameState.getBottomSheetBehavior()));
+        mainLiveData.setValue(new MainFrameState(false, mainFrameState.getRealTimeButton(), mainFrameState.getBottomSheetBehavior()));
     }
 
     public void onStartRealTimeButton() {
         MainFrameState mainFrameState = mainLiveData.getValue();
-        mainLiveData.setValue(new MainFrameState(mainFrameState.isFlashlight(), true, BottomSheetBehavior.STATE_COLLAPSED));
+        mainLiveData.setValue(new MainFrameState(mainFrameState.getFlashLight(), true, BottomSheetBehavior.STATE_COLLAPSED));
         PredictState predictState = predictLiveData.getValue();
         predictLiveData.setValue(new PredictState(predictState.getImageFromCamera(), "", predictState.getPredictLetter(), predictState.getCoordinateHand()));
         wordCompileUseCase.clearState();
@@ -130,7 +130,7 @@ public class MainViewModel extends ViewModel implements LoadImagesListener, Dete
 
     public void onStopRealTimeButton() {
         MainFrameState mainFrameState = mainLiveData.getValue();
-        mainLiveData.setValue(new MainFrameState(mainFrameState.isFlashlight(), false, BottomSheetBehavior.STATE_EXPANDED));
+        mainLiveData.setValue(new MainFrameState(mainFrameState.getFlashLight(), false, BottomSheetBehavior.STATE_EXPANDED));
     }
 
     public void bottomSheetCollapsed() {
