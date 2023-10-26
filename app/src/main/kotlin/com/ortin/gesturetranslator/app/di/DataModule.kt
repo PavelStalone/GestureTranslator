@@ -12,12 +12,12 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class DataModuleBind {
+interface DataModuleBind {
     @Binds
     @Singleton
-    abstract fun provideSettingsStorage(sharedPrefSettingsStorage: SharedPrefSettingsStorage): SettingsStorage
+    fun bindSettingsStorage(sharedPrefSettingsStorage: SharedPrefSettingsStorage): SettingsStorage
 
     @Binds
     @Singleton
-    abstract fun provideSettingsRepository(settingsRepositoryImpl: SettingsRepositoryImpl): SettingsRepository
+    fun bindSettingsRepository(impl: SettingsRepositoryImpl): SettingsRepository
 }

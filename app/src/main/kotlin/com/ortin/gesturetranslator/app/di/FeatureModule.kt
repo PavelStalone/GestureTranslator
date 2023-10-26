@@ -16,20 +16,20 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class FeatureModuleBind {
+interface FeatureModuleBind {
     @Binds
     @Singleton
-    abstract fun bindCameraManager(cameraManagerImpl: CameraManagerImpl): CameraManager
+    fun bindCameraManager(impl: CameraManagerImpl): CameraManager
 
     @Binds
     @Singleton
-    abstract fun provideLoadImageRepository(loadImageRepositoryImpl: LoadImageRepositoryImpl): LoadImageRepository
+    fun bindLoadImageRepository(impl: LoadImageRepositoryImpl): LoadImageRepository
 
     @Binds
     @Singleton
-    abstract fun provideWordCompilerManager(wordCompilerManagerImpl: WordCompilerManagerImpl): WordCompilerManager
+    fun bindWordCompilerManager(impl: WordCompilerManagerImpl): WordCompilerManager
 
     @Binds
     @Singleton
-    abstract fun provideWordCompilerRepository(wordCompilerRepositoryImpl: WordCompilerRepositoryImpl): WordCompilerRepository
+    fun bindWordCompilerRepository(impl: WordCompilerRepositoryImpl): WordCompilerRepository
 }

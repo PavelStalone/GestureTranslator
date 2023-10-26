@@ -18,24 +18,24 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class CoreModuleBind {
+interface CoreModuleBind {
     @Binds
     @Singleton
-    abstract fun provideModelCoordinateManager(modelCoordinateManagerImpl: ModelCoordinateManagerImpl): ModelCoordinateManager
+    fun bindModelCoordinateManager(impl: ModelCoordinateManagerImpl): ModelCoordinateManager
 
     @Binds
     @Singleton
-    abstract fun provideRecognizeCoordinateRepository(recognizeCoordinateRepositoryImpl: RecognizeCoordinateRepositoryImpl): RecognizeCoordinateRepository
+    fun bindRecognizeCoordinateRepository(impl: RecognizeCoordinateRepositoryImpl): RecognizeCoordinateRepository
 
     @Binds
     @Singleton
-    abstract fun provideMediaPipeManager(mediaPipeManagerImpl: MediaPipeManagerImpl): MediaPipeManager
+    fun bindMediaPipeManager(impl: MediaPipeManagerImpl): MediaPipeManager
 
     @Binds
     @Singleton
-    abstract fun provideHandDetectionRepository(handDetectionRepositoryImpl: HandDetectionRepositoryImpl): HandDetectionRepository
+    fun bindHandDetectionRepository(impl: HandDetectionRepositoryImpl): HandDetectionRepository
 
     @Binds
     @Singleton
-    abstract fun provideRecogniseImageRepository(recognizeImageRepositoryImpl: RecognizeImageRepositoryImpl): RecognizeImageRepository
+    fun bindRecogniseImageRepository(impl: RecognizeImageRepositoryImpl): RecognizeImageRepository
 }
