@@ -8,7 +8,6 @@ import com.ortin.gesturetranslator.core.repository.HandDetectionRepositoryImpl
 import com.ortin.gesturetranslator.core.repository.RecognizeCoordinateRepositoryImpl
 import com.ortin.gesturetranslator.domain.repository.HandDetectionRepository
 import com.ortin.gesturetranslator.domain.repository.RecognizeCoordinateRepository
-import com.ortin.gesturetranslator.domain.repository.RecognizeImageRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

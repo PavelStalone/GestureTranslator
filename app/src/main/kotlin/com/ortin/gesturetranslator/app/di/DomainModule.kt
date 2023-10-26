@@ -3,13 +3,11 @@ package com.ortin.gesturetranslator.app.di
 import com.ortin.gesturetranslator.domain.repository.HandDetectionRepository
 import com.ortin.gesturetranslator.domain.repository.LoadImageRepository
 import com.ortin.gesturetranslator.domain.repository.RecognizeCoordinateRepository
-import com.ortin.gesturetranslator.domain.repository.RecognizeImageRepository
 import com.ortin.gesturetranslator.domain.repository.SettingsRepository
 import com.ortin.gesturetranslator.domain.repository.WordCompilerRepository
 import com.ortin.gesturetranslator.domain.usecases.DetectHandUseCase
 import com.ortin.gesturetranslator.domain.usecases.LoadImageUseCase
 import com.ortin.gesturetranslator.domain.usecases.RecognizeCoordinateUseCase
-import com.ortin.gesturetranslator.domain.usecases.RecognizeImageUseCase
 import com.ortin.gesturetranslator.domain.usecases.SaveLoadSettingsUseCase
 import com.ortin.gesturetranslator.domain.usecases.WordCompileUseCase
 import dagger.Module
