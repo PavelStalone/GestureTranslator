@@ -136,7 +136,6 @@ public class MainFragment extends Fragment {
                     bottomSheetBehavior.setState(state.getBottomSheetBehavior());
             }
 
-            binding.controlMenu.flashLight.setState(state.getFlashLight());
             lastMainFrameState = state;
         });
 
