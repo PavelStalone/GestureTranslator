@@ -42,10 +42,6 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.3"
     }
-
-    androidResources {
-        noCompress 'tflite'
-    }
 }
 
 project.ext.ASSET_DIR = projectDir.toString() + '/src/main/assets'

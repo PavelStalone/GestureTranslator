@@ -35,12 +35,6 @@ class DomainModule {
 
     @Provides
     @Singleton
-    fun provideRecognizeImageUseCase(recognizeImageRepository: RecognizeImageRepository): RecognizeImageUseCase {
-        return RecognizeImageUseCase(recognizeImageRepository)
-    }
-
-    @Provides
-    @Singleton
     fun provideDetectHandUseCase(handDetectionRepository: HandDetectionRepository): DetectHandUseCase {
         return DetectHandUseCase(handDetectionRepository)
     }

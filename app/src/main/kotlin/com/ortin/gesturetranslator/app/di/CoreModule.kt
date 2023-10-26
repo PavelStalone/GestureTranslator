@@ -6,7 +6,6 @@ import com.ortin.gesturetranslator.core.managers.model_coordinate.ModelCoordinat
 import com.ortin.gesturetranslator.core.managers.model_coordinate.ModelCoordinateManagerImpl
 import com.ortin.gesturetranslator.core.repository.HandDetectionRepositoryImpl
 import com.ortin.gesturetranslator.core.repository.RecognizeCoordinateRepositoryImpl
-import com.ortin.gesturetranslator.core.repository.RecognizeImageRepositoryImpl
 import com.ortin.gesturetranslator.domain.repository.HandDetectionRepository
 import com.ortin.gesturetranslator.domain.repository.RecognizeCoordinateRepository
 import com.ortin.gesturetranslator.domain.repository.RecognizeImageRepository
@@ -34,8 +33,4 @@ interface CoreModuleBind {
     @Binds
     @Singleton
     fun bindHandDetectionRepository(impl: HandDetectionRepositoryImpl): HandDetectionRepository
-
-    @Binds
-    @Singleton
-    fun bindRecogniseImageRepository(impl: RecognizeImageRepositoryImpl): RecognizeImageRepository
 }
