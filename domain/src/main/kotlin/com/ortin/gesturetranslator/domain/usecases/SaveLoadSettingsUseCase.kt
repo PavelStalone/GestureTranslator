@@ -2,8 +2,9 @@ package com.ortin.gesturetranslator.domain.usecases
 
 import com.ortin.gesturetranslator.domain.models.SettingsDomain
 import com.ortin.gesturetranslator.domain.repository.SettingsRepository
+import javax.inject.Inject
 
-class SaveLoadSettingsUseCase(private val settingsRepository: SettingsRepository) {
+class SaveLoadSettingsUseCase @Inject constructor(private val settingsRepository: SettingsRepository) {
     fun setTheme(theme: Boolean): Boolean {
         val settingsDomain = SettingsDomain(theme = theme)
         return settingsRepository.saveTheme(settingsDomain)

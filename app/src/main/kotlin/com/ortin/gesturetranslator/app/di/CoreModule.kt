@@ -1,6 +1,5 @@
 package com.ortin.gesturetranslator.app.di
 
-import android.content.Context
 import com.ortin.gesturetranslator.core.managers.mediapipe.MediaPipeManager
 import com.ortin.gesturetranslator.core.managers.mediapipe.MediaPipeManagerImpl
 import com.ortin.gesturetranslator.core.managers.model_coordinate.ModelCoordinateManager
@@ -9,37 +8,28 @@ import com.ortin.gesturetranslator.core.repository.HandDetectionRepositoryImpl
 import com.ortin.gesturetranslator.core.repository.RecognizeCoordinateRepositoryImpl
 import com.ortin.gesturetranslator.domain.repository.HandDetectionRepository
 import com.ortin.gesturetranslator.domain.repository.RecognizeCoordinateRepository
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class CoreModule {
-    @Provides
+interface CoreModuleBind {
+    @Binds
     @Singleton
-    fun provideHandDetectionRepository(mediaPipeManager: MediaPipeManager): HandDetectionRepository {
-        return HandDetectionRepositoryImpl(mediaPipeManager)
-    }
+    fun bindModelCoordinateManager(impl: ModelCoordinateManagerImpl): ModelCoordinateManager
 
-    @Provides
+    @Binds
     @Singleton
-    fun provideMediaPipeManager(@ApplicationContext context: Context): MediaPipeManager {
-        return MediaPipeManagerImpl(context, "hand_landmarker.task")
-    }
+    fun bindRecognizeCoordinateRepository(impl: RecognizeCoordinateRepositoryImpl): RecognizeCoordinateRepository
 
-    @Provides
+    @Binds
     @Singleton
-    fun provideRecognizeCoordinateRepository(modelCoordinateManager: ModelCoordinateManager): RecognizeCoordinateRepository {
-        return RecognizeCoordinateRepositoryImpl(modelCoordinateManager)
-    }
+    fun bindMediaPipeManager(impl: MediaPipeManagerImpl): MediaPipeManager
 
-    @Provides
+    @Binds
     @Singleton
-    fun provideModelCoordinateManager(): ModelCoordinateManager {
-        return ModelCoordinateManagerImpl()
-    }
+    fun bindHandDetectionRepository(impl: HandDetectionRepositoryImpl): HandDetectionRepository
 }
