@@ -19,5 +19,15 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class javax.annotation.processing.** {*;}
+-dontwarn javax.annotation.processing.**
+
+-keep class com.google.auto.value.** {*;}
+-dontwarn com.google.auto.value.**
+
+-keep class javax.tools.** {*;}
+-dontwarn javax.tools.**
+
 -dontwarn javax.lang.model.**
 -dontwarn autovalue.shaded.com.squareup.javapoet.**
