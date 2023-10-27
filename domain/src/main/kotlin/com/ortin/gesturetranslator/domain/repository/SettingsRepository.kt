@@ -9,7 +9,7 @@ interface SettingsRepository {
 
     fun saveGpu(settingsDomain: SettingsDomain): Boolean
 
-    fun getGpu(): SettingsDomain        
+    fun getGpu(): SettingsDomain
 
     fun savePercent(settingsDomain: SettingsDomain): Boolean
 
