@@ -20,28 +20,32 @@ import com.google.android.material.navigation.NavigationView
 import com.ortin.gesturetranslator.R
 import com.ortin.gesturetranslator.databinding.ActivityMainBinding
 import com.ortin.gesturetranslator.domain.usecases.SaveLoadSettingsUseCase
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.Objects
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var saveLoadSettingsUseCase: SaveLoadSettingsUseCase
 
-    private var binding: ActivityMainBinding? = ActivityMainBinding.inflate(LayoutInflater.from(this))
+    private lateinit var binding: ActivityMainBinding
     private var navController: NavController = (Objects.requireNonNull<Fragment?>(supportFragmentManager.findFragmentById(R.id.nav_host_fragment)) as NavHostFragment).navController
-    private var drawerLayout: DrawerLayout? = binding?.drawerLayoutId
-    private var navigationView: NavigationView? = binding?.menuNavigationView
+    private var drawerLayout: DrawerLayout? = binding.drawerLayoutId
+    private var navigationView: NavigationView? = binding.menuNavigationView
 
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
         if (saveLoadSettingsUseCase.getTheme()) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
-        setContentView(binding?.root)
+        setContentView(binding.root)
 
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         init()
@@ -52,14 +56,14 @@ class MainActivity : AppCompatActivity() {
         navController = (Objects.requireNonNull(
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
         ) as NavHostFragment).navController
-        drawerLayout = binding?.drawerLayoutId
-        navigationView = binding?.menuNavigationView
+        drawerLayout = binding.drawerLayoutId
+        navigationView = binding.menuNavigationView
         //NavigationUI.setupWithNavController(navigationView, navController);
         hideControl()
     }
 
     private fun initListeners() {
-        binding?.topBar?.menuBtn?.setOnClickListener {
+        binding.topBar.menuBtn.setOnClickListener {
             if (drawerLayout?.isOpen == true) drawerLayout?.close()
             else drawerLayout?.open()
         }
@@ -116,12 +120,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun hideControl() {
-        binding?.topBar?.root?.visibility = View.GONE
+        binding.topBar.root.visibility = View.GONE
         drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
     }
 
     private fun showControl() {
-        binding?.topBar?.root?.visibility = View.VISIBLE
+        binding.topBar.root.visibility = View.VISIBLE
         drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
     }
 
@@ -134,10 +138,5 @@ class MainActivity : AppCompatActivity() {
         } else {
             super.onBackPressed()
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        binding = null
     }
 }

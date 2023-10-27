@@ -29,7 +29,6 @@ class MainViewModel @Inject constructor(
     private var wordCompileUseCase: WordCompileUseCase,
     private var detectHandUseCase: DetectHandUseCase,
     private var recognizeCoordinateUseCase: RecognizeCoordinateUseCase
-
 ) : LoadImagesListener, DetectionHandListener, ViewModel() {
     private val mainLiveData: MutableLiveData<MainFrameState> = MutableLiveData()
     private val predictLiveData: MutableLiveData<PredictState> = MutableLiveData()
