@@ -3,8 +3,11 @@ package com.ortin.gesturetranslator.data.storage
 import android.content.Context
 import android.content.SharedPreferences
 import com.ortin.gesturetranslator.data.models.Settings
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class SharedPrefSettingsStorage(context: Context): SettingsStorage {
+class SharedPrefSettingsStorage @Inject constructor(@ApplicationContext context: Context) :
+    SettingsStorage {
     private val sharedPreferences: SharedPreferences =
         context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
 
@@ -39,7 +42,12 @@ class SharedPrefSettingsStorage(context: Context): SettingsStorage {
     }
 
     override fun getSpeedFrameDetection(): Settings =
-        Settings(speedFrameDetection = sharedPreferences.getInt(KEY_SPEED_FRAME_DETECTION, DEFAULT_SPEED_FRAME_DETECTION))
+        Settings(
+            speedFrameDetection = sharedPreferences.getInt(
+                KEY_SPEED_FRAME_DETECTION,
+                DEFAULT_SPEED_FRAME_DETECTION
+            )
+        )
 
     companion object {
         private const val SHARED_PREFS_NAME: String = "settings"
