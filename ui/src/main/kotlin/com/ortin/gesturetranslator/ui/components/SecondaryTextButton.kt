@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun PrimaryTextButton(
+fun SecondaryTextButton(
     text: String,
     onButtonClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -38,17 +38,18 @@ fun PrimaryTextButton(
         ),
         shape = RoundedCornerShape(size = 100.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-            contentColor = MaterialTheme.colorScheme.onPrimary,
-            disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-            disabledContentColor = MaterialTheme.colorScheme.onSecondaryContainer
+            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+            disabledContentColor = MaterialTheme.colorScheme.onPrimary,
+            disabledContainerColor = MaterialTheme.colorScheme.primary,
         )
     ) {
         Row {
             leftIcon?.let {
                 Icon(
                     painter = painterResource(id = it),
-                    contentDescription = null)
+                    contentDescription = null
+                )
             }
             Text(
                 text = text,
@@ -59,7 +60,8 @@ fun PrimaryTextButton(
             rightIcon?.let {
                 Icon(
                     painter = painterResource(id = it),
-                    contentDescription = null)
+                    contentDescription = null
+                )
             }
         }
     }
@@ -67,7 +69,7 @@ fun PrimaryTextButton(
 
 @Preview
 @Composable
-fun PrimaryTextButtonPreview(){
+fun SecondaryTextButtonPreview() {
     PrimaryTextButton(
         text = "Войти",
         onButtonClick = {}

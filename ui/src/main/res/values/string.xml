@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Компоненты -->
     <string name="limit_of_max_char">Распознать еще</string>
+    <string name="login_support_screen">Войдите, чтобы пользоваться\nполным функционалом приложения</string>
+    <string name="enter_login">Введите логин</string>
+    <string name="enter_password">Введите пароль</string>
+    <string name="login_button_text">Войти</string>
+    <string name="without_login_button_text">Войти без регистрации</string>
+
 </resources>
