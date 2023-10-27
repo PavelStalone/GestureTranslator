@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Компоненты -->
+    <string name="limit_of_max_char">Распознать еще</string>
+</resources>
