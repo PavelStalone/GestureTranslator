@@ -6,5 +6,7 @@
     <string name="enter_password">Введите пароль</string>
     <string name="login_button_text">Войти</string>
     <string name="without_login_button_text">Войти без регистрации</string>
-
+    <string name="reset_password">Забыли пароль?</string>
+    <string name="sign_up">Зарегистрируйтесь</string>
+    <string name="without_accaunt">Еще нет аккаунта?</string>
 </resources>

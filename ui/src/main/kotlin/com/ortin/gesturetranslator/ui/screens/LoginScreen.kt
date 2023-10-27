@@ -39,7 +39,6 @@ fun LoginScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
-            .padding(horizontal = 16.dp)
     ) {
         Icon(
             painter = painterResource(id = R.drawable.icon_ortin_logo),
@@ -54,38 +53,43 @@ fun LoginScreen(
         )
         Spacer(modifier = Modifier.height(48.dp))
         PrimaryTextField(
+            modifier = Modifier.padding(horizontal = 16.dp),
             onTextChange = {},
             description = stringResource(id = R.string.enter_login)
         )
         Spacer(modifier = Modifier.height(16.dp))
         PasswordTextField(
+            modifier = Modifier.padding(horizontal = 8.dp),
             onTextChange = {},
             description = stringResource(id = R.string.enter_password)
         )
         Spacer(modifier = Modifier.height(24.dp))
         PrimaryTextButton(
+            modifier = Modifier.padding(horizontal = 16.dp),
             text = stringResource(id = R.string.login_button_text),
             onButtonClick = {},
             isEnabled = true
         )
         Spacer(modifier = Modifier.height(16.dp))
         SecondaryTextButton(
+            modifier = Modifier.padding(horizontal = 16.dp),
             text = stringResource(id = R.string.without_login_button_text),
             onButtonClick = {},
             isEnabled = true
         )
         Spacer(modifier = Modifier.height(24.dp))
         Row (
+            modifier = Modifier.padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ){
             Text(
-                text = "Еще нет аккаунта?",
+                text = stringResource(id = R.string.without_accaunt),
                 color = MaterialTheme.colorScheme.onBackground,
                 fontSize = 16.sp
                 )
             Spacer(modifier = Modifier.width(4.dp))
             Text(
-                text = "Зарегистрируйтесь",
+                text = stringResource(id = R.string.sign_up),
                 style = TextStyle(
                     color = MaterialTheme.colorScheme.primary,
                     textDecoration = TextDecoration.Underline,
@@ -98,13 +102,13 @@ fun LoginScreen(
         }
         Spacer(modifier = Modifier.width(16.dp))
         Text(
-            text = "Войти без регистрации",
+            text = stringResource(id = R.string.reset_password),
             style = TextStyle(
                 color = MaterialTheme.colorScheme.primary,
                 textDecoration = TextDecoration.Underline,
                 fontSize = 16.sp
             ),
-            modifier = Modifier.clickable(
+            modifier = Modifier.padding(horizontal = 16.dp).clickable(
                 onClick = {/* TODO: Handle click */}
             )
         )
