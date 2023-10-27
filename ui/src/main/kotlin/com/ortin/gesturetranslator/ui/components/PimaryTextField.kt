@@ -54,9 +54,7 @@ fun PrimaryTextField(
         modifier = modifier
     ) {
         title?.let {
-            Text(
-                text = title
-            )
+            Text(text = title)
             Spacer(spacerModifier)
         }
         OutlinedTextField(
