@@ -130,13 +130,12 @@ public class MainFragment extends Fragment {
             } else {
                 if (lastMainFrameState.getRealTimeButton() != state.getRealTimeButton())
                     binding.controlMenu.realTimeBTN.setState(state.getRealTimeButton());
-                if (lastMainFrameState.getRealTimeButton() != state.getRealTimeButton())
+                if (lastMainFrameState.getFlashLight() != state.getFlashLight())
                     binding.controlMenu.flashLight.setState(state.getFlashLight());
                 if (lastMainFrameState.getBottomSheetBehavior() != state.getBottomSheetBehavior())
                     bottomSheetBehavior.setState(state.getBottomSheetBehavior());
             }
 
-            binding.controlMenu.flashLight.setState(state.getFlashLight());
             lastMainFrameState = state;
         });
 
