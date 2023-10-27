@@ -7,7 +7,6 @@ interface RoomDatabaseRepository {
     suspend fun addUser(user: UserEntityDomain)
     suspend fun deleteUser(user: UserEntityDomain)
     suspend fun updateUserInformation(user: UserEntityDomain)
-
     suspend fun getUserList(): Flow<List<UserEntityDomain>>
     suspend fun getUser(login: String): UserEntityDomain
 }
