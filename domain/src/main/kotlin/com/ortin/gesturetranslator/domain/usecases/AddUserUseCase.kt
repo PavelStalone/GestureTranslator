@@ -1,10 +1,10 @@
 package com.ortin.gesturetranslator.domain.usecases
 
 import com.ortin.gesturetranslator.domain.entities.UserEntityDomain
-import com.ortin.gesturetranslator.domain.repository.RoomDatabaseRepository
+import com.ortin.gesturetranslator.domain.repository.UserRoomDatabaseRepository
 
-class AddUserUseCase(private val roomDatabaseRepository: RoomDatabaseRepository) {
+class AddUserUseCase(private val userRoomDatabaseRepository: UserRoomDatabaseRepository) {
     suspend fun execute(user: UserEntityDomain) {
-        roomDatabaseRepository.addUser(user)
+        userRoomDatabaseRepository.addUser(user)
     }
 }

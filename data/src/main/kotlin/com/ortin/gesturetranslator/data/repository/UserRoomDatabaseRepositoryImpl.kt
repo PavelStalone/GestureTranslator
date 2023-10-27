@@ -3,13 +3,13 @@ package com.ortin.gesturetranslator.data.repository
 import com.ortin.gesturetranslator.data.db.UserRoomDB
 import com.ortin.gesturetranslator.data.entities.UserEntity
 import com.ortin.gesturetranslator.domain.entities.UserEntityDomain
-import com.ortin.gesturetranslator.domain.repository.RoomDatabaseRepository
+import com.ortin.gesturetranslator.domain.repository.UserRoomDatabaseRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class RoomDatabaseRepositoryImpl(
+class UserRoomDatabaseRepositoryImpl(
     private val userDatabase: UserRoomDB,
-) : RoomDatabaseRepository {
+) : UserRoomDatabaseRepository {
     override suspend fun addUser(user: UserEntityDomain) {
         userDatabase.userDao.insertUser(user.mapToData())
     }

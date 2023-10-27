@@ -1,10 +1,10 @@
 package com.ortin.gesturetranslator.domain.usecases
 
 import com.ortin.gesturetranslator.domain.entities.UserEntityDomain
-import com.ortin.gesturetranslator.domain.repository.RoomDatabaseRepository
+import com.ortin.gesturetranslator.domain.repository.UserRoomDatabaseRepository
 
-class DeleteUserUseCase(private val roomDatabaseRepository: RoomDatabaseRepository) {
+class DeleteUserUseCase(private val userRoomDatabaseRepository: UserRoomDatabaseRepository) {
     suspend fun execute(user: UserEntityDomain) {
-        roomDatabaseRepository.deleteUser(user)
+        userRoomDatabaseRepository.deleteUser(user)
     }
 }
