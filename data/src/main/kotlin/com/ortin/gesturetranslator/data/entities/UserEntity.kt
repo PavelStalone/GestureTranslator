@@ -1,13 +1,13 @@
-package com.ortin.gesturetranslator.data.db
+package com.ortin.gesturetranslator.data.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "roomDB")
-data class RoomEntity(
+data class UserEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
-    val name: String,
+    val login: String,
     val password: String,
     val isSigned: Boolean
 )

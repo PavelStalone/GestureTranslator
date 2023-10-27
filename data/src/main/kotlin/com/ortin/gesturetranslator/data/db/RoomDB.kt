@@ -4,10 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.ortin.gesturetranslator.data.entities.UserEntity
 
 @Database(
     entities = [
-        RoomEntity::class
+        UserEntity::class
     ],
     version = 1
 )

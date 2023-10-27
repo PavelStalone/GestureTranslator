@@ -5,16 +5,19 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import com.ortin.gesturetranslator.data.entities.UserEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface Dao {
     @Insert
-    suspend fun insertItem(roomEntity: RoomEntity)
+    suspend fun insertUser(userEntity: UserEntity)
     @Update
-    suspend fun updateItem(roomEntity: RoomEntity)
+    suspend fun updateUser(userEntity: UserEntity)
     @Delete
-    suspend fun deleteItem(roomEntity: RoomEntity)
+    suspend fun deleteUser(userEntity: UserEntity)
     @Query("SELECT * FROM roomDB")
-    fun getAllItems(): Flow<List<RoomEntity>>
+    fun getAllUsers(): Flow<List<UserEntity>>
+    @Query("SELECT * FROM roomDB WHERE login == :login")
+    fun getUser(login: String): UserEntity
 }
