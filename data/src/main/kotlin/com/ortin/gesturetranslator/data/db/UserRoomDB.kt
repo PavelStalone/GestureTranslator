@@ -12,15 +12,15 @@ import com.ortin.gesturetranslator.data.entities.UserEntity
     ],
     version = 1
 )
-abstract class RoomDB: RoomDatabase() {
-    abstract val dao: Dao
+abstract class UserRoomDB: RoomDatabase() {
+    abstract val userDao: UserDao
 
     companion object {
-        fun createDataBase(context: Context): RoomDB {
+        fun createDataBase(context: Context): UserRoomDB {
             return Room.databaseBuilder(
                 context,
-                RoomDB::class.java,
-                "roomDB.db"
+                UserRoomDB::class.java,
+                "userRoomDB.db"
             ).build()
         }
     }
