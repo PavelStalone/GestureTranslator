@@ -34,7 +34,6 @@ class RoomDatabaseRepositoryImpl(
 
     private fun UserEntityDomain.mapToData(): UserEntity =
         UserEntity(
-            id = this.id,
             login = this.login,
             password = this.password,
             isSigned = this.isSigned
@@ -42,7 +41,6 @@ class RoomDatabaseRepositoryImpl(
 
     private fun UserEntity.mapToDomain(): UserEntityDomain =
         UserEntityDomain(
-            id = this.id,
             login = this.login,
             password = this.password,
             isSigned = this.isSigned
