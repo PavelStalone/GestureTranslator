@@ -54,5 +54,10 @@ gradlePlugin {
             id = "com.ortin.gesturetranslator.android.room"
             implementationClass = "AndroidRoomConventionPlugin"
         }
+
+        register("androidCamera") {
+            id = "com.ortin.gesturetranslator.android.camera"
+            implementationClass = "AndroidCameraXConventionPlugin"
+        }
     }
 }

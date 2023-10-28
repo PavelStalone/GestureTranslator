@@ -1,7 +1,6 @@
-package com.ortin.data;
+package com.ortin.gesturetranslator.data;
 
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 /**
