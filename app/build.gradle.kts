@@ -1,10 +1,13 @@
+import com.android.build.gradle.internal.tasks.factory.dependsOn
+import org.jetbrains.kotlin.de.undercouch.gradle.tasks.download.Download
+
 plugins {
     alias(libs.plugins.com.ortin.gesturetranslator.android.application)
     alias(libs.plugins.com.ortin.gesturetranslator.android.application.compose)
     alias(libs.plugins.com.ortin.gesturetranslator.android.hilt)
+    alias(libs.plugins.de.undercouch.download)
 
     alias(libs.plugins.androidx.navigation.safeargs)
-    alias(libs.plugins.de.undercouch.download)
 }
 
 android {
@@ -33,13 +36,12 @@ android {
     }
 }
 
-project.ext.set(projectDir.toString(), "/src/main/assets")
-//apply(from = "download_tasks.gradle")
-
-//project.ext.ASSET_DIR = projectDir.toString() + "/src/main/assets"
-//apply {
-//    from("download_tasks.gradle")
-//}
+tasks.create<Download>("downloadModel"){
+    src("https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task")
+    dest("$projectDir/src/main/assets/hand_landmarker.task")
+    overwrite(false)
+}
+tasks.preBuild.dependsOn("downloadModel")
 
 dependencies {
     /**
