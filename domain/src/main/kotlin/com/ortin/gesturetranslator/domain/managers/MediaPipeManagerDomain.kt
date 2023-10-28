@@ -1,6 +1,7 @@
 package com.ortin.gesturetranslator.domain.managers
 
 import android.graphics.Bitmap
+import android.util.Log
 import com.ortin.gesturetranslator.domain.listeners.DetectionHandListener
 import com.ortin.gesturetranslator.domain.models.ImageDetected
 import com.ortin.gesturetranslator.domain.models.SettingsMediaPipe
@@ -8,7 +9,12 @@ import com.ortin.gesturetranslator.domain.models.VideoDetected
 import com.ortin.gesturetranslator.domain.models.VideoFileDecode
 import com.ortin.gesturetranslator.domain.repository.HandDetectionRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.channels.trySendBlocking
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flowOn
 import timber.log.Timber
@@ -17,21 +23,19 @@ import javax.inject.Singleton
 
 @Singleton
 class MediaPipeManagerDomain @Inject constructor(private val handDetectionRepository: HandDetectionRepository) {
-    val listenerResult = callbackFlow<ImageDetected?> {
-        val listener: DetectionHandListener = object : DetectionHandListener {
+    val flowMediaPipe = MutableStateFlow<ImageDetected?>(null)
+
+    init {
+        handDetectionRepository.setMPDetectionListener(object : DetectionHandListener {
             override fun detect(imageDetected: ImageDetected?) {
-                trySend(imageDetected)
+                flowMediaPipe.value = imageDetected
             }
 
             override fun error(exception: Exception) {
                 Timber.e(exception)
-                close(exception)
             }
-        }
-        handDetectionRepository.setMPDetectionListener(listener)
-
-        awaitClose()
-    }.flowOn(Dispatchers.IO)
+        })
+    }
 
     fun detectLiveStream(image: Bitmap) {
         handDetectionRepository.detectLiveStream(image)

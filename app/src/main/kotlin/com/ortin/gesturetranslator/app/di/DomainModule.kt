@@ -1,6 +1,5 @@
 package com.ortin.gesturetranslator.app.di
 
-import com.ortin.gesturetranslator.domain.repository.HandDetectionRepository
 import com.ortin.gesturetranslator.domain.repository.LoadImageRepository
 import com.ortin.gesturetranslator.domain.repository.RecognizeCoordinateRepository
 import com.ortin.gesturetranslator.domain.repository.SettingsRepository
