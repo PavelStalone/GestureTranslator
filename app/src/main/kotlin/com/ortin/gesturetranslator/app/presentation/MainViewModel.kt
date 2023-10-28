@@ -6,6 +6,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.ortin.gesturetranslator.app.models.MainFrameState
 import com.ortin.gesturetranslator.app.models.PredictState
@@ -18,8 +19,6 @@ import com.ortin.gesturetranslator.domain.usecases.LoadImageUseCase
 import com.ortin.gesturetranslator.domain.usecases.RecognizeCoordinateUseCase
 import com.ortin.gesturetranslator.domain.usecases.WordCompileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,12 +28,14 @@ class MainViewModel @Inject constructor(
     private var wordCompileUseCase: WordCompileUseCase,
     private var detectHandUseCase: DetectHandUseCase,
     private var recognizeCoordinateUseCase: RecognizeCoordinateUseCase
-) : LoadImagesListener, DetectionHandListener, ViewModel() {
-    private val mainLiveData: MutableLiveData<MainFrameState> = MutableLiveData()
-    private val predictLiveData: MutableLiveData<PredictState> = MutableLiveData()
+) : ViewModel(), LoadImagesListener, DetectionHandListener {
+    private val _mainLiveData: MutableLiveData<MainFrameState> = MutableLiveData()
+    val mainLiveData = _mainLiveData as LiveData<MainFrameState>
+    private val _predictLiveData: MutableLiveData<PredictState> = MutableLiveData()
+    val predictLiveData = _predictLiveData as LiveData<PredictState>
     init {
-        mainLiveData.value = MainFrameState()
-        predictLiveData.value = PredictState()
+        _mainLiveData.value = MainFrameState()
+        _predictLiveData.value = PredictState()
         wordCompileUseCase.clearState()
     }
 
@@ -58,9 +59,9 @@ class MainViewModel @Inject constructor(
 
             val predictLetter = coordinateClassification.label
 
-            val predictState = predictLiveData.value
-            CoroutineScope(Dispatchers.Main).launch {
-                predictLiveData.value = PredictState(
+            val predictState = _predictLiveData.value
+            viewModelScope.launch {
+                _predictLiveData.value = PredictState(
                     predictState?.imageFromCamera,
                     wordCompileUseCase.getWord(),
                     predictLetter,
@@ -68,9 +69,9 @@ class MainViewModel @Inject constructor(
                 )
             }
         } else {
-            val predictState = predictLiveData.value
-            CoroutineScope(Dispatchers.Main).launch {
-                predictLiveData.value = PredictState(
+            val predictState = _predictLiveData.value
+            viewModelScope.launch {
+                _predictLiveData.value = PredictState(
                     predictState?.imageFromCamera,
                     predictState?.predictWord ?: "",
                     "",
@@ -82,8 +83,8 @@ class MainViewModel @Inject constructor(
 
     override fun getImage(image: Image) {
         val bitmap = image.bitmap
-        predictLiveData.value = predictLiveData.value?.copy(imageFromCamera = bitmap)
-        if (mainLiveData.value?.realTimeButton == true) detectHandUseCase.detectLiveStream(bitmap)
+        _predictLiveData.value = _predictLiveData.value?.copy(imageFromCamera = bitmap)
+        if (_mainLiveData.value?.realTimeButton == true) detectHandUseCase.detectLiveStream(bitmap)
     }
 
     override fun error(exception: Exception) {
@@ -99,22 +100,22 @@ class MainViewModel @Inject constructor(
 
     fun onFlashLight() {
         loadImageUseCase.setStatusFlashlight(true)
-        mainLiveData.value = mainLiveData.value?.copy(flashLight = true)
+        _mainLiveData.value = _mainLiveData.value?.copy(flashLight = true)
     }
 
     fun offFlashLight() {
         loadImageUseCase.setStatusFlashlight(false)
-        mainLiveData.value = mainLiveData.value?.copy(flashLight = false)
+        _mainLiveData.value = _mainLiveData.value?.copy(flashLight = false)
     }
 
     fun onStartRealTimeButton() {
-        mainLiveData.value = mainLiveData.value?.copy(realTimeButton = true, bottomSheetBehavior = BottomSheetBehavior.STATE_COLLAPSED)
-        predictLiveData.value = predictLiveData.value?.copy(predictWord = "")
+        _mainLiveData.value = _mainLiveData.value?.copy(realTimeButton = true, bottomSheetBehavior = BottomSheetBehavior.STATE_COLLAPSED)
+        _predictLiveData.value = _predictLiveData.value?.copy(predictWord = "")
         wordCompileUseCase.clearState()
     }
 
     fun onStopRealTimeButton() {
-        mainLiveData.value = mainLiveData.value?.copy(realTimeButton = true, bottomSheetBehavior = BottomSheetBehavior.STATE_EXPANDED)
+        _mainLiveData.value = _mainLiveData.value?.copy(realTimeButton = true, bottomSheetBehavior = BottomSheetBehavior.STATE_EXPANDED)
     }
 
     fun bottomSheetCollapsed() {
@@ -123,13 +124,5 @@ class MainViewModel @Inject constructor(
 
     fun bottomSheetExpanded() {
         onStopRealTimeButton()
-    }
-
-    fun getMainLiveData(): LiveData<MainFrameState> {
-        return mainLiveData
-    }
-
-    fun getPredictLiveData(): LiveData<PredictState> {
-        return predictLiveData
     }
 }
