@@ -9,21 +9,31 @@ import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPImageDetecti
 import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPVideoDetection
 import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPVideoInput
 import com.ortin.gesturetranslator.core.managers.mediapipe.models.SettingsModel
+import com.ortin.gesturetranslator.domain.di.Dispatcher
+import com.ortin.gesturetranslator.domain.di.DoDispatchers
 import com.ortin.gesturetranslator.domain.listeners.DetectionHandListener
 import com.ortin.gesturetranslator.domain.models.ImageDetected
 import com.ortin.gesturetranslator.domain.models.SettingsMediaPipe
 import com.ortin.gesturetranslator.domain.models.VideoDetected
 import com.ortin.gesturetranslator.domain.models.VideoFileDecode
 import com.ortin.gesturetranslator.domain.repository.HandDetectionRepository
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class HandDetectionRepositoryImpl @Inject constructor(private val mediaPipeManager: MediaPipeManager) :
-    HandDetectionRepository {
-    override fun detectImage(image: Bitmap): ImageDetected? =
-        mediaPipeManager.detectImage(image).mapToCoreImageDetected()
+class HandDetectionRepositoryImpl @Inject constructor(
+    private val mediaPipeManager: MediaPipeManager,
+    @Dispatcher(DoDispatchers.IO) private val ioDispatcher: CoroutineDispatcher
+) : HandDetectionRepository {
+    override suspend fun detectImage(image: Bitmap): ImageDetected? =
+        withContext(ioDispatcher) {
+            mediaPipeManager.detectImage(image).mapToCoreImageDetected()
+        }
 
-    override fun detectVideoFile(videoFile: VideoFileDecode): VideoDetected? =
-        mediaPipeManager.detectVideoFile(videoFile.mapToCoreMPVideoInput()).mapToVideDetected()
+    override suspend fun detectVideoFile(videoFile: VideoFileDecode): VideoDetected? =
+        withContext(ioDispatcher) {
+            mediaPipeManager.detectVideoFile(videoFile.mapToCoreMPVideoInput()).mapToVideDetected()
+        }
 
     override fun detectLiveStream(image: Bitmap) {
         mediaPipeManager.detectLiveStream(image)
