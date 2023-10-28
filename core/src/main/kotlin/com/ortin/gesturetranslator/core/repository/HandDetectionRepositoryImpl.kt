@@ -25,10 +25,9 @@ class HandDetectionRepositoryImpl @Inject constructor(
     private val mediaPipeManager: MediaPipeManager,
     @Dispatcher(DoDispatchers.IO) private val ioDispatcher: CoroutineDispatcher
 ) : HandDetectionRepository {
-    override suspend fun detectImage(image: Bitmap): ImageDetected? =
-        withContext(ioDispatcher) {
-            mediaPipeManager.detectImage(image).mapToCoreImageDetected()
-        }
+    override fun detectImage(image: Bitmap): ImageDetected? =
+        mediaPipeManager.detectImage(image).mapToCoreImageDetected()
+
 
     override suspend fun detectVideoFile(videoFile: VideoFileDecode): VideoDetected? =
         withContext(ioDispatcher) {

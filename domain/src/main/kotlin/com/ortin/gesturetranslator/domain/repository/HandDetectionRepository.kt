@@ -8,7 +8,7 @@ import com.ortin.gesturetranslator.domain.models.VideoDetected
 import com.ortin.gesturetranslator.domain.models.VideoFileDecode
 
 interface HandDetectionRepository {
-    suspend fun detectImage(image: Bitmap): ImageDetected?
+    fun detectImage(image: Bitmap): ImageDetected?
     suspend fun detectVideoFile(videoFile: VideoFileDecode): VideoDetected?
     fun detectLiveStream(image: Bitmap)
     fun setSettingsModel(settingsMediaPipe: SettingsMediaPipe)

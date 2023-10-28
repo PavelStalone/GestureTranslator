@@ -12,25 +12,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.ortin.gesturetranslator.databinding.ImageFromGalleryLayoutBinding;
 import com.ortin.gesturetranslator.domain.listeners.DetectionHandListener;
+import com.ortin.gesturetranslator.domain.managers.MediaPipeManagerDomain;
 import com.ortin.gesturetranslator.domain.models.CoordinateClassification;
 import com.ortin.gesturetranslator.domain.models.ImageDetected;
-import com.ortin.gesturetranslator.domain.usecases.DetectHandUseCase;
 import com.ortin.gesturetranslator.domain.usecases.RecognizeCoordinateUseCase;
-
 import javax.inject.Inject;
-
 import dagger.hilt.android.AndroidEntryPoint;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -40,7 +36,7 @@ public class ImageFromGalleryFragment extends Fragment implements DetectionHandL
     private ImageFromGalleryLayoutBinding binding;
 
     @Inject
-    DetectHandUseCase detectHandUseCase;
+    MediaPipeManagerDomain mediaPipeManagerDomain;
 
     @Inject
     RecognizeCoordinateUseCase recognizeCoordinateUseCase;
@@ -76,7 +72,6 @@ public class ImageFromGalleryFragment extends Fragment implements DetectionHandL
     private void init() {
         Uri uri = ImageFromGalleryFragmentArgs.fromBundle(getArguments()).getImage();
         binding.previewFromGallery.setImageURI(uri);
-        detectHandUseCase.setMPDetectionListener(this);
         predictUri(uri);
     }
 
@@ -100,7 +95,7 @@ public class ImageFromGalleryFragment extends Fragment implements DetectionHandL
                     @Override
                     public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                         Log.e("Gallery", "onResourceReady: " + resource);
-                        detectHandUseCase.detectLiveStream(resource);
+                        detect(mediaPipeManagerDomain.detectImage(resource));
                     }
                 });
     }

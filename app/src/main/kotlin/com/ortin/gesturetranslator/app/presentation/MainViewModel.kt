@@ -6,14 +6,15 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.ortin.gesturetranslator.app.models.MainFrameState
 import com.ortin.gesturetranslator.app.models.PredictState
 import com.ortin.gesturetranslator.domain.listeners.DetectionHandListener
 import com.ortin.gesturetranslator.domain.listeners.LoadImagesListener
+import com.ortin.gesturetranslator.domain.managers.MediaPipeManagerDomain
 import com.ortin.gesturetranslator.domain.models.Image
 import com.ortin.gesturetranslator.domain.models.ImageDetected
-import com.ortin.gesturetranslator.domain.usecases.DetectHandUseCase
 import com.ortin.gesturetranslator.domain.usecases.LoadImageUseCase
 import com.ortin.gesturetranslator.domain.usecases.RecognizeCoordinateUseCase
 import com.ortin.gesturetranslator.domain.usecases.WordCompileUseCase
@@ -27,11 +28,12 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private var loadImageUseCase: LoadImageUseCase,
     private var wordCompileUseCase: WordCompileUseCase,
-    private var detectHandUseCase: DetectHandUseCase,
+    private var mediaPipeManager: MediaPipeManagerDomain,
     private var recognizeCoordinateUseCase: RecognizeCoordinateUseCase
 ) : LoadImagesListener, DetectionHandListener, ViewModel() {
     private val mainLiveData: MutableLiveData<MainFrameState> = MutableLiveData()
     private val predictLiveData: MutableLiveData<PredictState> = MutableLiveData()
+
     init {
         mainLiveData.value = MainFrameState()
         predictLiveData.value = PredictState()
@@ -40,7 +42,11 @@ class MainViewModel @Inject constructor(
 
     fun startRealTimeImagining(lifecycleOwner: LifecycleOwner) {
         loadImageUseCase.execute(this, lifecycleOwner)
-        detectHandUseCase.setMPDetectionListener(this)
+        viewModelScope.launch {
+            mediaPipeManager.listenerResult.collect {
+                detect(it)
+            }
+        }
     }
 
     private companion object {
@@ -83,7 +89,7 @@ class MainViewModel @Inject constructor(
     override fun getImage(image: Image) {
         val bitmap = image.bitmap
         predictLiveData.value = predictLiveData.value?.copy(imageFromCamera = bitmap)
-        if (mainLiveData.value?.realTimeButton == true) detectHandUseCase.detectLiveStream(bitmap)
+        if (mainLiveData.value?.realTimeButton == true) mediaPipeManager.detectLiveStream(bitmap)
     }
 
     override fun error(exception: Exception) {
@@ -108,13 +114,19 @@ class MainViewModel @Inject constructor(
     }
 
     fun onStartRealTimeButton() {
-        mainLiveData.value = mainLiveData.value?.copy(realTimeButton = true, bottomSheetBehavior = BottomSheetBehavior.STATE_COLLAPSED)
+        mainLiveData.value = mainLiveData.value?.copy(
+            realTimeButton = true,
+            bottomSheetBehavior = BottomSheetBehavior.STATE_COLLAPSED
+        )
         predictLiveData.value = predictLiveData.value?.copy(predictWord = "")
         wordCompileUseCase.clearState()
     }
 
     fun onStopRealTimeButton() {
-        mainLiveData.value = mainLiveData.value?.copy(realTimeButton = true, bottomSheetBehavior = BottomSheetBehavior.STATE_EXPANDED)
+        mainLiveData.value = mainLiveData.value?.copy(
+            realTimeButton = true,
+            bottomSheetBehavior = BottomSheetBehavior.STATE_EXPANDED
+        )
     }
 
     fun bottomSheetCollapsed() {

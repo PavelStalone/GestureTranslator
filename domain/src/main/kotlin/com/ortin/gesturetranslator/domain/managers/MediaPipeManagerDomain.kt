@@ -1,7 +1,6 @@
 package com.ortin.gesturetranslator.domain.managers
 
 import android.graphics.Bitmap
-import com.ortin.gesturetranslator.domain.di.Dispatcher
 import com.ortin.gesturetranslator.domain.listeners.DetectionHandListener
 import com.ortin.gesturetranslator.domain.models.ImageDetected
 import com.ortin.gesturetranslator.domain.models.SettingsMediaPipe
@@ -17,8 +16,8 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class MediaPipeManager @Inject constructor(private val handDetectionRepository: HandDetectionRepository) {
-    private val listenerResult = callbackFlow<ImageDetected?> {
+class MediaPipeManagerDomain @Inject constructor(private val handDetectionRepository: HandDetectionRepository) {
+    val listenerResult = callbackFlow<ImageDetected?> {
         val listener: DetectionHandListener = object : DetectionHandListener {
             override fun detect(imageDetected: ImageDetected?) {
                 trySend(imageDetected)
@@ -42,7 +41,7 @@ class MediaPipeManager @Inject constructor(private val handDetectionRepository: 
         handDetectionRepository.setSettingsModel(settingsMediaPipe)
     }
 
-    suspend fun detectImage(image: Bitmap): ImageDetected? =
+    fun detectImage(image: Bitmap) =
         handDetectionRepository.detectImage(image)
 
     suspend fun detectVideoFile(videoFile: VideoFileDecode): VideoDetected? =

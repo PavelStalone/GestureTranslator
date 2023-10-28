@@ -17,7 +17,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class DomainModule {
+object DomainModule {
     @Provides
     @Singleton
     fun provideLoadImageUseCase(loadImageRepository: LoadImageRepository): LoadImageUseCase {
@@ -28,12 +28,6 @@ class DomainModule {
     @Singleton
     fun provideWordCompileUseCase(wordCompilerRepository: WordCompilerRepository): WordCompileUseCase {
         return WordCompileUseCase(wordCompilerRepository)
-    }
-
-    @Provides
-    @Singleton
-    fun provideDetectHandUseCase(handDetectionRepository: HandDetectionRepository): DetectHandUseCase {
-        return DetectHandUseCase(handDetectionRepository)
     }
 
     @Provides
