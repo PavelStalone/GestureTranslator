@@ -45,8 +45,7 @@ dependencies {
     /**
      * Lottie animation implementations
      */
-    val lottieVersion = "3.4.0"
-    implementation("com.airbnb.android:lottie:$lottieVersion")
+    implementation("com.airbnb.android:lottie:3.4.0")
 
     /**
      * Async implementations

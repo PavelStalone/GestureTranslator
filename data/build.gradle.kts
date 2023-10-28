@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.ortin.data"
+    namespace = "com.ortin.gesturetranslator.data"
 }
 
 dependencies {
