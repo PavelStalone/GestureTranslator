@@ -14,13 +14,13 @@ import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
     primary = Color(0xFFB3C5FF),
-    secondary = Color(0xFFC1C6DD),
+    secondary = Color(0xFF414659),
     tertiary = Color(0xFFE1BBDC)
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = Color(0xFF3C5BA9),
-    secondary = Color(0xFF585E71),
+    secondary = Color(0xFFDDE2F9),
     tertiary = Color(0xFF735471)
 )
 

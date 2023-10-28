@@ -28,14 +28,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ortin.gesturetranslator.ui.R
 
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 fun PrimaryTextField(
     modifier: Modifier = Modifier,
     title: String? = null,
     value: String = "",
-    description: String? = null,
+    placeholder: String? = null,
     supportText: String? = null,
     maxQuantityOfChar: Int? = null,
     maxLines: Int = 1,
@@ -50,9 +49,7 @@ fun PrimaryTextField(
         mutableStateOf(value)
     }
     val spacerModifier = Modifier.height(4.dp)
-    Column(
-        modifier = modifier
-    ) {
+    Column(modifier = modifier) {
         title?.let {
             Text(text = title)
             Spacer(spacerModifier)
@@ -67,7 +64,7 @@ fun PrimaryTextField(
                 }
             },
             placeholder = {
-                description?.let {
+                placeholder?.let {
                     Text(text = it)
                 }
             },
@@ -115,10 +112,12 @@ fun PrimaryTextField(
 
 @Preview
 @Composable
-fun PrimaryTextFieldPreview(){
-    Column(modifier = Modifier
-        .background(Color.White)
-        .fillMaxSize()){
+fun PrimaryTextFieldPreview() {
+    Column(
+        modifier = Modifier
+            .background(Color.White)
+            .fillMaxSize()
+    ) {
         Spacer(modifier = Modifier.height(40.dp))
         PrimaryTextField(onTextChange = {})
     }

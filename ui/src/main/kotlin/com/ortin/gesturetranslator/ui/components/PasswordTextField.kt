@@ -44,7 +44,7 @@ fun PasswordTextField(
                     IconButton(onClick = { passwordVisibilityState = false }) {
                         Icon(
                             painter = painterResource(id = R.drawable.icon_visibility_on),
-                            tint = MaterialTheme.colorScheme.secondary,
+                            tint = MaterialTheme.colorScheme.onSecondaryContainer,
                             contentDescription = null
                         )
                     }
@@ -58,7 +58,7 @@ fun PasswordTextField(
                     }
                 }
             },
-            description = description,
+            placeholder = description,
             visualTransformation = if (passwordVisibilityState) VisualTransformation.None else PasswordVisualTransformation(),
             keyboardType = KeyboardType.Password
         )

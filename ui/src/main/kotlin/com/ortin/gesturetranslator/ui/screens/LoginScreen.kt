@@ -33,6 +33,7 @@ import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
 
 @Composable
 fun LoginScreen(
+    isLoginButtonEnabled: Boolean,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -55,7 +56,7 @@ fun LoginScreen(
         PrimaryTextField(
             modifier = Modifier.padding(horizontal = 16.dp),
             onTextChange = {},
-            description = stringResource(id = R.string.enter_login)
+            placeholder = stringResource(id = R.string.enter_login)
         )
         Spacer(modifier = Modifier.height(16.dp))
         PasswordTextField(
@@ -68,7 +69,7 @@ fun LoginScreen(
             modifier = Modifier.padding(horizontal = 16.dp),
             text = stringResource(id = R.string.login_button_text),
             onButtonClick = {},
-            isEnabled = true
+            isEnabled = isLoginButtonEnabled
         )
         Spacer(modifier = Modifier.height(16.dp))
         SecondaryTextButton(
@@ -78,15 +79,15 @@ fun LoginScreen(
             isEnabled = true
         )
         Spacer(modifier = Modifier.height(24.dp))
-        Row (
+        Row(
             modifier = Modifier.padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically
-        ){
+        ) {
             Text(
                 text = stringResource(id = R.string.without_accaunt),
                 color = MaterialTheme.colorScheme.onBackground,
                 fontSize = 16.sp
-                )
+            )
             Spacer(modifier = Modifier.width(4.dp))
             Text(
                 text = stringResource(id = R.string.sign_up),
@@ -96,7 +97,7 @@ fun LoginScreen(
                     fontSize = 16.sp
                 ),
                 modifier = Modifier.clickable(
-                    onClick = {/* TODO: Handle click */}
+                    onClick = {/* TODO: Handle click */ }
                 )
             )
         }
@@ -108,9 +109,11 @@ fun LoginScreen(
                 textDecoration = TextDecoration.Underline,
                 fontSize = 16.sp
             ),
-            modifier = Modifier.padding(horizontal = 16.dp).clickable(
-                onClick = {/* TODO: Handle click */}
-            )
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .clickable(
+                    onClick = {/* TODO: Handle click */ }
+                )
         )
     }
 }
@@ -120,6 +123,7 @@ fun LoginScreen(
 fun LoginScreenPreviewLight() {
     GestureTranslatorTheme {
         LoginScreen(
+            isLoginButtonEnabled = true,
             modifier = Modifier
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background)
@@ -132,6 +136,7 @@ fun LoginScreenPreviewLight() {
 fun LoginScreenPreviewDark() {
     GestureTranslatorTheme(darkTheme = true) {
         LoginScreen(
+            isLoginButtonEnabled = true,
             modifier = Modifier
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background)
