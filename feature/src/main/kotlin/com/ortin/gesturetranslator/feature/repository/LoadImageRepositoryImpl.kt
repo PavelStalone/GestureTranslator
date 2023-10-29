@@ -8,8 +8,10 @@ import com.ortin.gesturetranslator.domain.repository.LoadImageRepository
 import com.ortin.gesturetranslator.feature.managers.camera.CameraManager
 import com.ortin.gesturetranslator.feature.managers.camera.listeners.CameraListener
 import com.ortin.gesturetranslator.feature.managers.camera.models.ImageFromCamera
+import javax.inject.Inject
 
-class LoadImageRepositoryImpl(private val cameraManager: CameraManager) : LoadImageRepository {
+class LoadImageRepositoryImpl @Inject constructor(private val cameraManager: CameraManager) :
+    LoadImageRepository {
     override fun loadImages(
         loadImagesListener: LoadImagesListener,
         lifecycleOwner: LifecycleOwner,

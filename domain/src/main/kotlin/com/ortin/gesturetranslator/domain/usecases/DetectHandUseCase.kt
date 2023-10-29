@@ -7,8 +7,9 @@ import com.ortin.gesturetranslator.domain.models.SettingsMediaPipe
 import com.ortin.gesturetranslator.domain.models.VideoDetected
 import com.ortin.gesturetranslator.domain.models.VideoFileDecode
 import com.ortin.gesturetranslator.domain.repository.HandDetectionRepository
+import javax.inject.Inject
 
-class DetectHandUseCase(private val handDetectionRepository: HandDetectionRepository) {
+class DetectHandUseCase @Inject constructor(private val handDetectionRepository: HandDetectionRepository) {
     fun detectImage(image: Bitmap): ImageDetected? = handDetectionRepository.detectImage(image)
 
     fun detectVideoFile(videoFile: VideoFileDecode): VideoDetected? =

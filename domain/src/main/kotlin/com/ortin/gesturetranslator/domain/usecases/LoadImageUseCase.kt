@@ -4,8 +4,9 @@ import androidx.lifecycle.LifecycleOwner
 import com.ortin.gesturetranslator.domain.listeners.LoadImagesListener
 import com.ortin.gesturetranslator.domain.models.CameraFacingSettings
 import com.ortin.gesturetranslator.domain.repository.LoadImageRepository
+import javax.inject.Inject
 
-class LoadImageUseCase(private val loadImageRepository: LoadImageRepository) {
+class LoadImageUseCase @Inject constructor(private val loadImageRepository: LoadImageRepository) {
     fun execute(
         loadImagesListener: LoadImagesListener,
         lifecycleOwner: LifecycleOwner,
