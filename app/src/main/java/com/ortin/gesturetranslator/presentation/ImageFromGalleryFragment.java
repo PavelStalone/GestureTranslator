@@ -111,7 +111,7 @@ public class ImageFromGalleryFragment extends Fragment implements DetectionHandL
     public void detect(ImageDetected imageDetected) {
         Log.e("Gallery", "detect: " + imageDetected);
         if (imageDetected != null) {
-            CoordinateClassification coordinateClassification = recognizeCoordinateUseCase.execute(imageDetected);
+            CoordinateClassification coordinateClassification = recognizeCoordinateUseCase.invoke(imageDetected);
 
             String predictLetter = String.format("%s", coordinateClassification.getLabel());
             Log.e("Gallery", "label: " + coordinateClassification.getLabel());

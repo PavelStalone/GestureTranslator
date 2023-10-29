@@ -1,6 +1,5 @@
 package com.ortin.gesturetranslator.domain.managers
 
-import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import com.ortin.gesturetranslator.domain.listeners.LoadImagesListener
 import com.ortin.gesturetranslator.domain.models.CameraFacingSettings
@@ -10,7 +9,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.trySendBlocking
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flowOn
@@ -20,8 +18,6 @@ import javax.inject.Singleton
 
 @Singleton
 class CameraInputManager @Inject constructor(private val loadImageRepository: LoadImageRepository) {
-    val flowCamera = MutableStateFlow<Image?>(null)
-
     fun execute(
         lifecycleOwner: LifecycleOwner,
         cameraFacing: CameraFacingSettings = CameraFacingSettings.LENS_FACING_BACK
@@ -29,8 +25,6 @@ class CameraInputManager @Inject constructor(private val loadImageRepository: Lo
         val listener: LoadImagesListener = object : LoadImagesListener {
             override fun getImage(image: Image) {
                 trySendBlocking(image)
-                flowCamera.value = image
-                Log.d("Camera", "ImageSend")
             }
 
             override fun error(exception: Exception) {

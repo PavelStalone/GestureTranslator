@@ -5,7 +5,9 @@ import com.ortin.gesturetranslator.domain.models.ImageDetected
 import com.ortin.gesturetranslator.domain.repository.RecognizeCoordinateRepository
 import javax.inject.Inject
 
-class RecognizeCoordinateUseCase @Inject constructor(private val recognizeCoordinateRepository: RecognizeCoordinateRepository) {
-    fun execute(imageDetected: ImageDetected): CoordinateClassification =
-        recognizeCoordinateRepository.recognise(imageDetected)
+interface RecognizeCoordinateUseCase : UseCase<ImageDetected, CoordinateClassification>
+
+class RecognizeCoordinateUseCaseImpl @Inject constructor(private val recognizeCoordinateRepository: RecognizeCoordinateRepository) : RecognizeCoordinateUseCase {
+    override fun invoke(data: ImageDetected): CoordinateClassification =
+        recognizeCoordinateRepository.recognise(data)
 }

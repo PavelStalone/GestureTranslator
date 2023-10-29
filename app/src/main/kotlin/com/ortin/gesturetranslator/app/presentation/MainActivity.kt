@@ -15,14 +15,14 @@ import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import com.ortin.gesturetranslator.R
 import com.ortin.gesturetranslator.databinding.ActivityMainBinding
-import com.ortin.gesturetranslator.domain.usecases.SaveLoadSettingsUseCase
+import com.ortin.gesturetranslator.domain.managers.SaveSettingsManager
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     @Inject
-    lateinit var saveLoadSettingsUseCase: SaveLoadSettingsUseCase
+    lateinit var saveSettingsManager: SaveSettingsManager
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
 
-        if (saveLoadSettingsUseCase.getTheme()) {
+        if (saveSettingsManager.getSettings().theme) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)

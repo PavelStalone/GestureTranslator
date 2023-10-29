@@ -1,42 +1,30 @@
 package com.ortin.gesturetranslator.app.presentation
 
-import android.annotation.SuppressLint
-import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.ortin.gesturetranslator.app.models.MainFrameState
 import com.ortin.gesturetranslator.app.models.PredictState
-import com.ortin.gesturetranslator.domain.listeners.DetectionHandListener
-import com.ortin.gesturetranslator.domain.listeners.LoadImagesListener
 import com.ortin.gesturetranslator.domain.managers.CameraInputManager
 import com.ortin.gesturetranslator.domain.managers.MediaPipeManagerDomain
+import com.ortin.gesturetranslator.domain.managers.WorldCompileManager
 import com.ortin.gesturetranslator.domain.models.Image
 import com.ortin.gesturetranslator.domain.models.ImageDetected
-import com.ortin.gesturetranslator.domain.models.SettingsMediaPipe
-import com.ortin.gesturetranslator.domain.usecases.LoadImageUseCase
 import com.ortin.gesturetranslator.domain.usecases.RecognizeCoordinateUseCase
-import com.ortin.gesturetranslator.domain.usecases.WordCompileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private var cameraManager: CameraInputManager,
-    private var wordCompileUseCase: WordCompileUseCase,
+    private var worldCompileManager: WorldCompileManager,
     private var mediaPipeManager: MediaPipeManagerDomain,
     private var recognizeCoordinateUseCase: RecognizeCoordinateUseCase
 ) : ViewModel() {
@@ -48,12 +36,12 @@ class MainViewModel @Inject constructor(
     init {
         _mainLiveData.value = MainFrameState()
         _predictLiveData.value = PredictState()
-        wordCompileUseCase.clearState()
+        worldCompileManager.clearState()
     }
 
     fun startRealTimeImagining(lifecycleOwner: LifecycleOwner) {
         val predictState: Flow<PredictState> = combine(
-            mediaPipeManager.flowMediaPipe,
+            mediaPipeManager.flow,
             cameraManager.execute(lifecycleOwner).onEach { mediaPipeManager.detectLiveStream(it.bitmap) },
             ::mergeSources
         )
@@ -69,13 +57,13 @@ class MainViewModel @Inject constructor(
         val bitmap = image?.bitmap
         bitmap?.run { mediaPipeManager.detectLiveStream(bitmap) }
         val coordinateClassification =
-            imageDetected?.let { recognizeCoordinateUseCase.execute(imageDetected) }
+            imageDetected?.let { recognizeCoordinateUseCase(imageDetected) }
         val predictLetter = coordinateClassification?.label ?: ""
         val coordinate = imageDetected?.coordinates
         coordinateClassification?.run {
-            if (this.percent > 30f) wordCompileUseCase.addLetter(this.label)
+            if (this.percent > 30f) worldCompileManager.addLetter(this.label)
         }
-        val currentWord = wordCompileUseCase.getWord()
+        val currentWord = worldCompileManager.getWord()
 
         return PredictState(
             imageFromCamera = bitmap,
@@ -88,7 +76,6 @@ class MainViewModel @Inject constructor(
     override fun onCleared() {
         super.onCleared()
         offFlashLight()
-        Timber.e("cleared [!]")
     }
 
     fun onFlashLight() {
@@ -107,7 +94,7 @@ class MainViewModel @Inject constructor(
             bottomSheetBehavior = BottomSheetBehavior.STATE_COLLAPSED
         )
         _predictLiveData.value = _predictLiveData.value?.copy(predictWord = "")
-        wordCompileUseCase.clearState()
+        worldCompileManager.clearState()
     }
 
     fun onStopRealTimeButton() {
