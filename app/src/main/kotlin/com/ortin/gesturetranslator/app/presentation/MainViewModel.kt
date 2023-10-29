@@ -55,7 +55,6 @@ class MainViewModel @Inject constructor(
 
     private fun mergeSources(imageDetected: ImageDetected?, image: Image?,): PredictState {
         val bitmap = image?.bitmap
-        bitmap?.run { mediaPipeManager.detectLiveStream(bitmap) }
         val coordinateClassification =
             imageDetected?.let { recognizeCoordinateUseCase(imageDetected) }
         val predictLetter = coordinateClassification?.label ?: ""
