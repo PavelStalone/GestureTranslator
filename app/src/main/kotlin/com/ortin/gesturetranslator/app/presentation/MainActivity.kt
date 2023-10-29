@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var saveLoadSettingsUseCase: SaveLoadSettingsUseCase
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var navController: NavController
 
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                val previousEntry = navController.previousBackStackEntry
+                val previousEntry = findNavController(binding.navHostFragment.id).previousBackStackEntry
                 Timber.tag("MainActivity").e("onBackPressed: previousEntry = %s", previousEntry)
                 if (previousEntry == null) {
                     finish()
@@ -57,7 +56,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        navController = findNavController(binding.navHostFragment.id)
         //NavigationUI.setupWithNavController(navigationView, navController)
         hideControl()
     }
@@ -71,7 +69,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        navController.addOnDestinationChangedListener(
+        findNavController(binding.navHostFragment.id).addOnDestinationChangedListener(
             object : NavController.OnDestinationChangedListener {
                 override fun onDestinationChanged(
                     controller: NavController,
@@ -87,31 +85,31 @@ class MainActivity : AppCompatActivity() {
         )
 
         binding.menuNavigationView.setNavigationItemSelectedListener { item: MenuItem ->
-            if (item.itemId != navController.currentDestination?.id) {
+            if (item.itemId != findNavController(binding.navHostFragment.id).currentDestination?.id) {
                 when (item.itemId) {
-                    R.id.mainFragment -> navController.navigate(R.id.mainFragment)
+                    R.id.mainFragment -> findNavController(binding.navHostFragment.id).navigate(R.id.mainFragment)
 
                     R.id.gestureListFragment -> {
-                        if (navController.currentDestination?.id == R.id.mainFragment) {
-                            navController.navigate(R.id.action_mainFragment_to_gestureListFragment)
+                        if (findNavController(binding.navHostFragment.id).currentDestination?.id == R.id.mainFragment) {
+                            findNavController(binding.navHostFragment.id).navigate(R.id.action_mainFragment_to_gestureListFragment)
                         } else {
-                            navController.navigate(R.id.gestureListFragment)
+                            findNavController(binding.navHostFragment.id).navigate(R.id.gestureListFragment)
                         }
                     }
 
                     R.id.settingsFragment -> {
-                        if (navController.currentDestination?.id == R.id.mainFragment) {
-                            navController.navigate(R.id.action_mainFragment_to_settingsFragment)
+                        if (findNavController(binding.navHostFragment.id).currentDestination?.id == R.id.mainFragment) {
+                            findNavController(binding.navHostFragment.id).navigate(R.id.action_mainFragment_to_settingsFragment)
                         } else {
-                            navController.navigate(R.id.settingsFragment)
+                            findNavController(binding.navHostFragment.id).navigate(R.id.settingsFragment)
                         }
                     }
 
                     R.id.informationFragment -> {
-                        if (navController.currentDestination?.id == R.id.mainFragment) {
-                            navController.navigate(R.id.action_mainFragment_to_informationFragment)
+                        if (findNavController(binding.navHostFragment.id).currentDestination?.id == R.id.mainFragment) {
+                            findNavController(binding.navHostFragment.id).navigate(R.id.action_mainFragment_to_informationFragment)
                         } else {
-                            navController.navigate(R.id.informationFragment)
+                            findNavController(binding.navHostFragment.id).navigate(R.id.informationFragment)
                         }
                     }
 
