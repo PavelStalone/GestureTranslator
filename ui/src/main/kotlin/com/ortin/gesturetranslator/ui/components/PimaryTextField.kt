@@ -8,11 +8,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -29,7 +28,6 @@ import androidx.compose.ui.unit.dp
 import com.ortin.gesturetranslator.ui.R
 
 @Composable
-@OptIn(ExperimentalMaterial3Api::class)
 fun PrimaryTextField(
     modifier: Modifier = Modifier,
     title: String? = null,
@@ -70,16 +68,18 @@ fun PrimaryTextField(
             },
             enabled = isEnabled,
             isError = isError,
-            colors = TextFieldDefaults.outlinedTextFieldColors(
+            colors = OutlinedTextFieldDefaults.colors(
                 disabledTextColor = MaterialTheme.colorScheme.secondary,
                 disabledSupportingTextColor = Color.Blue,
                 errorBorderColor = MaterialTheme.colorScheme.error,
                 errorSupportingTextColor = MaterialTheme.colorScheme.error,
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
-                textColor = MaterialTheme.colorScheme.onSurface,
+                focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
                 unfocusedBorderColor = MaterialTheme.colorScheme.outline,
-                containerColor = MaterialTheme.colorScheme.background,
-                placeholderColor = MaterialTheme.colorScheme.onSurface
+                focusedContainerColor = MaterialTheme.colorScheme.background,
+                unfocusedPlaceholderColor = MaterialTheme.colorScheme.onSurface,
+                focusedPlaceholderColor = MaterialTheme.colorScheme.onSurface
             ),
             supportingText = {
                 supportText?.let {

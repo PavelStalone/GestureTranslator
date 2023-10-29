@@ -22,7 +22,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ortin.gesturetranslator.ui.R
 import com.ortin.gesturetranslator.ui.components.PasswordTextField
@@ -30,12 +29,14 @@ import com.ortin.gesturetranslator.ui.components.PrimaryTextButton
 import com.ortin.gesturetranslator.ui.components.PrimaryTextField
 import com.ortin.gesturetranslator.ui.components.SecondaryTextButton
 import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
+import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 
 @Composable
 fun LoginScreen(
     isLoginButtonEnabled: Boolean,
     modifier: Modifier = Modifier
 ) {
+    val localDimensions = LocalDimensions.current
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -46,41 +47,41 @@ fun LoginScreen(
             tint = MaterialTheme.colorScheme.onBackground,
             contentDescription = null
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(localDimensions.vertical))
         Text(
             text = stringResource(id = R.string.login_support_screen),
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onBackground
         )
-        Spacer(modifier = Modifier.height(48.dp))
+        Spacer(modifier = Modifier.height(localDimensions.verticalXlarge))
         PrimaryTextField(
-            modifier = Modifier.padding(horizontal = 16.dp),
+            modifier = Modifier.padding(horizontal = localDimensions.horizontalMedium),
             onTextChange = {},
             placeholder = stringResource(id = R.string.enter_login)
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(localDimensions.vertical))
         PasswordTextField(
-            modifier = Modifier.padding(horizontal = 8.dp),
+            modifier = Modifier.padding(horizontal = localDimensions.horizontalTiny),
             onTextChange = {},
             description = stringResource(id = R.string.enter_password)
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(localDimensions.verticalMedium))
         PrimaryTextButton(
-            modifier = Modifier.padding(horizontal = 16.dp),
+            modifier = Modifier.padding(horizontal = localDimensions.horizontalMedium),
             text = stringResource(id = R.string.login_button_text),
             onButtonClick = {},
             isEnabled = isLoginButtonEnabled
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(localDimensions.vertical))
         SecondaryTextButton(
-            modifier = Modifier.padding(horizontal = 16.dp),
+            modifier = Modifier.padding(horizontal = localDimensions.horizontalMedium),
             text = stringResource(id = R.string.without_login_button_text),
             onButtonClick = {},
             isEnabled = true
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(localDimensions.vertical))
         Row(
-            modifier = Modifier.padding(horizontal = 16.dp),
+            modifier = Modifier.padding(horizontal = localDimensions.horizontalMedium),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
@@ -88,7 +89,7 @@ fun LoginScreen(
                 color = MaterialTheme.colorScheme.onBackground,
                 fontSize = 16.sp
             )
-            Spacer(modifier = Modifier.width(4.dp))
+            Spacer(modifier = Modifier.width(localDimensions.horizontalXTiny))
             Text(
                 text = stringResource(id = R.string.sign_up),
                 style = TextStyle(
@@ -97,11 +98,13 @@ fun LoginScreen(
                     fontSize = 16.sp
                 ),
                 modifier = Modifier.clickable(
-                    onClick = {/* TODO: Handle click */ }
+                    onClick = {
+                        /* TODO: Handle click */
+                    }
                 )
             )
         }
-        Spacer(modifier = Modifier.width(16.dp))
+        Spacer(modifier = Modifier.width(localDimensions.horizontalMedium))
         Text(
             text = stringResource(id = R.string.reset_password),
             style = TextStyle(
@@ -110,9 +113,11 @@ fun LoginScreen(
                 fontSize = 16.sp
             ),
             modifier = Modifier
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = localDimensions.horizontalMedium)
                 .clickable(
-                    onClick = {/* TODO: Handle click */ }
+                    onClick = {
+                        /* TODO: Handle click */
+                    }
                 )
         )
     }
