@@ -1,13 +1,10 @@
-package com.ortin.data;
+package com.ortin.gesturetranslator.data;
 
 import android.content.Context;
-
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import static org.junit.Assert.*;
 
 /**
@@ -21,6 +18,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.ortin.data.test", appContext.getPackageName());
+        assertEquals("com.ortin.gesturetranslator.data.test", appContext.getPackageName());
     }
 }
