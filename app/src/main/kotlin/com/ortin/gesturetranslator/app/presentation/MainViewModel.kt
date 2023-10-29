@@ -20,6 +20,7 @@ import com.ortin.gesturetranslator.domain.usecases.RecognizeCoordinateUseCase
 import com.ortin.gesturetranslator.domain.usecases.WordCompileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,6 +32,7 @@ class MainViewModel @Inject constructor(
 ) : ViewModel(), LoadImagesListener, DetectionHandListener {
     private val _mainLiveData: MutableLiveData<MainFrameState> = MutableLiveData()
     val mainLiveData = _mainLiveData as LiveData<MainFrameState>
+
     private val _predictLiveData: MutableLiveData<PredictState> = MutableLiveData()
     val predictLiveData = _predictLiveData as LiveData<PredictState>
     init {
@@ -84,18 +86,20 @@ class MainViewModel @Inject constructor(
     override fun getImage(image: Image) {
         val bitmap = image.bitmap
         _predictLiveData.value = _predictLiveData.value?.copy(imageFromCamera = bitmap)
-        if (_mainLiveData.value?.realTimeButton == true) detectHandUseCase.detectLiveStream(bitmap)
+        if (_mainLiveData.value?.realTimeButton == true) {
+            detectHandUseCase.detectLiveStream(bitmap)
+        }
     }
 
     override fun error(exception: Exception) {
-        Log.e(TAG, "Error!  [!]")
+        Timber.tag(TAG).e("Error!  [!]")
         exception.printStackTrace()
     }
 
     override fun onCleared() {
         super.onCleared()
         offFlashLight()
-        Log.e(TAG, "cleared [!]")
+        Timber.tag(TAG).e("cleared [!]")
     }
 
     fun onFlashLight() {
@@ -109,13 +113,19 @@ class MainViewModel @Inject constructor(
     }
 
     fun onStartRealTimeButton() {
-        _mainLiveData.value = _mainLiveData.value?.copy(realTimeButton = true, bottomSheetBehavior = BottomSheetBehavior.STATE_COLLAPSED)
+        _mainLiveData.value = _mainLiveData.value?.copy(
+            realTimeButton = true,
+            bottomSheetBehavior = BottomSheetBehavior.STATE_COLLAPSED
+        )
         _predictLiveData.value = _predictLiveData.value?.copy(predictWord = "")
         wordCompileUseCase.clearState()
     }
 
     fun onStopRealTimeButton() {
-        _mainLiveData.value = _mainLiveData.value?.copy(realTimeButton = true, bottomSheetBehavior = BottomSheetBehavior.STATE_EXPANDED)
+        _mainLiveData.value = _mainLiveData.value?.copy(
+            realTimeButton = true,
+            bottomSheetBehavior = BottomSheetBehavior.STATE_EXPANDED
+        )
     }
 
     fun bottomSheetCollapsed() {

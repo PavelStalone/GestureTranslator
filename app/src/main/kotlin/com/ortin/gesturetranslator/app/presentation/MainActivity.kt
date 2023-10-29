@@ -4,35 +4,46 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.findNavController
 import com.ortin.gesturetranslator.R
 import com.ortin.gesturetranslator.databinding.ActivityMainBinding
 import com.ortin.gesturetranslator.domain.usecases.SaveLoadSettingsUseCase
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
     @Inject
     lateinit var saveLoadSettingsUseCase: SaveLoadSettingsUseCase
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
-//    val callback = this.onBackPressedDispatcher.addCallback(this.getLifecycle())
 
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val previousEntry = navController.previousBackStackEntry
+                Timber.tag("MainActivity").e("onBackPressed: previousEntry = %s", previousEntry)
+                if (previousEntry == null) {
+                    finish()
+                }
+            }
+        })
 
         if (saveLoadSettingsUseCase.getTheme()) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -46,8 +57,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        navController = (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
-        //NavigationUI.setupWithNavController(navigationView, navController);
+        navController = findNavController(binding.navHostFragment.id)
+        //NavigationUI.setupWithNavController(navigationView, navController)
         hideControl()
     }
 
@@ -127,17 +138,5 @@ class MainActivity : AppCompatActivity() {
     private fun showControl() {
         binding.topBar.root.visibility = View.VISIBLE
         this.binding.drawerLayoutId.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-
-        val previousEntry = navController.previousBackStackEntry
-        Log.e("MainActivity", "onBackPressed: previousEntry = $previousEntry")
-        if (previousEntry == null) {
-            finish()
-        } else {
-            super.onBackPressed()
-        }
     }
 }
