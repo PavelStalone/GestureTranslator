@@ -1,6 +1,8 @@
 package com.ortin.gesturetranslator.data.validation
 
-class ValidateUserLogin {
+import javax.inject.Inject
+
+class ValidateUserLogin @Inject constructor() {
     fun execute(login: String): ValidationResult {
         if (login.isEmpty()) {
             return ValidationResult(

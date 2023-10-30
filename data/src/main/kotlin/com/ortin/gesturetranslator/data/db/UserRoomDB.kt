@@ -20,7 +20,7 @@ abstract class UserRoomDB: RoomDatabase() {
             return Room.databaseBuilder(
                 context,
                 UserRoomDB::class.java,
-                "userRoomDB.db"
+                "UserInfo.db"
             ).build()
         }
     }

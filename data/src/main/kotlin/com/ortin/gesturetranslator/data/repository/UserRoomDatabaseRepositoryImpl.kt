@@ -6,8 +6,9 @@ import com.ortin.gesturetranslator.domain.entities.UserEntityDomain
 import com.ortin.gesturetranslator.domain.repository.UserRoomDatabaseRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class UserRoomDatabaseRepositoryImpl(
+class UserRoomDatabaseRepositoryImpl @Inject constructor(
     private val userDatabase: UserRoomDB,
 ) : UserRoomDatabaseRepository {
     override suspend fun addUser(user: UserEntityDomain) {
@@ -25,7 +26,6 @@ class UserRoomDatabaseRepositoryImpl(
     override suspend fun getUserList(): Flow<List<UserEntityDomain>> {
         return dataFlowMapToDomain(userDatabase.userDao.getAllUsers())
     }
-
 
     override suspend fun getUser(login: String): UserEntityDomain {
         return userDatabase.userDao.getUser(login).mapToDomain()
