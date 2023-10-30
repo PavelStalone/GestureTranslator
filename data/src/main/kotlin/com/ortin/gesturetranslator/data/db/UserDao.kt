@@ -20,9 +20,9 @@ interface UserDao {
     @Delete
     suspend fun deleteUser(userEntity: UserEntity)
 
-    @Query("SELECT * FROM userRoomDB")
+    @Query("SELECT * FROM userinfo")
     fun getAllUsers(): Flow<List<UserEntity>>
 
-    @Query("SELECT * FROM userRoomDB WHERE login == :login")
+    @Query("SELECT * FROM userinfo WHERE login == :login")
     fun getUser(login: String): UserEntity
 }
