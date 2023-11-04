@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
                     destination: NavDestination,
                     arguments: Bundle?
                 ) {
-                    Timber.d("onDestinationChanged: ${destination.displayName}")
+                    Timber.d("onDestinationChanged: ${destination.label}")
                     if (destination.id != R.id.logotypeFragment) {
                         showTopBarAndUnlockDrawer()
                         controller.removeOnDestinationChangedListener(this)
