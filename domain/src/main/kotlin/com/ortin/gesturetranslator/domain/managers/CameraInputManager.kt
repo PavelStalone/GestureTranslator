@@ -32,7 +32,11 @@ class CameraInputManager @Inject constructor(private val loadImageRepository: Lo
                 close(exception)
             }
         }
-        loadImageRepository.loadImages(listener, lifecycleOwner, cameraFacing)
+        loadImageRepository.loadImages(
+            listener,
+            lifecycleOwner,
+            cameraFacing
+        )
 
         awaitClose()
     }.buffer(Channel.CONFLATED).flowOn(Dispatchers.IO)
