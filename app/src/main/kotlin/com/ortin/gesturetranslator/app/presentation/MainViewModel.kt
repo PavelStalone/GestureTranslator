@@ -4,7 +4,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.asLiveData
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.ortin.gesturetranslator.app.models.MainFrameState
 import com.ortin.gesturetranslator.app.models.PredictState
@@ -18,7 +18,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,35 +27,31 @@ class MainViewModel @Inject constructor(
     private var mediaPipeManager: MediaPipeManagerDomain,
     private var recognizeCoordinateUseCase: RecognizeCoordinateUseCase
 ) : ViewModel() {
-    private val _mainLiveData: MutableLiveData<MainFrameState> = MutableLiveData()
-    val mainLiveData = _mainLiveData as LiveData<MainFrameState>
-    private val _predictLiveData: MutableLiveData<PredictState> = MutableLiveData()
-    val predictLiveData = _predictLiveData as LiveData<PredictState>
+    private val _menuLiveData: MutableLiveData<MainFrameState> = MutableLiveData(MainFrameState())
+    val menuLiveData = _menuLiveData as LiveData<MainFrameState>
+
+    var predictLiveData: LiveData<PredictState> = MutableLiveData(PredictState())
 
     init {
-        _mainLiveData.value = MainFrameState()
-        _predictLiveData.value = PredictState()
         worldCompileManager.clearState()
     }
 
     fun startRealTimeImagining(lifecycleOwner: LifecycleOwner) {
         val predictState: Flow<PredictState> = combine(
             mediaPipeManager.flow,
-            cameraManager.execute(lifecycleOwner).onEach { mediaPipeManager.detectLiveStream(it.bitmap) },
+            cameraManager.startListening(lifecycleOwner)
+                .onEach { mediaPipeManager.detectLiveStream(it.bitmap) },
             ::mergeSources
         )
 
-        viewModelScope.launch {
-            predictState.collect {
-                _predictLiveData.postValue(it)
-            }
-        }
+        predictLiveData = predictState.asLiveData()
     }
 
-    private fun mergeSources(imageDetected: ImageDetected?, image: Image?,): PredictState {
+    private fun mergeSources(imageDetected: ImageDetected?, image: Image?): PredictState {
         val bitmap = image?.bitmap
-        val coordinateClassification =
-            imageDetected?.let { recognizeCoordinateUseCase(imageDetected) }
+        val coordinateClassification = imageDetected?.let {
+            recognizeCoordinateUseCase(imageDetected)
+        }
         val predictLetter = coordinateClassification?.label ?: ""
         val coordinate = imageDetected?.coordinates
         coordinateClassification?.run {
@@ -79,35 +74,34 @@ class MainViewModel @Inject constructor(
 
     fun onFlashLight() {
         cameraManager.setStatusFlashlight(true)
-        _mainLiveData.value = _mainLiveData.value?.copy(flashLight = true)
+        _menuLiveData.value = _menuLiveData.value?.copy(flashLight = true)
     }
 
     fun offFlashLight() {
         cameraManager.setStatusFlashlight(false)
-        _mainLiveData.value = _mainLiveData.value?.copy(flashLight = false)
+        _menuLiveData.value = _menuLiveData.value?.copy(flashLight = false)
     }
 
     fun onStartRealTimeButton() {
-        _mainLiveData.value = _mainLiveData.value?.copy(
+        _menuLiveData.value = _menuLiveData.value?.copy(
             realTimeButton = true,
             bottomSheetBehavior = BottomSheetBehavior.STATE_COLLAPSED
         )
-        _predictLiveData.value = _predictLiveData.value?.copy(predictWord = "")
         worldCompileManager.clearState()
     }
 
     fun onStopRealTimeButton() {
-        _mainLiveData.value = _mainLiveData.value?.copy(
+        _menuLiveData.value = _menuLiveData.value?.copy(
             realTimeButton = true,
             bottomSheetBehavior = BottomSheetBehavior.STATE_EXPANDED
         )
     }
 
-    fun bottomSheetCollapsed() {
+    fun onBottomSheetCollapsed() {
         onStartRealTimeButton()
     }
 
-    fun bottomSheetExpanded() {
+    fun onBottomSheetExpanded() {
         onStopRealTimeButton()
     }
 }

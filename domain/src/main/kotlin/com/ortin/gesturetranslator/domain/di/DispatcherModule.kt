@@ -9,14 +9,14 @@ import kotlinx.coroutines.Dispatchers
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
-enum class DoDispatchers {
+enum class GtDispatchers {
     IO,
     DEFAULT
 }
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Dispatcher(val dispatcher: DoDispatchers)
+annotation class Dispatcher(val dispatcher: GtDispatchers)
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -24,11 +24,11 @@ object DispatcherModule {
 
     @Provides
     @Singleton
-    @Dispatcher(DoDispatchers.DEFAULT)
+    @Dispatcher(GtDispatchers.DEFAULT)
     fun provideDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
 
     @Provides
     @Singleton
-    @Dispatcher(DoDispatchers.IO)
+    @Dispatcher(GtDispatchers.IO)
     fun provideIODispatcher(): CoroutineDispatcher = Dispatchers.IO
 }

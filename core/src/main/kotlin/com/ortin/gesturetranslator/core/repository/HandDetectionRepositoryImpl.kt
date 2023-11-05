@@ -10,7 +10,7 @@ import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPVideoDetecti
 import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPVideoInput
 import com.ortin.gesturetranslator.core.managers.mediapipe.models.SettingsModel
 import com.ortin.gesturetranslator.domain.di.Dispatcher
-import com.ortin.gesturetranslator.domain.di.DoDispatchers
+import com.ortin.gesturetranslator.domain.di.GtDispatchers
 import com.ortin.gesturetranslator.domain.listeners.DetectionHandListener
 import com.ortin.gesturetranslator.domain.models.ImageDetected
 import com.ortin.gesturetranslator.domain.models.SettingsMediaPipe
@@ -23,7 +23,7 @@ import javax.inject.Inject
 
 class HandDetectionRepositoryImpl @Inject constructor(
     private val mediaPipeManager: MediaPipeManager,
-    @Dispatcher(DoDispatchers.IO) private val ioDispatcher: CoroutineDispatcher
+    @Dispatcher(GtDispatchers.IO) private val ioDispatcher: CoroutineDispatcher
 ) : HandDetectionRepository {
     override fun detectImage(image: Bitmap): ImageDetected? =
         mediaPipeManager.detectImage(image).mapToCoreImageDetected()
@@ -31,7 +31,7 @@ class HandDetectionRepositoryImpl @Inject constructor(
 
     override suspend fun detectVideoFile(videoFile: VideoFileDecode): VideoDetected? =
         withContext(ioDispatcher) {
-            mediaPipeManager.detectVideoFile(videoFile.mapToCoreMPVideoInput()).mapToVideDetected()
+            mediaPipeManager.detectVideoFile(videoFile.mapToCoreMPVideoInput()).mapToVideoDetected()
         }
 
     override fun detectLiveStream(image: Bitmap) {
@@ -72,7 +72,7 @@ class HandDetectionRepositoryImpl @Inject constructor(
         return ImageDetected(coordinates)
     }
 
-    private fun MPVideoDetection?.mapToVideDetected(): VideoDetected? {
+    private fun MPVideoDetection?.mapToVideoDetected(): VideoDetected? {
         if (this == null) return null
 
         val results = MutableList<ImageDetected?>(this.results.size) { null }

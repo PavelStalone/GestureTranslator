@@ -15,14 +15,14 @@ import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import com.ortin.gesturetranslator.R
 import com.ortin.gesturetranslator.databinding.ActivityMainBinding
-import com.ortin.gesturetranslator.domain.managers.SaveSettingsManager
+import com.ortin.gesturetranslator.domain.managers.SettingsManager
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     @Inject
-    lateinit var saveSettingsManager: SaveSettingsManager
+    lateinit var saveSettingsManager: SettingsManager
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController

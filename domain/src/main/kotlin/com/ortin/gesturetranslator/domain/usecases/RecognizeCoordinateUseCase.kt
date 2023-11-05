@@ -7,7 +7,9 @@ import javax.inject.Inject
 
 interface RecognizeCoordinateUseCase : UseCase<ImageDetected, CoordinateClassification>
 
-class RecognizeCoordinateUseCaseImpl @Inject constructor(private val recognizeCoordinateRepository: RecognizeCoordinateRepository) : RecognizeCoordinateUseCase {
+class RecognizeCoordinateUseCaseImpl @Inject constructor(
+    private val recognizeCoordinateRepository: RecognizeCoordinateRepository
+) : RecognizeCoordinateUseCase {
     override fun invoke(data: ImageDetected): CoordinateClassification =
         recognizeCoordinateRepository.recognise(data)
 }

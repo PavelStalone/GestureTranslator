@@ -4,10 +4,10 @@ import com.ortin.gesturetranslator.domain.models.SettingsDomain
 import com.ortin.gesturetranslator.domain.repository.SettingsRepository
 import javax.inject.Inject
 
-class SaveSettingsManager @Inject constructor(private val saveSettingsRepository: SettingsRepository) {
+class SettingsManager @Inject constructor(private val settingsRepository: SettingsRepository) {
     fun saveSettings(settingsDomain: SettingsDomain): Boolean =
-        saveSettingsRepository.saveSettings(settingsDomain)
+        settingsRepository.saveSettings(settingsDomain)
 
     fun getSettings(): SettingsDomain =
-        saveSettingsRepository.getSettings()
+        settingsRepository.getSettings()
 }

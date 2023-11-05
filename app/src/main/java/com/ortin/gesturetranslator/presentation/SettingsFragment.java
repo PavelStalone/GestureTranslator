@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import com.ortin.gesturetranslator.R;
 import com.ortin.gesturetranslator.databinding.SettingsLayoutBinding;
-import com.ortin.gesturetranslator.domain.managers.SaveSettingsManager;
+import com.ortin.gesturetranslator.domain.managers.SettingsManager;
 import com.ortin.gesturetranslator.domain.models.SettingsDomain;
 import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
@@ -20,11 +20,12 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class SettingsFragment extends Fragment {
     private SettingsLayoutBinding binding;
+
     @NonNull
     private SettingsDomain currentSave;
 
     @Inject
-    SaveSettingsManager saveSettingsManager;
+    SettingsManager saveSettingsManager;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,

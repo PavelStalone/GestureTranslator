@@ -123,7 +123,7 @@ public class MainFragment extends Fragment {
     private void initListeners() {
         BottomSheetBehavior<LinearLayout> bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheetBehaviorLayout.bottomSheetBehavior);
 
-        viewModel.getMainLiveData().observe(getViewLifecycleOwner(), state -> {
+        viewModel.getMenuLiveData().observe(getViewLifecycleOwner(), state -> {
             if (lastMainFrameState == null) {
                 binding.controlMenu.realTimeBTN.setState(state.getRealTimeButton());
                 binding.controlMenu.flashLight.setState(state.getFlashLight());
@@ -188,8 +188,8 @@ public class MainFragment extends Fragment {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 switch (newState) {
-                    case BottomSheetBehavior.STATE_EXPANDED -> viewModel.bottomSheetExpanded();
-                    case BottomSheetBehavior.STATE_COLLAPSED -> viewModel.bottomSheetCollapsed();
+                    case BottomSheetBehavior.STATE_EXPANDED -> viewModel.onBottomSheetExpanded();
+                    case BottomSheetBehavior.STATE_COLLAPSED -> viewModel.onBottomSheetCollapsed();
                     default -> {
                     }
                 }
