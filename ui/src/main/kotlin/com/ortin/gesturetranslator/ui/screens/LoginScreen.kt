@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -38,6 +39,7 @@ fun LoginScreen(
     modifier: Modifier = Modifier
 ) {
     val localDimensions = LocalDimensions.current
+
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -64,20 +66,20 @@ fun LoginScreen(
         PasswordTextField(
             modifier = Modifier.padding(horizontal = localDimensions.horizontalTiny),
             onTextChange = {},
-            description = stringResource(id = R.string.enter_password)
+            placeholder = stringResource(id = R.string.enter_password)
         )
         Spacer(modifier = Modifier.height(localDimensions.verticalMedium))
         PrimaryTextButton(
             modifier = Modifier.padding(horizontal = localDimensions.horizontalMedium),
             text = stringResource(id = R.string.login_button_text),
-            onButtonClick = {},
+            onClick = {},
             isEnabled = isLoginButtonEnabled
         )
         Spacer(modifier = Modifier.height(localDimensions.verticalStandard))
         SecondaryTextButton(
             modifier = Modifier.padding(horizontal = localDimensions.horizontalMedium),
             text = stringResource(id = R.string.without_login_button_text),
-            onButtonClick = {},
+            onClick = {},
             isEnabled = true
         )
         Spacer(modifier = Modifier.height(localDimensions.verticalStandard))
@@ -86,7 +88,7 @@ fun LoginScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = stringResource(id = R.string.without_accaunt),
+                text = stringResource(id = R.string.without_account),
                 color = MaterialTheme.colorScheme.onBackground,
                 fontSize = 16.sp
             )
@@ -118,8 +120,7 @@ fun LoginScreen(
                 textDecoration = TextDecoration.Underline,
                 fontSize = 16.sp
             ),
-            modifier = Modifier
-                .padding(horizontal = localDimensions.horizontalMedium)
+            modifier = Modifier.padding(horizontal = localDimensions.horizontalMedium)
         )
     }
 }
@@ -128,12 +129,14 @@ fun LoginScreen(
 @Composable
 fun LoginScreenPreviewLight() {
     GestureTranslatorTheme {
-        LoginScreen(
-            isLoginButtonEnabled = true,
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
-        )
+        Surface {
+            LoginScreen(
+                isLoginButtonEnabled = true,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background)
+            )
+        }
     }
 }
 
@@ -141,11 +144,13 @@ fun LoginScreenPreviewLight() {
 @Composable
 fun LoginScreenPreviewDark() {
     GestureTranslatorTheme(darkTheme = true) {
-        LoginScreen(
-            isLoginButtonEnabled = true,
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
-        )
+        Surface {
+            LoginScreen(
+                isLoginButtonEnabled = true,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background)
+            )
+        }
     }
 }

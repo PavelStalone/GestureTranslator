@@ -8,6 +8,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -16,20 +17,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
 
 @Composable
 fun SecondaryTextButton(
     text: String,
-    onButtonClick: () -> Unit,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
     isEnabled: Boolean = true,
     @DrawableRes leftIcon: Int? = null,
     @DrawableRes rightIcon: Int? = null
 ) {
     Button(
-        onClick = {
-            onButtonClick()
-        },
+        onClick = onClick,
         modifier = modifier,
         enabled = isEnabled,
         contentPadding = PaddingValues(
@@ -40,8 +40,8 @@ fun SecondaryTextButton(
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.secondaryContainer,
             contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
-            disabledContentColor = MaterialTheme.colorScheme.onPrimary,
-            disabledContainerColor = MaterialTheme.colorScheme.primary
+            disabledContentColor = MaterialTheme.colorScheme.onSurface,
+            disabledContainerColor = MaterialTheme.colorScheme.surface
         )
     ) {
         Row {
@@ -70,8 +70,13 @@ fun SecondaryTextButton(
 @Preview
 @Composable
 fun SecondaryTextButtonPreview() {
-    PrimaryTextButton(
-        text = "Войти",
-        onButtonClick = {}
-    )
+    GestureTranslatorTheme {
+        Surface {
+            PrimaryTextButton(
+                text = "Войти",
+                onClick = {}
+            )
+        }
+    }
+
 }

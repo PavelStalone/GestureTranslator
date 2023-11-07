@@ -6,11 +6,13 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -26,6 +28,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ortin.gesturetranslator.ui.R
+import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
+import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 
 @Composable
 fun PrimaryTextField(
@@ -43,10 +47,10 @@ fun PrimaryTextField(
     trailingIcon: @Composable (() -> Unit)? = null,
     onTextChange: (String) -> Unit
 ) {
-    var mutableValue by rememberSaveable {
-        mutableStateOf(value)
-    }
-    val spacerModifier = Modifier.height(4.dp)
+    val localDimensions = LocalDimensions
+    var mutableValue by rememberSaveable { mutableStateOf(value) }
+    val spacerModifier = Modifier.height(localDimensions.current.verticalXTiny)
+
     Column(modifier = modifier) {
         title?.let {
             Text(text = title)
@@ -113,12 +117,14 @@ fun PrimaryTextField(
 @Preview
 @Composable
 fun PrimaryTextFieldPreview() {
-    Column(
-        modifier = Modifier
-            .background(Color.White)
-            .fillMaxSize()
-    ) {
-        Spacer(modifier = Modifier.height(40.dp))
-        PrimaryTextField(onTextChange = {})
+    GestureTranslatorTheme {
+        Surface(
+            modifier = Modifier
+                .background(Color.White)
+                .fillMaxSize()
+                .padding(LocalDimensions.current.verticalMedium)
+        ) {
+            PrimaryTextField(onTextChange = {})
+        }
     }
 }

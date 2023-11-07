@@ -2,13 +2,12 @@ package com.ortin.gesturetranslator.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -21,25 +20,24 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.ortin.gesturetranslator.ui.R
+import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
+import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 
 @Composable
 fun PasswordTextField(
     onTextChange: (String) -> Unit,
     modifier: Modifier = Modifier,
-    description: String? = null,
-    isPasswordVisible: Boolean = true
+    placeholder: String? = null
 ) {
     var passwordVisibilityState by rememberSaveable {
-        mutableStateOf(isPasswordVisible)
+        mutableStateOf(true)
     }
     Box(modifier = modifier) {
         PrimaryTextField(
             onTextChange = onTextChange,
             modifier = modifier,
-            trailingIcon =
-            {
+            trailingIcon = {
                 if (passwordVisibilityState) {
                     IconButton(onClick = { passwordVisibilityState = false }) {
                         Icon(
@@ -58,7 +56,7 @@ fun PasswordTextField(
                     }
                 }
             },
-            placeholder = description,
+            placeholder = placeholder,
             visualTransformation = if (passwordVisibilityState) VisualTransformation.None else PasswordVisualTransformation(),
             keyboardType = KeyboardType.Password
         )
@@ -68,12 +66,14 @@ fun PasswordTextField(
 @Preview
 @Composable
 fun PasswordTextFieldPreview() {
-    Column(
-        modifier = Modifier
-            .background(Color.White)
-            .fillMaxSize()
-    ) {
-        Spacer(modifier = Modifier.height(40.dp))
-        PasswordTextField(onTextChange = {})
+    GestureTranslatorTheme {
+        Surface(
+            modifier = Modifier
+                .background(Color.White)
+                .fillMaxSize()
+                .padding(LocalDimensions.current.verticalMedium)
+        ) {
+            PasswordTextField(onTextChange = {})
+        }
     }
 }
