@@ -65,8 +65,8 @@ fun SettingsCard(
             )
             composeFunc()
         }
+        Spacer(modifier = Modifier.height(dimensions.verticalStandard))
         description?.let {
-            Spacer(modifier = Modifier.height(dimensions.verticalStandard))
             Text(
                 modifier = Modifier.padding(horizontal = dimensions.horizontalMedium),
                 text = it,
@@ -88,6 +88,6 @@ fun SettingsCardPreview() {
             .clip(shape = RoundedCornerShape(12.dp))
             .background(Color(0xFF757680)),
         title = "Включить светлую тему",
-        description = "Нажимая на переключатель, Вы меняете основные цвета приложения со светлых на темные и наоборот"
+//        description = "Нажимая на переключатель, Вы меняете основные цвета приложения со светлых на темные и наоборот"
     )
 }
