@@ -1,23 +1,17 @@
 package com.ortin.gesturetranslator.ui.components.cards
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Switch
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -31,24 +25,16 @@ fun SettingsCard(
     title: String,
     modifier: Modifier = Modifier,
     description: String? = null,
-    composeFunc: @Composable RowScope.() -> Unit = {
-        var checked by rememberSaveable {
-            mutableStateOf(false)
-        }
-
-        Switch(
-            modifier = Modifier.weight(1f),
-            checked = checked,
-            onCheckedChange = {
-                checked = it
-            }
-        )
-    }
+    composeFunc: @Composable RowScope.() -> Unit
 ) {
     val dimensions = LocalDimensions.current
 
-    Column(
-        modifier = modifier
+    Card(
+        modifier = modifier,
+        shape = MaterialTheme.shapes.medium,
+        colors = CardDefaults.cardColors(
+            containerColor = Color(0xFF757680)
+        )
     ) {
         Spacer(modifier = Modifier.height(dimensions.verticalStandard))
         Row(
@@ -72,7 +58,7 @@ fun SettingsCard(
                 text = it,
                 fontStyle = FontStyle.Normal,
                 fontWeight = FontWeight(400),
-                fontSize = 15.sp
+                fontSize = 14.sp
             )
             Spacer(modifier = Modifier.height(dimensions.verticalStandard))
         }
@@ -84,10 +70,9 @@ fun SettingsCard(
 fun SettingsCardPreview() {
     SettingsCard(
         modifier = Modifier
-            .padding(16.dp)
-            .clip(shape = RoundedCornerShape(12.dp))
-            .background(Color(0xFF757680)),
+            .padding(16.dp),
         title = "Включить светлую тему",
-        description = "Нажимая на переключатель, Вы меняете основные цвета приложения со светлых на темные и наоборот"
+        description = "Нажимая на переключатель, Вы меняете основные цвета приложения со светлых на темные и наоборот",
+        composeFunc = {}
     )
 }
