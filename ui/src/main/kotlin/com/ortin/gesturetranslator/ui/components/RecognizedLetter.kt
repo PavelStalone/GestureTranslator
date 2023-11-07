@@ -2,7 +2,6 @@ package com.ortin.gesturetranslator.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,7 +20,7 @@ fun RecognizedLetter(
     Text(
         text = letter,
         modifier = modifier
-            .clip(shape = RoundedCornerShape(12.dp))
+            .clip(shape = MaterialTheme.shapes.large)
             .background(MaterialTheme.colorScheme.primary),
         textAlign = TextAlign.Center,
         fontSize = 20.sp,
