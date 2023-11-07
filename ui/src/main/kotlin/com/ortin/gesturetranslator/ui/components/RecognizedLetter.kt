@@ -31,7 +31,7 @@ fun RecognizedLetter(
 
 @Preview
 @Composable
-fun PreviewRecognizedLetter() {
+fun RecognizedLetterPreview() {
     RecognizedLetter(
         letter = "A",
         modifier = Modifier.width(48.dp)
