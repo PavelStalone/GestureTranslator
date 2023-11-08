@@ -1,5 +1,6 @@
 package com.ortin.gesturetranslator.presentation.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -80,7 +81,10 @@ fun MainScreen(currRoute: String?, modifier: Modifier = Modifier) {
                             // navController.navigate(item.route)
                         },
                         icon = {
-                            Icon(item.icon, contentDescription = item.title)
+                            if (selectedItem == index)
+                                Icon(item.icon, contentDescription = item.title)
+                            else
+                                Icon(item.icon_outlined, contentDescription = item.title)
                         },
                         label = {
                             Text(item.title)
@@ -90,7 +94,8 @@ fun MainScreen(currRoute: String?, modifier: Modifier = Modifier) {
             }
         }
     ) { innerPadding ->
-        Surface(modifier = Modifier.padding(innerPadding)) {
+        Surface(modifier = Modifier.padding(innerPadding)
+            .background(MaterialTheme.colorScheme.background)) {
              NavGraph(navController, currRoute!!)
         }
     }

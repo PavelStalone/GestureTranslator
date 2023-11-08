@@ -1,6 +1,8 @@
 package com.ortin.gesturetranslator.presentation.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -33,7 +35,7 @@ fun NavGraph(navController: NavHostController, currRoute: String) {
         }
 
         composable(route = BottomBarScreens.Settings.route) {
-            SettingsScreen()
+            SettingsScreen(modifier = Modifier.background(MaterialTheme.colorScheme.background))
         }
 
         composable(route = SettingsScreens.AppSettings.route) {

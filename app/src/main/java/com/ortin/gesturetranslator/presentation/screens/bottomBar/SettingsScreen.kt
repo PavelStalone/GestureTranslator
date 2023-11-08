@@ -12,9 +12,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ortin.gesturetranslator.presentation.screens.MainScreen
 import com.ortin.gesturetranslator.presentation.screens.settings.settingsScreens
-import com.ortin.gesturetranslator.presentation.ui.theme.SurfaceText
 import com.ortin.gesturetranslator.presentation.ui.theme.MainButton
 import com.ortin.gesturetranslator.presentation.ui.theme.OrtinTheme
+import com.ortin.gesturetranslator.presentation.ui.theme.SurfaceText
 
 @Composable
 fun SettingsScreen(
