@@ -60,14 +60,12 @@
             android:text="@string/settings_layout_switch_theme_description"
             android:textColor="?attr/descriptionColor" />
 
-        <TextView
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:gravity="center_horizontal"
-            android:text="@string/settings_layout_development_header"
-            android:textColor="?attr/textColor"
-            android:textSize="25sp" />
+            android:layout_height="1dp"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="15dp"
+            android:background="?attr/separatorColor" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -107,13 +105,14 @@
             android:text="@string/settings_layout_switch_gpu_description"
             android:textColor="?attr/descriptionColor" />
 
-        <View
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_gravity="bottom"
-            android:layout_marginTop="15dp"
-            android:background="?attr/separatorColor" />
-
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:gravity="center_horizontal"
+            android:text="@string/settings_layout_development_header"
+            android:textColor="?attr/textColor"
+            android:textSize="25sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
