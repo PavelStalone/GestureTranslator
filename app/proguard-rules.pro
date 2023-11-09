@@ -31,4 +31,3 @@
 
 -dontwarn javax.lang.model.**
 -dontwarn autovalue.shaded.com.squareup.javapoet.**
--dontwarn javax.annotation.processing**
