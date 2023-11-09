@@ -9,7 +9,9 @@ import com.ortin.gesturetranslator.feature.managers.camera.CameraManager
 import com.ortin.gesturetranslator.feature.managers.camera.listeners.CameraListener
 import com.ortin.gesturetranslator.feature.managers.camera.models.ImageFromCamera
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class LoadImageRepositoryImpl @Inject constructor(private val cameraManager: CameraManager) :
     LoadImageRepository {
     override fun loadImages(

@@ -1,7 +1,9 @@
 package com.ortin.gesturetranslator.feature.managers.word_compiler
 
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class WordCompilerManagerImpl @Inject constructor() : WordCompilerManager {
     private val MIN_FRAME_DETECT = 10
     private val MIN_SPACE_TIME = 3000L

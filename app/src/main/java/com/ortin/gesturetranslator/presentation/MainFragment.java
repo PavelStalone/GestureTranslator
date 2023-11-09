@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.ortin.gesturetranslator.app.presentation.MainViewModel;
 import com.ortin.gesturetranslator.components.OnChangedStatusListener;
 import com.ortin.gesturetranslator.databinding.MainFrameBinding;
 import com.ortin.gesturetranslator.app.models.MainFrameState;
@@ -122,7 +123,7 @@ public class MainFragment extends Fragment {
     private void initListeners() {
         BottomSheetBehavior<LinearLayout> bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheetBehaviorLayout.bottomSheetBehavior);
 
-        viewModel.getMainLiveData().observe(getViewLifecycleOwner(), state -> {
+        viewModel.getMenuLiveData().observe(getViewLifecycleOwner(), state -> {
             if (lastMainFrameState == null) {
                 binding.controlMenu.realTimeBTN.setState(state.getRealTimeButton());
                 binding.controlMenu.flashLight.setState(state.getFlashLight());
@@ -187,8 +188,8 @@ public class MainFragment extends Fragment {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 switch (newState) {
-                    case BottomSheetBehavior.STATE_EXPANDED -> viewModel.bottomSheetExpanded();
-                    case BottomSheetBehavior.STATE_COLLAPSED -> viewModel.bottomSheetCollapsed();
+                    case BottomSheetBehavior.STATE_EXPANDED -> viewModel.onBottomSheetExpanded();
+                    case BottomSheetBehavior.STATE_COLLAPSED -> viewModel.onBottomSheetCollapsed();
                     default -> {
                     }
                 }

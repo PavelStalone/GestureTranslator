@@ -10,7 +10,9 @@ import com.ortin.gesturetranslator.core.managers.mediapipe.models.MPVideoInput
 import com.ortin.gesturetranslator.core.managers.mediapipe.models.SettingsModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class MediaPipeManagerImpl @Inject constructor(
     @ApplicationContext val context: Context,
     @ModelPath modelPath: String

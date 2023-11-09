@@ -4,7 +4,9 @@ import com.ortin.gesturetranslator.core.managers.model_coordinate.ml_models.MlMo
 import com.ortin.gesturetranslator.core.managers.model_coordinate.models.ModelCoordinateArray
 import com.ortin.gesturetranslator.core.managers.model_coordinate.models.ModelCoordinateClassificationArray
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class ModelCoordinateManagerImpl @Inject constructor() : ModelCoordinateManager {
     private val LABELS = listOf(
         "А",
