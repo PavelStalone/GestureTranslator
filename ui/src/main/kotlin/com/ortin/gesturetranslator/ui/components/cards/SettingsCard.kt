@@ -16,7 +16,6 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 import com.ortin.gesturetranslator.ui.theme.surfaceContainerLow
 
@@ -25,7 +24,7 @@ fun SettingsCard(
     title: String,
     modifier: Modifier = Modifier,
     description: String? = null,
-    composeFunc: @Composable RowScope.() -> Unit
+    additionalContent: @Composable RowScope.() -> Unit
 ) {
     val dimensions = LocalDimensions.current
 
@@ -48,9 +47,9 @@ fun SettingsCard(
                 text = title,
                 fontStyle = FontStyle.Normal,
                 fontWeight = FontWeight(600),
-                fontSize = 20.sp
+                fontSize = MaterialTheme.typography.titleSmall.lineHeight
             )
-            composeFunc()
+            additionalContent()
         }
         Spacer(modifier = Modifier.height(dimensions.verticalStandard))
         description?.let {
@@ -60,7 +59,7 @@ fun SettingsCard(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontStyle = FontStyle.Normal,
                 fontWeight = FontWeight(400),
-                fontSize = 14.sp
+                fontSize = MaterialTheme.typography.bodyMedium.fontSize
             )
             Spacer(modifier = Modifier.height(dimensions.verticalStandard))
         }
@@ -75,6 +74,6 @@ fun SettingsCardPreview() {
             .padding(16.dp),
         title = "Включить светлую тему",
         description = "Нажимая на переключатель, Вы меняете основные цвета приложения со светлых на темные и наоборот",
-        composeFunc = {}
+        additionalContent = {}
     )
 }
