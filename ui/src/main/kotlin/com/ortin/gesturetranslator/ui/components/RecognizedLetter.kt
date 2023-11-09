@@ -23,7 +23,7 @@ fun RecognizedLetter(
             .clip(shape = MaterialTheme.shapes.medium)
             .background(MaterialTheme.colorScheme.primary),
         textAlign = TextAlign.Center,
-        fontSize = 20.sp,
+        style = MaterialTheme.typography.headlineSmall,
         color = MaterialTheme.colorScheme.onPrimary
     )
 }
