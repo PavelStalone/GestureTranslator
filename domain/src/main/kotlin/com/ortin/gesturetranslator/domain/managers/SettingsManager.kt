@@ -10,6 +10,5 @@ class SettingsManager @Inject constructor(private val settingsRepository: Settin
     fun saveSettings(settingsDomain: SettingsDomain): Boolean =
         settingsRepository.saveSettings(settingsDomain)
 
-    fun getSettings(): SettingsDomain =
-        settingsRepository.getSettings()
+    fun getSettings(): SettingsDomain = settingsRepository.getSettings()
 }

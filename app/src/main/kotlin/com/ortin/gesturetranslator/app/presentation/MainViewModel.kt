@@ -29,7 +29,7 @@ class MainViewModel @Inject constructor(
     private var recognizeCoordinateUseCase: RecognizeCoordinateUseCase
 ) : ViewModel() {
     private val _menuLiveData: MutableLiveData<MainFrameState> = MutableLiveData(MainFrameState())
-    val menuLiveData = _menuLiveData as LiveData<MainFrameState>
+    val menuLiveData: LiveData<MainFrameState> = _menuLiveData
 
     var predictLiveData: LiveData<PredictState> = MutableLiveData(PredictState())
 
