@@ -72,7 +72,7 @@ fun SecondaryTextButton(
 fun SecondaryTextButtonPreview() {
     GestureTranslatorTheme {
         Surface {
-            PrimaryTextButton(
+            SecondaryTextButton(
                 text = "Войти",
                 onClick = {}
             )
