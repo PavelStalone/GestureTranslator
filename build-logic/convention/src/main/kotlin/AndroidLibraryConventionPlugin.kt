@@ -21,11 +21,14 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             }
 
             dependencies {
+                add("implementation", libs.findLibrary("jakewharton-timber").get())
+                add("implementation", libs.findLibrary("kotlinx-coroutines-core").get())
+                add("implementation", libs.findLibrary("kotlinx-coroutines-android").get())
+
                 add("testImplementation", libs.findLibrary("junit").get())
                 add("androidTestImplementation", libs.findLibrary("junit").get())
                 add("testImplementation", libs.findLibrary("androidx-test-ext-junit").get())
                 add("androidTestImplementation", libs.findLibrary("androidx-test-ext-junit").get())
-                add("implementation", libs.findLibrary("jakewharton-timber").get())
             }
         }
     }

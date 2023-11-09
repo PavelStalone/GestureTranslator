@@ -11,38 +11,20 @@ class SharedPrefSettingsStorage @Inject constructor(@ApplicationContext context:
     private val sharedPreferences: SharedPreferences =
         context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
 
-    override fun saveTheme(settings: Settings): Boolean {
+    override fun saveSettings(settings: Settings): Boolean {
         sharedPreferences.edit().putBoolean(KEY_THEME, settings.theme).apply()
-        return true
-    }
-
-    override fun getTheme(): Settings =
-        Settings(theme = sharedPreferences.getBoolean(KEY_THEME, DEFAULT_THEME))
-
-    override fun saveGpu(settings: Settings): Boolean {
         sharedPreferences.edit().putBoolean(KEY_GPU, settings.gpu).apply()
-        return true
-    }
-
-    override fun getGpu(): Settings =
-        Settings(gpu = sharedPreferences.getBoolean(KEY_GPU, DEFAULT_GPU))
-
-    override fun savePercent(settings: Settings): Boolean {
         sharedPreferences.edit().putBoolean(KEY_PERCENT, settings.percent).apply()
-        return true
-    }
-
-    override fun getPercent(): Settings =
-        Settings(percent = sharedPreferences.getBoolean(KEY_PERCENT, DEFAULT_PERCENT))
-
-    override fun saveSpeedFrameDetection(settings: Settings): Boolean {
         sharedPreferences.edit().putInt(KEY_SPEED_FRAME_DETECTION, settings.speedFrameDetection)
             .apply()
         return true
     }
 
-    override fun getSpeedFrameDetection(): Settings =
+    override fun getSettings(): Settings =
         Settings(
+            theme = sharedPreferences.getBoolean(KEY_THEME, DEFAULT_THEME),
+            gpu = sharedPreferences.getBoolean(KEY_GPU, DEFAULT_GPU),
+            percent = sharedPreferences.getBoolean(KEY_PERCENT, DEFAULT_PERCENT),
             speedFrameDetection = sharedPreferences.getInt(
                 KEY_SPEED_FRAME_DETECTION,
                 DEFAULT_SPEED_FRAME_DETECTION
