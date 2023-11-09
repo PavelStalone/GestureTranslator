@@ -20,7 +20,9 @@ import com.ortin.gesturetranslator.domain.repository.HandDetectionRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class HandDetectionRepositoryImpl @Inject constructor(
     private val mediaPipeManager: MediaPipeManager,
     @Dispatcher(GtDispatchers.IO) private val ioDispatcher: CoroutineDispatcher

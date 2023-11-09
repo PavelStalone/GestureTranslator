@@ -5,7 +5,9 @@ import com.ortin.gesturetranslator.data.storage.SettingsStorage
 import com.ortin.gesturetranslator.domain.models.SettingsDomain
 import com.ortin.gesturetranslator.domain.repository.SettingsRepository
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class SettingsRepositoryImpl @Inject constructor(
     private val settingsStorage: SettingsStorage
 ) : SettingsRepository {

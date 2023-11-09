@@ -7,8 +7,10 @@ import com.ortin.gesturetranslator.domain.models.CoordinateClassification
 import com.ortin.gesturetranslator.domain.models.ImageDetected
 import com.ortin.gesturetranslator.domain.repository.RecognizeCoordinateRepository
 import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.math.abs
 
+@Singleton
 class RecognizeCoordinateRepositoryImpl @Inject constructor(private val modelCoordinateManager: ModelCoordinateManager) :
     RecognizeCoordinateRepository {
     override fun recognise(imageDetected: ImageDetected): CoordinateClassification =
