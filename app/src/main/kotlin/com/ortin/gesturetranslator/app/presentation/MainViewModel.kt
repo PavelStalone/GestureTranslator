@@ -1,5 +1,6 @@
 package com.ortin.gesturetranslator.app.presentation
 
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,9 +11,11 @@ import com.ortin.gesturetranslator.app.models.MainFrameState
 import com.ortin.gesturetranslator.app.models.PredictState
 import com.ortin.gesturetranslator.domain.managers.CameraInputManager
 import com.ortin.gesturetranslator.domain.managers.MediaPipeManagerDomain
+import com.ortin.gesturetranslator.domain.managers.SettingsManager
 import com.ortin.gesturetranslator.domain.managers.WorldCompileManager
 import com.ortin.gesturetranslator.domain.models.Image
 import com.ortin.gesturetranslator.domain.models.ImageDetected
+import com.ortin.gesturetranslator.domain.models.SettingsMediaPipe
 import com.ortin.gesturetranslator.domain.usecases.RecognizeCoordinateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -26,7 +29,8 @@ class MainViewModel @Inject constructor(
     private var cameraManager: CameraInputManager,
     private var worldCompileManager: WorldCompileManager,
     private var mediaPipeManager: MediaPipeManagerDomain,
-    private var recognizeCoordinateUseCase: RecognizeCoordinateUseCase
+    private var recognizeCoordinateUseCase: RecognizeCoordinateUseCase,
+    private var settingsManager: SettingsManager
 ) : ViewModel() {
     private val _menuLiveData: MutableLiveData<MainFrameState> = MutableLiveData(MainFrameState())
     val menuLiveData: LiveData<MainFrameState> = _menuLiveData
@@ -38,6 +42,16 @@ class MainViewModel @Inject constructor(
     }
 
     fun startRealTimeImagining(lifecycleOwner: LifecycleOwner) {
+        mediaPipeManager.setSettingsModel(
+            SettingsMediaPipe(
+                currentDelegate = if (settingsManager.getSettings().gpu) {
+                    SettingsMediaPipe.Delegation.DELEGATE_GPU
+                } else {
+                    SettingsMediaPipe.Delegation.DELEGATE_CPU
+                }
+            )
+        )
+
         val predictState: Flow<PredictState> = combine(
             mediaPipeManager.flow,
             cameraManager.startListening(lifecycleOwner)
