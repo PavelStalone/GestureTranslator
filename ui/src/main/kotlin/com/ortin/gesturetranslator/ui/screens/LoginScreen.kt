@@ -26,10 +26,10 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.ortin.gesturetranslator.ui.R
-import com.ortin.gesturetranslator.ui.components.PasswordTextField
-import com.ortin.gesturetranslator.ui.components.PrimaryTextButton
-import com.ortin.gesturetranslator.ui.components.PrimaryTextField
-import com.ortin.gesturetranslator.ui.components.SecondaryTextButton
+import com.ortin.gesturetranslator.ui.components.textfields.PasswordTextField
+import com.ortin.gesturetranslator.ui.components.buttons.PrimaryTextButton
+import com.ortin.gesturetranslator.ui.components.textfields.PrimaryTextField
+import com.ortin.gesturetranslator.ui.components.buttons.SecondaryTextButton
 import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
 import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 
