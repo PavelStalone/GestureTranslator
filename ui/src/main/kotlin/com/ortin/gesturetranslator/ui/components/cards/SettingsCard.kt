@@ -12,8 +12,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ortin.gesturetranslator.ui.theme.LocalDimensions
@@ -44,21 +42,17 @@ fun SettingsCard(
                 modifier = Modifier.weight(3f),
                 color = MaterialTheme.colorScheme.onSurface,
                 text = title,
-                fontStyle = FontStyle.Normal,
-                fontWeight = FontWeight(600),
-                fontSize = MaterialTheme.typography.titleSmall.lineHeight
+                style = MaterialTheme.typography.titleMedium
             )
             additionalContent()
         }
         Spacer(modifier = Modifier.height(dimensions.verticalStandard))
-        description?.let {
+        description?.let { text ->
             Text(
                 modifier = Modifier.padding(horizontal = dimensions.horizontalMedium),
-                text = it,
+                text = text,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                fontStyle = FontStyle.Normal,
-                fontWeight = FontWeight(400),
-                fontSize = MaterialTheme.typography.bodyMedium.fontSize
+                style = MaterialTheme.typography.bodyMedium
             )
             Spacer(modifier = Modifier.height(dimensions.verticalStandard))
         }
