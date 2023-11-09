@@ -58,6 +58,8 @@ class MainActivity : AppCompatActivity() {
 
                 if (previousBackStackEntry == null) {
                     finish()
+                } else {
+                    findNavController(binding.navHostFragment).popBackStack()
                 }
             }
         })
