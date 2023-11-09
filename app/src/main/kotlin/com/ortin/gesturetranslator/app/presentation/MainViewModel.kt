@@ -49,6 +49,14 @@ class MainViewModel @Inject constructor(
 
     private fun mergeSources(imageDetected: ImageDetected?, image: Image?): PredictState {
         val bitmap = image?.bitmap
+
+        if (_menuLiveData.value?.realTimeButton == false) {
+            return PredictState(
+                imageFromCamera = bitmap,
+                predictWord = worldCompileManager.getWord()
+            )
+        }
+
         val coordinateClassification = imageDetected?.let {
             recognizeCoordinateUseCase(imageDetected)
         }
@@ -92,7 +100,7 @@ class MainViewModel @Inject constructor(
 
     fun onStopRealTimeButton() {
         _menuLiveData.value = _menuLiveData.value?.copy(
-            realTimeButton = true,
+            realTimeButton = false,
             bottomSheetBehavior = BottomSheetBehavior.STATE_EXPANDED
         )
     }
