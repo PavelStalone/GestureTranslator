@@ -5,29 +5,17 @@ import com.ortin.gesturetranslator.data.storage.SettingsStorage
 import com.ortin.gesturetranslator.domain.models.SettingsDomain
 import com.ortin.gesturetranslator.domain.repository.SettingsRepository
 import javax.inject.Inject
+import javax.inject.Singleton
 
-class SettingsRepositoryImpl @Inject constructor(private val settingsStorage: SettingsStorage) :
-    SettingsRepository {
-    override fun saveTheme(settingsDomain: SettingsDomain): Boolean =
-        settingsStorage.saveTheme(settingsDomain.mapToData())
+@Singleton
+class SettingsRepositoryImpl @Inject constructor(
+    private val settingsStorage: SettingsStorage
+) : SettingsRepository {
+    override fun saveSettings(settingsDomain: SettingsDomain): Boolean =
+        settingsStorage.saveSettings(settingsDomain.mapToData())
 
-    override fun getTheme(): SettingsDomain = settingsStorage.getTheme().mapToDomain()
-
-    override fun saveGpu(settingsDomain: SettingsDomain): Boolean =
-        settingsStorage.saveGpu(settingsDomain.mapToData())
-
-    override fun getGpu(): SettingsDomain = settingsStorage.getGpu().mapToDomain()
-
-    override fun savePercent(settingsDomain: SettingsDomain): Boolean =
-        settingsStorage.savePercent(settingsDomain.mapToData())
-
-    override fun getPercent(): SettingsDomain = settingsStorage.getPercent().mapToDomain()
-
-    override fun saveSpeedFrameDetection(settingsDomain: SettingsDomain): Boolean =
-        settingsStorage.saveSpeedFrameDetection(settingsDomain.mapToData())
-
-    override fun getSpeedFrameDetection(): SettingsDomain =
-        settingsStorage.getSpeedFrameDetection().mapToDomain()
+    override fun getSettings(): SettingsDomain =
+        settingsStorage.getSettings().mapToDomain()
 
     private fun SettingsDomain.mapToData(): Settings =
         Settings(
