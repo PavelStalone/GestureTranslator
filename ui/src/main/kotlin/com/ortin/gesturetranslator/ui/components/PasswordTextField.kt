@@ -1,7 +1,6 @@
 package com.ortin.gesturetranslator.ui.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
@@ -33,34 +32,32 @@ fun PasswordTextField(
     var passwordVisibilityState by rememberSaveable {
         mutableStateOf(true)
     }
-    Box(modifier = modifier) {
-        PrimaryTextField(
-            onTextChange = onTextChange,
-            modifier = modifier,
-            trailingIcon = {
-                if (passwordVisibilityState) {
-                    IconButton(onClick = { passwordVisibilityState = false }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.icon_visibility_on),
-                            tint = MaterialTheme.colorScheme.onSecondaryContainer,
-                            contentDescription = null
-                        )
-                    }
-                } else {
-                    IconButton(onClick = { passwordVisibilityState = true }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.icon_visibility_off),
-                            tint = MaterialTheme.colorScheme.secondary,
-                            contentDescription = null
-                        )
-                    }
+    PrimaryTextField(
+        onTextChange = onTextChange,
+        modifier = modifier,
+        trailingIcon = {
+            if (passwordVisibilityState) {
+                IconButton(onClick = { passwordVisibilityState = false }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.icon_visibility_on),
+                        tint = MaterialTheme.colorScheme.onSecondaryContainer,
+                        contentDescription = null
+                    )
                 }
-            },
-            placeholder = placeholder,
-            visualTransformation = if (passwordVisibilityState) VisualTransformation.None else PasswordVisualTransformation(),
-            keyboardType = KeyboardType.Password
-        )
-    }
+            } else {
+                IconButton(onClick = { passwordVisibilityState = true }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.icon_visibility_off),
+                        tint = MaterialTheme.colorScheme.secondary,
+                        contentDescription = null
+                    )
+                }
+            }
+        },
+        placeholder = placeholder,
+        visualTransformation = if (passwordVisibilityState) VisualTransformation.None else PasswordVisualTransformation(),
+        keyboardType = KeyboardType.Password
+    )
 }
 
 @Preview
