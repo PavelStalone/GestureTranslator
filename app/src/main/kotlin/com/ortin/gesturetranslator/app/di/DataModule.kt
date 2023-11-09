@@ -1,8 +1,5 @@
-package com.ortin.gesturetranslator.data.di
+package com.ortin.gesturetranslator.app.di
 
-import android.app.Application
-import com.ortin.gesturetranslator.data.db.UserDao
-import com.ortin.gesturetranslator.data.db.UserRoomDB
 import com.ortin.gesturetranslator.data.repository.SettingsRepositoryImpl
 import com.ortin.gesturetranslator.data.repository.UserRoomDatabaseRepositoryImpl
 import com.ortin.gesturetranslator.data.storage.SettingsStorage
@@ -11,7 +8,6 @@ import com.ortin.gesturetranslator.domain.repository.SettingsRepository
 import com.ortin.gesturetranslator.domain.repository.UserRoomDatabaseRepository
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
@@ -30,12 +26,4 @@ interface DataModule {
     @Binds
     @Singleton
     fun bindUserRoomDatabaseRepository(impl: UserRoomDatabaseRepositoryImpl): UserRoomDatabaseRepository
-
-    companion object {
-        @Provides
-        @Singleton
-        fun provideUserDao(application: Application): UserDao {
-            return UserRoomDB.createDataBase(application).userDao
-        }
-    }
 }
