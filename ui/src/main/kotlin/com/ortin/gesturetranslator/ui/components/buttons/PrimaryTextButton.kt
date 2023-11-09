@@ -1,4 +1,4 @@
-package com.ortin.gesturetranslator.ui.components
+package com.ortin.gesturetranslator.ui.components.buttons
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.PaddingValues
@@ -78,5 +78,4 @@ fun PrimaryTextButtonPreview(){
             )
         }
     }
-
 }

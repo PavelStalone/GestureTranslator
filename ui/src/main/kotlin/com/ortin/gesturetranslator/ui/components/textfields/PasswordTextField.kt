@@ -1,4 +1,4 @@
-package com.ortin.gesturetranslator.ui.components
+package com.ortin.gesturetranslator.ui.components.textfields
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,6 +32,7 @@ fun PasswordTextField(
     var passwordVisibilityState by rememberSaveable {
         mutableStateOf(true)
     }
+
     PrimaryTextField(
         onTextChange = onTextChange,
         modifier = modifier,
