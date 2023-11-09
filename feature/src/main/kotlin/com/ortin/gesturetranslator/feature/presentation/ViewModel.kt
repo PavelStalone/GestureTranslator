@@ -4,8 +4,8 @@ import kotlinx.coroutines.flow.Flow
 
 /**
  * Base class for ViewModel in MVI
- * Accepts intent and works on its basis with the state
  *
+ * Accepts intent and works on its basis with the state
  *
  * @param S - state
  * @param I - intent

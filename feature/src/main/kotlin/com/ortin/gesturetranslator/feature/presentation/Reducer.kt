@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.asStateFlow
 
 /**
  * Base class for Reducer in MVI
+ *
  * Responsible for holding and processing state
  *
  * @param S - state
