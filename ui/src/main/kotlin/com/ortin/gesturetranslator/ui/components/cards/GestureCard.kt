@@ -24,7 +24,6 @@ fun GestureCard(
         modifier = modifier
             .size(140.dp)
             .clip(MaterialTheme.shapes.medium),
-
     ) {
         Text(
             text = letter,
