@@ -7,7 +7,9 @@ import com.ortin.gesturetranslator.domain.repository.UserRoomDatabaseRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class UserRoomDatabaseRepositoryImpl @Inject constructor(
     private val userDatabase: UserRoomDB,
 ) : UserRoomDatabaseRepository {
