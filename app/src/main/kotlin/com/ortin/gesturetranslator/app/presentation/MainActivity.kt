@@ -1,37 +1,34 @@
 package com.ortin.gesturetranslator.app.presentation
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
-import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.net.toUri
+import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.Navigation.findNavController
 import com.ortin.gesturetranslator.R
 import com.ortin.gesturetranslator.databinding.ActivityMainBinding
 import com.ortin.gesturetranslator.domain.managers.SettingsManager
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
     @Inject
     lateinit var saveSettingsManager: SettingsManager
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var navController: NavController
-//    val callback = this.onBackPressedDispatcher.addCallback(this.getLifecycle())
 
-    @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         if (saveSettingsManager.getSettings().theme) {
@@ -41,17 +38,52 @@ class MainActivity : AppCompatActivity() {
         }
         setContentView(binding.root)
 
-        init()
-        initListeners()
+        hideTopBarAndLockDrawer()
     }
 
-    private fun init() {
-        navController = (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
-        //NavigationUI.setupWithNavController(navigationView, navController);
-        hideControl()
+    override fun onStart() {
+        super.onStart()
+        setUpBackPressedDispatcher()
+        setUpDestinationChangedListener()
+        setUpDrawerMenuButtonClickListener()
+        setUpNavigationItemSelectedListener()
     }
 
-    private fun initListeners() {
+    private fun setUpBackPressedDispatcher() {
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val previousBackStackEntry =
+                    findNavController(binding.navHostFragment).previousBackStackEntry
+                Timber.d("onBackPressed: previousEntry = %s", previousBackStackEntry)
+
+                if (previousBackStackEntry == null) {
+                    finish()
+                } else {
+                    findNavController(binding.navHostFragment).popBackStack()
+                }
+            }
+        })
+    }
+
+    private fun setUpDestinationChangedListener() {
+        findNavController(binding.navHostFragment).addOnDestinationChangedListener(
+            object : NavController.OnDestinationChangedListener {
+                override fun onDestinationChanged(
+                    controller: NavController,
+                    destination: NavDestination,
+                    arguments: Bundle?
+                ) {
+                    Timber.d("onDestinationChanged: ${destination.label}")
+                    if (destination.id != R.id.logotypeFragment) {
+                        showTopBarAndUnlockDrawer()
+                        controller.removeOnDestinationChangedListener(this)
+                    }
+                }
+            }
+        )
+    }
+
+    private fun setUpDrawerMenuButtonClickListener() {
         binding.topBar.menuBtn.setOnClickListener {
             if (binding.drawerLayoutId.isOpen) {
                 binding.drawerLayoutId.close()
@@ -59,58 +91,34 @@ class MainActivity : AppCompatActivity() {
                 binding.drawerLayoutId.open()
             }
         }
+    }
 
-        navController.addOnDestinationChangedListener(
-            object : NavController.OnDestinationChangedListener {
-                override fun onDestinationChanged(
-                    controller: NavController,
-                    destination: NavDestination,
-                    arguments: Bundle?
-                ) {
-                    if (destination.id != R.id.logotypeFragment) {
-                        showControl()
-                        controller.removeOnDestinationChangedListener(this)
-                    }
-                }
-            }
-        )
-
+    private fun setUpNavigationItemSelectedListener() {
         binding.menuNavigationView.setNavigationItemSelectedListener { item: MenuItem ->
-            if (item.itemId != navController.currentDestination?.id) {
+            val controller = findNavController(binding.navHostFragment)
+            if (item.itemId != controller.currentDestination?.id) {
                 when (item.itemId) {
-                    R.id.mainFragment -> navController.navigate(R.id.mainFragment)
+                    R.id.mainFragment -> controller.navigate(R.id.mainFragment)
 
-                    R.id.gestureListFragment -> {
-                        if (navController.currentDestination?.id == R.id.mainFragment) {
-                            navController.navigate(R.id.action_mainFragment_to_gestureListFragment)
-                        } else {
-                            navController.navigate(R.id.gestureListFragment)
-                        }
-                    }
+                    R.id.gestureListFragment -> navigateWithMainFragmentCheck(
+                        controller,
+                        R.id.action_mainFragment_to_gestureListFragment,
+                        R.id.gestureListFragment
+                    )
 
-                    R.id.settingsFragment -> {
-                        if (navController.currentDestination?.id == R.id.mainFragment) {
-                            navController.navigate(R.id.action_mainFragment_to_settingsFragment)
-                        } else {
-                            navController.navigate(R.id.settingsFragment)
-                        }
-                    }
+                    R.id.settingsFragment -> navigateWithMainFragmentCheck(
+                        controller,
+                        R.id.action_mainFragment_to_settingsFragment,
+                        R.id.settingsFragment
+                    )
 
-                    R.id.informationFragment -> {
-                        if (navController.currentDestination?.id == R.id.mainFragment) {
-                            navController.navigate(R.id.action_mainFragment_to_informationFragment)
-                        } else {
-                            navController.navigate(R.id.informationFragment)
-                        }
-                    }
+                    R.id.informationFragment -> navigateWithMainFragmentCheck(
+                        controller,
+                        R.id.action_mainFragment_to_informationFragment,
+                        R.id.informationFragment
+                    )
 
-                    R.id.bugReportFragment -> {
-                        val intent = Intent(
-                            Intent.ACTION_VIEW,
-                            Uri.parse("https://docs.google.com/forms/d/e/1FAIpQLSfYhL5HzYcU939IDzZaLKuvblHfcme5FoPHW5-qPmvCA-5obg/viewform?usp=sf_link")
-                        )
-                        startActivity(intent)
-                    }
+                    R.id.bugReportFragment -> openBugReportForm()
                 }
                 binding.drawerLayoutId.close()
                 return@setNavigationItemSelectedListener true
@@ -119,25 +127,39 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun hideControl() {
-        binding.topBar.root.visibility = View.GONE
-        binding.drawerLayoutId.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-    }
-
-    private fun showControl() {
-        binding.topBar.root.visibility = View.VISIBLE
-        this.binding.drawerLayoutId.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-
-        val previousEntry = navController.previousBackStackEntry
-        Log.e("MainActivity", "onBackPressed: previousEntry = $previousEntry")
-        if (previousEntry == null) {
-            finish()
-        } else {
-            super.onBackPressed()
+    private fun hideTopBarAndLockDrawer() {
+        with(binding) {
+            topBar.root.isVisible = false
+            drawerLayoutId.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         }
+    }
+
+    private fun showTopBarAndUnlockDrawer() {
+        with(binding) {
+            topBar.root.isVisible = true
+            drawerLayoutId.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+        }
+    }
+
+    private fun navigateWithMainFragmentCheck(
+        controller: NavController,
+        actionFromMain: Int,
+        destinationId: Int
+    ) {
+        controller.navigate(
+            if (controller.currentDestination?.id == R.id.mainFragment) {
+                actionFromMain
+            } else {
+                destinationId
+            }
+        )
+    }
+
+    private fun openBugReportForm() {
+        val intent = Intent(
+            Intent.ACTION_VIEW,
+            "https://docs.google.com/forms/d/e/1FAIpQLSfYhL5HzYcU939IDzZaLKuvblHfcme5FoPHW5-qPmvCA-5obg/viewform?usp=sf_link".toUri()
+        )
+        startActivity(intent)
     }
 }

@@ -18,6 +18,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.onEach
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -78,6 +79,7 @@ class MainViewModel @Inject constructor(
     override fun onCleared() {
         super.onCleared()
         offFlashLight()
+        Timber.e("cleared [!]")
     }
 
     fun onFlashLight() {
