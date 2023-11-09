@@ -37,8 +37,7 @@ fun SettingsCard(
     ) {
         Spacer(modifier = Modifier.height(dimensions.verticalStandard))
         Row(
-            modifier = Modifier
-                .padding(horizontal = dimensions.horizontalMedium),
+            modifier = Modifier.padding(horizontal = dimensions.horizontalMedium),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
@@ -70,8 +69,7 @@ fun SettingsCard(
 @Composable
 fun SettingsCardPreview() {
     SettingsCard(
-        modifier = Modifier
-            .padding(16.dp),
+        modifier = Modifier.padding(16.dp),
         title = "Включить светлую тему",
         description = "Нажимая на переключатель, Вы меняете основные цвета приложения со светлых на темные и наоборот",
         additionalContent = {}
