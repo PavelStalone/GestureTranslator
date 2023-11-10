@@ -28,15 +28,14 @@ fun GestureCard(
     modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = modifier
-            .size(140.dp),
+        modifier = modifier,
         shape = MaterialTheme.shapes.medium
     ) {
         Box(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxSize()
                 .clip(MaterialTheme.shapes.medium),
-            contentAlignment = Alignment.BottomStart
+            contentAlignment = Alignment.BottomStart,
         ) {
             Image(
                 painter = painterResource(id = imageId),
@@ -44,13 +43,13 @@ fun GestureCard(
             )
             Text(
                 text = letter,
-                modifier = modifier
-                    .size(40.dp)
+                modifier = Modifier
+                    .fillMaxSize(0.27f)
                     .clip(MaterialTheme.shapes.medium)
                     .background(MaterialTheme.colorScheme.primary),
                 style = MaterialTheme.typography.headlineSmall,
                 color = MaterialTheme.colorScheme.onPrimary,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
             )
         }
     }
@@ -63,7 +62,8 @@ fun GestureCardPreview() {
         Surface {
             GestureCard(
                 letter = "A",
-                imageId = R.drawable.a
+                imageId = R.drawable.a,
+                modifier = Modifier.size(140.dp)
             )
         }
     }
