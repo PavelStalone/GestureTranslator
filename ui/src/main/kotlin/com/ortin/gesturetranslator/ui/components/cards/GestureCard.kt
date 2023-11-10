@@ -32,9 +32,7 @@ fun GestureCard(
         shape = MaterialTheme.shapes.medium
     ) {
         Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .clip(MaterialTheme.shapes.medium),
+            modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.BottomStart,
         ) {
             Image(
