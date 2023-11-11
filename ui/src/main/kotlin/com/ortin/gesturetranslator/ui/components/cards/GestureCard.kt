@@ -33,7 +33,7 @@ fun GestureCard(
     ) {
         Box(
             modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.BottomStart,
+            contentAlignment = Alignment.BottomStart
         ) {
             Image(
                 painter = painterResource(id = imageId),
@@ -47,7 +47,7 @@ fun GestureCard(
                     .background(MaterialTheme.colorScheme.primary),
                 style = MaterialTheme.typography.headlineSmall,
                 color = MaterialTheme.colorScheme.onPrimary,
-                textAlign = TextAlign.Center,
+                textAlign = TextAlign.Center
             )
         }
     }
