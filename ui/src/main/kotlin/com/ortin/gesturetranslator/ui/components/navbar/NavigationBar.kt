@@ -12,7 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.ortin.gesturetranslator.ui.components.navbar.navigationBarItems.navigationBarItems
+import com.ortin.gesturetranslator.ui.components.navbar.NavigationBarItems
+import com.ortin.gesturetranslator.ui.components.navbar.navigationBarItems
 
 @Composable
 fun navigationBar(
@@ -52,14 +53,14 @@ fun navigationBar(
 @Preview
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 fun NavigationBarPreview() {
-    Scaffold(
-        bottomBar = {
-            NavigationBar(navigationBarItems)
-        }
-    ) { innerPadding ->
-        Surface(
-            modifier = Modifier.padding(innerPadding)
-        ) {}
+    OrtinTheme {
+        Scaffold(
+            content = {},
+            bottomBar = {
+                NavigationBar(items = bottomBarScreens)
+            }
+        )
     }
 }

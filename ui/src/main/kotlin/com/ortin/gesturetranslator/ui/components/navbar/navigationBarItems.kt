@@ -1,6 +1,6 @@
 package com.ortin.gesturetranslator.ui.components.navbar
 
-import com.ortin.gesturetranslator.R
+import com.ortin.gesturetranslator.ui.R
 
 val navigationBarItems = listOf(
     NavigationBarItems.Home,
