@@ -60,7 +60,7 @@ fun NavigationBarPreview() {
             Surface(modifier = Modifier.padding(innerPadding)) {}
         },
         bottomBar = {
-            BottomNavigationBar(items = bottomBarScreens)
+            BottomNavigationBar(items = navigationBarItems)
         }
     )
 }
