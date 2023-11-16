@@ -1,6 +1,6 @@
 package com.ortin.gesturetranslator.ui.components
 
-import androidx.compose.ui.graphics.vector.ImageVector
+import com.ortin.gesturetranslator.R
 
 val navigationBarItems = listOf(
     NavigationBarItems.Home,

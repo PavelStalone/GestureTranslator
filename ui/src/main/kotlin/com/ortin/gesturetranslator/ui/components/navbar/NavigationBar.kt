@@ -15,9 +15,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.ortin.gesturetranslator.ui.components.navbar.navigationBarItems.navigationBarItems
 
 @Composable
-fun navigationBar(selectedItem: Int) {
+fun navigationBar(
+    items: List<NavigationBarItems>,
+    selectedItem: Int = 0,
+    modifier: Modifier = Modifier
+) {
     NavigationBar {
-        .forEachIndexed { index, item ->
+        items.forEachIndexed { index: Int, item: NavigationBarItems ->
             NavigationBarItem(
                 selected = (selectedItem == index),
                 onClick = {
@@ -51,7 +55,7 @@ fun navigationBar(selectedItem: Int) {
 fun NavigationBarPreview() {
     Scaffold(
         bottomBar = {
-            NavigationBar()
+            NavigationBar(navigationBarItems)
         }
     ) { innerPadding ->
         Surface(
