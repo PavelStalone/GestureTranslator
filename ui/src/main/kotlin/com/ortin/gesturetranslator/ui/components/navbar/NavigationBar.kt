@@ -17,7 +17,7 @@ import com.ortin.gesturetranslator.ui.components.navbar.NavigationBarItems
 import com.ortin.gesturetranslator.ui.components.navbar.navigationBarItems
 
 @Composable
-fun navigationBar(
+fun BottomNavigationBar(
     items: List<NavigationBarItems>,
     selectedItem: Int = 0,
     modifier: Modifier = Modifier
@@ -54,12 +54,13 @@ fun navigationBar(
 @Preview
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 fun NavigationBarPreview() {
     Scaffold(
-        content = {},
+        content = { innerPadding ->
+            Surface(modifier = Modifier.padding(innerPadding)) {}
+        },
         bottomBar = {
-            NavigationBar(items = navigationBarScreens)
+            BottomNavigationBar(items = bottomBarScreens)
         }
     )
 }
