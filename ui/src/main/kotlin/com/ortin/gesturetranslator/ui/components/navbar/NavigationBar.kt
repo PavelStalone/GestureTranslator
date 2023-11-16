@@ -2,6 +2,7 @@ package com.ortin.gesturetranslator.ui.components.navbar
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
+import android.annotation.SuppressLint
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -55,12 +56,10 @@ fun navigationBar(
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 fun NavigationBarPreview() {
-    OrtinTheme {
-        Scaffold(
-            content = {},
-            bottomBar = {
-                NavigationBar(items = bottomBarScreens)
-            }
-        )
-    }
+    Scaffold(
+        content = {},
+        bottomBar = {
+            NavigationBar(items = navigationBarScreens)
+        }
+    )
 }
