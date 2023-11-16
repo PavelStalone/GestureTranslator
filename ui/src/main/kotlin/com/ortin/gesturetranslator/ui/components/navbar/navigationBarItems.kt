@@ -1,4 +1,4 @@
-package com.ortin.gesturetranslator.ui.components
+package com.ortin.gesturetranslator.ui.components.navbar
 
 import com.ortin.gesturetranslator.R
 
