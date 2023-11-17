@@ -1,8 +1,6 @@
 package com.ortin.gesturetranslator.ui.components.navbar
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
-import android.annotation.SuppressLint
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -13,16 +11,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.ortin.gesturetranslator.ui.components.navbar.NavigationBarItems
-import com.ortin.gesturetranslator.ui.components.navbar.navigationBarItems
 
 @Composable
 fun BottomNavigationBar(
     items: List<NavigationBarItems>,
-    selectedItem: Int = 0,
-    modifier: Modifier = Modifier
+    selectedItem: Int = 0
 ) {
-    NavigationBar {
+    NavigationBar(
+    ) {
         items.forEachIndexed { index: Int, item: NavigationBarItems ->
             NavigationBarItem(
                 selected = (selectedItem == index),
@@ -53,7 +49,6 @@ fun BottomNavigationBar(
 
 @Preview
 @Composable
-@OptIn(ExperimentalMaterial3Api::class)
 fun NavigationBarPreview() {
     Scaffold(
         content = { innerPadding ->
