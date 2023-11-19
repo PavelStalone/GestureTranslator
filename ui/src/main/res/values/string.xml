@@ -9,4 +9,6 @@
     <string name="reset_password">Забыли пароль?</string>
     <string name="sign_up">Зарегистрируйтесь</string>
     <string name="without_account">Еще нет аккаунта?</string>
+    <string name="github">GitHub</string>
+    <string name="email">Почта</string>
 </resources>
