@@ -15,9 +15,11 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun BottomNavigationBar(
     items: List<NavigationBarItems>,
+    modifier: Modifier = Modifier,
     selectedItem: Int = 0
 ) {
     NavigationBar(
+        modifier = modifier
     ) {
         items.forEachIndexed { index: Int, item: NavigationBarItems ->
             NavigationBarItem(
