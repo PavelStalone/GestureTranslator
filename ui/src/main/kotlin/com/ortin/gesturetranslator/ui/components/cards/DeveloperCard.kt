@@ -3,6 +3,8 @@ package com.ortin.gesturetranslator.ui.components.cards
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -42,7 +44,7 @@ fun DeveloperCard(
     gitHubUrl: String?,
     email: String?,
     modifier: Modifier  = Modifier,
-    iconId: Int = R.drawable.icon_ortin_logo_without_text
+    @DrawableRes iconId: Int = R.drawable.icon_ortin_logo_without_text
 ) {
     val localDimensions = LocalDimensions.current
     val uriHandler = LocalUriHandler.current
@@ -126,9 +128,8 @@ fun DeveloperCard(
  */
 fun Context.openEmailApp(email: String) {
     try {
-        val intent = Intent(Intent.ACTION_SEND)
-        intent.type = "vnd.android.cursor.item/email"
-        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
+        val intent = Intent(Intent.ACTION_SENDTO)
+        intent.data = Uri.parse("mailto:$email")
         startActivity(intent)
     } catch (e: ActivityNotFoundException) {
         Timber.e("No email app is available")
@@ -141,11 +142,13 @@ fun DeveloperCardPreview() {
     GestureTranslatorTheme {
         Surface {
             DeveloperCard(
-                modifier = Modifier.padding(16.dp).fillMaxWidth(),
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
                 title = "PavelStalone",
                 description = "Вообще красавчик машина убийца",
-                gitHubUrl = "null",
-                email = "null"
+                gitHubUrl = "https://github.com/PavelStalone",
+                email = "poroshin.info@gmail.com"
             )
         }
     }
