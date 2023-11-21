@@ -44,12 +44,13 @@ public class InformationFragment extends Fragment {
 
     private void init() {
         List<DeveloperCard> cards = new ArrayList<>();
-        cards.add(new DeveloperCard("PavelStalone", "Team lead, Android developer and ML engineer", R.drawable.pavel_stalone, "https://github.com/PavelStalone", "https://vk.com/pasha_just_pasha"));
+        cards.add(new DeveloperCard("PavelStalone", "Android developer and ML engineer", R.drawable.pavel_stalone, "https://github.com/PavelStalone", "https://vk.com/pasha_just_pasha"));
         cards.add(new DeveloperCard("Glebix", "ML engineer, Android and Web developer", R.drawable.glebix, "https://github.com/PoroshinGA", "https://t.me/Glebsobaka"));
         cards.add(new DeveloperCard("qondeeter", "UI/UX - designer and data engineer", R.drawable.qondeeter, "https://github.com/kond1ter", "https://t.me/qondeeter"));
-        cards.add(new DeveloperCard("Sova", "UI/UX - writer and data engineer", R.drawable.sova, "https://github.com/N1kySSS", "https://vk.com/sova___666"));
-        cards.add(new DeveloperCard("Glazeezalg", "Analyst", R.drawable.glazeezalg, "https://github.com/glazeezalg", "https://t.me/Dmitriy_kkk"));
+        cards.add(new DeveloperCard("Sova", "UI/UX - writer, Android developer and data engineer", R.drawable.sova, "https://github.com/N1kySSS", "https://vk.com/sova___666"));
         cards.add(new DeveloperCard("Sever", "Teach lead and mentor", R.drawable.sever, "https://github.com/jacksever", "https://t.me/jasever"));
+        cards.add(new DeveloperCard("LittlePony00", "Android developer", R.drawable.little_pony00, "https://github.com/LittlePony00", "https://t.me/littlepony01"));
+        cards.add(new DeveloperCard("AccessAndrei", "ML engineer", R.drawable.access_andrei, "https://github.com/AccessAndrei", "https://t.me/AxAndrei"));
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext()){
             @Override
