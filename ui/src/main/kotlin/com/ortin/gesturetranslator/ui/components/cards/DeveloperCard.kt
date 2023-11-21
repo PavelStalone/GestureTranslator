@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -36,14 +35,13 @@ import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 import com.ortin.gesturetranslator.ui.theme.surfaceContainerLow
 import timber.log.Timber
 
-
 @Composable
 fun DeveloperCard(
     title: String,
     description: String,
-    gitHubUrl: String?,
-    email: String?,
-    modifier: Modifier  = Modifier,
+    modifier: Modifier = Modifier,
+    gitHubUrl: String? = null,
+    secondContact: String? = null,
     @DrawableRes iconId: Int = R.drawable.icon_ortin_logo_without_text
 ) {
     val localDimensions = LocalDimensions.current
@@ -62,27 +60,30 @@ fun DeveloperCard(
         Text(
             modifier = Modifier.padding(horizontal = localDimensions.horizontalMedium),
             text = title,
-            color = MaterialTheme.colorScheme.onSurface,
             style = MaterialTheme.typography.titleMedium.copy(
                 fontWeight = FontWeight(600),
-                fontSize = 24.sp
+                fontSize = 24.sp,
+                color = MaterialTheme.colorScheme.onSurface
             )
         )
 
         Text(
             modifier = Modifier.padding(horizontal = localDimensions.horizontalMedium),
             text = description,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyMedium.copy(
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
         )
 
         Row(
-            modifier = Modifier.padding(
-                horizontal = localDimensions.horizontalMedium,
-                vertical = localDimensions.verticalTiny
-            ),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    vertical = localDimensions.verticalTiny,
+                    horizontal = localDimensions.horizontalMedium
+                ),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(localDimensions.horizontalSmall)
         ) {
             Image(
                 painter = painterResource(id = iconId),
@@ -90,33 +91,42 @@ fun DeveloperCard(
             )
 
             gitHubUrl?.let {
-                Spacer(modifier = Modifier.width(localDimensions.horizontalSmall))
                 PrimaryTextButton(
                     text = stringResource(id = R.string.github),
                     onClick = {
                         uriHandler.openUri(gitHubUrl)
                         Timber.d("Go to $title GitHub account")
                     },
-                    modifier = Modifier
-                        .height(localDimensions.verticalXlarge)
-                        .weight(0.4f)
+                    modifier = Modifier.weight(0.45f)
                 )
             }
 
-            email?.let {
-                Spacer(modifier = Modifier.width(localDimensions.horizontalSmall))
-                PrimaryTextButton(
-                    text = stringResource(id = R.string.email),
-                    onClick = {
-                        context.openEmailApp(email)
-                        Timber.d("Email app was opened")
-                    },
-                    modifier = Modifier
-                        .height(localDimensions.verticalXlarge)
-                        .weight(0.4f)
-                )
-            }
+            secondContact?.let {
+                val buttonText = when (secondContact.substring(0, 12)) {
+                    "https://t.me" -> stringResource(id = R.string.tg)
+                    "https://vk.c" -> stringResource(id = R.string.vk)
+                    else -> stringResource(id = R.string.email)
+                }
 
+                if (secondContact.indexOf("@") < 0) {
+                    PrimaryTextButton(
+                        text = buttonText,
+                        onClick = {
+                            uriHandler.openUri(secondContact)
+                            Timber.d("Go to $secondContact")
+                        },
+                        modifier = Modifier.weight(0.45f)
+                    )
+                } else {
+                    PrimaryTextButton(
+                        text = buttonText,
+                        onClick = {
+                            context.openEmailApp(secondContact)
+                        },
+                        modifier = Modifier.weight(0.45f)
+                    )
+                }
+            }
         }
     }
 }
@@ -130,6 +140,7 @@ fun Context.openEmailApp(email: String) {
     try {
         val intent = Intent(Intent.ACTION_SENDTO)
         intent.data = Uri.parse("mailto:$email")
+        Timber.d("Email app was opened with mail to $email")
         startActivity(intent)
     } catch (e: ActivityNotFoundException) {
         Timber.e("No email app is available")
@@ -148,7 +159,7 @@ fun DeveloperCardPreview() {
                 title = "PavelStalone",
                 description = "Вообще красавчик машина убийца",
                 gitHubUrl = "https://github.com/PavelStalone",
-                email = "poroshin.info@gmail.com"
+                secondContact = "Poroshin.info@gmail.com"
             )
         }
     }

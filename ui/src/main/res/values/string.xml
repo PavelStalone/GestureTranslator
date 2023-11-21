@@ -10,5 +10,7 @@
     <string name="sign_up">Зарегистрируйтесь</string>
     <string name="without_account">Еще нет аккаунта?</string>
     <string name="github">GitHub</string>
+    <string name="tg">Telegram</string>
+    <string name="vk">Вконтакте</string>
     <string name="email">Почта</string>
 </resources>
