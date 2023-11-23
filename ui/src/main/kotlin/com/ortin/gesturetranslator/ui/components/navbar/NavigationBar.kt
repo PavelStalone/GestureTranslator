@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
 
 @Composable
 fun BottomNavigationBar(
@@ -52,12 +53,16 @@ fun BottomNavigationBar(
 @Preview
 @Composable
 fun NavigationBarPreview() {
-    Scaffold(
-        content = { innerPadding ->
-            Surface(modifier = Modifier.padding(innerPadding)) {}
-        },
-        bottomBar = {
-            BottomNavigationBar(items = navigationBarItems)
+    GestureTranslatorTheme {
+        Surface {
+            Scaffold(
+                content = { innerPadding ->
+                    Surface(modifier = Modifier.padding(innerPadding)) {}
+                },
+                bottomBar = {
+                    BottomNavigationBar(items = navigationBarItems)
+                }
+            )
         }
-    )
+    }
 }
