@@ -29,7 +29,6 @@ fun SecondaryTextButton(
 ) {
     val localDimensions = LocalDimensions.current
 
-
     Button(
         onClick = onClick,
         modifier = modifier,
