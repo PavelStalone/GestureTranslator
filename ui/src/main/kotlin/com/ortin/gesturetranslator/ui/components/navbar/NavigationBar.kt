@@ -2,6 +2,7 @@ package com.ortin.gesturetranslator.ui.components.navbar
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
@@ -20,7 +21,8 @@ fun BottomNavigationBar(
     selectedItem: Int = 0
 ) {
     NavigationBar(
-        modifier = modifier
+        modifier = modifier,
+        contentColor = MaterialTheme.colorScheme.secondaryContainer
     ) {
         items.forEachIndexed { index: Int, item: NavigationBarItems ->
             NavigationBarItem(
