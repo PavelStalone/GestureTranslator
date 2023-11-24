@@ -16,6 +16,6 @@ class UserDaoModule {
     @Provides
     @Singleton
     fun provideUserDao(@ApplicationContext context: Context): UserDao {
-        return UserRoomDB.createDataBase(context).userDao
+        return UserRoomDB.createDataBase(context).userDao()
     }
 }
