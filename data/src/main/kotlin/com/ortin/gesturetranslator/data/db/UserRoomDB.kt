@@ -7,9 +7,7 @@ import androidx.room.RoomDatabase
 import com.ortin.gesturetranslator.data.entities.UserEntity
 
 @Database(
-    entities = [
-        UserEntity::class
-    ],
+    entities = [UserEntity::class],
     version = 1
 )
 abstract class UserRoomDB: RoomDatabase() {
