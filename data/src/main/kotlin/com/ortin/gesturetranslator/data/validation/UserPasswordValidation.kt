@@ -1,7 +1,9 @@
 package com.ortin.gesturetranslator.data.validation
 
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class UserPasswordValidation @Inject constructor() {
     fun execute(password: String): ValidationResult {
         if (password.isEmpty()) {

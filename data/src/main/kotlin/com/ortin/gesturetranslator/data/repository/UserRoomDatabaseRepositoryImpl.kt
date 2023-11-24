@@ -1,6 +1,6 @@
 package com.ortin.gesturetranslator.data.repository
 
-import com.ortin.gesturetranslator.data.db.UserRoomDB
+import com.ortin.gesturetranslator.data.db.UserDao
 import com.ortin.gesturetranslator.data.entities.UserEntity
 import com.ortin.gesturetranslator.domain.entities.UserEntityDomain
 import com.ortin.gesturetranslator.domain.repository.UserRoomDatabaseRepository
@@ -11,26 +11,26 @@ import javax.inject.Singleton
 
 @Singleton
 class UserRoomDatabaseRepositoryImpl @Inject constructor(
-    private val userDatabase: UserRoomDB,
+    private val userDao: UserDao,
 ) : UserRoomDatabaseRepository {
     override suspend fun addUser(user: UserEntityDomain) {
-        userDatabase.userDao.insertUser(user.mapToData())
+        userDao.insertUser(user.mapToData())
     }
 
     override suspend fun deleteUser(user: UserEntityDomain) {
-        userDatabase.userDao.deleteUser(user.mapToData())
+        userDao.deleteUser(user.mapToData())
     }
 
     override suspend fun updateUserInformation(user: UserEntityDomain) {
-        userDatabase.userDao.updateUser(user.mapToData())
+        userDao.updateUser(user.mapToData())
     }
 
     override suspend fun getUserList(): Flow<List<UserEntityDomain>> {
-        return dataFlowMapToDomain(userDatabase.userDao.getAllUsers())
+        return dataFlowMapToDomain(userDao.getAllUsers())
     }
 
     override suspend fun getUser(login: String): UserEntityDomain {
-        return userDatabase.userDao.getUser(login).mapToDomain()
+        return userDao.getUser(login).mapToDomain()
     }
 
     private fun UserEntityDomain.mapToData(): UserEntity =
