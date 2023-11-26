@@ -2,9 +2,7 @@ package com.ortin.gesturetranslator.ui.screens
 
 import android.graphics.Bitmap
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,15 +22,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.layout.MeasurePolicy
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.core.graphics.drawable.toBitmap
 import com.ortin.gesturetranslator.ui.AdaptiveTestPreviews
 import com.ortin.gesturetranslator.ui.R
@@ -43,7 +38,7 @@ import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
 import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
     image: Bitmap,
@@ -57,7 +52,7 @@ fun MainScreen(
     Box(modifier = modifier, contentAlignment = Alignment.BottomCenter) {
         val scaffoldState = rememberBottomSheetScaffoldState()
         val coroutineScope = rememberCoroutineScope()
-        var scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+        val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
         BottomSheetScaffold(
             modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -102,7 +97,7 @@ fun MainScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = localDimensions.verticalSmall),
-            measurePolicy = MeasurePolicy { measurables, constraints ->
+            measurePolicy = { measurables, constraints ->
                 val minWidth = measurables.maxOf { it.minIntrinsicWidth(0) }
                 val placeables = measurables.map { measurable ->
                     measurable.measure(constraints.copy(minWidth = minWidth, minHeight = 0))
