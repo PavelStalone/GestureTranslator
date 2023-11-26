@@ -33,7 +33,7 @@ fun SettingsCard(
             containerColor = surfaceContainerLow
         )
     ) {
-        Spacer(modifier = Modifier.height(dimensions.verticalStandard))
+//        Spacer(modifier = Modifier.height(dimensions.verticalXTiny))
         Row(
             modifier = Modifier.padding(horizontal = dimensions.horizontalMedium),
             verticalAlignment = Alignment.CenterVertically
@@ -46,7 +46,7 @@ fun SettingsCard(
             )
             additionalContent()
         }
-        Spacer(modifier = Modifier.height(dimensions.verticalStandard))
+        Spacer(modifier = Modifier.height(dimensions.verticalXTiny))
         description?.let { text ->
             Text(
                 modifier = Modifier.padding(horizontal = dimensions.horizontalMedium),
