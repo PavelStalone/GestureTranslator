@@ -1,20 +1,22 @@
 package com.ortin.gesturetranslator.ui.components.buttons
 
 import androidx.annotation.DrawableRes
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
 import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 
@@ -33,7 +35,10 @@ fun SecondaryTextButton(
         onClick = onClick,
         modifier = modifier,
         enabled = isEnabled,
-        contentPadding = PaddingValues(vertical = localDimensions.verticalSmall),
+        contentPadding = PaddingValues(
+            vertical = localDimensions.verticalSmall,
+            horizontal = localDimensions.horizontalPreLarge
+        ),
         shape = RoundedCornerShape(size = localDimensions.buttonsCornerRadius),
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.secondaryContainer,
@@ -42,25 +47,25 @@ fun SecondaryTextButton(
             disabledContainerColor = MaterialTheme.colorScheme.surface
         )
     ) {
-        Row {
-            leftIcon?.let {
-                Icon(
-                    painter = painterResource(id = it),
-                    contentDescription = null
-                )
-            }
-            Text(
-                text = text,
-                modifier = Modifier.weight(1f),
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.titleSmall
+        leftIcon?.let {
+            Icon(
+                painter = painterResource(id = it),
+                contentDescription = null
             )
-            rightIcon?.let {
-                Icon(
-                    painter = painterResource(id = it),
-                    contentDescription = null
-                )
-            }
+            Spacer(modifier = Modifier.weight(1f))
+        }
+        Text(
+            text = text,
+            modifier = Modifier,
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.titleSmall
+        )
+        rightIcon?.let {
+            Spacer(modifier = Modifier.weight(1f))
+            Icon(
+                painter = painterResource(id = it),
+                contentDescription = null
+            )
         }
     }
 }
@@ -69,7 +74,7 @@ fun SecondaryTextButton(
 @Composable
 fun SecondaryTextButtonPreview() {
     GestureTranslatorTheme {
-        Surface {
+        Box(modifier = Modifier.fillMaxSize()) {
             SecondaryTextButton(
                 text = "Войти",
                 onClick = {}

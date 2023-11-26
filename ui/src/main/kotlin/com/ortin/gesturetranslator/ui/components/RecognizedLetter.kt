@@ -20,7 +20,7 @@ fun RecognizedLetter(
     Text(
         text = letter,
         modifier = modifier
-            .clip(shape = MaterialTheme.shapes.medium)
+            .clip(shape = MaterialTheme.shapes.extraLarge)
             .background(MaterialTheme.colorScheme.primary),
         textAlign = TextAlign.Center,
         style = MaterialTheme.typography.headlineSmall,
