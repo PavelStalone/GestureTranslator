@@ -24,7 +24,9 @@ import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
 
 @Composable
 fun GestureCard(
-    letter: String, @DrawableRes imageId: Int, modifier: Modifier = Modifier
+    letter: String,
+    @DrawableRes imageId: Int,
+    modifier: Modifier = Modifier
 ) {
     Box(
         modifier = modifier,
