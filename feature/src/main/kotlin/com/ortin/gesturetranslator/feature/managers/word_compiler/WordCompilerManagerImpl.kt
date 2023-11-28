@@ -18,7 +18,12 @@ class WordCompilerManagerImpl @Inject constructor() : WordCompilerManager {
     private var lastTime: Long = 0
     override fun addLetter(letter: String?) {
         timeSpace = if (lastTime != 0L) System.currentTimeMillis() - lastTime else 0L
-        if (timeSpace >= MIN_SPACE_TIME) text += " "
+        if (timeSpace >= MIN_SPACE_TIME) {
+            text += " "
+            lastWord = null
+            currentLastWord = null
+            frameSortedMap.clear()
+        }
 
         if (lastWord != null) {
             if (lastWord == letter) {
