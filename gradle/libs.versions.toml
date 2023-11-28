@@ -25,6 +25,7 @@ androidx-test-ext-junit = "1.1.5"
 espresso-core = "3.5.1"
 bumptech-glide-compose = "1.0.0-beta01"
 undercouch-download = "4.1.2"
+ktor = "2.3.6"
 
 [libraries]
 gradle-plugin-android = { module = "com.android.tools.build:gradle", version.ref = "android-gradle-plugin" }
@@ -87,6 +88,9 @@ androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navig
 androidx-hilt-ext-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "androidx-hilt-ext" }
 androidx-hilt-ext-common = { group = "androidx.hilt", name = "hilt-common", version.ref = "androidx-hilt-ext" }
 
+ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+ktor-client-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "ktor" }
+
 jakewharton-timber = { module = "com.jakewharton.timber:timber", version.ref = "jakewharton-timber" }
 
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -94,7 +98,7 @@ androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
 
 com-github-bumptech-glide-compose = { group = "com.github.bumptech.glide", name = "compose", version.ref = "bumptech-glide-compose" }
-com-google-mediapipe = { group = "com.google.mediapipe", name = "tasks-vision", version = "latest.release"}
+com-google-mediapipe = { group = "com.google.mediapipe", name = "tasks-vision", version = "latest.release" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org-jetbrains-kotlin" }
@@ -115,5 +119,6 @@ com-ortin-gesturetranslator-android-library = { id = "com.ortin.gesturetranslato
 com-ortin-gesturetranslator-android-library-compose = { id = "com.ortin.gesturetranslator.android.library.compose", version = "unspecified" }
 com-ortin-gesturetranslator-android-room = { id = "com.ortin.gesturetranslator.android.room", version = "unspecified" }
 com-ortin-gesturetranslator-android-camera = { id = "com.ortin.gesturetranslator.android.camera", version = "unspecified" }
+com-ortin-gesturetranslator-android-ktor = { id = "com.ortin.gesturetranslator.android.ktor", version = "unspecified" }
 
 [bundles]
