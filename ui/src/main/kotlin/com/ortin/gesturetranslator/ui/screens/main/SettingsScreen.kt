@@ -1,9 +1,11 @@
 package com.ortin.gesturetranslator.ui.screens.main
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
@@ -14,11 +16,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringArrayResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import com.ortin.gesturetranslator.ui.R
 import com.ortin.gesturetranslator.ui.components.cards.SettingsCard
 import com.ortin.gesturetranslator.ui.components.combobox.ComboBox
 import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
+import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 import com.ortin.gesturetranslator.ui.theme.surfaceContainerLow
 
 @Composable
@@ -29,18 +34,25 @@ fun SettingsScreen(
     var isLightTheme by remember { mutableStateOf(true) }
     var isGpuOn by remember { mutableStateOf(false) }
     var isPercentsVisible by remember { mutableStateOf(false) }
-    val speedConstants = listOf("10", "15", "30", "35", "40")
+
+    val speedConstants = stringArrayResource(id = R.array.recognition_speed_constants)
+    val localDimensions = LocalDimensions.current
 
     LazyColumn(
-        modifier = modifier,
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        modifier = modifier.background(MaterialTheme.colorScheme.background),
+        contentPadding = PaddingValues(localDimensions.horizontalMedium),
+        verticalArrangement = Arrangement.spacedBy(localDimensions.verticalStandard)
     ) {
-        item { Text(text = "Основные") }
+        item {
+            Text(
+                text = stringResource(id = R.string.main_settings),
+                style = MaterialTheme.typography.headlineSmall
+            )
+        }
         item {
             SettingsCard(
-                title = "Включить светлую тему",
-                description = "Нажимая на переключатель, Вы меняете основные цвета приложения со светлых на темные и наоборот"
+                title = stringResource(id = R.string.theme_title),
+                description = stringResource(id = R.string.theme_description)
             ) {
                 Switch(
                     checked = isLightTheme,
@@ -55,12 +67,17 @@ fun SettingsScreen(
             }
 
         }
-        item { Text(text = "По подписке") }
+        item {
+            Text(
+                text = stringResource(id = R.string.by_premium),
+                style = MaterialTheme.typography.headlineSmall
+            )
+        }
 
         item {
             SettingsCard(
-                title = "Включить обработку по GPU",
-                description = "Нажимая на переключатель, Вы меняете основные цвета приложения со светлых на темные и наоборот"
+                title = stringResource(id = R.string.gpu_title),
+                description = stringResource(id = R.string.gpu_description)
             ) {
                 Switch(
                     checked = isGpuOn,
@@ -77,8 +94,8 @@ fun SettingsScreen(
         }
         item {
             SettingsCard(
-                title = "Включить показ процентов",
-                description = "Нажимая на переключатель, Вы включаете или выключаете отображение процента точности распознавания жеста"
+                title = stringResource(id = R.string.percents_title),
+                description = stringResource(id = R.string.percents_description)
             ) {
                 Switch(
                     checked = isPercentsVisible,
@@ -95,13 +112,14 @@ fun SettingsScreen(
         }
         item {
             SettingsCard(
-                title = "Скорость распознавания",
-                description = "В выпадающем меню Вы можете выбрать с какой скоростью будут считываться жесты с камеры"
+                title = stringResource(id = R.string.recognition_speed_title),
+                description = stringResource(id = R.string.recognition_speed_description)
             ) {
                 ComboBox(
                     listOfItems = speedConstants,
                     isEnabled = isPremium,
-                    modifier = Modifier.fillMaxWidth(0.3f)
+                    modifier = Modifier.fillMaxWidth(0.3f),
+                    onItemSelected = { /* TODO: Handle click */ }
                 )
             }
         }
@@ -113,7 +131,7 @@ fun SettingsScreen(
 fun SettingsScreenPreview() {
     GestureTranslatorTheme {
         Surface {
-            SettingsScreen()
+            SettingsScreen(isPremium = true)
         }
     }
 }

@@ -27,7 +27,7 @@ import com.ortin.gesturetranslator.ui.theme.surfaceContainerLow
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun ComboBox(
-    listOfItems: List<String>,
+    listOfItems: Array<String>,
     modifier: Modifier = Modifier,
     isEnabled: Boolean = false,
     onItemSelected: (String) -> Unit = {}
@@ -50,6 +50,7 @@ fun ComboBox(
                 value = selectedText,
                 onValueChange = {},
                 readOnly = true,
+                textStyle = MaterialTheme.typography.titleMedium,
                 colors = TextFieldDefaults.colors(
                     unfocusedTextColor = MaterialTheme.colorScheme.onSecondaryContainer,
                     focusedTextColor = if(isEnabled) {
@@ -61,7 +62,7 @@ fun ComboBox(
                     focusedIndicatorColor = surfaceContainerLow
                 ),
                 trailingIcon = {
-                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = !expanded)
+                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
                 },
                 modifier = Modifier.menuAnchor()
             )
@@ -93,7 +94,7 @@ fun ComboBoxPreview() {
         Surface {
             ComboBox(
                 modifier = Modifier.width(100.dp),
-                listOfItems = listOf("10", "15", "30", "35", "40")
+                listOfItems = arrayOf("10", "15", "30", "35", "40")
             )
         }
     }
