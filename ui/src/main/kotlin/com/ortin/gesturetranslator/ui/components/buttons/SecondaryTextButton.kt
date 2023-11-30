@@ -46,8 +46,9 @@ fun SecondaryTextButton(
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.secondary,
             contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
-            disabledContentColor = MaterialTheme.colorScheme.onSurface,
-            disabledContainerColor = MaterialTheme.colorScheme.surface
+            disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
+            disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant
+
         )
     ) {
         Row(

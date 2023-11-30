@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -45,8 +46,8 @@ fun PrimaryTextButton(
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primary,
             contentColor = MaterialTheme.colorScheme.onPrimary,
-            disabledContentColor = MaterialTheme.colorScheme.onSurface,
-            disabledContainerColor = MaterialTheme.colorScheme.surface
+            disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
+            disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant
         )
     ) {
         Row(
@@ -57,12 +58,14 @@ fun PrimaryTextButton(
                     imageVector = it,
                     contentDescription = null,
                 )
+                Spacer(modifier = Modifier.weight(1f))
             }
             leftIconId?.let {
                 Icon(
                     painter = painterResource(id = it),
                     contentDescription = null
                 )
+                Spacer(modifier = Modifier.weight(1f))
             }
             Text(
                 text = text,
@@ -77,6 +80,7 @@ fun PrimaryTextButton(
                 )
             }
             rightIconId?.let {
+                Spacer(modifier = Modifier.weight(1f))
                 Icon(
                     painter = painterResource(id = it),
                     contentDescription = null
@@ -90,7 +94,9 @@ fun PrimaryTextButton(
 @Composable
 fun PrimaryTextButtonPreview() {
     GestureTranslatorTheme {
-        Surface {
+        Surface(
+            modifier = Modifier.fillMaxWidth()
+        ) {
             PrimaryTextButton(
                 text = "Войти",
                 onClick = {}
