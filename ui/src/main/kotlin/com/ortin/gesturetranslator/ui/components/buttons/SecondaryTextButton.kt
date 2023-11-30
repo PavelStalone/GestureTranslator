@@ -20,7 +20,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
 
 @Composable
@@ -51,37 +50,37 @@ fun SecondaryTextButton(
 
         )
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            val spacerModifier = Modifier.weight(0.5f)
+
             leftIcon?.let {
                 Icon(
                     imageVector = it,
                     contentDescription = null,
                 )
-                Spacer(modifier = Modifier.weight(1f))
+                Spacer(modifier = spacerModifier)
             }
             leftIconId?.let {
                 Icon(
                     painter = painterResource(id = it),
                     contentDescription = null
                 )
-                Spacer(modifier = Modifier.weight(1f))
+                Spacer(modifier = spacerModifier)
             }
             Text(
                 text = text,
                 textAlign = TextAlign.Center,
-                fontSize = 20.sp
+                style = MaterialTheme.typography.titleMedium
             )
             rightIcon?.let {
-                Spacer(modifier = Modifier.weight(1f))
+                Spacer(modifier = spacerModifier)
                 Icon(
                     imageVector = it,
                     contentDescription = null
                 )
             }
             rightIconId?.let {
-                Spacer(modifier = Modifier.weight(1f))
+                Spacer(modifier = spacerModifier)
                 Icon(
                     painter = painterResource(id = it),
                     contentDescription = null
@@ -95,9 +94,7 @@ fun SecondaryTextButton(
 @Composable
 fun SecondaryTextButtonPreview() {
     GestureTranslatorTheme {
-        Surface(
-            modifier = Modifier.fillMaxWidth()
-        ) {
+        Surface(modifier = Modifier.fillMaxWidth()) {
             SecondaryTextButton(
                 text = "Войти",
                 onClick = {}

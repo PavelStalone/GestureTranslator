@@ -2,8 +2,8 @@ package com.ortin.gesturetranslator.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -39,17 +39,18 @@ fun MainMenuScreen (
     userLogin: String,
     modifier: Modifier = Modifier
 ) {
-    Column(
-        modifier = modifier
-    ) {
+    Column(modifier = modifier) {
+        val columnArrangement = LocalDimensions.current.verticalStandard
+        val buttonIcon = Icons.Default.KeyboardArrowRight
+
         Column(
+            verticalArrangement = Arrangement.spacedBy(columnArrangement),
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(LocalDimensions.current.verticalStandard)
         ) {
             if (isLoggedIn) {
-                Spacer(modifier = Modifier.height(LocalDimensions.current.verticalStandard))
                 Image(
                     painter = painterResource(id = userImageID),
                     contentDescription = null,
@@ -59,7 +60,6 @@ fun MainMenuScreen (
                         .height(110.dp)
                         .clip(CircleShape)
                 )
-                Spacer(modifier = Modifier.height(LocalDimensions.current.verticalStandard))
                 Text(
                     text = userLogin,
                     textAlign = TextAlign.Center,
@@ -84,6 +84,7 @@ fun MainMenuScreen (
             }
         }
         Column(
+            verticalArrangement = Arrangement.spacedBy(columnArrangement),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(LocalDimensions.current.verticalStandard)
@@ -92,48 +93,42 @@ fun MainMenuScreen (
                 if (isPremium) {
                     PrimaryTextButton(
                         text = stringResource(id = R.string.main_menu_is_premium),
-                        rightIcon = Icons.Default.KeyboardArrowRight,
-                        onClick = {},
+                        rightIcon = buttonIcon,
+                        onClick = { /* TODO: Handle clicks */ },
                     )
-                    Spacer(modifier = Modifier.height(LocalDimensions.current.verticalStandard))
                 } else {
                     PrimaryTextButton(
                         text = stringResource(id = R.string.main_menu_buy_premium),
-                        rightIcon = Icons.Default.KeyboardArrowRight,
-                        onClick = {},
+                        rightIcon = buttonIcon,
+                        onClick = { /* TODO: Handle clicks */ },
                     )
-                    Spacer(modifier = Modifier.height(LocalDimensions.current.verticalStandard))
                 }
                 SecondaryTextButton(
                     text = stringResource(id = R.string.main_menu_account_settings),
-                    rightIcon = Icons.Default.KeyboardArrowRight,
-                    onClick = {},
+                    rightIcon = buttonIcon,
+                    onClick = { /* TODO: Handle clicks */ },
                 )
-                Spacer(modifier = Modifier.height(LocalDimensions.current.verticalStandard))
             } else {
                 PrimaryTextButton(
                     text = stringResource(id = R.string.main_menu_log_in),
-                    rightIcon = Icons.Default.KeyboardArrowRight,
-                    onClick = {},
+                    rightIcon = buttonIcon,
+                    onClick = { /* TODO: Handle clicks */ },
                 )
-                Spacer(modifier = Modifier.height(LocalDimensions.current.verticalStandard))
             }
             SecondaryTextButton(
                 text = stringResource(id = R.string.main_menu_app_settings),
-                rightIcon = Icons.Default.KeyboardArrowRight,
-                onClick = {},
+                rightIcon = buttonIcon,
+                onClick = { /* TODO: Handle clicks */ },
             )
-            Spacer(modifier = Modifier.height(LocalDimensions.current.verticalStandard))
             SecondaryTextButton(
                 text = stringResource(id = R.string.main_menu_bugreport),
-                rightIcon = Icons.Default.KeyboardArrowRight,
-                onClick = {},
+                rightIcon = buttonIcon,
+                onClick = { /* TODO: Handle clicks */ },
             )
-            Spacer(modifier = Modifier.height(LocalDimensions.current.verticalStandard))
             SecondaryTextButton(
                 text = stringResource(id = R.string.main_menu_about),
-                rightIcon = Icons.Default.KeyboardArrowRight,
-                onClick = {},
+                rightIcon = buttonIcon,
+                onClick = { /* TODO: Handle clicks */ },
             )
         }
     }
@@ -141,16 +136,38 @@ fun MainMenuScreen (
 
 @Preview
 @Composable
-fun ViewMainMenuScreen() {
+fun MainMenuScreenNotLoggedInPreview() {
     GestureTranslatorTheme {
-        MainMenuScreen(
-            isLoggedIn = true,
-            isPremium = true,
-            userImageID = R.drawable.icon_ortin_logo_without_text,
-            userLogin = "Username",
+        Surface(
             modifier = Modifier
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background)
-        )
+        ) {
+            MainMenuScreen(
+                isLoggedIn = false,
+                isPremium = false,
+                userImageID = R.drawable.icon_ortin_logo_without_text,
+                userLogin = "Username",
+            )
+        }
+    }
+}
+
+@Preview
+@Composable
+fun MainMenuScreenLoggedInPreview() {
+    GestureTranslatorTheme {
+        Surface(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
+        ) {
+            MainMenuScreen(
+                isLoggedIn = true,
+                isPremium = true,
+                userImageID = R.drawable.icon_ortin_logo_without_text,
+                userLogin = "Username",
+            )
+        }
     }
 }
