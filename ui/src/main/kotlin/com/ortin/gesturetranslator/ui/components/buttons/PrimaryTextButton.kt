@@ -1,25 +1,26 @@
 package com.ortin.gesturetranslator.ui.components.buttons
 
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
-import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 
 @Composable
 fun PrimaryTextButton(
@@ -27,17 +28,20 @@ fun PrimaryTextButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     isEnabled: Boolean = true,
-    @DrawableRes leftIcon: Int? = null,
-    @DrawableRes rightIcon: Int? = null
+    @DrawableRes leftIconId: Int? = null,
+    @DrawableRes rightIconId: Int? = null,
+    leftIcon: ImageVector? = null,
+    rightIcon: ImageVector? = null
 ) {
-    val localDimensions = LocalDimensions.current
-
     Button(
         onClick = onClick,
         modifier = modifier,
         enabled = isEnabled,
-        contentPadding = PaddingValues(vertical = localDimensions.verticalSmall),
-        shape = RoundedCornerShape(size = localDimensions.buttonsCornerRadius),
+        contentPadding = PaddingValues(
+            horizontal = 24.dp,
+            vertical = 16.dp
+        ),
+        shape = RoundedCornerShape(size = 100.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primary,
             contentColor = MaterialTheme.colorScheme.onPrimary,
@@ -45,8 +49,16 @@ fun PrimaryTextButton(
             disabledContainerColor = MaterialTheme.colorScheme.surface
         )
     ) {
-        Row {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             leftIcon?.let {
+                Icon(
+                    imageVector = it,
+                    contentDescription = null,
+                )
+            }
+            leftIconId?.let {
                 Icon(
                     painter = painterResource(id = it),
                     contentDescription = null
@@ -54,11 +66,17 @@ fun PrimaryTextButton(
             }
             Text(
                 text = text,
-                modifier = Modifier.weight(1f),
                 textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.titleSmall
+                fontSize = 20.sp
             )
             rightIcon?.let {
+                Spacer(modifier = Modifier.weight(1f))
+                Icon(
+                    imageVector = it,
+                    contentDescription = null
+                )
+            }
+            rightIconId?.let {
                 Icon(
                     painter = painterResource(id = it),
                     contentDescription = null
@@ -70,12 +88,11 @@ fun PrimaryTextButton(
 
 @Preview
 @Composable
-fun PrimaryTextButtonPreview(){
+fun PrimaryTextButtonPreview() {
     GestureTranslatorTheme {
-        Box(modifier = Modifier.fillMaxSize()) {
+        Surface {
             PrimaryTextButton(
-                modifier = Modifier.fillMaxWidth(0.30f),
-                text = "Telegram",
+                text = "Войти",
                 onClick = {}
             )
         }
