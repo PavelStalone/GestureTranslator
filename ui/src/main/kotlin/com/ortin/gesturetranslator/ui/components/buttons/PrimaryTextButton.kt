@@ -75,7 +75,6 @@ fun PrimaryTextButtonPreview() {
     GestureTranslatorTheme {
         Box(modifier = Modifier.fillMaxSize()) {
             PrimaryTextButton(
-                modifier = Modifier,
                 text = "Telegram",
                 onClick = {}
             )

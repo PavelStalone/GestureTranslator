@@ -38,8 +38,8 @@ import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
 import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 fun MainScreen(
     image: Bitmap,
     recognizedLetter: String,
@@ -49,7 +49,10 @@ fun MainScreen(
 ) {
     val localDimensions = LocalDimensions.current
 
-    Box(modifier = modifier, contentAlignment = Alignment.BottomCenter) {
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.BottomCenter
+    ) {
         val scaffoldState = rememberBottomSheetScaffoldState()
         val coroutineScope = rememberCoroutineScope()
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
@@ -67,9 +70,10 @@ fun MainScreen(
             },
             scaffoldState = scaffoldState,
             sheetShape = ShapeDefaults.ExtraLarge.copy(
-                bottomEnd = CornerSize(0.dp), bottomStart = CornerSize(0.dp)
+                bottomEnd = CornerSize(0.dp),
+                bottomStart = CornerSize(0.dp)
             ),
-            sheetPeekHeight = 216.dp
+            sheetPeekHeight = localDimensions.sheetPeekHeight
         ) { innerPadding ->
             Box(
                 modifier = Modifier
