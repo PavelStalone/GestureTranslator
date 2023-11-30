@@ -1,5 +1,6 @@
 [versions]
 android-gradle-plugin = "8.1.2"
+org-jetbrains-kotlinx-serialization-json = "1.6.0"
 org-jetbrains-kotlin = "1.9.10"
 org-jetbrains-coroutines = "1.7.3"
 org-jetbrains-kotlinx-datetime = "0.4.1"
@@ -25,13 +26,14 @@ androidx-test-ext-junit = "1.1.5"
 espresso-core = "3.5.1"
 bumptech-glide-compose = "1.0.0-beta01"
 undercouch-download = "4.1.2"
-ktor = "2.3.6"
+io-ktor = "2.3.6"
 
 [libraries]
 gradle-plugin-android = { module = "com.android.tools.build:gradle", version.ref = "android-gradle-plugin" }
 gradle-plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "org-jetbrains-kotlin" }
 gradle-plugin-ksp = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "com-google-ksp" }
 
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "org-jetbrains-kotlinx-serialization-json" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "org-jetbrains-coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "org-jetbrains-coroutines" }
 kotlinx-coroutines-jdk8 = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8", version.ref = "org-jetbrains-coroutines" }
@@ -88,8 +90,14 @@ androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navig
 androidx-hilt-ext-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "androidx-hilt-ext" }
 androidx-hilt-ext-common = { group = "androidx.hilt", name = "hilt-common", version.ref = "androidx-hilt-ext" }
 
-ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
-ktor-client-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "ktor" }
+ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "io-ktor" }
+ktor-client-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "io-ktor" }
+ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "io-ktor" }
+ktor-client-android = { group = "io.ktor", name = "ktor-client-android", version.ref = "io-ktor" }
+ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "io-ktor" }
+ktor-client-serialization = { group = "io.ktor", name = "ktor-client-serialization", version.ref = "io-ktor" }
+ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "io-ktor" }
+ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "io-ktor" }
 
 jakewharton-timber = { module = "com.jakewharton.timber:timber", version.ref = "jakewharton-timber" }
 
@@ -105,6 +113,7 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org-jetbrains-kot
 android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
 android-library = { id = "com.android.library", version.ref = "android-gradle-plugin" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin" }
+jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "org-jetbrains-kotlin" }
 google-dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "google-dagger" }
 androidx-navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "androidx-navigation" }
 com-google-ksp = { id = "com.google.devtools.ksp", version.ref = "com-google-ksp" }
