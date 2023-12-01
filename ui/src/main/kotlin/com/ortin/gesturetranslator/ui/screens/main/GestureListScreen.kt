@@ -19,7 +19,7 @@ import com.ortin.gesturetranslator.ui.components.cards.GestureCard
 import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
 import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 
-private val list = listOf<String>(
+private val gestureNamesList = listOf<String>(
     "А",
     "Б",
     "В",
@@ -64,9 +64,7 @@ fun GestureListScreen(
         horizontalArrangement = Arrangement.spacedBy(space = localDimensions.horizontalLarge),
         contentPadding = PaddingValues(localDimensions.horizontalLarge)
     ) {
-        items(
-            list
-        ) { item ->
+        items(gestureNamesList) { item ->
             GestureCard(
                 letter = item,
                 imageId = R.drawable.a,

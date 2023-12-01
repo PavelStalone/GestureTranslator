@@ -32,6 +32,8 @@ fun GestureCard(
         modifier = modifier,
         contentAlignment = Alignment.BottomStart
     ) {
+        val boxSize = 40.dp
+
         Image(
             painter = painterResource(id = imageId),
             contentDescription = letter,
@@ -42,7 +44,7 @@ fun GestureCard(
         )
         Box(
             modifier = Modifier
-                .size(40.dp)
+                .size(boxSize)
                 .clip(MaterialTheme.shapes.medium)
                 .background(MaterialTheme.colorScheme.primary),
             contentAlignment = Alignment.Center
@@ -50,8 +52,7 @@ fun GestureCard(
             Text(
                 text = letter,
                 color = MaterialTheme.colorScheme.onPrimary,
-                style = MaterialTheme.typography.headlineSmall.copy(
-                    fontSize = 20.sp,
+                style = MaterialTheme.typography.titleLarge.copy(
                     fontWeight = FontWeight.Bold
                 )
             )
