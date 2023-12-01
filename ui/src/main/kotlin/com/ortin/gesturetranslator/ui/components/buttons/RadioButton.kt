@@ -35,7 +35,7 @@ fun RadioButton(
     @DrawableRes rightIcon: Int? = null
 ) {
     val localDimensions = LocalDimensions.current
-    var isClicked by remember { mutableStateOf(true) }
+    var isClicked by remember { mutableStateOf(false) }
     val borderStroke = 2.dp
 
     Button(
