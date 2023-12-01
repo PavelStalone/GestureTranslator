@@ -35,9 +35,9 @@ import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 fun MainMenuScreen (
     isLoggedIn: Boolean,
     isPremium: Boolean,
-    userImageID: Int,
     userLogin: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    userImageID: Int = R.drawable.icon_ortin_logo_without_text
 ) {
     Column(modifier = modifier) {
         val columnArrangement = LocalDimensions.current.verticalStandard
