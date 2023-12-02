@@ -67,7 +67,8 @@ fun LoadingAnimation(
                 }
                 .background(
                     color = circleColor, shape = CircleShape
-                ))
+                )
+            )
         }
     }
 }

@@ -34,7 +34,7 @@ fun ProgressDialog(
                 .clip(shape = MaterialTheme.shapes.medium)
                 .background(MaterialTheme.colorScheme.background)
                 .defaultMinSize(
-                    minWidth =  dialogMinSize,
+                    minWidth = dialogMinSize,
                     minHeight = dialogMinSize
                 ),
             verticalArrangement = Arrangement.Center,
@@ -64,8 +64,7 @@ fun ProgressDialogPreview() {
     GestureTranslatorTheme {
         Surface {
             ProgressDialog(
-//                dialogText = "Падажжи загрузку плз",
-//                modifier = Modifier.size(250.dp)
+                dialogText = "Падажжи загрузку плз",
             )
         }
     }
