@@ -39,7 +39,7 @@ import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 fun CustomDialog(
     showDialog: Boolean,
     onDismissRequest: () -> Unit,
-    content: @Composable () -> Unit,
+    content: @Composable () -> Unit
 ) {
     val dimensions = LocalDimensions.current
     val shadowSize = 8.dp
@@ -63,7 +63,7 @@ fun CustomDialog(
                 AnimatedVisibility(
                     visible = animateIn,
                     enter = fadeIn(),
-                    exit = fadeOut(),
+                    exit = fadeOut()
                 ) {
                     Box(
                         modifier = Modifier
@@ -90,9 +90,7 @@ fun CustomDialog(
                             .shadow(shadowSize, shape = RoundedCornerShape(dimensions.horizontalMedium))
                             .width(dialogWidth)
                             .clip(RoundedCornerShape(dimensions.horizontalMedium))
-                            .background(
-                                MaterialTheme.colorScheme.surface,
-                            ),
+                            .background(MaterialTheme.colorScheme.surface),
                         contentAlignment = Alignment.Center
                     ) {
                         content()
@@ -106,9 +104,7 @@ fun CustomDialog(
 @Preview
 @Composable
 fun CustomDialogPreview() {
-    var showDialog by remember {
-        mutableStateOf(false)
-    }
+    var showDialog by remember { mutableStateOf(false) }
 
     CustomDialog(
         showDialog = showDialog,
@@ -124,7 +120,7 @@ fun CustomDialogPreview() {
     }
     Box(
         modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center,
+        contentAlignment = Alignment.Center
     ) {
         Button(
             onClick = {

@@ -45,7 +45,7 @@ fun CustomDialogContent(
     cancelButtonText: String? = null,
     confirmButtonText: String = "Confirm",
     onConfirmButtonClick: () -> Unit,
-    onDismissRequest: () -> Unit,
+    onDismissRequest: () -> Unit
 ) {
     val dimensions = LocalDimensions.current
     val brushHeight = 150.dp
@@ -60,7 +60,7 @@ fun CustomDialogContent(
             visible = contentVisible,
             enter = expandVertically(
                 animationSpec = spring(stiffness = Spring.StiffnessMediumLow),
-                expandFrom = Alignment.CenterVertically,
+                expandFrom = Alignment.CenterVertically
             )
         ) {
             Box(
@@ -71,7 +71,7 @@ fun CustomDialogContent(
                         brush = Brush.linearGradient(
                             colors = listOf(
                                 Color(0xE903A3A8),
-                                Color(0xFF0221B6),
+                                Color(0xFF0221B6)
                             )
                         )
                     ),
@@ -79,7 +79,7 @@ fun CustomDialogContent(
             ) {
                 Image(
                     imageVector = Icons.Rounded.Warning,
-                    contentDescription = null,
+                    contentDescription = null
                 )
             }
         }
