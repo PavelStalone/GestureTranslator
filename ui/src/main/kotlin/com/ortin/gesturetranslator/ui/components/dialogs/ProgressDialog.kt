@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -34,7 +33,10 @@ fun ProgressDialog(
             modifier = modifier
                 .clip(shape = MaterialTheme.shapes.medium)
                 .background(MaterialTheme.colorScheme.background)
-                .defaultMinSize(dialogMinSize),
+                .defaultMinSize(
+                    minWidth =  dialogMinSize,
+                    minHeight = dialogMinSize
+                ),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -62,8 +64,8 @@ fun ProgressDialogPreview() {
     GestureTranslatorTheme {
         Surface {
             ProgressDialog(
-                dialogText = "Падажжи загрузку плз",
-                modifier = Modifier.size(250.dp)
+//                dialogText = "Падажжи загрузку плз",
+//                modifier = Modifier.size(250.dp)
             )
         }
     }
