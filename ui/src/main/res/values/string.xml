@@ -13,4 +13,12 @@
     <string name="tg">Telegram</string>
     <string name="vk">Вконтакте</string>
     <string name="email">Почта</string>
+    <string name="developers">Разработчики</string>
+    <string name="app_github">https://github.com/PavelStalone/GestureTranslator</string>
+    <string name="info_screen_text">
+        Gesture Translator - настолько класная прилажуха
+        что даже сложно придумать соизмеримо класное описание,
+        так что я над ним еще подумаю, но вы не уходите пока что
+    </string>
+    <string name="application_website">Сайт приложения</string>
 </resources>
