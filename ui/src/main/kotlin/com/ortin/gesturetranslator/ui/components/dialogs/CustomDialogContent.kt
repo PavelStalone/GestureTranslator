@@ -37,7 +37,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 
-
 @Composable
 fun CustomDialogContent(
     title: String = "What",
