@@ -19,8 +19,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
+import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 
 @Composable
 fun PrimaryTextButton(
@@ -33,15 +33,17 @@ fun PrimaryTextButton(
     leftIcon: ImageVector? = null,
     rightIcon: ImageVector? = null
 ) {
+    val localDimensions = LocalDimensions.current
+
     Button(
         onClick = onClick,
         modifier = modifier,
         enabled = isEnabled,
         contentPadding = PaddingValues(
-            horizontal = 24.dp,
-            vertical = 16.dp
+            vertical = localDimensions.verticalSmall,
+            horizontal = localDimensions.horizontalMedium
         ),
-        shape = RoundedCornerShape(size = 100.dp),
+        shape = RoundedCornerShape(size = localDimensions.buttonsCornerRadius),
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primary,
             contentColor = MaterialTheme.colorScheme.onPrimary,
