@@ -4,7 +4,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -25,13 +27,16 @@ fun ProgressDialog(
     dialogText: String? = null
 ) {
     val localDimens = LocalDimensions.current
+    val dialogMinSize = 150.dp
 
     Dialog(onDismissRequest = {}) {
         Column(
-            modifier = modifier,
+            modifier = modifier
+                .clip(shape = MaterialTheme.shapes.medium)
+                .background(MaterialTheme.colorScheme.background)
+                .defaultMinSize(dialogMinSize),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
-
         ) {
             LoadingAnimation(
                 circleSize = localDimens.horizontalMedium,
@@ -40,7 +45,11 @@ fun ProgressDialog(
             dialogText?.also {
                 Spacer(modifier = Modifier.height(localDimens.verticalSmall))
                 Text(
-                    text = dialogText
+                    text = dialogText,
+                    modifier = Modifier
+                        .padding(
+                            horizontal = localDimens.horizontalMedium
+                        )
                 )
             }
         }
@@ -54,10 +63,7 @@ fun ProgressDialogPreview() {
         Surface {
             ProgressDialog(
                 dialogText = "Падажжи загрузку плз",
-                modifier = Modifier
-                    .clip(shape = MaterialTheme.shapes.medium)
-                    .size(250.dp)
-                    .background(MaterialTheme.colorScheme.background)
+                modifier = Modifier.size(250.dp)
             )
         }
     }
