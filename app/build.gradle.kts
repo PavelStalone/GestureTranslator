@@ -78,6 +78,7 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":data"))
     implementation(project(":ui"))
+    implementation(project(":network"))
 
     /**
      * Github implementations
