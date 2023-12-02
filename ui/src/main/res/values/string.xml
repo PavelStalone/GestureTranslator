@@ -15,27 +15,14 @@
     <string name="email">Почта</string>
 
     <!--   SettingsScreen   -->
-
     <string name="main_settings">Основные</string>
     <string name="by_premium">По подписке</string>
-
     <string name="theme_title">Включить светлую тему</string>
     <string name="theme_description">Нажимая на переключатель, Вы меняете основные цвета приложения со светлых на темные и наоборот</string>
-
     <string name="gpu_title">Включить обработку по GPU</string>
     <string name="gpu_description">Нажимая на переключатель, вы увеличиваете производительность за счет видео-чипа\n</string>
-
     <string name="percents_title">Включить показ процентов</string>
     <string name="percents_description">Нажимая на переключатель, Вы включаете или выключаете отображение процента точности распознавания жеста</string>
-
     <string name="recognition_speed_title">Скорость распознавания</string>
     <string name="recognition_speed_description">В выпадающем меню Вы можете выбрать с какой скоростью будут считываться жесты с камеры</string>
-    <string-array
-        name="recognition_speed_constants">
-        <item>10</item>
-        <item>15</item>
-        <item>20</item>
-        <item>25</item>
-        <item>30</item>
-    </string-array>
 </resources>

@@ -1,6 +1,5 @@
 package com.ortin.gesturetranslator.ui.components.combobox
 
-
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
@@ -27,7 +26,7 @@ import com.ortin.gesturetranslator.ui.theme.surfaceContainerLow
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun ComboBox(
-    listOfItems: Array<String>,
+    listOfItems: List<String>,
     modifier: Modifier = Modifier,
     isEnabled: Boolean = false,
     onItemSelected: (String) -> Unit = {}
@@ -53,7 +52,7 @@ fun ComboBox(
                 textStyle = MaterialTheme.typography.titleMedium,
                 colors = TextFieldDefaults.colors(
                     unfocusedTextColor = MaterialTheme.colorScheme.onSecondaryContainer,
-                    focusedTextColor = if(isEnabled) {
+                    focusedTextColor = if (isEnabled) {
                         MaterialTheme.colorScheme.primary
                     } else MaterialTheme.colorScheme.onSecondaryContainer,
                     unfocusedContainerColor = surfaceContainerLow,
@@ -86,7 +85,6 @@ fun ComboBox(
     }
 }
 
-
 @Preview
 @Composable
 fun ComboBoxPreview() {
@@ -94,7 +92,7 @@ fun ComboBoxPreview() {
         Surface {
             ComboBox(
                 modifier = Modifier.width(100.dp),
-                listOfItems = arrayOf("10", "15", "30", "35", "40")
+                listOfItems = listOf("10", "15", "30", "35", "40")
             )
         }
     }
