@@ -31,12 +31,12 @@ fun RadioButton(
     onClick: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
     isEnabled: Boolean = true,
-    isButtonClicked: Boolean = false,
+    checked: Boolean = false,
     @DrawableRes leftIcon: Int? = null,
     @DrawableRes rightIcon: Int? = null
 ) {
     val localDimensions = LocalDimensions.current
-    var isClicked by remember { mutableStateOf(isButtonClicked) }
+    var isClicked by remember { mutableStateOf(checked) }
     val borderStroke = 2.dp
 
     Button(
