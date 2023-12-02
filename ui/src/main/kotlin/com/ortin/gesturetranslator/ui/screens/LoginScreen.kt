@@ -64,7 +64,7 @@ fun LoginScreen(
         )
         Spacer(modifier = Modifier.height(localDimensions.verticalStandard))
         PasswordTextField(
-            modifier = Modifier.padding(horizontal = localDimensions.horizontalTiny),
+            modifier = Modifier.padding(horizontal = localDimensions.horizontalMedium),
             onTextChange = {},
             placeholder = stringResource(id = R.string.enter_password)
         )
