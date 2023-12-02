@@ -6,19 +6,22 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.ortin.gesturetranslator.data.entities.UserEntity
 
+private const val DATABASE_NAME = "user_info"
+
 @Database(
     entities = [UserEntity::class],
     version = 1
 )
-abstract class UserRoomDB: RoomDatabase() {
+abstract class UserDatabase: RoomDatabase() {
+
     abstract fun userDao(): UserDao
 
     companion object {
-        fun createDataBase(context: Context): UserRoomDB {
+        fun buildDataBase(context: Context): UserDatabase {
             return Room.databaseBuilder(
                 context,
-                UserRoomDB::class.java,
-                "UserInfo.db"
+                UserDatabase::class.java,
+                DATABASE_NAME
             ).build()
         }
     }

@@ -1,8 +1,7 @@
 package com.ortin.gesturetranslator.data.di
 
 import android.content.Context
-import com.ortin.gesturetranslator.data.db.UserDao
-import com.ortin.gesturetranslator.data.db.UserRoomDB
+import com.ortin.gesturetranslator.data.db.UserDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,10 +11,8 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class UserDaoModule {
+class DatabaseModule {
     @Provides
     @Singleton
-    fun provideUserDao(@ApplicationContext context: Context): UserDao {
-        return UserRoomDB.createDataBase(context).userDao()
-    }
+    fun provideUserDatabase (@ApplicationContext context: Context) = UserDatabase.buildDataBase(context)
 }

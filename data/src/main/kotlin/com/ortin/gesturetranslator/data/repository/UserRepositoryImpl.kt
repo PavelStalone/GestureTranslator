@@ -3,16 +3,16 @@ package com.ortin.gesturetranslator.data.repository
 import com.ortin.gesturetranslator.data.db.UserDao
 import com.ortin.gesturetranslator.data.entities.UserEntity
 import com.ortin.gesturetranslator.domain.entities.UserEntityDomain
-import com.ortin.gesturetranslator.domain.repository.UserRoomDatabaseRepository
+import com.ortin.gesturetranslator.domain.repository.UserRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class UserRoomDatabaseRepositoryImpl @Inject constructor(
+class UserRepositoryImpl @Inject constructor(
     private val userDao: UserDao,
-) : UserRoomDatabaseRepository {
+) : UserRepository {
     override suspend fun addUser(user: UserEntityDomain) {
         userDao.insertUser(user.mapToData())
     }
@@ -21,7 +21,7 @@ class UserRoomDatabaseRepositoryImpl @Inject constructor(
         userDao.deleteUser(user.mapToData())
     }
 
-    override suspend fun updateUserInformation(user: UserEntityDomain) {
+    override suspend fun updateUser(user: UserEntityDomain) {
         userDao.updateUser(user.mapToData())
     }
 
@@ -29,7 +29,7 @@ class UserRoomDatabaseRepositoryImpl @Inject constructor(
         return dataFlowMapToDomain(userDao.getAllUsers())
     }
 
-    override suspend fun getUser(login: String): UserEntityDomain {
+    override suspend fun getUserByLogin(login: String): UserEntityDomain {
         return userDao.getUser(login).mapToDomain()
     }
 
@@ -37,14 +37,14 @@ class UserRoomDatabaseRepositoryImpl @Inject constructor(
         UserEntity(
             login = this.login,
             password = this.password,
-            isSigned = this.isSigned
+            isLoggedIn = this.isLoggedIn
         )
 
     private fun UserEntity.mapToDomain(): UserEntityDomain =
         UserEntityDomain(
             login = this.login,
             password = this.password,
-            isSigned = this.isSigned
+            isLoggedIn = this.isLoggedIn
         )
 
     private fun dataFlowMapToDomain(flow: Flow<List<UserEntity>>): Flow<List<UserEntityDomain>> =

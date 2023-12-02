@@ -1,11 +1,11 @@
 package com.ortin.gesturetranslator.app.di
 
 import com.ortin.gesturetranslator.data.repository.SettingsRepositoryImpl
-import com.ortin.gesturetranslator.data.repository.UserRoomDatabaseRepositoryImpl
+import com.ortin.gesturetranslator.data.repository.UserRepositoryImpl
 import com.ortin.gesturetranslator.data.storage.SettingsStorage
 import com.ortin.gesturetranslator.data.storage.SharedPrefSettingsStorage
 import com.ortin.gesturetranslator.domain.repository.SettingsRepository
-import com.ortin.gesturetranslator.domain.repository.UserRoomDatabaseRepository
+import com.ortin.gesturetranslator.domain.repository.UserRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -25,5 +25,5 @@ interface DataModule {
 
     @Binds
     @Singleton
-    fun bindUserRoomDatabaseRepository(impl: UserRoomDatabaseRepositoryImpl): UserRoomDatabaseRepository
+    fun bindUserRoomDatabaseRepository(impl: UserRepositoryImpl): UserRepository
 }

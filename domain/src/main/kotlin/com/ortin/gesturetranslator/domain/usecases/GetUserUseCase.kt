@@ -1,15 +1,15 @@
 package com.ortin.gesturetranslator.domain.usecases
 
 import com.ortin.gesturetranslator.domain.entities.UserEntityDomain
-import com.ortin.gesturetranslator.domain.repository.UserRoomDatabaseRepository
+import com.ortin.gesturetranslator.domain.repository.UserRepository
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class GetUserUseCase @Inject constructor(
-    private val userRoomDatabaseRepository: UserRoomDatabaseRepository
+    private val userRepository: UserRepository
 ) {
     suspend fun execute(login: String): UserEntityDomain {
-        return userRoomDatabaseRepository.getUser(login)
+        return userRepository.getUserByLogin(login)
     }
 }
