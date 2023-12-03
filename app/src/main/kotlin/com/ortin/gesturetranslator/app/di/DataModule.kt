@@ -25,5 +25,5 @@ interface DataModule {
 
     @Binds
     @Singleton
-    fun bindUserRoomDatabaseRepository(impl: UserRepositoryImpl): UserRepository
+    fun bindUserRepository(impl: UserRepositoryImpl): UserRepository
 }
