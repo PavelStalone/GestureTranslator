@@ -7,6 +7,5 @@ import kotlinx.serialization.Serializable
  *
  * @property correctedText collected text, received as a response from the server
  */
-
 @Serializable
 data class CorrectedTextModel(val correctedText: String)
