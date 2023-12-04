@@ -59,7 +59,7 @@ fun MainApplicationScreenFlow(
          * Main menu screen for additional information about app
          */
         composable(
-            route = MainApplicationScreen.MainMenuScreen.route
+            route = MainApplicationScreen.MenuScreen.route
         ) {
             // TODO: add MainMenuScreen
         }

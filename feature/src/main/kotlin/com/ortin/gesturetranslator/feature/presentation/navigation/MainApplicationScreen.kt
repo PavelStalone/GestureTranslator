@@ -11,12 +11,12 @@ import javax.annotation.concurrent.Immutable
 sealed class MainApplicationScreen(val route: String) {
 
     /**
-     * Main screen
+     * Main screen for gesture translation
      */
     data object MainScreen : MainApplicationScreen("MainScreen")
 
     /**
-     * Settings screen
+     * Settings screen to fine-tune the application
      */
     data object SettingsScreen : MainApplicationScreen("Settings")
 
@@ -28,7 +28,7 @@ sealed class MainApplicationScreen(val route: String) {
     /**
      *  Main menu screen to view additional information about app
      */
-    data object MainMenuScreen : MainApplicationScreen("MainMenu")
+    data object MenuScreen : MainApplicationScreen("MainMenu")
 
     /**
      * Gesture list screen to view available gestures
