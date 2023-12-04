@@ -110,7 +110,7 @@ fun CustomDialogPreview() {
         showDialog = showDialog,
         onDismissRequest = { showDialog = false }
     ) {
-        CustomDialogContent(
+        WarningDialog(
             title = "Oops, something went wrong!",
             description = "Your phone will be destroy in 5 seconds. Sorry :)",
             cancelButtonText = "Cancel",
