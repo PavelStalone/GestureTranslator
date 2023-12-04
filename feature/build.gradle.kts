@@ -13,4 +13,10 @@ dependencies {
      * Modules implementations
      */
     implementation(project(":domain"))
+
+
+    /**
+     * Navigation dependencies
+     */
+    implementation(libs.androidx.navigation.compose)
 }
