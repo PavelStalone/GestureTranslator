@@ -45,7 +45,7 @@ public class InformationFragment extends Fragment {
     private void init() {
         List<DeveloperCardInfo> cards = new ArrayList<>();
         cards.add(new DeveloperCardInfo("PavelStalone", "Android developer and ML engineer", R.drawable.pavel_stalone, "https://github.com/PavelStalone", "https://vk.com/pasha_just_pasha"));
-        cards.add(new DeveloperCardInfo("Glebix", "ML engineer, Android and Web developer", R.drawable.glebix, "https://github.com/PoroshinGA", "https://t.me/Glebsobaka"));
+        cards.add(new DeveloperCardInfo("Glebix", "ML engineer, Android and Web developer", R.drawable.glebix, "https://github.com/PoroshinGA", "https://t.me/PoroshinG"));
         cards.add(new DeveloperCardInfo("qondeeter", "UI/UX - designer and data engineer", R.drawable.qondeeter, "https://github.com/kond1ter", "https://t.me/qondeeter"));
         cards.add(new DeveloperCardInfo("Sova", "UI/UX - writer, Android developer and data engineer", R.drawable.sova, "https://github.com/N1kySSS", "https://vk.com/sova___666"));
         cards.add(new DeveloperCardInfo("Sever", "Teach lead and mentor", R.drawable.sever, "https://github.com/jacksever", "https://t.me/jasever"));

@@ -37,9 +37,9 @@ private val developersList = listOf(
     DeveloperCardInfo(
         "Glebix",
         "ML engineer, Android and Web developer",
-        R.drawable.glebix,
+        R.drawable.gleb,
         "https://github.com/PoroshinGA",
-        "https://t.me/Glebsobaka"
+        "https://t.me/PoroshinG"
     ),
     DeveloperCardInfo(
         "qondeeter", "UI/UX - designer and data engineer",
