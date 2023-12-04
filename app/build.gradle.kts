@@ -75,7 +75,6 @@ dependencies {
      */
     implementation(libs.androidx.navigation.compose)
 
-
     /**
      *  Module dependencies
      */

@@ -13,27 +13,27 @@ sealed class MainApplicationScreen(val route: String) {
     /**
      * Main screen
      */
-    data object MainScreen : MainApplicationScreen("Login")
+    data object MainScreen : MainApplicationScreen("MainScreen")
 
     /**
      * Settings screen
      */
-    data object SettingsScreen : MainApplicationScreen("LinkReset")
+    data object SettingsScreen : MainApplicationScreen("Settings")
 
     /**
      * App info screen to view all developers and major information about app
      */
-    data object AppInfoScreen : MainApplicationScreen("FirstLogin")
+    data object AppInfoScreen : MainApplicationScreen("AppInfo")
 
     /**
      *  Main menu screen to view additional information about app
      */
-    data object MainMenuScreen : MainApplicationScreen("PasswordReset")
+    data object MainMenuScreen : MainApplicationScreen("MainMenu")
 
     /**
      * Gesture list screen to view available gestures
      */
-    data object GestureListScreen : MainApplicationScreen("PasswordRecovery")
+    data object GestureListScreen : MainApplicationScreen("GestureList")
 
     /**
      * Builds the route string with the provided arguments

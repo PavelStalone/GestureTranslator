@@ -14,7 +14,6 @@ dependencies {
      */
     implementation(project(":domain"))
 
-
     /**
      * Navigation dependencies
      */

@@ -18,7 +18,7 @@ sealed class GestureTranslatorScreen(val route: String) {
     /**
      * Screens for
      */
-    data object MainApplicationScreenFlow : GestureTranslatorScreen("TimeTracking")
+    data object MainApplicationScreenFlow : GestureTranslatorScreen("MainApplicationScreen")
 
     /**
      * Builds the route string with the provided arguments
