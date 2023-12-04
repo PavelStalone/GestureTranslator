@@ -38,7 +38,7 @@ import androidx.compose.ui.unit.dp
 import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 
 @Composable
-fun CustomDialogContent(
+fun WarningDialog(
     title: String = "What",
     description: String? = null,
     cancelButtonText: String? = null,
