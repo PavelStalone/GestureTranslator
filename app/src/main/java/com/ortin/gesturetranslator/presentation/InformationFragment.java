@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.ortin.gesturetranslator.R;
 import com.ortin.gesturetranslator.databinding.InformationFragmentBinding;
 import com.ortin.gesturetranslator.decorators.SpacesItemDecoration;
-import com.ortin.gesturetranslator.app.models.DeveloperCard;
+import com.ortin.gesturetranslator.app.models.DeveloperCardInfo;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,14 +43,14 @@ public class InformationFragment extends Fragment {
     }
 
     private void init() {
-        List<DeveloperCard> cards = new ArrayList<>();
-        cards.add(new DeveloperCard("PavelStalone", "Android developer and ML engineer", R.drawable.pavel_stalone, "https://github.com/PavelStalone", "https://vk.com/pasha_just_pasha"));
-        cards.add(new DeveloperCard("Glebix", "ML engineer, Android and Web developer", R.drawable.glebix, "https://github.com/PoroshinGA", "https://t.me/Glebsobaka"));
-        cards.add(new DeveloperCard("qondeeter", "UI/UX - designer and data engineer", R.drawable.qondeeter, "https://github.com/kond1ter", "https://t.me/qondeeter"));
-        cards.add(new DeveloperCard("Sova", "UI/UX - writer, Android developer and data engineer", R.drawable.sova, "https://github.com/N1kySSS", "https://vk.com/sova___666"));
-        cards.add(new DeveloperCard("Sever", "Teach lead and mentor", R.drawable.sever, "https://github.com/jacksever", "https://t.me/jasever"));
-        cards.add(new DeveloperCard("LittlePony00", "Android developer", R.drawable.little_pony00, "https://github.com/LittlePony00", "https://t.me/littlepony01"));
-        cards.add(new DeveloperCard("AccessAndrei", "ML engineer", R.drawable.access_andrei, "https://github.com/AccessAndrei", "https://t.me/AxAndrei"));
+        List<DeveloperCardInfo> cards = new ArrayList<>();
+        cards.add(new DeveloperCardInfo("PavelStalone", "Android developer and ML engineer", R.drawable.pavel_stalone, "https://github.com/PavelStalone", "https://vk.com/pasha_just_pasha"));
+        cards.add(new DeveloperCardInfo("Glebix", "ML engineer, Android and Web developer", R.drawable.glebix, "https://github.com/PoroshinGA", "https://t.me/PoroshinG"));
+        cards.add(new DeveloperCardInfo("qondeeter", "UI/UX - designer and data engineer", R.drawable.qondeeter, "https://github.com/kond1ter", "https://t.me/qondeeter"));
+        cards.add(new DeveloperCardInfo("Sova", "UI/UX - writer, Android developer and data engineer", R.drawable.sova, "https://github.com/N1kySSS", "https://vk.com/sova___666"));
+        cards.add(new DeveloperCardInfo("Sever", "Teach lead and mentor", R.drawable.sever, "https://github.com/jacksever", "https://t.me/jasever"));
+        cards.add(new DeveloperCardInfo("LittlePony00", "Android developer", R.drawable.little_pony00, "https://github.com/LittlePony00", "https://t.me/littlepony01"));
+        cards.add(new DeveloperCardInfo("AccessAndrei", "ML engineer", R.drawable.access_andrei, "https://github.com/AccessAndrei", "https://t.me/AxAndrei"));
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext()){
             @Override
