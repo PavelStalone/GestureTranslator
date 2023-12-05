@@ -1,6 +1,6 @@
-package com.ortin.gesturetranslator.feature.presentation.navigation
+package com.ortin.gesturetranslator.ui.navigation
 
-import javax.annotation.concurrent.Immutable
+import androidx.compose.runtime.Immutable
 
 /**
  * Sealed class representing the different authentication screens in the app

@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.ortin.gesturetranslator.feature.presentation.navigation.MainApplicationScreenFlow
+import com.ortin.gesturetranslator.ui.navigation.MainApplicationScreenFlow
 import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
 
 @Composable
