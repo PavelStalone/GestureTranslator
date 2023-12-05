@@ -11,14 +11,17 @@ import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.RedirectResponseException
 import io.ktor.client.plugins.ServerResponseException
-import io.ktor.client.request.header
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
+import io.ktor.http.HttpHeaders
 import io.ktor.http.URLProtocol
 import io.ktor.http.contentType
+import io.ktor.http.headers
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import timber.log.Timber
 
 /**
@@ -34,29 +37,31 @@ interface AutoCorrectDataSource {
      * @return network response of CorrectedTextModel
      */
     suspend fun correctText(
-        model: RecognizedTextModel,
+        model: Map<String, RecognizedTextModel>,
         token: String
     ): NetworkResponse<CorrectedTextModel>
 }
 
 class AutoCorrectDataSourceImpl(
     private val client: HttpClient,
-    @EndpointUrl("Portal") private val portalHost: String,
+    @EndpointUrl("HuggingFace") private val huggingFaceHost: String,
     @Dispatcher(GtDispatchers.IO) private val dispatcher: CoroutineDispatcher
 ) : AutoCorrectDataSource {
     override suspend fun correctText(
-        model: RecognizedTextModel,
+        model: Map<String, RecognizedTextModel>,
         token: String
     ) = withContext(dispatcher) {
         return@withContext try {
             client.post {
                 url {
-                    host = portalHost
+                    host = huggingFaceHost
                     protocol = URLProtocol.HTTPS
                     contentType(ContentType.Application.Json)
                 }
-                header("Authorization", "Bearer $token")
-                setBody(model)
+                headers {
+                    append("Authorization", "Bearer $token")
+                }
+                setBody(Json.encodeToString(model))
             }.let { response ->
                 Timber.d("Response %s", response)
                 NetworkResponse.Success(response.body<CorrectedTextModel>())
