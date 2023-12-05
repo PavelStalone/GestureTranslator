@@ -59,5 +59,10 @@ gradlePlugin {
             id = "com.ortin.gesturetranslator.android.camera"
             implementationClass = "AndroidCameraXConventionPlugin"
         }
+
+        register("androidKtor") {
+            id = "com.ortin.gesturetranslator.android.ktor"
+            implementationClass = "AndroidKtorConventionPlugin"
+        }
     }
 }
