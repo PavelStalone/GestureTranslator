@@ -1,5 +1,6 @@
 package com.ortin.gesturetranslator.network.di
 
+import com.ortin.gesturetranslator.network.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,9 +17,12 @@ annotation class EndpointUrl(val qualifier: String)
 @InstallIn(SingletonComponent::class)
 object NetworkEndpointsModule {
 
+    @Provides
     @Singleton
     @Named("HuggingFace")
-    @Provides
-    fun provideHuggingFaceHost(): String = "https://api-inference.huggingface.co/models/AccessAndrei/tired"
+    fun provideHuggingFaceHost(): String = "api-inference.huggingface.co"
 
+    @Provides
+    @Singleton
+    fun provideInferenceToken(): String = BuildConfig.INFERENCE_TOKEN
 }

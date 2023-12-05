@@ -14,14 +14,12 @@ import io.ktor.client.plugins.ServerResponseException
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
-import io.ktor.http.HttpHeaders
 import io.ktor.http.URLProtocol
 import io.ktor.http.contentType
 import io.ktor.http.headers
+import io.ktor.http.path
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import timber.log.Timber
 
 /**
@@ -33,38 +31,33 @@ interface AutoCorrectDataSource {
      * Method for sending request to switch user's password
      *
      * @param [model] data class, which contains user's current password and new password. Uses the [RecognizedTextModel] data class
-     * @param [token] token for sending request
      * @return network response of CorrectedTextModel
      */
-    suspend fun correctText(
-        model: Map<String, RecognizedTextModel>,
-        token: String
-    ): NetworkResponse<CorrectedTextModel>
+    suspend fun correctText(model: RecognizedTextModel): NetworkResponse<List<CorrectedTextModel>>
 }
 
 class AutoCorrectDataSourceImpl(
+    private val token: String,
     private val client: HttpClient,
     @EndpointUrl("HuggingFace") private val huggingFaceHost: String,
     @Dispatcher(GtDispatchers.IO) private val dispatcher: CoroutineDispatcher
 ) : AutoCorrectDataSource {
-    override suspend fun correctText(
-        model: Map<String, RecognizedTextModel>,
-        token: String
-    ) = withContext(dispatcher) {
+    override suspend fun correctText(model: RecognizedTextModel) = withContext(dispatcher) {
         return@withContext try {
             client.post {
                 url {
                     host = huggingFaceHost
                     protocol = URLProtocol.HTTPS
                     contentType(ContentType.Application.Json)
+                    path("models", "AccessAndrei", "tired")
                 }
                 headers {
                     append("Authorization", "Bearer $token")
                 }
-                setBody(Json.encodeToString(model))
+                setBody(model)
             }.let { response ->
                 Timber.d("Response %s", response)
-                NetworkResponse.Success(response.body<CorrectedTextModel>())
+                NetworkResponse.Success(response.body<List<CorrectedTextModel>>())
             }
         } catch (exception: Exception) {
             when (exception) {

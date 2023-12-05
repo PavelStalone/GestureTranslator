@@ -68,7 +68,6 @@ object NetworkModule {
         }
     }
 
-
     @Module
     @InstallIn(SingletonComponent::class)
     interface NetworkBinds {
