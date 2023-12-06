@@ -1,4 +1,4 @@
-package com.ortin.gesturetranslator.ui.screens
+package com.ortin.gesturetranslator.ui.screens.main
 
 import android.graphics.Bitmap
 import androidx.compose.animation.AnimatedVisibility

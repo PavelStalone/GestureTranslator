@@ -71,6 +71,11 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
     /**
+     * Navigation dependencies
+     */
+    implementation(libs.androidx.navigation.compose)
+
+    /**
      *  Module dependencies
      */
     implementation(project(":domain"))
