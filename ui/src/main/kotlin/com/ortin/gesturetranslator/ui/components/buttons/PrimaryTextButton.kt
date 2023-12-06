@@ -2,7 +2,6 @@ package com.ortin.gesturetranslator.ui.components.buttons
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -13,7 +12,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
@@ -41,7 +39,7 @@ fun PrimaryTextButton(
         enabled = isEnabled,
         contentPadding = PaddingValues(
             vertical = localDimensions.verticalSmall,
-            horizontal = localDimensions.horizontalMedium
+            horizontal = localDimensions.horizontalPreLarge
         ),
         shape = RoundedCornerShape(size = localDimensions.buttonsCornerRadius),
         colors = ButtonDefaults.buttonColors(
@@ -53,40 +51,38 @@ fun PrimaryTextButton(
     ) {
         val spacerModifier = Modifier.weight(0.5f)
 
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            leftIcon?.let {
-                Icon(
-                    imageVector = it,
-                    contentDescription = null,
-                )
-                Spacer(modifier = spacerModifier)
-            }
-            leftIconId?.let {
-                Icon(
-                    painter = painterResource(id = it),
-                    contentDescription = null
-                )
-                Spacer(modifier = spacerModifier)
-            }
-            Text(
-                text = text,
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.titleMedium
+        leftIcon?.let {
+            Icon(
+                imageVector = it,
+                contentDescription = null
             )
-            rightIcon?.let {
-                Spacer(modifier = spacerModifier)
-                Icon(
-                    imageVector = it,
-                    contentDescription = null
-                )
-            }
-            rightIconId?.let {
-                Spacer(modifier = spacerModifier)
-                Icon(
-                    painter = painterResource(id = it),
-                    contentDescription = null
-                )
-            }
+            Spacer(modifier = spacerModifier)
+        }
+        leftIconId?.let {
+            Icon(
+                painter = painterResource(id = it),
+                contentDescription = null
+            )
+            Spacer(modifier = spacerModifier)
+        }
+        Text(
+            text = text,
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.titleMedium
+        )
+        rightIcon?.let {
+            Spacer(modifier = spacerModifier)
+            Icon(
+                imageVector = it,
+                contentDescription = null
+            )
+        }
+        rightIconId?.let {
+            Spacer(modifier = spacerModifier)
+            Icon(
+                painter = painterResource(id = it),
+                contentDescription = null
+            )
         }
     }
 }
