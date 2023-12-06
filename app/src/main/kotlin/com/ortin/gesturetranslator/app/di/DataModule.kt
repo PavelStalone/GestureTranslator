@@ -1,9 +1,11 @@
 package com.ortin.gesturetranslator.app.di
 
 import com.ortin.gesturetranslator.data.repository.SettingsRepositoryImpl
+import com.ortin.gesturetranslator.data.repository.UserRepositoryImpl
 import com.ortin.gesturetranslator.data.storage.SettingsStorage
 import com.ortin.gesturetranslator.data.storage.SharedPrefSettingsStorage
 import com.ortin.gesturetranslator.domain.repository.SettingsRepository
+import com.ortin.gesturetranslator.domain.repository.UserRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,7 +14,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface DataModuleBind {
+interface DataModule {
     @Binds
     @Singleton
     fun bindSettingsStorage(sharedPrefSettingsStorage: SharedPrefSettingsStorage): SettingsStorage
@@ -20,4 +22,8 @@ interface DataModuleBind {
     @Binds
     @Singleton
     fun bindSettingsRepository(impl: SettingsRepositoryImpl): SettingsRepository
+
+    @Binds
+    @Singleton
+    fun bindUserRepository(impl: UserRepositoryImpl): UserRepository
 }
