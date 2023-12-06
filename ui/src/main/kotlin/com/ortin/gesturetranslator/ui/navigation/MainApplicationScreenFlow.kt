@@ -18,7 +18,6 @@ fun MainApplicationScreenFlow(
         navController = navController,
         startDestination = MainApplicationScreenRoutes.MainScreenRoutes.route
     ) {
-
         /**
          * Main screen for gesture translation
          */
