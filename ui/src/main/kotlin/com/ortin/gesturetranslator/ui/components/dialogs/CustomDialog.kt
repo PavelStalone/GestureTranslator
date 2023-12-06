@@ -18,6 +18,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -29,29 +30,40 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import androidx.compose.ui.window.DialogWindowProvider
+import com.ortin.gesturetranslator.ui.R
 import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 
 @Composable
 fun CustomDialog(
+    modifier: Modifier = Modifier,
     showDialog: Boolean,
     onDismissRequest: () -> Unit,
     content: @Composable () -> Unit
 ) {
-    val dimensions = LocalDimensions.current
-    val shadowSize = 8.dp
-    val dialogWidth = 300.dp
+    var showAnimatedDialog by remember { mutableStateOf(false) }
 
-    if (showDialog) {
+    LaunchedEffect(showDialog) {
+        if (showDialog) showAnimatedDialog = true
+    }
+
+    if (showAnimatedDialog) {
         Dialog(
             onDismissRequest = onDismissRequest,
             properties = DialogProperties(
                 usePlatformDefaultWidth = false
             )
         ) {
+            (LocalView.current.parent as? DialogWindowProvider)?.window?.let { window ->
+                window.setDimAmount(0f)
+                window.setWindowAnimations(-1)
+            }
+
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
@@ -61,7 +73,7 @@ fun CustomDialog(
                 LaunchedEffect(Unit) { animateIn = true }
 
                 AnimatedVisibility(
-                    visible = animateIn,
+                    visible = showDialog && animateIn,
                     enter = fadeIn(),
                     exit = fadeOut()
                 ) {
@@ -74,7 +86,7 @@ fun CustomDialog(
                 }
 
                 AnimatedVisibility(
-                    visible = animateIn,
+                    visible = showDialog && animateIn,
                     enter = fadeIn(spring(stiffness = Spring.StiffnessHigh)) + scaleIn(
                         initialScale = .8f,
                         animationSpec = spring(
@@ -85,15 +97,16 @@ fun CustomDialog(
                     exit = slideOutVertically { it / 8 } + fadeOut() + scaleOut(targetScale = .95f)
                 ) {
                     Box(
-                        Modifier
-                            .pointerInput(Unit) { detectTapGestures { } }
-                            .shadow(shadowSize, shape = RoundedCornerShape(dimensions.horizontalMedium))
-                            .width(dialogWidth)
-                            .clip(RoundedCornerShape(dimensions.horizontalMedium))
-                            .background(MaterialTheme.colorScheme.surface),
+                        modifier = modifier,
                         contentAlignment = Alignment.Center
                     ) {
                         content()
+                    }
+
+                    DisposableEffect(Unit) {
+                        onDispose {
+                            showAnimatedDialog = false
+                        }
                     }
                 }
             }
@@ -105,8 +118,17 @@ fun CustomDialog(
 @Composable
 fun CustomDialogPreview() {
     var showDialog by remember { mutableStateOf(false) }
+    val dimensions = LocalDimensions.current
+    val shadowSize = 8.dp
+    val dialogWidth = 300.dp
 
     CustomDialog(
+        modifier = Modifier
+            .pointerInput(Unit) { detectTapGestures { } }
+            .shadow(shadowSize, shape = RoundedCornerShape(dimensions.horizontalMedium))
+            .width(dialogWidth)
+            .clip(RoundedCornerShape(dimensions.horizontalMedium))
+            .background(MaterialTheme.colorScheme.surface),
         showDialog = showDialog,
         onDismissRequest = { showDialog = false }
     ) {
@@ -115,6 +137,7 @@ fun CustomDialogPreview() {
             description = "Your phone will be destroy in 5 seconds. Sorry :)",
             cancelButtonText = "Cancel",
             onConfirmButtonClick = { showDialog = false },
+            icon = R.drawable.icon_ortin_logo_without_text,
             onDismissRequest = { showDialog = false }
         )
     }

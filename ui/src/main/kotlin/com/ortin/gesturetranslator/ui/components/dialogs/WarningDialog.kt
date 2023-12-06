@@ -1,5 +1,6 @@
 package com.ortin.gesturetranslator.ui.components.dialogs
 
+import androidx.annotation.DrawableRes
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
@@ -33,12 +34,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 
 @Composable
 fun WarningDialog(
+    @DrawableRes icon: Int,
     title: String = "What",
     description: String? = null,
     cancelButtonText: String? = null,
@@ -77,7 +81,7 @@ fun WarningDialog(
                 contentAlignment = Alignment.Center,
             ) {
                 Image(
-                    imageVector = Icons.Rounded.Warning,
+                    painter = painterResource(id = icon),
                     contentDescription = null
                 )
             }
@@ -106,22 +110,19 @@ fun WarningDialog(
             modifier = Modifier.height(IntrinsicSize.Min)
         ) {
             cancelButtonText?.let {
-                Box(
+                Text(
                     modifier = Modifier
-                        .padding(dimensions.verticalTiny)
-                        .clip(RoundedCornerShape(dimensions.verticalTiny))
+                        .padding(dimensions.horizontalMedium)
+                        .clip(RoundedCornerShape(dimensions.horizontalTiny))
                         .weight(1f)
-                        .clickable { onDismissRequest() }
+                        .clickable { onConfirmButtonClick() }
                         .padding(vertical = dimensions.verticalStandardPlus),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = it,
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                }
+                    textAlign = TextAlign.Center,
+                    text = it,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
 
                 Box(
                     modifier = Modifier
@@ -135,22 +136,19 @@ fun WarningDialog(
                 )
             }
 
-            Box(
+            Text(
                 modifier = Modifier
-                    .padding(dimensions.horizontalTiny)
+                    .padding(dimensions.horizontalMedium)
                     .clip(RoundedCornerShape(dimensions.horizontalTiny))
                     .weight(1f)
                     .clickable { onConfirmButtonClick() }
                     .padding(vertical = dimensions.verticalStandardPlus),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = confirmButtonText,
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(0xFF0221B6)
-                )
-            }
+                textAlign = TextAlign.Center,
+                text = confirmButtonText,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary
+            )
         }
     }
 }
