@@ -21,7 +21,7 @@ fun RecognizedLetter(
 ) {
     Box(
         modifier = modifier
-            .clip(shape = MaterialTheme.shapes.extraLarge)
+            .clip(shape = MaterialTheme.shapes.medium)
             .background(MaterialTheme.colorScheme.primary),
         contentAlignment = Alignment.Center
     ) {
