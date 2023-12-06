@@ -17,6 +17,7 @@ dependencies {
      * Modules implementations
      */
     implementation(project(":domain"))
+    implementation(project(":ui"))
 
     /**
      * Navigation dependencies

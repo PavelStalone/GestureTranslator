@@ -1,4 +1,4 @@
-package com.ortin.gesturetranslator.ui.navigation
+package com.ortin.gesturetranslator.main.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

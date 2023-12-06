@@ -1,4 +1,4 @@
-package com.ortin.gesturetranslator.ui.screens
+package com.ortin.gesturetranslator.auth.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

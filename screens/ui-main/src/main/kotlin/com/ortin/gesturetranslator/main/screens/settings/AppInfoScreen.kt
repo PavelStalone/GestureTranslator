@@ -1,4 +1,4 @@
-package com.ortin.gesturetranslator.ui.screens
+package com.ortin.gesturetranslator.main.screens.settings
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 import com.ortin.gesturetranslator.ui.R
 import com.ortin.gesturetranslator.ui.components.buttons.PrimaryTextButton
 import com.ortin.gesturetranslator.ui.components.cards.DeveloperCard
-import com.ortin.gesturetranslator.ui.screens.models.DeveloperCardInfo
+import com.ortin.gesturetranslator.ui.models.DeveloperCardInfo
 import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
 import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 import timber.log.Timber
