@@ -16,52 +16,43 @@ fun MainApplicationScreenFlow(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = MainApplicationScreen.MainScreen.route
+        startDestination = MainApplicationScreenRoutes.MainScreenRoutes.route
     ) {
 
         /**
          * Main screen for gesture translation
          */
         composable(
-            route = MainApplicationScreen.MainScreen.route
+            route = MainApplicationScreenRoutes.MainScreenRoutes.route
         ) {
             //TODO: add MainScreen
         }
 
         /**
-         * App info screen to view all developers and major information about app
+         * Gallery screen to translate a gesture from an image
          */
         composable(
-            route = MainApplicationScreen.AppInfoScreen.route
+            route = MainApplicationScreenRoutes.GalleryScreenRoutes.route
         ) {
-            // TODO: add AppInfoScreen
-        }
-
-        /**
-         * Settings screen to fine-tune the application
-         */
-        composable(
-            route = MainApplicationScreen.SettingsScreen.route
-        ) {
-            // TODO: add SettingsScreen
+            //TODO: add MainScreen
         }
 
         /**
          * Gesture list screen to view available gestures
          */
         composable(
-            route = MainApplicationScreen.GestureListScreen.route
+            route = MainApplicationScreenRoutes.GestureListScreenRoutes.route
         ) {
             // TODO: add GestureListScreen
         }
 
         /**
-         * Main menu screen for additional information about app
+         * Settings screen to fine-tune the application
          */
         composable(
-            route = MainApplicationScreen.MenuScreen.route
+            route = MainApplicationScreenRoutes.SettingsScreenRoutes.route
         ) {
-            // TODO: add MainMenuScreen
+            // TODO: add SettingsScreen
         }
     }
 }

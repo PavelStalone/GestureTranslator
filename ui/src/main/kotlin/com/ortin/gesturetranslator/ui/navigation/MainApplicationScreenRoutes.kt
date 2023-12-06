@@ -5,35 +5,30 @@ import androidx.compose.runtime.Immutable
 /**
  * Sealed class representing the different authentication screens in the app
  *
- * @property route Route associated with the screen
+ * @property route route associated with the screen
  */
 @Immutable
-sealed class MainApplicationScreen(val route: String) {
+sealed class MainApplicationScreenRoutes(val route: String) {
 
     /**
      * Main screen for gesture translation
      */
-    data object MainScreen : MainApplicationScreen("MainScreen")
+    data object MainScreenRoutes : MainApplicationScreenRoutes("MainScreen")
+
+    /**
+     * Gallery screen to translate a gesture from an image
+     */
+    data object GalleryScreenRoutes : MainApplicationScreenRoutes("GalleryScreen")
 
     /**
      * Settings screen to fine-tune the application
      */
-    data object SettingsScreen : MainApplicationScreen("Settings")
-
-    /**
-     * App info screen to view all developers and major information about app
-     */
-    data object AppInfoScreen : MainApplicationScreen("AppInfo")
-
-    /**
-     *  Main menu screen to view additional information about app
-     */
-    data object MenuScreen : MainApplicationScreen("MainMenu")
+    data object SettingsScreenRoutes : MainApplicationScreenRoutes("Settings")
 
     /**
      * Gesture list screen to view available gestures
      */
-    data object GestureListScreen : MainApplicationScreen("GestureList")
+    data object GestureListScreenRoutes : MainApplicationScreenRoutes("GestureList")
 
     /**
      * Builds the route string with the provided arguments
