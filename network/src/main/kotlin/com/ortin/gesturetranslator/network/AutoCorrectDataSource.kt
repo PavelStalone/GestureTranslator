@@ -33,7 +33,7 @@ interface AutoCorrectDataSource {
      * @param [model] data class, which contains user's current password and new password. Uses the [RecognizedTextModel] data class
      * @return network response of CorrectedTextModel
      */
-    suspend fun correctText(model: RecognizedTextModel): NetworkResponse<List<CorrectedTextModel>>
+    suspend fun correctText(model: RecognizedTextModel): NetworkResponse<CorrectedTextModel>
 }
 
 class AutoCorrectDataSourceImpl(
@@ -57,7 +57,7 @@ class AutoCorrectDataSourceImpl(
                 setBody(model)
             }.let { response ->
                 Timber.d("Response %s", response)
-                NetworkResponse.Success(response.body<List<CorrectedTextModel>>())
+                NetworkResponse.Success(response.body<CorrectedTextModel>())
             }
         } catch (exception: Exception) {
             when (exception) {
