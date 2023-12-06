@@ -54,7 +54,7 @@ fun PrimaryTextButton(
         leftIcon?.let {
             Icon(
                 imageVector = it,
-                contentDescription = null,
+                contentDescription = null
             )
             Spacer(modifier = spacerModifier)
         }
