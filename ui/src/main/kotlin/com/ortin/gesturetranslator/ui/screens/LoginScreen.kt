@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -70,14 +71,14 @@ fun LoginScreen(
         )
         Spacer(modifier = Modifier.height(localDimensions.verticalMedium))
         PrimaryTextButton(
-            modifier = Modifier.padding(horizontal = localDimensions.horizontalMedium),
+            modifier = Modifier.padding(horizontal = localDimensions.horizontalMedium).fillMaxWidth(),
             text = stringResource(id = R.string.login_button_text),
             onClick = {},
             isEnabled = isLoginButtonEnabled
         )
         Spacer(modifier = Modifier.height(localDimensions.verticalStandard))
         SecondaryTextButton(
-            modifier = Modifier.padding(horizontal = localDimensions.horizontalMedium),
+            modifier = Modifier.padding(horizontal = localDimensions.horizontalMedium).fillMaxWidth(),
             text = stringResource(id = R.string.without_login_button_text),
             onClick = {},
             isEnabled = true

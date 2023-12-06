@@ -2,7 +2,8 @@ package com.ortin.gesturetranslator.ui.components.buttons
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -12,6 +13,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,8 +26,10 @@ fun SecondaryTextButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     isEnabled: Boolean = true,
-    @DrawableRes leftIcon: Int? = null,
-    @DrawableRes rightIcon: Int? = null
+    @DrawableRes leftIconId: Int? = null,
+    @DrawableRes rightIconId: Int? = null,
+    leftIcon: ImageVector? = null,
+    rightIcon: ImageVector? = null
 ) {
     val localDimensions = LocalDimensions.current
 
@@ -33,34 +37,52 @@ fun SecondaryTextButton(
         onClick = onClick,
         modifier = modifier,
         enabled = isEnabled,
-        contentPadding = PaddingValues(vertical = localDimensions.verticalSmall),
+        contentPadding = PaddingValues(
+            vertical = localDimensions.verticalSmall,
+            horizontal = localDimensions.horizontalPreLarge
+        ),
         shape = RoundedCornerShape(size = localDimensions.buttonsCornerRadius),
         colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            containerColor = MaterialTheme.colorScheme.secondary,
             contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
-            disabledContentColor = MaterialTheme.colorScheme.onSurface,
-            disabledContainerColor = MaterialTheme.colorScheme.surface
+            disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
+            disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant
         )
     ) {
-        Row {
-            leftIcon?.let {
-                Icon(
-                    painter = painterResource(id = it),
-                    contentDescription = null
-                )
-            }
-            Text(
-                text = text,
-                modifier = Modifier.weight(1f),
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.titleSmall
+        val spacerModifier = Modifier.weight(0.5f)
+
+        leftIcon?.let {
+            Icon(
+                imageVector = it,
+                contentDescription = null
             )
-            rightIcon?.let {
-                Icon(
-                    painter = painterResource(id = it),
-                    contentDescription = null
-                )
-            }
+            Spacer(modifier = spacerModifier)
+        }
+        leftIconId?.let {
+            Icon(
+                painter = painterResource(id = it),
+                contentDescription = null
+            )
+            Spacer(modifier = spacerModifier)
+        }
+        Text(
+            text = text,
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.titleMedium
+        )
+        rightIcon?.let {
+            Spacer(modifier = spacerModifier)
+            Icon(
+                imageVector = it,
+                contentDescription = null
+            )
+        }
+        rightIconId?.let {
+            Spacer(modifier = spacerModifier)
+            Icon(
+                painter = painterResource(id = it),
+                contentDescription = null
+            )
         }
     }
 }
@@ -69,7 +91,7 @@ fun SecondaryTextButton(
 @Composable
 fun SecondaryTextButtonPreview() {
     GestureTranslatorTheme {
-        Surface {
+        Surface(modifier = Modifier.fillMaxWidth()) {
             SecondaryTextButton(
                 text = "Войти",
                 onClick = {}
