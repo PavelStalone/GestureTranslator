@@ -84,6 +84,8 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":ui"))
     implementation(project(":network"))
+    implementation(project(":screens:ui-auth"))
+    implementation(project(":screens:ui-main"))
 
     /**
      * Github implementations
