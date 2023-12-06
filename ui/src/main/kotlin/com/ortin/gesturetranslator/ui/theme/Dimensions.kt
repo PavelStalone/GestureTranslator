@@ -24,7 +24,7 @@ data class Dimensions(
     val verticalPreExtraLarge: Dp = 80.dp,
     val standardCornerRadius: Dp = 12.dp,
     val buttonsCornerRadius: Dp = 100.dp,
-    val sheetPeekHeight: Dp = 216.dp
+    val sheetPeekHeight: Dp = 110.dp
 )
 
 val LocalDimensions = compositionLocalOf { Dimensions() }

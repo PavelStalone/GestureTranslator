@@ -1,6 +1,10 @@
 package com.ortin.gesturetranslator.ui.screens
 
 import android.graphics.Bitmap
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -15,28 +19,35 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.drawable.toBitmap
 import com.ortin.gesturetranslator.ui.AdaptiveTestPreviews
 import com.ortin.gesturetranslator.ui.R
 import com.ortin.gesturetranslator.ui.components.RecognizedLetter
-import com.ortin.gesturetranslator.ui.components.buttons.PrimaryTextButton
-import com.ortin.gesturetranslator.ui.components.buttons.SecondaryTextButton
+import com.ortin.gesturetranslator.ui.components.buttons.RadioButton
+import com.ortin.gesturetranslator.ui.components.text.ScrollableText
 import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
 import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 import kotlinx.coroutines.launch
+import kotlin.math.max
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -48,6 +59,7 @@ fun MainScreen(
     modifier: Modifier = Modifier
 ) {
     val localDimensions = LocalDimensions.current
+    val density = LocalDensity.current
 
     Box(
         modifier = modifier,
@@ -56,24 +68,37 @@ fun MainScreen(
         val scaffoldState = rememberBottomSheetScaffoldState()
         val coroutineScope = rememberCoroutineScope()
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+        val isBehaviorOnExpanded by remember(scaffoldState) {
+            derivedStateOf { scaffoldState.bottomSheetState.currentValue == SheetValue.Expanded }
+        }
+
+        var sheetSize by remember {
+            mutableStateOf(localDimensions.sheetPeekHeight)
+        }
+        var correctChecked by remember {
+            mutableStateOf(false)
+        }
+        var translateChecked by remember {
+            mutableStateOf(false)
+        }
 
         BottomSheetScaffold(
             modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+            containerColor = MaterialTheme.colorScheme.surface,
             sheetContent = {
-                Text(
+                ScrollableText(
                     modifier = Modifier
                         .padding(horizontal = localDimensions.horizontalPreLarge)
                         .fillMaxSize(),
-                    text = "Моя говорить твоя не понимать что я говорить что твоя не понимать",
-                    style = MaterialTheme.typography.headlineSmall
+                    textState = "Моя говорить твоя не понимать что я говорить что твоя не понимать",
+                    scrollable = !isBehaviorOnExpanded
                 )
             },
             scaffoldState = scaffoldState,
             sheetShape = ShapeDefaults.ExtraLarge.copy(
-                bottomEnd = CornerSize(0.dp),
-                bottomStart = CornerSize(0.dp)
+                bottomEnd = CornerSize(0.dp), bottomStart = CornerSize(0.dp)
             ),
-            sheetPeekHeight = localDimensions.sheetPeekHeight
+            sheetPeekHeight = sheetSize + localDimensions.sheetPeekHeight
         ) { innerPadding ->
             Box(
                 modifier = Modifier
@@ -97,10 +122,12 @@ fun MainScreen(
         }
 
         // Кастомный layout для отрисовки одинакового размера кнопок и расчета адаптивного расположения
-        Layout(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = localDimensions.verticalSmall),
+        Layout(modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = localDimensions.verticalSmall)
+            .onSizeChanged {
+                sheetSize = with(density) { it.height.toDp() }
+            },
             measurePolicy = { measurables, constraints ->
                 val minWidth = measurables.maxOf { it.minIntrinsicWidth(0) }
                 val placeables = measurables.map { measurable ->
@@ -119,13 +146,13 @@ fun MainScreen(
 
                         placeables.forEach { placeable ->
                             placeable.placeRelative(
-                                constraints.maxWidth / 2 - placeable.width / 2,
-                                y
+                                constraints.maxWidth / 2 - placeable.width / 2, y
                             )
                             y += placeable.height
                         }
                     } else {
-                        val offset = (constraints.maxWidth - sumWidhtPlaceables) / placeables.size
+                        val offset =
+                            (constraints.maxWidth - sumWidhtPlaceables) / max(placeables.size, 2)
                         var x = offset
 
                         placeables.forEach { placeable ->
@@ -136,28 +163,38 @@ fun MainScreen(
                 }
             },
             content = {
-                PrimaryTextButton(
+                RadioButton(
                     modifier = Modifier.padding(horizontal = localDimensions.horizontalTiny),
+                    checked = !isBehaviorOnExpanded || translateChecked,
                     text = "Распознавание",
                     onClick = {
                         coroutineScope.launch {
-                            val isExpand =
-                                scaffoldState.bottomSheetState.currentValue == SheetValue.Expanded
-
-                            if (isExpand) {
+                            translateChecked = it
+                            if (it) {
                                 scaffoldState.bottomSheetState.partialExpand()
                             } else {
                                 scaffoldState.bottomSheetState.expand()
                             }
-                            onStatusRecognitionChanged(!isExpand)
+                            onStatusRecognitionChanged(it)
                         }
                     }
                 )
-                SecondaryTextButton(
-                    modifier = Modifier.padding(horizontal = localDimensions.horizontalTiny),
-                    text = "Автоисправление",
-                    onClick = { onStatusCorrectiveChanged(true) } // Нужен toogleButton
-                )
+                AnimatedVisibility(
+                    visible = isBehaviorOnExpanded,
+                    enter = slideInHorizontally { with(density) { 100.dp.roundToPx() } }
+                            + fadeIn(initialAlpha = 0.3f),
+                    exit = slideOutHorizontally { with(density) { 200.dp.roundToPx() } }
+                ) {
+                    RadioButton(
+                        modifier = Modifier.padding(horizontal = localDimensions.horizontalTiny),
+                        checked = correctChecked && isBehaviorOnExpanded,
+                        text = "Автоисправление",
+                        onClick = {
+                            correctChecked = it
+                            onStatusCorrectiveChanged(it)
+                        }
+                    )
+                }
             }
         )
     }
@@ -172,8 +209,11 @@ fun MainScreenPreview() {
                 onStatusCorrectiveChanged = {},
                 onStatusRecognitionChanged = {},
                 image = LocalContext.current.getDrawable(R.drawable.a)
-                    ?.toBitmap(500, 500, Bitmap.Config.ARGB_8888)
-                    ?: Bitmap.createBitmap(500, 500, Bitmap.Config.ARGB_8888),
+                    ?.toBitmap(500, 500, Bitmap.Config.ARGB_8888) ?: Bitmap.createBitmap(
+                    500,
+                    500,
+                    Bitmap.Config.ARGB_8888
+                ),
                 recognizedLetter = "A"
             )
         }
