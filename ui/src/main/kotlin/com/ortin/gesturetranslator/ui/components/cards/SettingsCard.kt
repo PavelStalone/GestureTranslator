@@ -8,12 +8,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
 import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 import com.ortin.gesturetranslator.ui.theme.surfaceContainerLow
 
@@ -33,7 +36,7 @@ fun SettingsCard(
             containerColor = surfaceContainerLow
         )
     ) {
-        Spacer(modifier = Modifier.height(dimensions.verticalStandard))
+        Spacer(modifier = Modifier.height(dimensions.verticalXTiny))
         Row(
             modifier = Modifier.padding(horizontal = dimensions.horizontalMedium),
             verticalAlignment = Alignment.CenterVertically
@@ -46,7 +49,7 @@ fun SettingsCard(
             )
             additionalContent()
         }
-        Spacer(modifier = Modifier.height(dimensions.verticalStandard))
+        Spacer(modifier = Modifier.height(dimensions.verticalXTiny))
         description?.let { text ->
             Text(
                 modifier = Modifier.padding(horizontal = dimensions.horizontalMedium),
@@ -62,10 +65,20 @@ fun SettingsCard(
 @Preview
 @Composable
 fun SettingsCardPreview() {
-    SettingsCard(
-        modifier = Modifier.padding(16.dp),
-        title = "Включить светлую тему",
-        description = "Нажимая на переключатель, Вы меняете основные цвета приложения со светлых на темные и наоборот",
-        additionalContent = {}
-    )
+    GestureTranslatorTheme {
+        SettingsCard(
+            modifier = Modifier.padding(16.dp),
+            title = "Включить светлую тему",
+            description = "Нажимая на переключатель, Вы меняете основные цвета приложения со светлых на темные и наоборот",
+            additionalContent = {
+                Switch(
+                    checked = true,
+                    onCheckedChange = { /* TODO: Handle click */ },
+                    colors = SwitchDefaults.colors(
+                        uncheckedTrackColor = surfaceContainerLow
+                    )
+                )
+            }
+        )
+    }
 }

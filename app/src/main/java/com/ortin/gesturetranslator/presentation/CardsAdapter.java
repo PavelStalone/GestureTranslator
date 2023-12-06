@@ -11,14 +11,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.ortin.gesturetranslator.databinding.DevelopCardItemBinding;
-import com.ortin.gesturetranslator.app.models.DeveloperCard;
+import com.ortin.gesturetranslator.app.models.DeveloperCardInfo;
 import java.util.List;
 
 public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder> {
-    private final List<DeveloperCard> data;
+    private final List<DeveloperCardInfo> data;
     private final Context context;
 
-    public CardsAdapter(List<DeveloperCard> data, Context context) {
+    public CardsAdapter(List<DeveloperCardInfo> data, Context context) {
         this.data = data;
         this.context = context;
     }
@@ -31,7 +31,7 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull CardsAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        DeveloperCard card = data.get(position);
+        DeveloperCardInfo card = data.get(position);
         DevelopCardItemBinding itemBinding = holder.getItemBinding();
 
         itemBinding.name.setText(card.getName());
