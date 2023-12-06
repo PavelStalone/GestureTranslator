@@ -2,6 +2,7 @@
 <resources>
     <string name="limit_of_max_char">%1$d / %2$d</string>
     <string name="login_support_screen">Войдите, чтобы пользоваться\nполным функционалом приложения</string>
+    <string name="not_logged_in_help_text">Вы не вошли в аккаунт приложения, войдите чтобы открыть дополнительный функционал</string>
     <string name="enter_login">Введите логин</string>
     <string name="enter_password">Введите пароль</string>
     <string name="login_button_text">Войти</string>
@@ -13,6 +14,15 @@
     <string name="tg">Telegram</string>
     <string name="vk">Вконтакте</string>
     <string name="email">Почта</string>
+  
+    <string name="main_menu_buy_premium">Приобрести премиум</string>
+    <string name="main_menu_is_premium">Премиум</string>
+    <string name="main_menu_log_in">Войти в аккаунт</string>
+    <string name="main_menu_account_settings">Настройки аккаунта</string>
+    <string name="main_menu_app_settings">Настройки приложения</string>
+    <string name="main_menu_bugreport">Сообщить об ошибке</string>
+    <string name="main_menu_about">О приложении</string>
+
     <string name="developers">Разработчики</string>
     <string name="app_github">https://github.com/PavelStalone/GestureTranslator</string>
     <string name="info_screen_text">
