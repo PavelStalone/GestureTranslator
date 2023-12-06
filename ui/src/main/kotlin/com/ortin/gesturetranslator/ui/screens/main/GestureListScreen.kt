@@ -19,36 +19,36 @@ import com.ortin.gesturetranslator.ui.components.cards.GestureCard
 import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
 import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 
-private val gestureNamesList = listOf<String>(
-    "А",
-    "Б",
-    "В",
-    "Г",
-    "Д",
-    "Е",
-    "Ж",
-    "З",
-    "И",
-    "К",
-    "Л",
-    "М",
-    "Н",
-    "О",
-    "П",
-    "Р",
-    "С",
-    "Т",
-    "У",
-    "Ф",
-    "Х",
-    "Ц",
-    "Ч",
-    "Ш",
-    "Ы",
-    "Ь",
-    "Э",
-    "Ю",
-    "Я"
+val gesturesList = listOf(
+    Gesture("А", R.drawable.a),
+    Gesture("Б", R.drawable.b),
+    Gesture("В", R.drawable.v),
+    Gesture("Г", R.drawable.g),
+    Gesture("Д", R.drawable.d),
+    Gesture("Е", R.drawable.e),
+    Gesture("Ж", R.drawable.zh),
+    Gesture("З", R.drawable.z),
+    Gesture("И", R.drawable.i),
+    Gesture("К", R.drawable.k),
+    Gesture("Л", R.drawable.l),
+    Gesture("М", R.drawable.m),
+    Gesture("Н", R.drawable.n),
+    Gesture("О", R.drawable.o),
+    Gesture("П", R.drawable.p),
+    Gesture("Р", R.drawable.r),
+    Gesture("С", R.drawable.s),
+    Gesture("Т", R.drawable.t),
+    Gesture("У", R.drawable.u),
+    Gesture("Ф", R.drawable.f),
+    Gesture("Х", R.drawable.h),
+    Gesture("Ц", R.drawable.c),
+    Gesture("Ч", R.drawable.ch),
+    Gesture("Ш", R.drawable.sh),
+    Gesture("Ы", R.drawable.bi),
+    Gesture("Ь", R.drawable.soft_sign),
+    Gesture("Э", R.drawable.e),
+    Gesture("Ю", R.drawable.yu),
+    Gesture("Я", R.drawable.ya),
 )
 
 @Composable
@@ -64,10 +64,10 @@ fun GestureListScreen(
         horizontalArrangement = Arrangement.spacedBy(space = localDimensions.horizontalLarge),
         contentPadding = PaddingValues(localDimensions.horizontalLarge)
     ) {
-        items(gestureNamesList) { item ->
+        items(gesturesList) { item ->
             GestureCard(
-                letter = item,
-                imageId = R.drawable.a,
+                letter = item.name,
+                imageId = item.imageId,
                 modifier = Modifier.size(140.dp)
             )
         }
@@ -101,3 +101,8 @@ fun GestureListScreenPreviewDark() {
         }
     }
 }
+
+data class Gesture(
+    val name: String,
+    val imageId: Int
+)
