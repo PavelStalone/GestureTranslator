@@ -11,6 +11,6 @@ interface HandDetectionRepository {
     fun detectImage(image: Bitmap): ImageDetected?
     suspend fun detectVideoFile(videoFile: VideoFileDecode): VideoDetected?
     fun detectLiveStream(image: Bitmap)
-    fun setSettingsModel(settingsMediaPipe: SettingsMediaPipe)
+    suspend fun setSettingsModel(settingsMediaPipe: SettingsMediaPipe)
     fun setMPDetectionListener(detectionHandListener: DetectionHandListener)
 }

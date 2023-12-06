@@ -1,4 +1,4 @@
-package com.ortin.gesturetranslator.feature.presentation
+package com.ortin.gesturetranslator.common.presentation
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

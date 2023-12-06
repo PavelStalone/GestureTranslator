@@ -90,7 +90,7 @@ fun MainScreen(
                     modifier = Modifier
                         .padding(horizontal = localDimensions.horizontalPreLarge)
                         .fillMaxSize(),
-                    textState = "Моя говорить твоя не понимать что я говорить что твоя не понимать",
+                    text = "Моя говорить твоя не понимать что я говорить что твоя не понимать",
                     scrollable = !isBehaviorOnExpanded
                 )
             },

@@ -86,6 +86,7 @@ dependencies {
     implementation(project(":network"))
     implementation(project(":screens:ui-auth"))
     implementation(project(":screens:ui-main"))
+    implementation(project(":common"))
 
     /**
      * Github implementations

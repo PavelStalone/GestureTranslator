@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun ScrollableText(
     modifier: Modifier = Modifier,
-    textState: String,
+    text: String,
     scrollable: Boolean = true,
     textStyle: TextStyle = MaterialTheme.typography.headlineSmall
 ) {
@@ -33,7 +33,7 @@ fun ScrollableText(
             .let {
                 if (scrollable) it.horizontalScroll(textScroll) else it
             },
-        text = textState,
+        text = text,
         style = textStyle
     )
     coroutineScope.launch { textScroll.animateScrollTo(textScroll.maxValue) }
@@ -48,7 +48,7 @@ fun ScrollableTextPreview() {
         }
         Column {
             TextField(value = textState.value, onValueChange = { textState.value = it })
-            ScrollableText(textState = textState.value)
+            ScrollableText(text = textState.value)
         }
     }
 }
