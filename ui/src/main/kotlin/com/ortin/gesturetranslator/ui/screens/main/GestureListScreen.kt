@@ -1,10 +1,11 @@
 package com.ortin.gesturetranslator.ui.screens.main
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -13,11 +14,15 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.ortin.gesturetranslator.ui.R
 import com.ortin.gesturetranslator.ui.components.cards.GestureCard
 import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
 import com.ortin.gesturetranslator.ui.theme.LocalDimensions
+
+data class Gesture(
+    val name: String,
+    val imageId: Int
+)
 
 val gesturesList = listOf(
     Gesture("А", R.drawable.a),
@@ -68,15 +73,16 @@ fun GestureListScreen(
             GestureCard(
                 letter = item.name,
                 imageId = item.imageId,
-                modifier = Modifier.size(140.dp)
+                modifier = Modifier.aspectRatio(1f)
             )
         }
     }
 }
 
 @Preview
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL)
 @Composable
-fun GestureListScreenPreviewLight() {
+fun GestureListScreenPreviewDark() {
     GestureTranslatorTheme {
         Surface {
             GestureListScreen(
@@ -87,22 +93,3 @@ fun GestureListScreenPreviewLight() {
         }
     }
 }
-
-@Preview
-@Composable
-fun GestureListScreenPreviewDark() {
-    GestureTranslatorTheme(darkTheme = true) {
-        Surface {
-            GestureListScreen(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(MaterialTheme.colorScheme.background)
-            )
-        }
-    }
-}
-
-data class Gesture(
-    val name: String,
-    val imageId: Int
-)

@@ -4,7 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -18,7 +18,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.ortin.gesturetranslator.ui.R
 import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
 
@@ -29,7 +28,7 @@ fun GestureCard(
     modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = modifier,
+        modifier = modifier.defaultMinSize(minWidth = 200.dp, minHeight = 200.dp),
         contentAlignment = Alignment.BottomStart
     ) {
         val boxSize = 40.dp
@@ -38,7 +37,7 @@ fun GestureCard(
             painter = painterResource(id = imageId),
             contentDescription = letter,
             modifier = Modifier
-                .fillMaxSize()
+                .matchParentSize()
                 .clip(MaterialTheme.shapes.medium),
             contentScale = ContentScale.Crop
         )
