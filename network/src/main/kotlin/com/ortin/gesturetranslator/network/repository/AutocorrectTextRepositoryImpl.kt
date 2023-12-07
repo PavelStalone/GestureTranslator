@@ -1,5 +1,7 @@
 package com.ortin.gesturetranslator.network.repository
 
+import com.ortin.gesturetranslator.domain.di.Dispatcher
+import com.ortin.gesturetranslator.domain.di.GtDispatchers
 import com.ortin.gesturetranslator.domain.models.CorrectedTextModel
 import com.ortin.gesturetranslator.domain.models.NetworkResponse
 import com.ortin.gesturetranslator.domain.models.RecognizedTextModel
@@ -15,14 +17,21 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.time.Duration.Companion.seconds
 
-class AutocorrectTextRepositoryImpl: AutocorrectTextRepository {
+@Singleton
+class AutocorrectTextRepositoryImpl @Inject constructor (
+    @Dispatcher(GtDispatchers.IO) private val dispatcher: CoroutineDispatcher
+): AutocorrectTextRepository {
     private val json = Json { ignoreUnknownKeys = true }
-    override suspend fun correctText(recognizedTextModel: RecognizedTextModel): NetworkResponse<CorrectedTextModel> {
-        return AutoCorrectDataSourceImpl(
+    override suspend fun correctText(recognizedTextModel: RecognizedTextModel) = withContext(dispatcher) {
+        return@withContext AutoCorrectDataSourceImpl(
             client = HttpClient(OkHttp.create()) {
                 install(ContentNegotiation) { json(json) }
 

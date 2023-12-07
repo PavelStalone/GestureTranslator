@@ -12,7 +12,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class CorrectTextUseCase @Inject constructor(
     private val autocorrectTextRepository: AutocorrectTextRepository,
     @Dispatcher(GtDispatchers.IO) private val dispatcher: CoroutineDispatcher
