@@ -43,6 +43,7 @@ import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 @Composable
 fun WarningDialog(
     @DrawableRes icon: Int,
+    modifier: Modifier = Modifier,
     title: String = "What",
     description: String? = null,
     cancelButtonText: String? = null,
@@ -54,7 +55,7 @@ fun WarningDialog(
     val brushHeight = 150.dp
     val dividerWidth = 2.dp
 
-    Column(Modifier.background(MaterialTheme.colorScheme.surface)) {
+    Column(modifier = modifier) {
         var contentVisible by remember { mutableStateOf(false) }
 
         LaunchedEffect(Unit) { contentVisible = true }
