@@ -30,7 +30,7 @@ data class MainTranslatorScreenState(
         fun initial() = MainTranslatorScreenState(
             image = Bitmap.createBitmap(200, 200, Bitmap.Config.ARGB_8888),
             recognizedLetter = "",
-            translatedText = "",
+            translatedText = "Чтобы начать перевод, опустите шторку или нажмите на кнопку распознавания",
             showDialogLoader = true,
             descriptionLoaderDialog = "Идет настройка переводчика"
         )

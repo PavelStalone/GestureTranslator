@@ -10,8 +10,12 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
@@ -19,9 +23,12 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.Navigation.findNavController
+import androidx.navigation.compose.rememberNavController
 import com.ortin.gesturetranslator.R
 import com.ortin.gesturetranslator.databinding.ActivityMainBinding
 import com.ortin.gesturetranslator.domain.managers.SettingsManager
+import com.ortin.gesturetranslator.main.components.navbar.BottomNavigationBar
+import com.ortin.gesturetranslator.main.components.navbar.navigationBarItems
 import com.ortin.gesturetranslator.main.navigation.MainApplicationScreenFlow
 import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,32 +41,18 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var saveSettingsManager: SettingsManager
 
-    private lateinit var binding: ActivityMainBinding
-
     private lateinit var mGetContent: ActivityResultLauncher<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        binding = ActivityMainBinding.inflate(layoutInflater)
+        if (saveSettingsManager.getSettings().theme) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
         registerPermission()
         checkPermission()
-
-//        if (saveSettingsManager.getSettings().theme) {
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-//        } else {
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-//        }
-//        setContentView(binding.root)
-//
-//        hideTopBarAndLockDrawer()
-    }
-
-    override fun onStart() {
-        super.onStart()
-//        setUpBackPressedDispatcher()
-//        setUpDestinationChangedListener()
-//        setUpDrawerMenuButtonClickListener()
-//        setUpNavigationItemSelectedListener()
     }
 
     private fun registerPermission() {
@@ -84,116 +77,26 @@ class MainActivity : AppCompatActivity() {
         } else {
             setContent {
                 GestureTranslatorTheme {
-                    MainApplicationScreenFlow(Modifier.fillMaxSize())
-                }
-            }
-        }
-    }
+                    val navController = rememberNavController()
 
-    private fun setUpBackPressedDispatcher() {
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                val previousBackStackEntry =
-                    findNavController(binding.navHostFragment).previousBackStackEntry
-                Timber.d("onBackPressed: previousEntry = %s", previousBackStackEntry)
-
-                if (previousBackStackEntry == null) {
-                    finish()
-                } else {
-                    findNavController(binding.navHostFragment).popBackStack()
-                }
-            }
-        })
-    }
-
-    private fun setUpDestinationChangedListener() {
-        findNavController(binding.navHostFragment).addOnDestinationChangedListener(
-            object : NavController.OnDestinationChangedListener {
-                override fun onDestinationChanged(
-                    controller: NavController,
-                    destination: NavDestination,
-                    arguments: Bundle?
-                ) {
-                    Timber.d("onDestinationChanged: ${destination.label}")
-                    if (destination.id != R.id.logotypeFragment) {
-                        showTopBarAndUnlockDrawer()
-                        controller.removeOnDestinationChangedListener(this)
+                    Scaffold(
+                        bottomBar = {
+                            BottomNavigationBar(
+                                items = navigationBarItems,
+                                navController = navController
+                            )
+                        }
+                    ) {
+                        MainApplicationScreenFlow(
+                            modifier = Modifier
+                                .padding(it)
+                                .fillMaxSize(),
+                            navController = navController
+                        )
                     }
                 }
             }
-        )
-    }
-
-    private fun setUpDrawerMenuButtonClickListener() {
-        binding.topBar.menuBtn.setOnClickListener {
-            if (binding.drawerLayoutId.isOpen) {
-                binding.drawerLayoutId.close()
-            } else {
-                binding.drawerLayoutId.open()
-            }
         }
-    }
-
-    private fun setUpNavigationItemSelectedListener() {
-        binding.menuNavigationView.setNavigationItemSelectedListener { item: MenuItem ->
-            val controller = findNavController(binding.navHostFragment)
-            if (item.itemId != controller.currentDestination?.id) {
-                when (item.itemId) {
-                    R.id.mainFragment -> controller.navigate(R.id.mainFragment)
-
-                    R.id.gestureListFragment -> navigateWithMainFragmentCheck(
-                        controller,
-                        R.id.action_mainFragment_to_gestureListFragment,
-                        R.id.gestureListFragment
-                    )
-
-                    R.id.settingsFragment -> navigateWithMainFragmentCheck(
-                        controller,
-                        R.id.action_mainFragment_to_settingsFragment,
-                        R.id.settingsFragment
-                    )
-
-                    R.id.informationFragment -> navigateWithMainFragmentCheck(
-                        controller,
-                        R.id.action_mainFragment_to_informationFragment,
-                        R.id.informationFragment
-                    )
-
-                    R.id.bugReportFragment -> openBugReportForm()
-                }
-                binding.drawerLayoutId.close()
-                return@setNavigationItemSelectedListener true
-            }
-            false
-        }
-    }
-
-    private fun hideTopBarAndLockDrawer() {
-        with(binding) {
-            topBar.root.isVisible = false
-            drawerLayoutId.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-        }
-    }
-
-    private fun showTopBarAndUnlockDrawer() {
-        with(binding) {
-            topBar.root.isVisible = true
-            drawerLayoutId.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-        }
-    }
-
-    private fun navigateWithMainFragmentCheck(
-        controller: NavController,
-        actionFromMain: Int,
-        destinationId: Int
-    ) {
-        controller.navigate(
-            if (controller.currentDestination?.id == R.id.mainFragment) {
-                actionFromMain
-            } else {
-                destinationId
-            }
-        )
     }
 
     private fun openBugReportForm() {

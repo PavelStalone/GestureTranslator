@@ -3,6 +3,7 @@ package com.ortin.gesturetranslator.main.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -11,9 +12,9 @@ import com.ortin.gesturetranslator.main.viewmodel.MainTranslatorViewModel
 
 @Composable
 fun MainApplicationScreenFlow(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavHostController = rememberNavController()
 ) {
-    val navController = rememberNavController()
     val mainScreenViewModel: MainTranslatorViewModel = hiltViewModel()
     // TODO: add view models
 
@@ -37,7 +38,7 @@ fun MainApplicationScreenFlow(
         composable(
             route = MainApplicationScreenRoutes.GalleryScreenRoutes.route
         ) {
-            //TODO: add MainScreen
+            // TODO: add MainScreen
         }
 
         /**
