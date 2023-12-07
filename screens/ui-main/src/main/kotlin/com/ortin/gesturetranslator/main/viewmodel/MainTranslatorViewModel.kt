@@ -22,6 +22,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -38,7 +39,7 @@ class MainTranslatorViewModel @Inject constructor(
     override val state: StateFlow<MainTranslatorScreenState>
         get() = reducer.state
 
-    private lateinit var lifecycleOwner: LifecycleOwner
+    private var lifecycleOwner: LifecycleOwner? = null
     private var oldMediaPipeSettings: SettingsDomain = SettingsDomain()
     private var coroutineContext: CoroutineContext? = null
 
@@ -64,14 +65,19 @@ class MainTranslatorViewModel @Inject constructor(
     }
 
     private fun startTranslating() {
-        coroutineContext = viewModelScope.launch {
-            worldCompileManager.clearState() // Стираем собранный текст
-            combine(
-                mediaPipeManager.flow,
-                cameraManager.startListening(lifecycleOwner)
-                    .onEach { mediaPipeManager.detectLiveStream(it.bitmap) },
-                ::mergeSources
-            ).collect(::sendEvent)
+        lifecycleOwner?.let {lifecycleOwner ->
+            coroutineContext = viewModelScope.launch {
+                worldCompileManager.clearState() // Стираем собранный текст
+                combine(
+                    mediaPipeManager.flow,
+                    cameraManager.startListening(lifecycleOwner)
+                        .onEach { mediaPipeManager.detectLiveStream(it.bitmap) },
+                    ::mergeSources
+                ).collect(::sendEvent)
+            }
+        } ?: {
+            Timber.e("LifeCycleOwner is null")
+            // Todo use Warning dialog
         }
     }
 
