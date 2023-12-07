@@ -14,6 +14,7 @@ import io.ktor.client.plugins.ServerResponseException
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
+import io.ktor.http.HttpHeaders
 import io.ktor.http.URLProtocol
 import io.ktor.http.contentType
 import io.ktor.http.headers
@@ -33,7 +34,7 @@ interface AutoCorrectDataSource {
      * @param [model] data class, which contains user's current password and new password. Uses the [RecognizedTextModel] data class
      * @return network response of CorrectedTextModel
      */
-    suspend fun correctText(model: RecognizedTextModel): NetworkResponse<List<CorrectedTextModel>>
+    suspend fun correctText(model: RecognizedTextModel): NetworkResponse<CorrectedTextModel>
 }
 
 class AutoCorrectDataSourceImpl(
@@ -52,12 +53,12 @@ class AutoCorrectDataSourceImpl(
                     path("models", "AccessAndrei", "tired")
                 }
                 headers {
-                    append("Authorization", "Bearer $token")
+                    append(HttpHeaders.Authorization, "Bearer $token")
                 }
                 setBody(model)
             }.let { response ->
                 Timber.d("Response %s", response)
-                NetworkResponse.Success(response.body<List<CorrectedTextModel>>())
+                NetworkResponse.Success(response.body<List<CorrectedTextModel>>()[0])
             }
         } catch (exception: Exception) {
             when (exception) {
