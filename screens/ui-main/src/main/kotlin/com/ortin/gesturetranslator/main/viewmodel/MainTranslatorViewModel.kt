@@ -15,15 +15,17 @@ import com.ortin.gesturetranslator.domain.models.SettingsMediaPipe
 import com.ortin.gesturetranslator.domain.usecases.RecognizeCoordinateUseCase
 import com.ortin.gesturetranslator.main.MainTranslatorScreenIntent
 import com.ortin.gesturetranslator.main.MainTranslatorScreenState
+import com.ortin.gesturetranslator.main.components.PaintHand.drawHand
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
+@HiltViewModel
 class MainTranslatorViewModel @Inject constructor(
     private val cameraManager: CameraInputManager,
     private val worldCompileManager: WorldCompileManager,
@@ -33,12 +35,12 @@ class MainTranslatorViewModel @Inject constructor(
 ) : ViewModel<MainTranslatorScreenState, MainTranslatorScreenIntent>() {
 
     private val reducer = MainTranslatorReducer(MainTranslatorScreenState.initial())
-    override val state: Flow<MainTranslatorScreenState>
+    override val state: StateFlow<MainTranslatorScreenState>
         get() = reducer.state
 
     private lateinit var lifecycleOwner: LifecycleOwner
     private var oldMediaPipeSettings: SettingsDomain = SettingsDomain()
-    private lateinit var coroutineContext: CoroutineContext
+    private var coroutineContext: CoroutineContext? = null
 
     private fun sendEvent(event: MainTranslatorScreenIntent) {
         reducer.sendIntent(event)
@@ -63,20 +65,18 @@ class MainTranslatorViewModel @Inject constructor(
 
     private fun startTranslating() {
         coroutineContext = viewModelScope.launch {
-            cameraManager.startListening(lifecycleOwner)
-                .onEach { mediaPipeManager.detectLiveStream(it.bitmap) }.collect()
-
-            val intentFlow: Flow<MainTranslatorScreenIntent> = combine(
+            worldCompileManager.clearState() // Стираем собранный текст
+            combine(
                 mediaPipeManager.flow,
                 cameraManager.startListening(lifecycleOwner)
                     .onEach { mediaPipeManager.detectLiveStream(it.bitmap) },
                 ::mergeSources
-            )
+            ).collect(::sendEvent)
         }
     }
 
     private fun stopTranslating() {
-        coroutineContext.cancel()
+        coroutineContext?.cancel()
     }
 
     fun onTranslatingStatusChanged(status: Boolean) {
@@ -88,9 +88,10 @@ class MainTranslatorViewModel @Inject constructor(
                             description = "Идет настройка переводчика"
                         )
                     )
-
                     oldMediaPipeSettings = settingsManager.getSettings()
                     changeMediaPipeSettings()
+                }.invokeOnCompletion {
+                    startTranslating()
                 }
             } else {
                 startTranslating()
@@ -101,7 +102,7 @@ class MainTranslatorViewModel @Inject constructor(
     }
 
     fun onTextCorrectedStatusChanged(status: Boolean) {
-
+        // Todo correctedText useCase
     }
 
     fun bindLifeCycle(lifecycleOwner: LifecycleOwner) {
@@ -110,9 +111,9 @@ class MainTranslatorViewModel @Inject constructor(
 
     private fun mergeSources(
         imageDetected: ImageDetected?,
-        image: Image?
+        image: Image
     ): MainTranslatorScreenIntent {
-        val bitmap = image?.bitmap
+        val bitmap = image.bitmap
 
         val coordinateClassification = imageDetected?.let {
             recognizeCoordinateUseCase(imageDetected)
@@ -124,13 +125,10 @@ class MainTranslatorViewModel @Inject constructor(
         }
         val currentWord = worldCompileManager.getWord()
 
-
-
-        return PredictState(
-            imageFromCamera = bitmap,
-            predictWord = currentWord,
-            predictLetter = predictLetter,
-            coordinateHand = coordinate
+        return MainTranslatorScreenIntent.ChangeAll(
+            image = if (coordinate != null) bitmap.drawHand(coordinate) else bitmap,
+            letter = predictLetter,
+            textTranslation = currentWord
         )
     }
 
@@ -160,13 +158,26 @@ class MainTranslatorViewModel @Inject constructor(
 
                 is MainTranslatorScreenIntent.StartLoaderDialog -> {
                     setState(
-                        oldState.copy(showDialogLoader = true, descriptionLoaderDialog = intent.description)
+                        oldState.copy(
+                            showDialogLoader = true,
+                            descriptionLoaderDialog = intent.description
+                        )
                     )
                 }
 
                 MainTranslatorScreenIntent.StopLoaderDialog -> {
                     setState(
                         oldState.copy(showDialogLoader = false)
+                    )
+                }
+
+                is MainTranslatorScreenIntent.ChangeAll -> {
+                    setState(
+                        oldState.copy(
+                            image = intent.image,
+                            recognizedLetter = intent.letter,
+                            translatedText = intent.textTranslation
+                        )
                     )
                 }
             }

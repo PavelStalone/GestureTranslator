@@ -12,6 +12,8 @@ sealed class MainTranslatorScreenIntent : ModelIntent {
     data class OnImageChange(val newImage: Bitmap) : MainTranslatorScreenIntent()
     data class OnRecognizedLetterChange(val letter: String) : MainTranslatorScreenIntent()
     data class StartLoaderDialog(val description: String) : MainTranslatorScreenIntent()
+    data class ChangeAll(val image: Bitmap, val letter: String, val textTranslation: String) :
+        MainTranslatorScreenIntent()
     data object StopLoaderDialog : MainTranslatorScreenIntent()
 }
 

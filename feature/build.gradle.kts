@@ -13,4 +13,6 @@ dependencies {
      * Modules implementations
      */
     implementation(project(":domain"))
+
+    implementation("com.google.guava:guava:30.1-jre")
 }

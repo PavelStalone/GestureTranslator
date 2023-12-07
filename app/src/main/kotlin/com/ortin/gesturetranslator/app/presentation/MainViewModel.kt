@@ -21,6 +21,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -42,15 +43,17 @@ class MainViewModel @Inject constructor(
     }
 
     fun startRealTimeImagining(lifecycleOwner: LifecycleOwner) {
-        mediaPipeManager.setSettingsModel(
-            SettingsMediaPipe(
-                currentDelegate = if (settingsManager.getSettings().gpu) {
-                    SettingsMediaPipe.Delegation.DELEGATE_GPU
-                } else {
-                    SettingsMediaPipe.Delegation.DELEGATE_CPU
-                }
+        runBlocking {
+            mediaPipeManager.setSettingsModel(
+                SettingsMediaPipe(
+                    currentDelegate = if (settingsManager.getSettings().gpu) {
+                        SettingsMediaPipe.Delegation.DELEGATE_GPU
+                    } else {
+                        SettingsMediaPipe.Delegation.DELEGATE_CPU
+                    }
+                )
             )
-        )
+        }
 
         val predictState: Flow<PredictState> = combine(
             mediaPipeManager.flow,

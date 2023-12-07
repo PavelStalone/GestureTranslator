@@ -1,6 +1,5 @@
 package com.ortin.gesturetranslator.main.screens
 
-import android.graphics.Bitmap
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.slideInHorizontally
@@ -18,10 +17,11 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.SheetValue
-import androidx.compose.material3.Surface
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberBottomSheetScaffoldState
+import androidx.compose.material3.rememberStandardBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,16 +35,13 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.onSizeChanged
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
-import androidx.core.graphics.drawable.toBitmap
-import com.ortin.gesturetranslator.ui.AdaptiveTestPreviews
-import com.ortin.gesturetranslator.ui.R
+import com.ortin.gesturetranslator.main.viewmodel.MainTranslatorViewModel
 import com.ortin.gesturetranslator.ui.components.RecognizedLetter
 import com.ortin.gesturetranslator.ui.components.buttons.RadioButton
 import com.ortin.gesturetranslator.ui.components.text.ScrollableText
-import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
 import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 import kotlinx.coroutines.launch
 import kotlin.math.max
@@ -52,25 +49,24 @@ import kotlin.math.max
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun MainScreen(
-    image: Bitmap,
-    recognizedLetter: String,
-    onStatusRecognitionChanged: (statusRecognition: Boolean) -> Unit,
-    onStatusCorrectiveChanged: (statusCorrective: Boolean) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: MainTranslatorViewModel
 ) {
+    viewModel.bindLifeCycle(LocalLifecycleOwner.current)
+
     val localDimensions = LocalDimensions.current
     val density = LocalDensity.current
+    val state by viewModel.state.collectAsState()
 
     Box(
         modifier = modifier,
         contentAlignment = Alignment.BottomCenter
     ) {
-        val scaffoldState = rememberBottomSheetScaffoldState()
         val coroutineScope = rememberCoroutineScope()
+        val scaffoldState = rememberBottomSheetScaffoldState(
+            bottomSheetState = rememberStandardBottomSheetState(initialValue = SheetValue.Expanded)
+        )
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-        val isBehaviorOnExpanded by remember(scaffoldState) {
-            derivedStateOf { scaffoldState.bottomSheetState.currentValue == SheetValue.Expanded }
-        }
 
         var sheetSize by remember {
             mutableStateOf(localDimensions.sheetPeekHeight)
@@ -82,6 +78,15 @@ fun MainScreen(
             mutableStateOf(false)
         }
 
+        val isBehaviorOnExpanded by remember(scaffoldState) {
+            derivedStateOf {
+                (scaffoldState.bottomSheetState.currentValue == SheetValue.Expanded).also {
+                    translateChecked = !it
+                    viewModel.onTranslatingStatusChanged(!it)
+                }
+            }
+        }
+
         BottomSheetScaffold(
             modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
             containerColor = MaterialTheme.colorScheme.surface,
@@ -90,7 +95,7 @@ fun MainScreen(
                     modifier = Modifier
                         .padding(horizontal = localDimensions.horizontalPreLarge)
                         .fillMaxSize(),
-                    text = "Моя говорить твоя не понимать что я говорить что твоя не понимать",
+                    text = state.translatedText,
                     scrollable = !isBehaviorOnExpanded
                 )
             },
@@ -109,14 +114,14 @@ fun MainScreen(
                 Image(
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Crop,
-                    bitmap = image.asImageBitmap(),
+                    bitmap = state.image.asImageBitmap(),
                     contentDescription = null
                 )
                 RecognizedLetter(
                     modifier = Modifier
                         .width(48.dp)
                         .padding(bottom = 40.dp),
-                    letter = recognizedLetter
+                    letter = state.recognizedLetter
                 )
             }
         }
@@ -165,7 +170,7 @@ fun MainScreen(
             content = {
                 RadioButton(
                     modifier = Modifier.padding(horizontal = localDimensions.horizontalTiny),
-                    checked = !isBehaviorOnExpanded || translateChecked,
+                    checked = translateChecked,
                     text = "Распознавание",
                     onClick = {
                         coroutineScope.launch {
@@ -175,7 +180,7 @@ fun MainScreen(
                             } else {
                                 scaffoldState.bottomSheetState.expand()
                             }
-                            onStatusRecognitionChanged(it)
+                            viewModel.onTranslatingStatusChanged(it)
                         }
                     }
                 )
@@ -191,31 +196,11 @@ fun MainScreen(
                         text = "Автоисправление",
                         onClick = {
                             correctChecked = it
-                            onStatusCorrectiveChanged(it)
+                            viewModel.onTextCorrectedStatusChanged(it)
                         }
                     )
                 }
             }
         )
-    }
-}
-
-@Composable
-@AdaptiveTestPreviews
-fun MainScreenPreview() {
-    GestureTranslatorTheme {
-        Surface {
-            MainScreen(
-                onStatusCorrectiveChanged = {},
-                onStatusRecognitionChanged = {},
-                image = LocalContext.current.getDrawable(R.drawable.a)
-                    ?.toBitmap(500, 500, Bitmap.Config.ARGB_8888) ?: Bitmap.createBitmap(
-                    500,
-                    500,
-                    Bitmap.Config.ARGB_8888
-                ),
-                recognizedLetter = "A"
-            )
-        }
     }
 }

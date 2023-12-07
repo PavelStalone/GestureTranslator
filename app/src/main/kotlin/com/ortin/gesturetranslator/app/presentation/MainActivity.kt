@@ -1,11 +1,18 @@
 package com.ortin.gesturetranslator.app.presentation
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.compose.setContent
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.Modifier
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
@@ -15,6 +22,8 @@ import androidx.navigation.Navigation.findNavController
 import com.ortin.gesturetranslator.R
 import com.ortin.gesturetranslator.databinding.ActivityMainBinding
 import com.ortin.gesturetranslator.domain.managers.SettingsManager
+import com.ortin.gesturetranslator.main.navigation.MainApplicationScreenFlow
+import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
@@ -27,26 +36,58 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    private lateinit var mGetContent: ActivityResultLauncher<String>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+//        binding = ActivityMainBinding.inflate(layoutInflater)
+        registerPermission()
+        checkPermission()
 
-        if (saveSettingsManager.getSettings().theme) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
-        setContentView(binding.root)
-
-        hideTopBarAndLockDrawer()
+//        if (saveSettingsManager.getSettings().theme) {
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//        } else {
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//        }
+//        setContentView(binding.root)
+//
+//        hideTopBarAndLockDrawer()
     }
 
     override fun onStart() {
         super.onStart()
-        setUpBackPressedDispatcher()
-        setUpDestinationChangedListener()
-        setUpDrawerMenuButtonClickListener()
-        setUpNavigationItemSelectedListener()
+//        setUpBackPressedDispatcher()
+//        setUpDestinationChangedListener()
+//        setUpDrawerMenuButtonClickListener()
+//        setUpNavigationItemSelectedListener()
+    }
+
+    private fun registerPermission() {
+        mGetContent = registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { result ->
+            if (result) {
+                checkPermission()
+            } else {
+                mGetContent.launch(Manifest.permission.CAMERA)
+            }
+        }
+    }
+
+    private fun checkPermission() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            mGetContent.launch(Manifest.permission.CAMERA)
+        } else {
+            setContent {
+                GestureTranslatorTheme {
+                    MainApplicationScreenFlow(Modifier.fillMaxSize())
+                }
+            }
+        }
     }
 
     private fun setUpBackPressedDispatcher() {
