@@ -24,7 +24,7 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 /**
- * Interface for autocorrecting recognized text bu model on HuggingFace
+ * Interface for autocorrecting recognized text by model on HuggingFace
  */
 interface AutoCorrectDataSource {
 

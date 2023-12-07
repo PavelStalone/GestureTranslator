@@ -67,12 +67,4 @@ object NetworkModule {
             }
         }
     }
-
-    @Module
-    @InstallIn(SingletonComponent::class)
-    interface NetworkBinds {
-
-        @Binds
-        fun bindAutoCorrectDataSource(impl: AutoCorrectDataSourceImpl): AutoCorrectDataSource
-    }
 }
