@@ -1,4 +1,4 @@
-package com.ortin.gesturetranslator.feature.presentation
+package com.ortin.gesturetranslator.common.presentation
 
 /**
  * Base interface for States in MVI

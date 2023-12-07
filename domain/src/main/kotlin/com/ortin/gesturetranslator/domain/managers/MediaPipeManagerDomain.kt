@@ -30,7 +30,7 @@ class MediaPipeManagerDomain @Inject constructor(private val handDetectionReposi
         handDetectionRepository.detectLiveStream(image)
     }
 
-    fun setSettingsModel(settingsMediaPipe: SettingsMediaPipe) {
+    suspend fun setSettingsModel(settingsMediaPipe: SettingsMediaPipe) {
         handDetectionRepository.setSettingsModel(settingsMediaPipe)
     }
 

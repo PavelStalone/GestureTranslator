@@ -12,6 +12,7 @@ class AndroidHiltConventionPlugin : Plugin<Project> {
             }
 
             dependencies {
+                add("implementation", libs.findLibrary("androidx-hilt-navigation-compose").get())
                 add("implementation", libs.findLibrary("androidx-hilt-ext-common").get())
                 add("implementation", libs.findLibrary("google-dagger-hilt-android").get())
                 add("ksp", libs.findLibrary("google-dagger-hilt-android-compiler").get())

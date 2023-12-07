@@ -25,8 +25,10 @@ import javax.inject.Singleton
 @Singleton
 class HandDetectionRepositoryImpl @Inject constructor(
     private val mediaPipeManager: MediaPipeManager,
-    @Dispatcher(GtDispatchers.IO) private val ioDispatcher: CoroutineDispatcher
+    @Dispatcher(GtDispatchers.IO) private val ioDispatcher: CoroutineDispatcher,
+    @Dispatcher(GtDispatchers.DEFAULT) private val defaultDispatcher: CoroutineDispatcher
 ) : HandDetectionRepository {
+
     override fun detectImage(image: Bitmap): ImageDetected? =
         mediaPipeManager.detectImage(image).mapToCoreImageDetected()
 
@@ -40,8 +42,10 @@ class HandDetectionRepositoryImpl @Inject constructor(
         mediaPipeManager.detectLiveStream(image)
     }
 
-    override fun setSettingsModel(settingsMediaPipe: SettingsMediaPipe) {
-        mediaPipeManager.setSettingsModel(settingsMediaPipe.mapToSettingsModel())
+    override suspend fun setSettingsModel(settingsMediaPipe: SettingsMediaPipe) {
+        withContext(defaultDispatcher) {
+            mediaPipeManager.setSettingsModel(settingsMediaPipe.mapToSettingsModel())
+        }
     }
 
     override fun setMPDetectionListener(detectionHandListener: DetectionHandListener) {
