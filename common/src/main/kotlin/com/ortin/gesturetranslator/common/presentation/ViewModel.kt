@@ -1,7 +1,7 @@
 package com.ortin.gesturetranslator.common.presentation
 
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 
 /**
  * Base class for ViewModel in MVI
@@ -13,5 +13,5 @@ import kotlinx.coroutines.flow.Flow
  */
 abstract class ViewModel<S: UiState, in I: ModelIntent>: ViewModel() {
 
-    abstract val state: Flow<S>
+    abstract val state: StateFlow<S>
 }
