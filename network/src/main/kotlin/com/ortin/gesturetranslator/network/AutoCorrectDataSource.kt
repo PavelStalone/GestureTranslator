@@ -3,9 +3,9 @@ package com.ortin.gesturetranslator.network
 import com.ortin.gesturetranslator.domain.di.Dispatcher
 import com.ortin.gesturetranslator.domain.di.GtDispatchers
 import com.ortin.gesturetranslator.network.di.EndpointUrl
-import com.ortin.gesturetranslator.network.models.CorrectedTextModel
-import com.ortin.gesturetranslator.network.models.NetworkResponse
-import com.ortin.gesturetranslator.network.models.RecognizedTextModel
+import com.ortin.gesturetranslator.domain.models.CorrectedTextModel
+import com.ortin.gesturetranslator.domain.models.NetworkResponse
+import com.ortin.gesturetranslator.domain.models.RecognizedTextModel
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
