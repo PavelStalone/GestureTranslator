@@ -1,5 +1,6 @@
 package com.ortin.gesturetranslator.network.models
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
@@ -8,4 +9,6 @@ import kotlinx.serialization.Serializable
  * @property correctedText collected text, received as a response from the server
  */
 @Serializable
-data class CorrectedTextModel(val correctedText: String)
+data class CorrectedTextModel(
+    @SerialName("generated_text") val correctedText: String
+)
