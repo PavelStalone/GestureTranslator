@@ -6,8 +6,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
@@ -28,36 +28,37 @@ import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 
 @Composable
 fun ImageFromGalleryScreen(
-    @DrawableRes imageId: Int,
-    letter: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    letter: String = "A",
+    @DrawableRes imageId: Int = R.drawable.a
 ) {
     val localDimensions = LocalDimensions.current
     val boxSize = 62.dp
 
     Column(
-        modifier = modifier,
+        modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
-        Spacer(modifier = Modifier.height(localDimensions.verticalSmall))
         Image(
             painter = painterResource(id = imageId),
             contentDescription = letter,
             modifier = Modifier
-                .padding(horizontal = localDimensions.horizontalMedium)
+                .aspectRatio(1f)
+                .padding(localDimensions.horizontalMedium)
                 .clip(shape = MaterialTheme.shapes.medium),
             contentScale = ContentScale.Crop
         )
         Spacer(modifier = Modifier.weight(1f))
         RecognizedLetter(
-            modifier = Modifier.size(boxSize),
+            modifier = Modifier
+                .size(boxSize)
+                .padding(bottom = localDimensions.horizontalMedium),
             letter = letter,
             textStyle = MaterialTheme.typography.titleLarge.copy(
                 fontWeight = FontWeight.SemiBold
             )
         )
-        Spacer(modifier = Modifier.height(localDimensions.verticalMedium))
     }
 }
 

@@ -7,7 +7,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.ortin.gesturetranslator.main.screens.GestureListScreen
+import com.ortin.gesturetranslator.main.screens.ImageFromGalleryScreen
 import com.ortin.gesturetranslator.main.screens.MainScreen
+import com.ortin.gesturetranslator.main.screens.SettingsScreen
 import com.ortin.gesturetranslator.main.viewmodel.MainTranslatorViewModel
 
 @Composable
@@ -38,7 +41,7 @@ fun MainApplicationScreenFlow(
         composable(
             route = MainApplicationScreenRoutes.GalleryScreenRoutes.route
         ) {
-            // TODO: add MainScreen
+            ImageFromGalleryScreen()
         }
 
         /**
@@ -47,7 +50,7 @@ fun MainApplicationScreenFlow(
         composable(
             route = MainApplicationScreenRoutes.GestureListScreenRoutes.route
         ) {
-            // TODO: add GestureListScreen
+            GestureListScreen()
         }
 
         /**
@@ -56,7 +59,7 @@ fun MainApplicationScreenFlow(
         composable(
             route = MainApplicationScreenRoutes.SettingsScreenRoutes.route
         ) {
-            // TODO: add SettingsScreen
+            SettingsScreen()
         }
     }
 }

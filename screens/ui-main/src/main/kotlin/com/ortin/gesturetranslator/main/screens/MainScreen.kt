@@ -37,7 +37,9 @@ import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.ortin.gesturetranslator.main.R
 import com.ortin.gesturetranslator.main.viewmodel.MainTranslatorViewModel
 import com.ortin.gesturetranslator.ui.components.RecognizedLetter
 import com.ortin.gesturetranslator.ui.components.buttons.RadioButton
@@ -171,7 +173,7 @@ fun MainScreen(
                 RadioButton(
                     modifier = Modifier.padding(horizontal = localDimensions.horizontalTiny),
                     checked = translateChecked,
-                    text = "Распознавание",
+                    text = stringResource(id = R.string.recognition_button),
                     onClick = {
                         coroutineScope.launch {
                             translateChecked = it
@@ -193,7 +195,7 @@ fun MainScreen(
                     RadioButton(
                         modifier = Modifier.padding(horizontal = localDimensions.horizontalTiny),
                         checked = correctChecked && isBehaviorOnExpanded,
-                        text = "Автоисправление",
+                        text = stringResource(id = R.string.auto_correct_button),
                         onClick = {
                             correctChecked = it
                             viewModel.onTextCorrectedStatusChanged(it)
