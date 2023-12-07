@@ -18,6 +18,7 @@ data class Dimensions(
     val verticalTiny: Dp = 8.dp,
     val verticalSmall: Dp = 12.dp,
     val verticalStandard: Dp = 16.dp,
+    val verticalStandardPlus: Dp = 20.dp,
     val verticalMedium: Dp = 24.dp,
     val verticalLarge: Dp = 32.dp,
     val verticalXlarge: Dp = 48.dp,
