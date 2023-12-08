@@ -57,7 +57,7 @@ fun ComboBox(
         ) {
             Row(
                 modifier = Modifier
-                    .background(surfaceContainerLow)
+                    .background(MaterialTheme.colorScheme.secondary)
                     .padding(vertical = localDimens.verticalTiny)
                     .menuAnchor()
             ) {

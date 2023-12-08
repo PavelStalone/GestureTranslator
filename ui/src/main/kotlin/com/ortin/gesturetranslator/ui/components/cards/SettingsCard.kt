@@ -33,7 +33,7 @@ fun SettingsCard(
         modifier = modifier,
         shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(
-            containerColor = surfaceContainerLow
+            containerColor = MaterialTheme.colorScheme.secondary
         )
     ) {
         Spacer(modifier = Modifier.height(dimensions.verticalXTiny))
