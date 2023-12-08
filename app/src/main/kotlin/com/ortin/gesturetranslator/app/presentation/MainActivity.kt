@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
             setContent {
                 GestureTranslatorTheme {
                     val navController = rememberNavController()
-                    var isBottomBarVisible by remember { mutableStateOf(true) }
+                    var isBottomBarVisible by remember { mutableStateOf(false) }
 
                     Scaffold(
                         bottomBar = {
@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
                             modifier = Modifier
                                 .padding(it)
                                 .fillMaxSize(),
-                            navController = navController
+                            mainNavController = navController
                         )
                     }
                 }

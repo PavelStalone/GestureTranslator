@@ -15,12 +15,13 @@ import com.ortin.gesturetranslator.splashscreen.SplashScreen
 fun ApplicationScreenFlow(
     onBottomBarVisibilityChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController()
+    mainNavController: NavHostController = rememberNavController()
 ) {
+    val navController = rememberNavController()
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = ApplicationScreenRoutes.SplashScreenRoutes.route
+        startDestination = ApplicationScreenRoutes.MainScreenFlowRoutes.route
     ) {
         composable(
             route = ApplicationScreenRoutes.SplashScreenRoutes.route,
@@ -46,7 +47,7 @@ fun ApplicationScreenFlow(
             exitTransition = { fadeOut() }
         ) {
             onBottomBarVisibilityChange(true)
-            MainApplicationScreenFlow(navController = navController)
+            MainApplicationScreenFlow(navController = mainNavController)
         }
     }
 }
