@@ -28,9 +28,9 @@ import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 
 @Composable
 fun ImageFromGalleryScreen(
-    @DrawableRes imageId: Int,
-    letter: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    letter: String = "A",
+    @DrawableRes imageId: Int = R.drawable.a,
 ) {
     val localDimensions = LocalDimensions.current
     val boxSize = 62.dp
