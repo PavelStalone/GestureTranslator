@@ -87,6 +87,7 @@ dependencies {
     implementation(project(":screens:ui-auth"))
     implementation(project(":screens:ui-main"))
     implementation(project(":common"))
+    implementation(project(":screens:ui-splash-screen"))
 
     /**
      * Github implementations
