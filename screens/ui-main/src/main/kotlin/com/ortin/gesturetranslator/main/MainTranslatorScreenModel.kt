@@ -14,7 +14,10 @@ sealed class MainTranslatorScreenIntent : ModelIntent {
     data class StartLoaderDialog(val description: String) : MainTranslatorScreenIntent()
     data class ChangeAll(val image: Bitmap, val letter: String, val textTranslation: String) :
         MainTranslatorScreenIntent()
+    data class ShowWarningDialog(val title: String, val description: String) :
+        MainTranslatorScreenIntent()
     data object StopLoaderDialog : MainTranslatorScreenIntent()
+    data object CloseWarningDialog : MainTranslatorScreenIntent()
 }
 
 @Immutable
@@ -23,7 +26,10 @@ data class MainTranslatorScreenState(
     val recognizedLetter: String,
     val translatedText: String,
     val showDialogLoader: Boolean,
-    val descriptionLoaderDialog: String
+    val descriptionLoaderDialog: String,
+    val showWarningDialog: Boolean,
+    val warningTitle: String,
+    val warningDescription: String
 ) : UiState {
 
     companion object {
@@ -31,8 +37,11 @@ data class MainTranslatorScreenState(
             image = Bitmap.createBitmap(200, 200, Bitmap.Config.ARGB_8888),
             recognizedLetter = "",
             translatedText = "Чтобы начать перевод, опустите шторку или нажмите на кнопку распознавания",
-            showDialogLoader = true,
-            descriptionLoaderDialog = "Идет настройка переводчика"
+            showDialogLoader = false,
+            descriptionLoaderDialog = "Идет настройка переводчика",
+            showWarningDialog = false,
+            warningTitle = "Что-то пошло не так",
+            warningDescription = "Не волнуйтесь, это просто ошибка"
         )
     }
 }

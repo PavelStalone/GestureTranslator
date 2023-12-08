@@ -12,6 +12,7 @@ import com.ortin.gesturetranslator.domain.models.Image
 import com.ortin.gesturetranslator.domain.models.ImageDetected
 import com.ortin.gesturetranslator.domain.models.SettingsMediaPipe
 import com.ortin.gesturetranslator.domain.usecases.RecognizeCoordinateUseCase
+import com.ortin.gesturetranslator.main.GalleryScreenIntent
 import com.ortin.gesturetranslator.main.MainTranslatorScreenIntent
 import com.ortin.gesturetranslator.main.MainTranslatorScreenState
 import com.ortin.gesturetranslator.main.components.PaintHand.drawHand
@@ -106,6 +107,21 @@ class MainTranslatorViewModel @Inject constructor(
         this.lifecycleOwner = lifecycleOwner
     }
 
+    fun someError() {
+        sendEvent(
+            MainTranslatorScreenIntent.ShowWarningDialog(
+                title = "Что-то пошло не так",
+                description = "Не волнуйтесь, это просто ошибка"
+            )
+        )
+    }
+
+    fun closeWarning(){
+        sendEvent(
+            MainTranslatorScreenIntent.CloseWarningDialog
+        )
+    }
+
     private fun mergeSources(
         imageDetected: ImageDetected?,
         image: Image
@@ -174,6 +190,24 @@ class MainTranslatorViewModel @Inject constructor(
                             image = intent.image,
                             recognizedLetter = intent.letter,
                             translatedText = intent.textTranslation
+                        )
+                    )
+                }
+
+                MainTranslatorScreenIntent.CloseWarningDialog -> {
+                    setState(
+                        oldState.copy(
+                            showWarningDialog = false
+                        )
+                    )
+                }
+
+                is MainTranslatorScreenIntent.ShowWarningDialog -> {
+                    setState(
+                        oldState.copy(
+                            showWarningDialog = true,
+                            warningTitle = intent.title,
+                            warningDescription = intent.description
                         )
                     )
                 }

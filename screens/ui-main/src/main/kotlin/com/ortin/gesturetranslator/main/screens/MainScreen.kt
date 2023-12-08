@@ -5,6 +5,8 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CornerSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -30,8 +33,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.onSizeChanged
@@ -43,6 +49,9 @@ import com.ortin.gesturetranslator.main.R
 import com.ortin.gesturetranslator.main.viewmodel.MainTranslatorViewModel
 import com.ortin.gesturetranslator.ui.components.RecognizedLetter
 import com.ortin.gesturetranslator.ui.components.buttons.RadioButton
+import com.ortin.gesturetranslator.ui.components.dialogs.CustomDialog
+import com.ortin.gesturetranslator.ui.components.dialogs.ProgressDialog
+import com.ortin.gesturetranslator.ui.components.dialogs.WarningDialog
 import com.ortin.gesturetranslator.ui.components.text.ScrollableText
 import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 import kotlinx.coroutines.launch
@@ -59,6 +68,30 @@ fun MainScreen(
     val localDimensions = LocalDimensions.current
     val density = LocalDensity.current
     val state by viewModel.state.collectAsState()
+
+    if (state.showDialogLoader) {
+        ProgressDialog(dialogText = state.descriptionLoaderDialog)
+    }
+
+    CustomDialog(
+        modifier = Modifier
+            .pointerInput(Unit) { detectTapGestures { } }
+            .shadow(8.dp, shape = RoundedCornerShape(localDimensions.horizontalMedium))
+            .fillMaxWidth()
+            .padding(horizontal = localDimensions.horizontalMedium)
+            .clip(RoundedCornerShape(localDimensions.horizontalMedium))
+            .background(MaterialTheme.colorScheme.surface),
+        showDialog = state.showWarningDialog,
+        onDismissRequest = { viewModel.closeWarning() }
+    ) {
+        WarningDialog(
+            title = state.warningTitle,
+            description = state.warningDescription,
+            onConfirmButtonClick = { viewModel.closeWarning() },
+            icon = com.ortin.gesturetranslator.ui.R.drawable.icon_ortin_logo_without_text,
+            onDismissRequest = { viewModel.closeWarning() }
+        )
+    }
 
     Box(
         modifier = modifier,
