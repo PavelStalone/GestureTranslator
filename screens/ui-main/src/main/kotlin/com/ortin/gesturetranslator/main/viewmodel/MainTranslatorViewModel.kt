@@ -10,7 +10,10 @@ import com.ortin.gesturetranslator.domain.managers.SettingsManager
 import com.ortin.gesturetranslator.domain.managers.WorldCompileManager
 import com.ortin.gesturetranslator.domain.models.Image
 import com.ortin.gesturetranslator.domain.models.ImageDetected
+import com.ortin.gesturetranslator.domain.models.NetworkResponse
+import com.ortin.gesturetranslator.domain.models.RecognizedTextModel
 import com.ortin.gesturetranslator.domain.models.SettingsMediaPipe
+import com.ortin.gesturetranslator.domain.usecases.CorrectTextUseCase
 import com.ortin.gesturetranslator.domain.usecases.RecognizeCoordinateUseCase
 import com.ortin.gesturetranslator.main.GalleryScreenIntent
 import com.ortin.gesturetranslator.main.MainTranslatorScreenIntent
@@ -32,7 +35,8 @@ class MainTranslatorViewModel @Inject constructor(
     private val worldCompileManager: WorldCompileManager,
     private val mediaPipeManager: MediaPipeManagerDomain,
     private val recognizeCoordinateUseCase: RecognizeCoordinateUseCase,
-    private val settingsManager: SettingsManager
+    private val settingsManager: SettingsManager,
+    private val correctTextUseCase: CorrectTextUseCase
 ) : ViewModel<MainTranslatorScreenState, MainTranslatorScreenIntent>() {
 
     private val reducer = MainTranslatorReducer(MainTranslatorScreenState.initial())
@@ -100,7 +104,27 @@ class MainTranslatorViewModel @Inject constructor(
     }
 
     fun onTextCorrectedStatusChanged(status: Boolean) {
-        // Todo correctedText useCase
+        viewModelScope.launch {
+            sendEvent(
+                MainTranslatorScreenIntent.StartLoaderDialog(
+                    description = "Идет загрузка"
+                )
+            )
+            val response = correctTextUseCase(RecognizedTextModel(worldCompileManager.getWord()))
+            when(response) {
+                is NetworkResponse.Success -> {
+                    sendEvent(
+                        MainTranslatorScreenIntent.OnTextTranslatingChange(
+                            response.body.correctedText
+                        )
+                    )
+                }
+                is NetworkResponse.Error -> { someError() }
+            }
+            sendEvent(
+                MainTranslatorScreenIntent.StopLoaderDialog
+            )
+        }
     }
 
     fun bindLifeCycle(lifecycleOwner: LifecycleOwner) {
@@ -116,7 +140,7 @@ class MainTranslatorViewModel @Inject constructor(
         )
     }
 
-    fun closeWarning(){
+    fun closeWarning() {
         sendEvent(
             MainTranslatorScreenIntent.CloseWarningDialog
         )

@@ -60,8 +60,8 @@ import kotlin.math.max
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun MainScreen(
-    modifier: Modifier = Modifier,
-    viewModel: MainTranslatorViewModel
+    viewModel: MainTranslatorViewModel,
+    modifier: Modifier = Modifier
 ) {
     viewModel.bindLifeCycle(LocalLifecycleOwner.current)
 

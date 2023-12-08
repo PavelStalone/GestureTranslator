@@ -9,5 +9,5 @@ import javax.inject.Singleton
 class CorrectTextUseCase @Inject constructor(
     private val autocorrectTextRepository: AutocorrectTextRepository,
 ) {
-    suspend fun invoke(data: RecognizedTextModel) = autocorrectTextRepository.correctText(data)
+    suspend operator fun invoke(data: RecognizedTextModel) = autocorrectTextRepository.correctText(data)
 }
