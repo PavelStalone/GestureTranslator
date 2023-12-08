@@ -18,6 +18,7 @@ class MediaPipeManagerImpl @Inject constructor(
     @ModelPath modelPath: String
 ) : MediaPipeManager {
     private var handLandmarkerHelper: HandLandmarkerHelper
+    private var oldSettingsModel: SettingsModel? = null
 
     init {
         handLandmarkerHelper = HandLandmarkerHelper(
@@ -36,8 +37,11 @@ class MediaPipeManagerImpl @Inject constructor(
         handLandmarkerHelper.detectLiveStream(image)
 
     override fun setSettingsModel(settingsModel: SettingsModel) {
-        handLandmarkerHelper.settingsModel = settingsModel
-        handLandmarkerHelper.update()
+        if (oldSettingsModel != settingsModel) {
+            oldSettingsModel = settingsModel
+            handLandmarkerHelper.settingsModel = settingsModel
+            handLandmarkerHelper.update()
+        }
     }
 
     override fun setMPDetectionListener(mpDetectionListener: MPDetectionListener) {

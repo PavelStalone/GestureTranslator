@@ -10,7 +10,6 @@ import com.ortin.gesturetranslator.domain.managers.SettingsManager
 import com.ortin.gesturetranslator.domain.managers.WorldCompileManager
 import com.ortin.gesturetranslator.domain.models.Image
 import com.ortin.gesturetranslator.domain.models.ImageDetected
-import com.ortin.gesturetranslator.domain.models.SettingsDomain
 import com.ortin.gesturetranslator.domain.models.SettingsMediaPipe
 import com.ortin.gesturetranslator.domain.usecases.RecognizeCoordinateUseCase
 import com.ortin.gesturetranslator.main.MainTranslatorScreenIntent
@@ -40,31 +39,28 @@ class MainTranslatorViewModel @Inject constructor(
         get() = reducer.state
 
     private var lifecycleOwner: LifecycleOwner? = null
-    private var oldMediaPipeSettings: SettingsDomain = SettingsDomain()
     private var coroutineContext: CoroutineContext? = null
 
     private fun sendEvent(event: MainTranslatorScreenIntent) {
         reducer.sendIntent(event)
     }
 
-    private fun isSettingsChanged(): Boolean {
-        return oldMediaPipeSettings != settingsManager.getSettings()
-    }
-
     private suspend fun changeMediaPipeSettings() {
+        val settings = settingsManager.getSettings()
         mediaPipeManager.setSettingsModel(
             SettingsMediaPipe(
-                currentDelegate = if (oldMediaPipeSettings.gpu) {
+                currentDelegate = if (settings.gpu) {
                     SettingsMediaPipe.Delegation.DELEGATE_GPU
                 } else {
                     SettingsMediaPipe.Delegation.DELEGATE_CPU
-                }
+                },
+                runningMode = SettingsMediaPipe.InputMode.LIVE_STREAM
             )
         )
     }
 
     private fun startTranslating() {
-        lifecycleOwner?.let {lifecycleOwner ->
+        lifecycleOwner?.let { lifecycleOwner ->
             coroutineContext = viewModelScope.launch {
                 worldCompileManager.clearState() // Стираем собранный текст
                 combine(
@@ -86,19 +82,15 @@ class MainTranslatorViewModel @Inject constructor(
 
     fun onTranslatingStatusChanged(status: Boolean) {
         if (status) {
-            if (isSettingsChanged()) {
-                viewModelScope.launch {
-                    sendEvent(
-                        MainTranslatorScreenIntent.StartLoaderDialog(
-                            description = "Идет настройка переводчика"
-                        )
+            viewModelScope.launch {
+                sendEvent(
+                    MainTranslatorScreenIntent.StartLoaderDialog(
+                        description = "Идет настройка переводчика"
                     )
-                    oldMediaPipeSettings = settingsManager.getSettings()
-                    changeMediaPipeSettings()
-                }.invokeOnCompletion {
-                    startTranslating()
-                }
-            } else {
+                )
+                changeMediaPipeSettings()
+                sendEvent(MainTranslatorScreenIntent.StopLoaderDialog)
+            }.invokeOnCompletion {
                 startTranslating()
             }
         } else {
