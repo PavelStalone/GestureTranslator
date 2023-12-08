@@ -1,6 +1,7 @@
 package com.ortin.gesturetranslator.main.screens
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.Image
@@ -221,7 +222,7 @@ fun MainScreen(
                 AnimatedVisibility(
                     visible = isBehaviorOnExpanded,
                     enter = scaleIn(),
-                    exit = scaleOut()
+                    exit = scaleOut() + fadeOut()
                 ) {
                     RadioButton(
                         modifier = Modifier.padding(horizontal = localDimensions.horizontalTiny),

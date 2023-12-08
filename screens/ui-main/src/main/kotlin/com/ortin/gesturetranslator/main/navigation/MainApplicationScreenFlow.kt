@@ -13,6 +13,7 @@ import com.ortin.gesturetranslator.main.screens.GestureListScreen
 import com.ortin.gesturetranslator.main.screens.ImageFromGalleryScreen
 import com.ortin.gesturetranslator.main.screens.MainScreen
 import com.ortin.gesturetranslator.main.screens.SettingsScreen
+import com.ortin.gesturetranslator.main.viewmodel.GalleryViewModel
 import com.ortin.gesturetranslator.main.viewmodel.MainTranslatorViewModel
 import com.ortin.gesturetranslator.main.viewmodel.SettingsScreenViewModel
 import com.ortin.gesturetranslator.ui.R
@@ -24,6 +25,7 @@ fun MainApplicationScreenFlow(
 ) {
     val mainScreenViewModel: MainTranslatorViewModel = hiltViewModel<MainTranslatorViewModel>()
     val settingsScreenViewModel: SettingsScreenViewModel = hiltViewModel<SettingsScreenViewModel>()
+    val galleryViewModel: GalleryViewModel = hiltViewModel<GalleryViewModel>()
 
     NavHost(
         modifier = modifier,
@@ -50,8 +52,7 @@ fun MainApplicationScreenFlow(
             exitTransition = { fadeOut() }
         ) {
             ImageFromGalleryScreen(
-                imageId = R.drawable.a,
-                letter = "A"
+                viewModel = galleryViewModel
             )
         }
 
