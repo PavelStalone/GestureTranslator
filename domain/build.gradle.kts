@@ -9,7 +9,3 @@ plugins {
 android {
     namespace = "com.ortin.gesturetranslator.domain"
 }
-
-dependencies {
-//    implementation(libs.kotlinx.serialization.json)
-}
