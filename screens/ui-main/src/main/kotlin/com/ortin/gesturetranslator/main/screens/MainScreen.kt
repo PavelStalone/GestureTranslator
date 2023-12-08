@@ -2,6 +2,8 @@ package com.ortin.gesturetranslator.main.screens
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.Image
@@ -60,8 +62,8 @@ import kotlin.math.max
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun MainScreen(
-    modifier: Modifier = Modifier,
-    viewModel: MainTranslatorViewModel
+    viewModel: MainTranslatorViewModel,
+    modifier: Modifier = Modifier
 ) {
     viewModel.bindLifeCycle(LocalLifecycleOwner.current)
 
@@ -221,9 +223,8 @@ fun MainScreen(
                 )
                 AnimatedVisibility(
                     visible = isBehaviorOnExpanded,
-                    enter = slideInHorizontally { with(density) { 100.dp.roundToPx() } }
-                            + fadeIn(initialAlpha = 0.3f),
-                    exit = slideOutHorizontally { with(density) { 200.dp.roundToPx() } }
+                    enter = scaleIn(),
+                    exit = scaleOut()
                 ) {
                     RadioButton(
                         modifier = Modifier.padding(horizontal = localDimensions.horizontalTiny),
