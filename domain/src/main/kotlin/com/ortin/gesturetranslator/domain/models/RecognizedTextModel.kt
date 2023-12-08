@@ -1,4 +1,4 @@
-package com.ortin.gesturetranslator.network.models
+package com.ortin.gesturetranslator.domain.models
 
 import kotlinx.serialization.Serializable
 

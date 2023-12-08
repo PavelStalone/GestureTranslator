@@ -1,4 +1,4 @@
-package com.ortin.gesturetranslator.network.models
+package com.ortin.gesturetranslator.domain.models
 
 /**
  * The class responsible for storing and transmitting responses from the API

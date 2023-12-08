@@ -10,19 +10,19 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.ui.Modifier
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.Navigation.findNavController
 import com.ortin.gesturetranslator.R
 import com.ortin.gesturetranslator.databinding.ActivityMainBinding
 import com.ortin.gesturetranslator.domain.managers.SettingsManager
-import com.ortin.gesturetranslator.main.navigation.MainApplicationScreenFlow
+import com.ortin.gesturetranslator.main.screens.SettingsScreen
+import com.ortin.gesturetranslator.main.viewmodel.SettingsScreenViewModel
 import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             setContent {
                 GestureTranslatorTheme {
-                    MainApplicationScreenFlow(Modifier.fillMaxSize())
+                    SettingsScreen(settingsScreenViewModel = hiltViewModel<SettingsScreenViewModel>())
                 }
             }
         }

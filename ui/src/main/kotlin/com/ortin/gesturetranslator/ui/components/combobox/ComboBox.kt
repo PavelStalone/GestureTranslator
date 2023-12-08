@@ -30,17 +30,18 @@ import com.ortin.gesturetranslator.ui.theme.LocalDimensions
 import com.ortin.gesturetranslator.ui.theme.onSurfaceContainerLow
 import com.ortin.gesturetranslator.ui.theme.surfaceContainerLow
 
+private val listOfItems = listOf("10", "15", "30", "35", "40")
+
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun ComboBox(
-    listOfItems: List<String>,
     modifier: Modifier = Modifier,
     isEnabled: Boolean = false,
+    currentItem: Int = 0,
     onItemSelected: (String) -> Unit = {}
 ) {
     val localDimens = LocalDimensions.current
     var expanded by remember { mutableStateOf(false) }
-    var selectedItem by remember { mutableStateOf(listOfItems[0]) }
     var isItemSelected by remember { mutableStateOf(false) }
 
     Box(
@@ -61,7 +62,7 @@ fun ComboBox(
                     .menuAnchor()
             ) {
                 Text(
-                    text = selectedItem,
+                    text = currentItem.toString(),
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .weight(1f),
@@ -90,7 +91,6 @@ fun ComboBox(
                     DropdownMenuItem(
                         text = { Text(text = item) },
                         onClick = {
-                            selectedItem = item
                             onItemSelected(item)
                             expanded = false
                             isItemSelected = true
@@ -108,8 +108,7 @@ fun ComboBoxPreview() {
     GestureTranslatorTheme {
         Surface {
             ComboBox(
-                modifier = Modifier.width(100.dp),
-                listOfItems = listOf("10", "15", "30", "35", "40")
+                modifier = Modifier.width(100.dp)
             )
         }
     }
