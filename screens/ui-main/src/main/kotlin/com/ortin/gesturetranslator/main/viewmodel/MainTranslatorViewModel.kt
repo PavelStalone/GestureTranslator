@@ -48,8 +48,7 @@ class MainTranslatorViewModel @Inject constructor(
     }
 
     private fun isSettingsChanged(): Boolean {
-        if (oldMediaPipeSettings == settingsManager.getSettings()) return false
-        return true
+        return oldMediaPipeSettings != settingsManager.getSettings()
     }
 
     private suspend fun changeMediaPipeSettings() {
