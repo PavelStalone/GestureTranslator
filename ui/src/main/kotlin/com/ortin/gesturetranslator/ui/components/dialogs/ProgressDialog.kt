@@ -26,7 +26,7 @@ fun ProgressDialog(
     dialogText: String? = null
 ) {
     val localDimens = LocalDimensions.current
-    val dialogMinSize = 150.dp
+    val dialogMinSize = 170.dp
 
     Dialog(onDismissRequest = {}) {
         Column(
