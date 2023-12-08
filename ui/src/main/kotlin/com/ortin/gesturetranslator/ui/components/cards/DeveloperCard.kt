@@ -35,7 +35,6 @@ import com.ortin.gesturetranslator.ui.R
 import com.ortin.gesturetranslator.ui.components.buttons.PrimaryTextButton
 import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
 import com.ortin.gesturetranslator.ui.theme.LocalDimensions
-import com.ortin.gesturetranslator.ui.theme.surfaceContainerLow
 import timber.log.Timber
 
 @Composable
@@ -55,7 +54,7 @@ fun DeveloperCard(
         modifier = modifier,
         shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(
-            containerColor = surfaceContainerLow
+            containerColor = MaterialTheme.colorScheme.secondary
         )
     ) {
         Spacer(modifier = Modifier.height(localDimensions.verticalStandard))

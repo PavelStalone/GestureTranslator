@@ -27,7 +27,13 @@ fun BottomNavigationBar(
             NavigationBarItem(
                 selected = (currentRoute == item.route),
                 onClick = {
-                    if (currentRoute != item.route) navController.navigate(item.route)
+                    if (currentRoute != item.route) {
+                        navController.navigate(item.route) {
+                            popUpTo(NavigationBarItem.Home.route) {
+                                saveState = false
+                            }
+                        }
+                    }
                 },
                 icon = {
                     if (currentRoute == item.route)
