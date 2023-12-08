@@ -77,7 +77,12 @@ class MainTranslatorViewModel @Inject constructor(
             }
         } ?: {
             Timber.e("LifeCycleOwner is null")
-            // Todo use Warning dialog
+            sendEvent(
+                MainTranslatorScreenIntent.ShowWarningDialog(
+                    title = "Что-то пошло не так",
+                    description = "LifeCycle is null"
+                )
+            )
         }
     }
 
@@ -104,25 +109,42 @@ class MainTranslatorViewModel @Inject constructor(
     }
 
     fun onTextCorrectedStatusChanged(status: Boolean) {
-        viewModelScope.launch {
-            sendEvent(
-                MainTranslatorScreenIntent.StartLoaderDialog(
-                    description = "Идет загрузка"
-                )
-            )
-            val response = correctTextUseCase(RecognizedTextModel(worldCompileManager.getWord()))
-            when(response) {
-                is NetworkResponse.Success -> {
-                    sendEvent(
-                        MainTranslatorScreenIntent.OnTextTranslatingChange(
-                            response.body.correctedText
-                        )
+        if (status) {
+            viewModelScope.launch {
+                sendEvent(
+                    MainTranslatorScreenIntent.StartLoaderDialog(
+                        description = "Идет загрузка"
                     )
+                )
+                val response =
+                    correctTextUseCase(RecognizedTextModel(worldCompileManager.getWord()))
+                when (response) {
+                    is NetworkResponse.Success -> {
+                        sendEvent(
+                            MainTranslatorScreenIntent.OnTextTranslatingChange(
+                                response.body.correctedText
+                            )
+                        )
+                    }
+
+                    is NetworkResponse.Error -> {
+                        sendEvent(
+                            MainTranslatorScreenIntent.ShowWarningDialog(
+                                title = "Что-то пошло не так",
+                                description = "Ошибка Api: ${response.throwable?.message ?: "хз"}"
+                            )
+                        )
+                    }
                 }
-                is NetworkResponse.Error -> { someError() }
+                sendEvent(
+                    MainTranslatorScreenIntent.StopLoaderDialog
+                )
             }
+        } else {
             sendEvent(
-                MainTranslatorScreenIntent.StopLoaderDialog
+                MainTranslatorScreenIntent.OnTextTranslatingChange(
+                    worldCompileManager.getWord()
+                )
             )
         }
     }
