@@ -19,7 +19,6 @@ dependencies {
      */
     implementation(project(":domain"))
     implementation(project(":ui"))
-    implementation(project(":common"))
 
     /**
      * Navigation dependencies

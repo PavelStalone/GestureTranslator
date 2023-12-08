@@ -1,7 +1,6 @@
 package com.ortin.gesturetranslator.splashscreen
 
 import org.junit.Test
-
 import org.junit.Assert.*
 
 /**
