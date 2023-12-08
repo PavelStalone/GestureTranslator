@@ -3,6 +3,7 @@ package com.ortin.gesturetranslator.main.screens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
@@ -37,7 +38,9 @@ fun SettingsScreen(
     val localDimensions = LocalDimensions.current
 
     LazyColumn(
-        modifier = modifier.background(MaterialTheme.colorScheme.background),
+        modifier = modifier
+            .background(MaterialTheme.colorScheme.background)
+            .fillMaxSize(),
         contentPadding = PaddingValues(localDimensions.horizontalMedium),
         verticalArrangement = Arrangement.spacedBy(localDimensions.verticalStandard)
     ) {
@@ -66,7 +69,7 @@ fun SettingsScreen(
         item {
             Text(
                 text = stringResource(id = R.string.by_premium),
-                style = MaterialTheme.typography.headlineSmall
+                style = MaterialTheme.typography.headlineSmall.copy(fontSize = 32.sp)
             )
         }
         item {

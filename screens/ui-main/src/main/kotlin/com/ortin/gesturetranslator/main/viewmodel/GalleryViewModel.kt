@@ -61,6 +61,21 @@ class GalleryViewModel @Inject constructor(
         }
     }
 
+    fun someError() {
+        sendEvent(
+            GalleryScreenIntent.ShowWarningDialog(
+                title = "Что-то пошло не так",
+                description = "Не волнуйтесь, это просто ошибка"
+            )
+        )
+    }
+
+    fun closeWarning(){
+        sendEvent(
+            GalleryScreenIntent.CloseWarningDialog
+        )
+    }
+
     private class GalleryReducer(initial: GalleryScreenState) :
         Reducer<GalleryScreenState, GalleryScreenIntent>(initial) {
         override fun reduce(
@@ -85,6 +100,24 @@ class GalleryViewModel @Inject constructor(
                 GalleryScreenIntent.StopLoadDialog -> {
                     setState(
                         oldState.copy(showDialogLoader = false)
+                    )
+                }
+
+                GalleryScreenIntent.CloseWarningDialog -> {
+                    setState(
+                        oldState.copy(
+                            showWarningDialog = false
+                        )
+                    )
+                }
+
+                is GalleryScreenIntent.ShowWarningDialog -> {
+                    setState(
+                        oldState.copy(
+                            showWarningDialog = true,
+                            warningTitle = intent.title,
+                            warningDescription = intent.description
+                        )
                     )
                 }
             }

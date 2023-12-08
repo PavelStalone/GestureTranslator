@@ -3,18 +3,26 @@ package com.ortin.gesturetranslator.main.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.ortin.gesturetranslator.main.screens.GestureListScreen
+import com.ortin.gesturetranslator.main.screens.ImageFromGalleryScreen
 import com.ortin.gesturetranslator.main.screens.MainScreen
+import com.ortin.gesturetranslator.main.screens.SettingsScreen
+import com.ortin.gesturetranslator.main.viewmodel.GalleryViewModel
 import com.ortin.gesturetranslator.main.viewmodel.MainTranslatorViewModel
+import com.ortin.gesturetranslator.main.viewmodel.SettingsScreenViewModel
 
 @Composable
 fun MainApplicationScreenFlow(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavHostController = rememberNavController()
 ) {
-    val navController = rememberNavController()
     val mainScreenViewModel: MainTranslatorViewModel = hiltViewModel()
+    val settingsScreenViewModel: SettingsScreenViewModel = hiltViewModel()
+    val galleryScreenViewModel: GalleryViewModel = hiltViewModel()
     // TODO: add view models
 
     NavHost(
@@ -37,7 +45,7 @@ fun MainApplicationScreenFlow(
         composable(
             route = MainApplicationScreenRoutes.GalleryScreenRoutes.route
         ) {
-            //TODO: add MainScreen
+            ImageFromGalleryScreen(viewModel = galleryScreenViewModel)
         }
 
         /**
@@ -46,7 +54,7 @@ fun MainApplicationScreenFlow(
         composable(
             route = MainApplicationScreenRoutes.GestureListScreenRoutes.route
         ) {
-            // TODO: add GestureListScreen
+            GestureListScreen()
         }
 
         /**
@@ -55,7 +63,7 @@ fun MainApplicationScreenFlow(
         composable(
             route = MainApplicationScreenRoutes.SettingsScreenRoutes.route
         ) {
-            // TODO: add SettingsScreen
+            SettingsScreen(settingsScreenViewModel = settingsScreenViewModel)
         }
     }
 }

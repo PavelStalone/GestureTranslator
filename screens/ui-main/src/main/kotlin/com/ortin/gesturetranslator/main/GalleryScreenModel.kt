@@ -10,7 +10,9 @@ sealed class GalleryScreenIntent : ModelIntent {
 
     data class OnRecognizedLetterChange(val letter: String) : GalleryScreenIntent()
     data class StartLoadDialog(val description: String) : GalleryScreenIntent()
+    data class ShowWarningDialog(val title: String, val description: String) : GalleryScreenIntent()
     data object StopLoadDialog : GalleryScreenIntent()
+    data object CloseWarningDialog : GalleryScreenIntent()
 }
 
 @Immutable
@@ -18,7 +20,10 @@ data class GalleryScreenState(
     val image: Uri?,
     val recognizedLetter: String,
     val showDialogLoader: Boolean,
-    val descriptionLoaderDialog: String
+    val descriptionLoaderDialog: String,
+    val showWarningDialog: Boolean,
+    val warningTitle: String,
+    val warningDescription: String
 ) : UiState {
 
     companion object {
@@ -26,7 +31,10 @@ data class GalleryScreenState(
             image = null,
             recognizedLetter = "",
             showDialogLoader = false,
-            descriptionLoaderDialog = "Идет настройка переводчика"
+            descriptionLoaderDialog = "Идет настройка переводчика",
+            showWarningDialog = false,
+            warningTitle = "Что-то пошло не так",
+            warningDescription = "Не волнуйтесь, это просто ошибка"
         )
     }
 }
