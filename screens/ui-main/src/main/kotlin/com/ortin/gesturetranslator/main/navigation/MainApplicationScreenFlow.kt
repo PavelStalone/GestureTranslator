@@ -2,13 +2,9 @@ package com.ortin.gesturetranslator.main.navigation
 
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navigation
 import com.ortin.gesturetranslator.main.screens.GestureListScreen
 import com.ortin.gesturetranslator.main.screens.ImageFromGalleryScreen
 import com.ortin.gesturetranslator.main.screens.MainScreen
@@ -16,21 +12,17 @@ import com.ortin.gesturetranslator.main.screens.SettingsScreen
 import com.ortin.gesturetranslator.main.viewmodel.GalleryViewModel
 import com.ortin.gesturetranslator.main.viewmodel.MainTranslatorViewModel
 import com.ortin.gesturetranslator.main.viewmodel.SettingsScreenViewModel
-import com.ortin.gesturetranslator.ui.R
 
-@Composable
-fun MainApplicationScreenFlow(
-    modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController()
+fun NavGraphBuilder.mainApplicationScreenFlow(
+    mainScreenViewModel: MainTranslatorViewModel,
+    galleryViewModel: GalleryViewModel,
+    settingsScreenViewModel: SettingsScreenViewModel,
+    route: String,
+    action: () -> Unit = {}
 ) {
-    val mainScreenViewModel: MainTranslatorViewModel = hiltViewModel<MainTranslatorViewModel>()
-    val settingsScreenViewModel: SettingsScreenViewModel = hiltViewModel<SettingsScreenViewModel>()
-    val galleryViewModel: GalleryViewModel = hiltViewModel<GalleryViewModel>()
-
-    NavHost(
-        modifier = modifier,
-        navController = navController,
-        startDestination = MainApplicationScreenRoutes.MainScreenRoutes.route
+    navigation(
+        startDestination = MainApplicationScreenRoutes.MainScreenRoutes.route,
+        route = route
     ) {
         /**
          * Main screen for gesture translation
@@ -40,6 +32,7 @@ fun MainApplicationScreenFlow(
             enterTransition = { fadeIn() },
             exitTransition = { fadeOut() }
         ) {
+            action()
             MainScreen(viewModel = mainScreenViewModel)
         }
 
@@ -51,9 +44,7 @@ fun MainApplicationScreenFlow(
             enterTransition = { fadeIn() },
             exitTransition = { fadeOut() }
         ) {
-            ImageFromGalleryScreen(
-                viewModel = galleryViewModel
-            )
+            ImageFromGalleryScreen(viewModel = galleryViewModel)
         }
 
         /**

@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
                             modifier = Modifier
                                 .padding(it)
                                 .fillMaxSize(),
-                            mainNavController = navController
+                            navController = navController
                         )
                     }
                 }
