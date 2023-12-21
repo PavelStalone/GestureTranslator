@@ -2,10 +2,10 @@ package com.ortin.gesturetranslator.network
 
 import com.ortin.gesturetranslator.domain.di.Dispatcher
 import com.ortin.gesturetranslator.domain.di.GtDispatchers
-import com.ortin.gesturetranslator.network.di.EndpointUrl
 import com.ortin.gesturetranslator.domain.models.CorrectedTextModel
 import com.ortin.gesturetranslator.domain.models.NetworkResponse
 import com.ortin.gesturetranslator.domain.models.RecognizedTextModel
+import com.ortin.gesturetranslator.network.di.EndpointUrl
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
@@ -14,14 +14,13 @@ import io.ktor.client.plugins.ServerResponseException
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
-import io.ktor.http.HttpHeaders
 import io.ktor.http.URLProtocol
 import io.ktor.http.contentType
-import io.ktor.http.headers
 import io.ktor.http.path
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import javax.inject.Inject
 
 /**
  * Interface for autocorrecting recognized text by model on HuggingFace
@@ -37,7 +36,7 @@ interface AutoCorrectDataSource {
     suspend fun correctText(model: RecognizedTextModel): NetworkResponse<CorrectedTextModel>
 }
 
-class AutoCorrectDataSourceImpl(
+class AutoCorrectDataSourceImpl @Inject constructor(
     private val token: String,
     private val client: HttpClient,
     @EndpointUrl("HuggingFace") private val huggingFaceHost: String,
@@ -48,17 +47,14 @@ class AutoCorrectDataSourceImpl(
             client.post {
                 url {
                     host = huggingFaceHost
-                    protocol = URLProtocol.HTTPS
+                    protocol = URLProtocol.HTTP
                     contentType(ContentType.Application.Json)
-                    path("models", "AccessAndrei", "tired")
-                }
-                headers {
-                    append(HttpHeaders.Authorization, "Bearer $token")
+                    path("predict")
                 }
                 setBody(model)
             }.let { response ->
                 Timber.d("Response %s", response)
-                NetworkResponse.Success(response.body<List<CorrectedTextModel>>()[0])
+                NetworkResponse.Success(response.body<CorrectedTextModel>())
             }
         } catch (exception: Exception) {
             when (exception) {

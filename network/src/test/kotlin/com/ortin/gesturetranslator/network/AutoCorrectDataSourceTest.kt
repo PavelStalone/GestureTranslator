@@ -45,7 +45,7 @@ class AutoCorrectDataSourceTest {
                 }
             },
             token = BuildConfig.INFERENCE_TOKEN,
-            huggingFaceHost = "api-inference.huggingface.co",
+            huggingFaceHost = "192.168.1.73:8080",
             dispatcher = Dispatchers.IO
         )
     }
@@ -54,7 +54,7 @@ class AutoCorrectDataSourceTest {
     fun correctText() = runTest {
         // When: calling the correctText method with incorrect text as input
         val response = dataSource.correctText(
-            model = RecognizedTextModel(inputs = "Кагда ты возвращашься назад?")
+            model = RecognizedTextModel(data = "Кагда ты возвращашься назад?")
         )
 
         // Then: print the result and manually check it

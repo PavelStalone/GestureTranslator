@@ -19,8 +19,8 @@ object NetworkEndpointsModule {
 
     @Provides
     @Singleton
-    @Named("HuggingFace")
-    fun provideHuggingFaceHost(): String = "api-inference.huggingface.co"
+    @EndpointUrl("HuggingFace")
+    fun provideHuggingFaceHost(): String = "192.168.1.73:8080"
 
     @Provides
     @Singleton
