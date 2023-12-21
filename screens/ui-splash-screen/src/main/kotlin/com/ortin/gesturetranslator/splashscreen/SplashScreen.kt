@@ -1,32 +1,29 @@
 package com.ortin.gesturetranslator.splashscreen
 
-import androidx.annotation.RawRes
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
 import com.airbnb.lottie.LottieProperty
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.airbnb.lottie.compose.rememberLottieDynamicProperties
 import com.airbnb.lottie.compose.rememberLottieDynamicProperty
-import com.ortin.gesturetranslator.ui.theme.GestureTranslatorTheme
 
 @Composable
 fun SplashScreen(
-    @RawRes animationJson: Int,
+    onAnimationEnd: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val composition by rememberLottieComposition(
-        spec = LottieCompositionSpec.RawRes(resId = animationJson)
+        spec = LottieCompositionSpec.RawRes(resId = R.raw.logotype)
     )
-
+    val progress by animateLottieCompositionAsState(composition = composition)
     val dynamicProperties = rememberLottieDynamicProperties(
         rememberLottieDynamicProperty(
             property = LottieProperty.COLOR_FILTER,
@@ -41,21 +38,12 @@ fun SplashScreen(
     )
 
     LottieAnimation(
-        modifier = modifier,
+        modifier = modifier.fillMaxSize(),
         composition = composition,
         dynamicProperties = dynamicProperties
     )
-}
 
-@Preview
-@Composable
-fun LottieSplashScreenPreview() {
-    GestureTranslatorTheme(darkTheme = true) {
-        Surface {
-            SplashScreen(
-                animationJson = R.raw.logotype,
-                Modifier.fillMaxSize()
-            )
-        }
+    if (progress == 1f) {
+        onAnimationEnd()
     }
 }
