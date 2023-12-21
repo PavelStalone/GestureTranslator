@@ -1,5 +1,9 @@
 package com.ortin.gesturetranslator.main.screens
 
+import android.Manifest
+import android.content.pm.PackageManager
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
@@ -40,10 +44,12 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import com.ortin.gesturetranslator.main.R
 import com.ortin.gesturetranslator.main.viewmodel.MainTranslatorViewModel
 import com.ortin.gesturetranslator.ui.components.RecognizedLetter
@@ -59,11 +65,15 @@ import kotlin.math.max
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun MainScreen(
-    viewModel: MainTranslatorViewModel,
-    modifier: Modifier = Modifier
+    viewModel: MainTranslatorViewModel
 ) {
     viewModel.bindLifeCycle(LocalLifecycleOwner.current)
 
+    var permissionGranted by remember {
+        mutableStateOf(false)
+    }
+
+    val context = LocalContext.current
     val localDimensions = LocalDimensions.current
     val density = LocalDensity.current
     val state by viewModel.state.collectAsState()
@@ -93,7 +103,7 @@ fun MainScreen(
     }
 
     Box(
-        modifier = modifier,
+        modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.BottomCenter
     ) {
         val coroutineScope = rememberCoroutineScope()
@@ -112,11 +122,37 @@ fun MainScreen(
             mutableStateOf(false)
         }
 
+        val launcher =
+            rememberLauncherForActivityResult(contract = ActivityResultContracts.RequestPermission()) { result ->
+                permissionGranted = result
+                if (!result) {
+                    translateChecked = false
+                    coroutineScope.launch {
+                        scaffoldState.bottomSheetState.expand()
+                    }
+                }
+            }
+
         val isBehaviorOnExpanded by remember(scaffoldState) {
             derivedStateOf {
                 (scaffoldState.bottomSheetState.currentValue == SheetValue.Expanded).also {
                     translateChecked = !it
-                    viewModel.onTranslatingStatusChanged(!it)
+                    if (permissionGranted) viewModel.onTranslatingStatusChanged(!it)
+                }
+            }
+        }
+
+        if (translateChecked && !permissionGranted) {
+            when (PackageManager.PERMISSION_GRANTED) {
+                ContextCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.CAMERA
+                ) -> {
+                    permissionGranted = true
+                }
+
+                else -> {
+                    launcher.launch(Manifest.permission.CAMERA)
                 }
             }
         }
@@ -191,7 +227,10 @@ fun MainScreen(
                         }
                     } else {
                         val offset =
-                            (constraints.maxWidth - sumWidhtPlaceables) / max(placeables.size, 2)
+                            (constraints.maxWidth - sumWidhtPlaceables) / max(
+                                placeables.size,
+                                2
+                            )
                         var x = offset
 
                         placeables.forEach { placeable ->
@@ -214,7 +253,7 @@ fun MainScreen(
                             } else {
                                 scaffoldState.bottomSheetState.expand()
                             }
-                            viewModel.onTranslatingStatusChanged(it)
+                            if (permissionGranted) viewModel.onTranslatingStatusChanged(it)
                         }
                     }
                 )

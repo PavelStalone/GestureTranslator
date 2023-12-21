@@ -44,6 +44,7 @@ fun NavGraphBuilder.mainApplicationScreenFlow(
             enterTransition = { fadeIn() },
             exitTransition = { fadeOut() }
         ) {
+            action()
             ImageFromGalleryScreen(viewModel = galleryViewModel)
         }
 
@@ -55,6 +56,7 @@ fun NavGraphBuilder.mainApplicationScreenFlow(
             enterTransition = { fadeIn() },
             exitTransition = { fadeOut() }
         ) {
+            action()
             GestureListScreen()
         }
 
@@ -66,6 +68,7 @@ fun NavGraphBuilder.mainApplicationScreenFlow(
             enterTransition = { fadeIn() },
             exitTransition = { fadeOut() }
         ) {
+            action()
             SettingsScreen(settingsScreenViewModel = settingsScreenViewModel)
         }
     }
