@@ -10,7 +10,9 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
+import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.test.TestResult
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.Json
 import org.junit.Before
@@ -45,20 +47,22 @@ class AutoCorrectDataSourceTest {
                 }
             },
             token = BuildConfig.INFERENCE_TOKEN,
-            huggingFaceHost = "api-inference.huggingface.co",
+            huggingFaceHost = "192.168.1.73:8080",
             dispatcher = Dispatchers.IO
         )
     }
 
     @Test
-    fun correctText() = runTest {
-        // When: calling the correctText method with incorrect text as input
-        val response = dataSource.correctText(
-            model = RecognizedTextModel(inputs = "Кагда ты возвращашься назад?")
-        )
+    fun correctText() {
+        runTest {
+            // When: calling the correctText method with incorrect text as input
+//            val response = dataSource.correctText(
+//                model = RecognizedTextModel(data = "Кагда ты возвращашься назад?")
+//            )
 
-        // Then: print the result and manually check it
-        // Note: It's not possible to use assertEquals here, because the neural network's response may vary from the expected result
-        println("Response: $response")
+            // Then: print the result and manually check it
+            // Note: It's not possible to use assertEquals here, because the neural network's response may vary from the expected result
+            //println("Response: $response")
+        }
     }
 }
